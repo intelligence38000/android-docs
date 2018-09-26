@@ -119,26 +119,42 @@ mapboxMap.setOnInfoWindowClickListener(new MapboxMap.OnInfoWindowClickListener()
 
 The map view goes through a series of events while building/changing the map. The `OnMapChangedListener` provided can be used to notify you when one or multiple events occur you're interested in. This includes knowing when the map starts and finishes loading the map style or when frames are finished rendering.
 
-Instead of adding the listener through the `MapboxMap` object, the listeners added using the `MapView`, `mapView.addOnMapChangedListener(OnMapChangedListener());`. When a new map change occurs, the `onMapChanged` callback is invoked. This provides the constant, as an integer, as the parameter which you can then use to match up with one of the constants listed in the table below.
+Instead of adding the listener through the `MapboxMap` object, the listeners added using the `MapView`, `mapView.addOnMapChangedListener(OnMapChangedListener());`. You can also implement the `MapView.OnMapChangedListener` interface and override the `onMapChanged()` method. When a new map change occurs, the `onMapChanged()` callback is invoked. This provides the constant, as an integer, as the parameter which you can then use to match up with one of the constants listed in the table below.
+
+Here lifecycle events that are fired during the most basic loading of a `MapView`. They are listed in the order that they occur:
 
 | MapChange Constants                       | Description |
 |-------------------------------------------|--------|
 | `REGION_WILL_CHANGE`                        | This event is triggered whenever the currently displayed map region is about to change without an animation. |
-| `REGION_WILL_CHANGE_ANIMATED`               | This event is triggered whenever the currently displayed map region is about to change with an animation. |
-| `REGION_IS_CHANGING`                        | This event is triggered whenever the currently displayed map region is changing. |
 | `REGION_DID_CHANGE`                         | This event is triggered whenever the currently displayed map region finished changing without an animation. |
-| `REGION_DID_CHANGE_ANIMATED`                | This event is triggered whenever the currently displayed map region finished changing with an animation. |
 | `WILL_START_LOADING_MAP`                    | This event is triggered when the map is about to start loading a new map style. |
-| `DID_FINISH_LOADING_MAP`                    | This is triggered when the map has successfully loaded a new map style. |
-| `DID_FAIL_LOADING_MAP`                      | This event is triggered when the map has failed to load a new map style. |
+| `WILL_START_RENDERING_MAP`                  | This event is triggered when the map will start rendering the map. |
+| `WILL_START_RENDERING_FRAME`                | This event is triggered when the map will start rendering a frame. |
+| `DID_FINISH_RENDERING_FRAME`                | This event is triggered when the map finished rendering a frame. |
+| `REGION_WILL_CHANGE`                        | This event is triggered whenever the currently displayed map region is about to change without an animation. |
+| `REGION_DID_CHANGE`                         | This event is triggered whenever the currently displayed map region finished changing without an animation. |
+| `DID_FINISH_LOADING_STYLE`                  | Triggered when a style has finished loading. |
+| `DID_FINISH_RENDERING_FRAME`                | This event is triggered when the map finished rendering a frame. |
+| `SOURCE_DID_CHANGE`                         | Triggered when a source attribution changes. |
 | `WILL_START_RENDERING_FRAME`                | This event is triggered when the map will start rendering a frame. |
 | `DID_FINISH_RENDERING_FRAME`                | This event is triggered when the map finished rendering a frame. |
 | `DID_FINISH_RENDERING_FRAME_FULLY_RENDERED` | This event is triggered when the map finished rendering the frame fully. |
-| `WILL_START_RENDERING_MAP`                  | This event is triggered when the map will start rendering the map. |
-| `DID_FINISH_RENDERING_MAP`                  | This event is triggered when the map finished rendering the map. |
 | `DID_FINISH_RENDERING_MAP_FULLY_RENDERED`   | This event is triggered when the map is fully rendered. |
-| `DID_FINISH_LOADING_STYLE`                  | Triggered when a style has finished loading. |
-| `SOURCE_DID_CHANGE`                         | Triggered when a source attribution changes. |
+| `DID_FINISH_LOADING_MAP`                    | This is triggered when the map has successfully loaded a new map style. |
+| `WILL_START_RENDERING_FRAME`                | This event is triggered when the map will start rendering a frame. |
+| `DID_FINISH_RENDERING_MAP_FULLY_RENDERED`   | This event is triggered when the map is fully rendered. |
+
+Additional change events that are not part of the standard map lifecycle:
+
+| MapChange Constants                       | Description |
+|-------------------------------------------|--------|
+| `REGION_WILL_CHANGE_ANIMATED`               | This event is triggered whenever the currently displayed map region is about to change with an animation. |
+| `REGION_IS_CHANGING`                        | This event is triggered whenever the currently displayed map region is changing. |
+| `REGION_DID_CHANGE_ANIMATED`                | This event is triggered whenever the currently displayed map region finished changing with an animation. |
+| `DID_FAIL_LOADING_MAP`                      | This event is triggered when the map has failed to load a new map style. |
+| `DID_FINISH_RENDERING_MAP`                  | This event is triggered when the map finished rendering the map. |
+
+
 
 When the event that you were interested in actually occurs and you no longer need to listen to the map change events, `mapView.removeOnMapChangedListener(mapChangeListener)` can be used to remove the listener.
 
