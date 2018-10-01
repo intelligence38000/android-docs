@@ -3,6 +3,8 @@ title: "Camera"
 description: "Information about map camera behavior in the Mapbox Maps SDK for Android. Updating the camera position. Restricting the camera. It's all covered inside."
 prependJs:
   - "import { Floater } from '../../../components/floater';"
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
 The Maps SDK's maps are represented as a flat plane using a [Mercator projection](https://en.wikipedia.org/wiki/Mercator_projection). On the east-west-axis, the map seamlessly wraps around on itself an infinite amount of times. Because the bottom and the top of the map could infinitely grow larger and further distort the map towards the poles, the north-south-axis gets cut off around the 90 degrees north and 90 degrees south. With this in mind, the camera object's introduced to represent the user's viewpoint above the map.
@@ -17,13 +19,28 @@ The Maps SDK includes a `CameraPosition` class which comprises of the camera's t
 
 A `CameraPosition` object can change a single property of the camera object such as the zoom, or it can change multiple properties at the same time. For example, you could write code to have the camera change its target, zoom out, **and** tilt _all at the same time_:
 
-```java
+{{
+<CodeLanguageToggle id="camera-position" />
+<ToggleableCodeBlock
+
+java={`
 CameraPosition position = new CameraPosition.Builder()
           .target(new LatLng(51.50550, -0.07520)) // Sets the new camera position
           .zoom(10) // Sets the zoom to level 10
           .tilt(20) // Set the camera tilt to 20 degrees
           .build(); // Builds the CameraPosition object from the builder
-```
+`}
+
+kotlin={`
+val position = new CameraPosition.Builder()
+          .target(new LatLng(51.50550, -0.07520)) // Sets the new camera position
+          .zoom(10) // Sets the zoom to level 10
+          .tilt(20) // Set the camera tilt to 20 degrees
+          .build(); // Builds the CameraPosition object from the builder
+`}
+
+/>
+}}
 
 Read all about [mapView XML attributes](https://www.mapbox.com/android-docs/map-sdk/overview/#mapview-xml-attributes) to learn about setting the camera's initial position. It's best to either set the initial camera position in XML or through `MapboxMapOptions` to prevent unnecessary downloading of map tiles using up your user's data.
 
@@ -92,14 +109,30 @@ The `MapboxMap` class' `getCameraPosition()` method makes it easy for your code 
 
 Similar to how a camera can be restricted to a region (see below), the camera can also center within a map area. First you'll need a defined `LatLngBounds` object which includes at least two coordinates. You'll then be able to update the camera position using the available `newLatLngBounds()` API which takes your bounding box and adjust the viewport so the specified region will be within view. Besides the bounding box being passed into the camera update factory, you will also need to provide an integer value defining the padding between the edge of the screen and the actual bounded region. You also have the option to provide different padding values for each side of the box.
 
-```java
+{{
+<CodeLanguageToggle id="lat-lng-bounds" />
+<ToggleableCodeBlock
+
+java={`
 LatLngBounds latLngBounds = new LatLngBounds.Builder()
                     .include(first marker position)
                     .include(second marker position)
                     .build();
 
+mapboxMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 10));          
+`}
+
+kotlin={`
+val latLngBounds = LatLngBounds.Builder()
+                .include(first marker position)
+                .include(second marker position)
+                .build()
 mapboxMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 10));
-```
+
+`}
+
+/>
+}}
 
 ## Restricting the user's panning to a given area
 
