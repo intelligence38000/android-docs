@@ -4,6 +4,8 @@ description: "Learn how to use the Mapbox Maps SDK for Android to show clustered
 prependJs:
   - import AppropriateImage from '../../../components/appropriate-image';
   - "import { Floater } from '../../../components/floater';"
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
 Often times, too much data is shown on a map at a single time. Markers overlap with each other. The map looks and feels cluttered. Users can't get a quick understanding of what the data is supposed to say. 
@@ -51,9 +53,13 @@ The `SymbolLayer` is a bit more complicated but essentially the same as the `Cir
 To accomplish this:
 	
 1. Use a GeoJSON data source and add it to the Mapbox map as a `GeoJsonSource`.
+	
+	{{
+<CodeLanguageToggle id="symbol-layer" />
+<ToggleableCodeBlock
 
-	```java
-	try {
+java={`
+try {
 	      mapboxMap.addSource(
 	        new GeoJsonSource("GEOJSON_SOURCE_ID",
 	          new URL("URL_POINTING_TO_GEOJSON_FILE"),
@@ -66,14 +72,39 @@ To accomplish this:
 	    } catch (MalformedURLException malformedUrlException) {
 	      Log.e(TAG, "Check the URL " + malformedUrlException.getMessage());
 	    }
-	```
+`}
+
+kotlin={`
+try {
+	      mapboxMap.addSource(
+	        GeoJsonSource("GEOJSON_SOURCE_ID",
+	          URL("URL_POINTING_TO_GEOJSON_FILE"),
+	          GeoJsonOptions()
+	            .withCluster(true)
+	            .withClusterMaxZoom(MAX_ZOOM)
+	            .withClusterRadius(DESIRED_CLUSTER_RADIUS)
+	        )
+	      );
+	    } catch (malformedUrlException: MalformedURLException) {
+            Log.e(TAG, "Check the URL " + malformedUrlException.message)
+	    }
+
+`}
+
+/>
+}}
+
 	
 2. Create a `SymbolLayer` with icons that represent the individual data points for when points are not clustered. These icons will only be visible when the map's camera is close enough to the map. Remember, the higher the map zoom value, the more zoomed in the camera is. A zoom level of 12 is closer to the map than a zoom value of 4.
 3. Create as many additional `SymbolLayer`s or `CircleLayer`s as you want for the various data ranges. You might have red circles represent data clusters that have 10-30 data points and then blue circles that have 50 or more data points. Data-driven styling and `Expression` filtering will determine which cluster layers are shown at which zoom level.
 4. Create a `SymbolLayer` for the hidden data amount text. That is, the number that appears and tells a user how many more data points are "hidden" behind the cluster icon/circle and can be viewed if the map is zoomed in on. Don't forget to use runtime styling to adjust the text size, text color, and other text properties:
-	
-```java
-    SymbolLayer count = new SymbolLayer("SYMBOL_LAYER_COUNT_LAYER_ID", "GEOJSON_SOURCE_ID");
+
+{{
+<CodeLanguageToggle id="set-properties" />
+<ToggleableCodeBlock
+
+java={`
+SymbolLayer count = new SymbolLayer("SYMBOL_LAYER_COUNT_LAYER_ID", "GEOJSON_SOURCE_ID");
     count.setProperties(
       textField(Expression.toString(get("point_count"))),
       textSize(TEXT_SIZE),
@@ -81,5 +112,20 @@ To accomplish this:
       textIgnorePlacement(true),
       textAllowOverlap(true)
     );
-    mapboxMap.addLayer(count);
-```
+mapboxMap.addLayer(count);
+`}
+
+kotlin={`
+val count = SymbolLayer("SYMBOL_LAYER_COUNT_LAYER_ID", "GEOJSON_SOURCE_ID")
+	count.setProperties(
+		textField(Expression.toString(get("point_count"))),
+		textSize(TEXT_SIZE),
+		textColor(TEXT_COLOR),
+		textIgnorePlacement(true),
+		textAllowOverlap(true)
+    )
+mapboxMap.addLayer(count)
+`}
+
+/>
+}}
