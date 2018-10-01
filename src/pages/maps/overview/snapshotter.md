@@ -3,6 +3,8 @@ title: "Snapshotter"
 description: "Take a static snapshot photo of the map to use on the device in your app, a notification, or even to share with others"
 prependJs:
   - "import { Floater } from '../../../components/floater';"
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
 The snapshot functionality of the Mapbox Maps SDK for Android generates a static map image to use in your Android project. Take a snapshot of any Mapbox map and add the image into:
@@ -26,14 +28,33 @@ This snapshot feature is different than [the Mapbox Static API](https://www.mapb
 
 The `MapSnapshotter` constructor requires a `MapSnapshotter.Options` object. 
 
-```java
+{{
+<CodeLanguageToggle id="take-a-map-snapshot" />
+<ToggleableCodeBlock
+
+java={`
 MapSnapshotter.Options snapShotOptions = new MapSnapshotter.Options(500, 500);
 
 snapShotOptions.withRegion(mapboxMap.getProjection().getVisibleRegion().latLngBounds);
+
 snapShotOptions.withStyle(mapboxMap.getStyleUrl());
 
 MapSnapshotter mapSnapshotter = new MapSnapshotter(this, snapShotOptions);
-```
+`}
+
+kotlin={`
+
+val snapShotOptions = MapSnapshotter.Options(500, 500)
+
+snapShotOptions.withRegion(mapboxMap.getProjection().getVisibleRegion().latLngBounds)
+
+snapShotOptions.withStyle(mapboxMap.getStyleUrl())
+
+val mapSnapshotter = MapSnapshotter(this, options)
+`}
+
+/>
+}}
 
 Here are the various settings that are available within the `MapSnapshotter.Options` class. You would use them in the same way that `withRegion()` and `withStyle()` are used in the code snippet above.
 
@@ -48,7 +69,11 @@ Here are the various settings that are available within the `MapSnapshotter.Opti
 
 Start the snapshot process with `start()` once you've created your `MapSnapshotter` object. When `MapSnapshot` is ready, use `snapshot.getBitmap()` to retrieve the `Bitmap` image.
 
-```java
+{{
+<CodeLanguageToggle id="get-bipmap" />
+<ToggleableCodeBlock
+
+java={`
 mapSnapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
 	@Override
 	public void onSnapshotReady(MapSnapshot snapshot) {
@@ -59,7 +84,22 @@ mapSnapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
 	
 	}
 });
-```    
+`}
+
+kotlin={`
+
+mapSnapshotter?.start { snapshot ->
+
+	// Use bitmapImage however you'd like
+	
+	val bitmapOfMapSnapshotImage = snapshot.bitmap
+
+}
+`}
+
+/>
+}}
+
 
 Once you have the `Bitmap` image, you're free to use it however you'd like.
 
