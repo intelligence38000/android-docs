@@ -3,6 +3,8 @@ title: "Annotations"
 description: "Looking to annotate a map with the Mapbox Maps SDK for Android. Read this documentation to learn about markers, info windows, lines, polygons, plus more."
 prependJs:
   - "import { Floater } from '../../../components/floater';"
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
 The Mapbox Maps SDK for Android provides several different ways to mark a single point, add a line between many points, or draw a polygon. Often, these objects are drawn either on top of the map or in some cases, within the map itself. This document walks you through how to add high-level objects. 
@@ -30,11 +32,24 @@ Markers are useful when identifying a single point on the map. The SDK comes wit
   />
 }}
 
-```java
+{{
+<CodeLanguageToggle id="add-a-marker" />
+<ToggleableCodeBlock
+
+java={`
 mapboxMap.addMarker(new MarkerOptions()
   .position(new LatLng(48.85819, 2.29458))
   .title("Eiffel Tower")
-```
+`}
+kotlin={`
+mapboxMap.addMarker(new MarkerOptions()
+  .position(new LatLng(48.85819, 2.29458))
+  .title("Eiffel Tower")
+`}
+
+/>
+}}
+
 
 Besides providing the position, you can also add a title and snippet which display inside of an [info window](#info-window). The info window is displayed when users tap on the marker and close when they tap outside of the info window.
 
@@ -50,7 +65,11 @@ You can specify a custom icon by using the `IconFactory` object and passing it t
 
 Place your custom marker image in your project’s drawable folder and note its file name. In the example below, the custom icon’s image file's called `blue_marker.png`
 
-```java
+{{
+<CodeLanguageToggle id="customize-a-marker" />
+<ToggleableCodeBlock
+
+java={`
 // Create an Icon object for the marker to use
 IconFactory iconFactory = IconFactory.getInstance(MainActivity.this);
 Icon icon = iconFactory.fromResource(R.drawable.blue_marker);
@@ -59,7 +78,20 @@ Icon icon = iconFactory.fromResource(R.drawable.blue_marker);
 mapboxMap.addMarker(new MarkerViewOptions()
   .position(new LatLng(-37.821648, 144.978594))
   .icon(icon));
-```
+`}
+kotlin={`
+// Create an Icon object for the marker to use
+val icon = IconFactory.getInstance(this)
+icon.fromResource(R.drawable. R.drawable.blue_marker)
+
+// Add the marker to the map
+mapboxMap.addMarker(new MarkerOptions()
+  .position(new LatLng(48.85819, 2.29458))
+  .title("Eiffel Tower")
+`}
+
+/>
+}}
 
 ### Capturing marker events
 
@@ -67,15 +99,32 @@ The Mapbox Maps SDK for Android provides a handy listener for capturing when a u
 
 To display a toast message with the clicked marker’s title, listen for a click event with `setOnMarkerClickListener` and finally call `Toast.makeText()`. To prevent displaying a toast message and an info window at the same time, return true at the end:
 
-```java
+{{
+<CodeLanguageToggle id="capturing-marker-events" />
+<ToggleableCodeBlock
+
+java={`
 mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
   @Override
   public boolean onMarkerClick(@NonNull Marker marker) {
-    Toast.makeText(MainActivity.this, marker.getTitle(), Toast.LENGTH_LONG).show();
+  
+  // Show a toast with the title of the selected marker
+    Toast.makeText(this, marker.getTitle(), Toast.LENGTH_LONG).show();
     return true;
   }
 });
-```
+`}
+kotlin={`
+mapboxMap.setOnMarkerClickListener { marker ->
+
+// Show a toast with the title of the selected marker
+Toast.makeText(this, marker.getTitle(), Toast.LENGTH_LONG).show()
+}
+`}
+
+/>
+}}
+
 
 ### Update a marker
 
@@ -90,13 +139,30 @@ mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
 
 If you have intentions to update a marker rather than completely removing it, the SDK provides a few update methods. Using these mean less boilerplate code and an increase in performance since you are only updating the marker. Using these update APIs, you can create animating markers using a [ValueAnimator](https://developer.android.com/reference/android/animation/ValueAnimator.html) for example. The APIs for updating either the marker position or icon bitmap are found inside of your marker object reference.
 
-```java
+
+{{
+<CodeLanguageToggle id="update-a-marker" />
+<ToggleableCodeBlock
+
+java={`
 // Change the marker location
 marker.setPosition(new LatLng(-37.822884, 144.981916));
 
 // Update the marker icon
 marker.setIcon(icon);
-```
+`}
+kotlin={`
+// Change the marker location
+marker.setPosition(new LatLng(-37.822884, 144.981916));
+
+// Update the marker icon
+marker.setIcon(icon);
+`}
+
+/>
+}}
+
+
 
 ## Polyline and polygons
 
@@ -106,22 +172,84 @@ Adding a line or polygon to your map is like adding a marker. Due to the nature 
 
 Make sure that the first and last `Point` locations are the same.
 
-```java
+{{
+<CodeLanguageToggle id="draw-a-polyline" />
+<ToggleableCodeBlock
+
+java={`
 mapboxMap.addPolyline(new PolylineOptions()
   .addAll(points)
   .color(Color.parseColor("#3bb2d0"))
   .width(2));
-```
+`}
+
+kotlin={`
+mapboxMap.addPolyline(PolylineOptions()
+                .add(*pointsArray)
+                .color(Color.parseColor("#8a8acb"))
+                .alpha(0.65f)
+                .width(4f))
+`}
+
+/>
+}}
 
 ### Draw a polygon on the map
 
 Make sure that the first and last `Point` locations are the same.
 
-```java
+{{
+<CodeLanguageToggle id="draw-polygon-on-map" />
+<ToggleableCodeBlock
+
+java={`
+List<LatLng> polygonLatLngList = new ArrayList<>();
+
+polygon.add(new LatLng(45.522585, -122.685699));
+polygon.add(new LatLng(45.534611, -122.708873));
+polygon.add(new LatLng(45.530883, -122.678833));
+polygon.add(new LatLng(45.547115, -122.667503));
+polygon.add(new LatLng(45.530643, -122.660121));
+polygon.add(new LatLng(45.533529, -122.636260));
+polygon.add(new LatLng(45.521743, -122.659091));
+polygon.add(new LatLng(45.510677, -122.648792));
+polygon.add(new LatLng(45.515008, -122.664070));
+polygon.add(new LatLng(45.502496, -122.669048));
+polygon.add(new LatLng(45.515369, -122.678489));
+polygon.add(new LatLng(45.506346, -122.702007));
+polygon.add(new LatLng(45.522585, -122.685699));
+
 mapboxMap.addPolygon(new PolygonOptions()
-  .addAll(polygon)
-  .fillColor(Color.parseColor("#3bb2d0")));
-```
+.addAll(polygonLatLngList)
+.fillColor(Color.parseColor("#3bb2d0")));
+`}
+
+kotlin={`
+
+val polygonLatLngList = ArrayList<LatLng>()
+
+polygon.add(LatLng(45.522585, -122.685699))
+polygon.add(LatLng(45.534611, -122.708873))
+polygon.add(LatLng(45.530883, -122.678833))
+polygon.add(LatLng(45.547115, -122.667503))
+polygon.add(LatLng(45.530643, -122.660121))
+polygon.add(LatLng(45.533529, -122.636260))
+polygon.add(LatLng(45.521743, -122.659091))
+polygon.add(LatLng(45.510677, -122.648792))
+polygon.add(LatLng(45.515008, -122.664070))
+polygon.add(LatLng(45.502496, -122.669048))
+polygon.add(LatLng(45.515369, -122.678489))
+polygon.add(LatLng(45.506346, -122.702007))
+polygon.add(LatLng(45.522585, -122.685699))
+
+mapboxMap.addPolygon(PolygonOptions()
+.addAll(polygonLatLngList)
+.fillColor(Color.parseColor("#3bb2d0")))
+`}
+
+/>
+}}
+
 
 ### Use line and fill layers
 
