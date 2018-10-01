@@ -1,6 +1,9 @@
 ---
 title: "Events"
 description: "Documentation about map events within the Mapbox Maps SDK for Android. Read about map clicking, flinging, scrolling, and other Mapbox map events."
+prependJs:
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
 The Maps SDK provides various ways to listen to map events. The majority of listeners that the SDK offers are listed below. However, you'll occasionally find other listeners specific to their corresponding API inside other overview documents.
@@ -9,17 +12,37 @@ The Maps SDK provides various ways to listen to map events. The majority of list
 
 Click (tap) events can be set up through the `MapboxMap` object and invoke a callback each time that the event occurs. In both cases, the callback provides a `LatLng` of where the user click occurred on the map. To add an onClick listener to your map, insert the following snippet inside your application's code:
 
-```java
+{{
+<CodeLanguageToggle id="click-events" />
+<ToggleableCodeBlock
+
+java={`
+
 mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
   @Override
   public void onMapClick(@NonNull LatLng point) {
   
     String string = String.format(Locale.US, "User clicked at: %s", point.toString())
+    
     Toast.makeText(MainActivity.this, string, Toast.LENGTH_LONG).show();
     
   }
 });
-```
+`}
+
+kotlin={`
+
+mapboxMap.addOnMapClickListener { latLngPoint ->
+
+	val string = String.format(Locale.US, "User clicked at: %s", latLngPoint.toString())
+
+	Toast.makeText(this@MainActivity, string, Toast.LENGTH_LONG).show()
+	
+}
+`}
+
+/>
+}}
 
 ### Convert from screen pixel
 
@@ -33,7 +56,12 @@ The map's camera represents the view looking down on the maps flat plane. In alm
 
 The Map SDK provides a handful of camera change listeners which can notify you of any or specific camera movements. Different camera listeners are given to determine if the camera movement was caused by a user gesture, built-in API animations, or a developer-controlled movement. The snippet below shows the various camera listeners available:
 
-```java
+{{
+<CodeLanguageToggle id="camera-change-events" />
+<ToggleableCodeBlock
+
+java={`
+
 mapboxMap.addOnCameraMoveStartedListener(new MapboxMap.OnCameraMoveStartedListener() {
 
   private final String[] REASONS = {"REASON_API_GESTURE", "REASON_DEVELOPER_ANIMATION", "REASON_API_ANIMATION"};
@@ -65,27 +93,77 @@ mapboxMap.addOnCameraIdleListener(new MapboxMap.OnCameraIdleListener() {
     Toast.makeText(MainActivity.this, "onCameraIdle", Toast.LENGTH_LONG).show();
   }
 });
-```
+`}
+
+kotlin={`
+
+mapboxMap.addOnCameraMoveStartedListener(object : 
+	MapboxMap.OnCameraMoveStartedListener {
+	
+	private val REASONS = arrayOf("REASON_API_GESTURE", "REASON_DEVELOPER_ANIMATION", "REASON_API_ANIMATION")
+	
+	override fun onCameraMoveStarted(reason: Int) {
+		val string = String.format(Locale.US, "OnCameraMoveStarted: %s", REASONS[reason - 1])
+		
+		Toast.makeText(this@MainActivity, string, Toast.LENGTH_LONG).show()
+	}
+})
+
+mapboxMap.addOnCameraMoveListener { Toast.makeText(this@MainActivity, "onCameraMove", Toast.LENGTH_LONG).show() }
+
+mapboxMap.addOnCameraMoveCancelListener { Toast.makeText(this@MainActivity, "onCameraMoveCanceled", Toast.LENGTH_LONG).show() }
+
+mapboxMap.addOnCameraIdleListener { Toast.makeText(this@MainActivity, "onCameraIdle", Toast.LENGTH_LONG).show() }
+`}
+
+/>
+}}
+
+
 
 ## On fling & on scroll events
 
 Besides the camera change listeners, the `MapboxMap` object allows you to listen into when the user scrolls or flings the map. A scroll event occurs when the user drags a single finger across the screen causing the camera position to change. A similar action from the user will cause the `onFling` callback to be invoked, but the user performs the gesture with more momentum. Only one of these events will be fired once when the user performs the particular gesture.
 
-```java
-mapboxMap.setOnScrollListener(new MapboxMap.OnScrollListener() {
+{{
+<CodeLanguageToggle id="on-fling-and-scroll-events" />
+<ToggleableCodeBlock
+
+java={`
+
+mapboxMap.addOnScrollListener(new MapboxMap.OnScrollListener() {
   @Override
   public void onScroll() {
     Toast.makeText(MainActivity.this, "onScroll", Toast.LENGTH_LONG).show();
   }
 });
 
-mapboxMap.setOnFlingListener(new MapboxMap.OnFlingListener() {
+mapboxMap.addOnFlingListener(new MapboxMap.OnFlingListener() {
   @Override
   public void onFling() {
     Toast.makeText(MainActivity.this, "onFling", Toast.LENGTH_LONG).show();
   }
 });
-```
+`}
+
+kotlin={`
+
+mapboxMap.addOnScrollListener { 
+
+Toast.makeText(this@MainActivity, "onScroll", Toast.LENGTH_LONG).show() 
+
+}
+
+mapboxMap.addOnFlingListener { 
+
+Toast.makeText(this@MainActivity, "onFling", Toast.LENGTH_LONG).show() 
+
+}
+`}
+
+/>
+}}
+
 
 ## Marker and info window events
 
@@ -93,7 +171,12 @@ The Maps SDK provides a handy listener for capturing when a user taps on a marke
 
 To display a toast message with the clicked marker’s title, listen for a click event with `setOnMarkerClickListener` and finally call Toast.makeText(). To prevent displaying a toast message and an info window at the same time, return true at the end:
 
-```java
+{{
+<CodeLanguageToggle id="marker-events" />
+<ToggleableCodeBlock
+
+java={`
+
 mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
   @Override
   public boolean onMarkerClick(@NonNull Marker marker) {
@@ -101,13 +184,36 @@ mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
     return true;
   }
 });
-```
+`}
+
+kotlin={`
+
+mapboxMap.setOnMarkerClickListener { marker ->
+
+	Toast.makeText(MainActivity.this, marker.getTitle(), Toast.LENGTH_LONG).show();
+	
+}
+`}
+
+/>
+}}
+
 
 In a similar case, the info window offers a handful of listeners for being notified when an info windows clicked, long clicked, or when a user closes the window.
 
-```java
+{{
+<CodeLanguageToggle id="info-window-events" />
+<ToggleableCodeBlock
+
+java={`
+
 mapboxMap.setOnInfoWindowLongClickListener(OnInfoWindowLongClickListener);
-mapboxMap.setOnInfoWindowCloseListener(OnInfoWindowCloseListener);
+mapboxMap.setOnInfoWindowCloseListener(new MapboxMap.OnInfoWindowCloseListener() {
+	@Override
+	public void onInfoWindowClose(@NonNull Marker marker) {
+
+	}
+});
 
 mapboxMap.setOnInfoWindowClickListener(new MapboxMap.OnInfoWindowClickListener() {
   @Override
@@ -115,7 +221,24 @@ mapboxMap.setOnInfoWindowClickListener(new MapboxMap.OnInfoWindowClickListener()
     return false;
   }
 });
-```
+
+`}
+
+kotlin={`
+
+mapboxMap.onInfoWindowCloseListener = MapboxMap.OnInfoWindowCloseListener { marker -> val closedMarker = marker }
+
+mapboxMap.onInfoWindowClickListener = MapboxMap.OnInfoWindowClickListener { marker -> 
+	// Able to use the marker 
+marker.icon 
+	false
+}
+`}
+
+/>
+}}
+
+
 
 ## Map change events
 
@@ -163,7 +286,11 @@ When the event that you were interested in actually occurs and you no longer nee
 
 `DID_FINISH_LOADING_STYLE ` is useful if you're using runtime styling to change the Mapbox map style in real time. Here's how you'd use the constant:
 
-```java
+{{
+<CodeLanguageToggle id="window-click-listener-events" />
+<ToggleableCodeBlock
+
+java={`
 @Override
   public void onMapChanged(int change) {
     if (change == MapView.DID_FINISH_LOADING_STYLE) {
@@ -173,4 +300,18 @@ When the event that you were interested in actually occurs and you no longer nee
       
     }
   }
-```
+`}
+
+kotlin={`
+override fun onMapChanged(change: Int) {
+        if (change == MapView.DID_FINISH_LOADING_STYLE) {
+
+            // Here is where you can re-add the source(s) and layer(s)
+            // for displaying data on top of the new map style
+
+        }
+    }
+`}
+
+/>
+}}
