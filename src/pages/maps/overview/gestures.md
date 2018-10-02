@@ -3,6 +3,8 @@ title: "Gestures"
 description: "Detecting gestures in the Mapbox Maps SDK for Android"
 prependJs:
   - "import { GESTURES_VERSION } from '../../../constants';"
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';" 
 ---
 
 The [Mapbox Gestures for Android library](https://github.com/mapbox/mapbox-gestures-android) is used inside of the Mapbox Maps SDK for Android for gesture detection based on user's input. This library wraps [GestureDetectorCompat](https://developer.android.com/reference/android/support/v4/view/GestureDetectorCompat.html) and [ScaleGestureDetector](https://developer.android.com/reference/android/view/ScaleGestureDetector.html) as well as introduces implementation of rotate, move, shove, and tap gesture detectors.
@@ -59,21 +61,41 @@ You can pass mutually exclusive gesture sets in a constructor of `AndroidGesture
 
 For example:
 
-```java
-    Set<Integer> mutuallyExclusive1 = new HashSet<>();
-    mutuallyExclusive1.add(AndroidGesturesManager.GESTURE_TYPE_SHOVE);
-    mutuallyExclusive1.add(AndroidGesturesManager.GESTURE_TYPE_SCROLL);
+{{
+<CodeLanguageToggle id="mutually-exclusive-gestures" />
+<ToggleableCodeBlock
 
-    Set<Integer> mutuallyExclusive2 = new HashSet<>();
-    mutuallyExclusive2.add(AndroidGesturesManager.GESTURE_TYPE_SHOVE);
-    mutuallyExclusive2.add(AndroidGesturesManager.GESTURE_TYPE_SCALE);
+java={`
 
-    AndroidGesturesManager androidGesturesManager = new AndroidGesturesManager(
-      context,
-      mutuallyExclusive1,
-      mutuallyExclusive2
-    );
-```
+Set<Integer> mutuallyExclusive1 = new HashSet<>();
+mutuallyExclusive1.add(AndroidGesturesManager.GESTURE_TYPE_SHOVE);
+mutuallyExclusive1.add(AndroidGesturesManager.GESTURE_TYPE_SCROLL);
+
+Set<Integer> mutuallyExclusive2 = new HashSet<>();
+mutuallyExclusive2.add(AndroidGesturesManager.GESTURE_TYPE_SHOVE);
+mutuallyExclusive2.add(AndroidGesturesManager.GESTURE_TYPE_SCALE);
+
+AndroidGesturesManager androidGesturesManager = new AndroidGesturesManager(
+  context,
+  mutuallyExclusive1,
+  mutuallyExclusive2
+);
+`}
+
+kotlin={`
+val mutuallyExclusive1 = HashSet<Int>()
+mutuallyExclusive1.add(AndroidGesturesManager.GESTURE_TYPE_SHOVE)
+mutuallyExclusive1.add(AndroidGesturesManager.GESTURE_TYPE_SCROLL)
+
+val mutuallyExclusive2 = HashSet<Int>()
+mutuallyExclusive2.add(AndroidGesturesManager.GESTURE_TYPE_SHOVE)
+mutuallyExclusive2.add(AndroidGesturesManager.GESTURE_TYPE_SCALE)
+
+val androidGesturesManager = AndroidGesturesManager(this@MatrixApiActivity, mutuallyExclusive1, mutuallyExclusive2)
+`}
+
+/>
+}}
 
 The first set makes it certain that when a shove gesture is detected, you will no longer be notified about the scroll gestures. The shove gesture will be able to execute because scroll is not a `ProgressiveGesture`.
 In the second set, when either a shove or scale is detected, you won't be notified about the other one until the first gesture finishes.
@@ -84,14 +106,37 @@ You can set thresholds for supported gestures, which means that a gesture detect
 
 Set thresholds using `dimen` values, rather than raw pixels, to accommodate for various screen sizes and pixel densities across Android devices. For example:
 
-```java
+{{
+<CodeLanguageToggle id="set-span" />
+<ToggleableCodeBlock
+
+java={`
 androidGesturesManager.getStandardScaleGestureDetector().setSpanSinceStartThresholdResource(R.dimen.scaleSpanSinceStartThreshold);
-```
+`}
+
+kotlin={`
+androidGesturesManager?.standardScaleGestureDetector?.setSpanSinceStartThresholdResource(R.dimen.scaleSpanSinceStartThreshold)
+`}
+
+/>
+}}
+
 For thresholds that are not expressed in pixels:
 
-```java
+{{
+<CodeLanguageToggle id="set-threshold" />
+<ToggleableCodeBlock
+
+java={`
 androidGesturesManager.getRotateGestureDetector().setAngleThreshold(ROTATE_ANGLE_THRESHOLD);
-```
+`}
+
+kotlin={`
+androidGesturesManager?.rotateGestureDetector?.angleThreshold = ROTATE_ANGLE_THRESHOLD
+`}
+
+/>
+}}
 
 ## Velocity
 
@@ -103,7 +148,11 @@ Every gesture detector can be enabled/disabled at any time using the `#setEnable
 
 Additionally, every progressive gesture can be interrupted, which will force it to meet start conditions again in order to resume. A popular use case would be to increase the gesture's threshold when another gesture is detected:
 
-```java
+{{
+<CodeLanguageToggle id="enable-and-disable" />
+<ToggleableCodeBlock
+
+java={`
 @Override
 public boolean onScaleBegin(StandardScaleGestureDetector detector) {
   // forbid movement when scaling
@@ -120,8 +169,7 @@ public boolean onScaleBegin(StandardScaleGestureDetector detector) {
 @Override
 public boolean onScale(StandardScaleGestureDetector detector) {
   float scaleFactor = detector.getScaleFactor();
-  ...
-  ...
+
   return true;
 }
     
@@ -131,7 +179,38 @@ public void onScaleEnd(StandardScaleGestureDetector detector) {
   RotateGestureDetector rotateGestureDetector = androidGesturesManager.getRotateGestureDetector();
   rotateGestureDetector.setAngleThreshold(Constants.DEFAULT_ROTATE_ANGLE_THRESHOLD);
 }
-```
+
+`}
+
+kotlin={`
+override fun onScaleBegin(detector: StandardScaleGestureDetector): Boolean {
+        // forbid movement when scaling
+        androidGesturesManager?.moveGestureDetector.isEnabled = false // this interrupts a gesture as well
+
+        // increase rotate angle threshold when scale is detected, then interrupt to force re-check
+        val rotateGestureDetector = androidGesturesManager.rotateGestureDetector
+        rotateGestureDetector.angleThreshold = ROTATION_THRESHOLD_WHEN_SCALING
+        rotateGestureDetector.interrupt()
+
+        return true
+    }
+
+override fun onScale(detector: StandardScaleGestureDetector): Boolean {
+        val scaleFactor = detector.scaleFactor
+
+        return true
+    }
+
+override fun onScaleEnd(detector: StandardScaleGestureDetector) {
+        // revert thresholds values
+        val rotateGestureDetector = androidGesturesManager?.rotateGestureDetector
+        rotateGestureDetector.angleThreshold = Constants.DEFAULT_ROTATE_ANGLE_THRESHOLD
+    }
+`}
+
+/>
+}}
+
 
 ## Detectors
 
@@ -165,26 +244,55 @@ This library is shipped as a part of the [Mapbox Maps SDK for Android](https://g
 
 To get the `AndroidGesturesManager` object which holds references to all of the gesture detectors, use:
 
-```java
+{{
+<CodeLanguageToggle id="usage-with-maps-sdk" />
+<ToggleableCodeBlock
+
+java={`
 AndroidGesturesManager gesturesManager = mapboxMap.getGesturesManager();
-```
+`}
+
+kotlin={`
+val gesturesManager = mapboxMap.gesturesManager
+`}
+
+/>
+}}
 
 In order to react to the user's input, you can register several different listeners that will be notified whenever a user interacts with a Mapbox map.
 
 `OnMapClickListener`:
 
-```java
+{{
+<CodeLanguageToggle id="on-map-click" />
+<ToggleableCodeBlock
+
+java={`
 mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
   @Override
   public void onMapClick(@NonNull LatLng point) {
     // user clicked on the map
   }
 });
-```
+`}
+
+kotlin={`
+mapboxMap.addOnMapClickListener { point ->
+ 
+}
+`}
+
+/>
+}}
+
 
 `OnMoveListener`:
 
-```java
+{{
+<CodeLanguageToggle id="on-move-click" />
+<ToggleableCodeBlock
+
+java={`
 mapboxMap.addOnMoveListener(new MapboxMap.OnMoveListener() {
   @Override
   public void onMoveBegin(MoveGestureDetector detector) {
@@ -199,7 +307,27 @@ mapboxMap.addOnMoveListener(new MapboxMap.OnMoveListener() {
     // user stopped moving the map
   }
 });
-```
+`}
+
+kotlin={`
+mapboxMap.addOnMoveListener(object : MapboxMap.OnMoveListener {
+	override fun onMoveBegin(detector: MoveGestureDetector) {
+	    // user started moving the map
+	}
+	
+	override fun onMove(detector: MoveGestureDetector) {
+	    // user is moving the map
+	}
+	
+	override fun onMoveEnd(detector: MoveGestureDetector) {
+	    // user stopped moving the map
+	}
+})
+`}
+
+/>
+}}
+
 
 You can see a `MoveGestureDetector` object being passed in the callbacks above. This class is the underlying detector from the Mapbox Gestures for Android library.
 
