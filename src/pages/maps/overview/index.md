@@ -6,6 +6,8 @@ prependJs:
   - "import AppropriateImage from '../../../components/appropriate-image';"
   - "import { Floater } from '../../../components/floater';"
   - "import { MAP_SDK_VERSION } from '../../../constants';"
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
 {{
@@ -82,7 +84,11 @@ If you don't have a Mapbox account, sign up for one [here](https://www.mapbox.co
 
 Then to pass this into the Maps SDK, you'll want to place the access token inside of your application's `onCreate()` method.
 
-```java
+{{
+<CodeLanguageToggle id="token-in-application-class" />
+<ToggleableCodeBlock
+
+java={`
 public class MyApplication extends Application {
 
   @Override
@@ -93,7 +99,23 @@ public class MyApplication extends Application {
     Mapbox.getInstance(getApplicationContext(), getString(R.string.mapbox_access_token));
   }
 }
-```
+`}
+
+kotlin={`
+class MapboxApplication : Application() {
+
+	override fun onCreate() {
+        super.onCreate()
+        
+    // Mapbox Access token
+    Mapbox.getInstance(getApplicationContext(), getString(R.string.mapbox_access_token));
+	}
+}
+`}
+
+/>
+}}
+
 
 ### 3. Setup permissions
 
@@ -107,7 +129,11 @@ Starting with the 5.0 version of the Maps SDK, we are making use of the Manifest
 
 Open the Java file of the activity where you'd like to include the map in and add the code below to the file.
 
-```java
+{{
+<CodeLanguageToggle id="add-a-map" />
+<ToggleableCodeBlock
+
+java={`
 private MapView mapView;
 
 @Override
@@ -125,7 +151,34 @@ protected void onCreate(Bundle savedInstanceState) {
     }
   });
 }
-```
+`}
+
+kotlin={`
+private var mapView: MapView? = null
+
+override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+	// Mapbox access token is configured here. This needs to be called either in your application
+	// object or in the same activity which contains the mapview.
+	Mapbox.getInstance(this, getString(R.string.access_token))
+	
+	// This contains the MapView in XML and needs to be called after the access token is configured.
+	setContentView(R.layout.activity_basic_simple_mapview)
+	
+	mapView = findViewById(R.id.mapView)
+	mapView?.onCreate(savedInstanceState)
+	mapView?.getMapAsync {
+	    
+	    // Customize map with markers, polylines, etc.
+	    
+	    
+	}
+}
+`}
+
+/>
+}}
 
 Open the acitvity's XML layout file and add the `mapView` within your layout.
 
@@ -141,17 +194,35 @@ Open the acitvity's XML layout file and add the `mapView` within your layout.
 
 The `MapView` contains its own lifecycle methods for managing Android's OpenGL lifecycle, which must be called directly from the containing Activity. In order for your app to correctly call the MapView's lifecycle methods, you must override the following lifecycle methods in the Activity that contains the MapView and call the respective MapView method. For example, your onStart() method should look like this:
 
-```java
+{{
+<CodeLanguageToggle id="on-start" />
+<ToggleableCodeBlock
+
+java={`
 @Override
 protected void onStart() {
-  super.onStart();
-  mapView.onStart();
+	super.onStart();
+	mapView.onStart();
 }
-```
+`}
+
+kotlin={`
+override fun onStart() {
+	super.onStart()
+	mapView?.onStart()
+}
+`}
+/>
+}}
+
 
 All the lifecycle methods that need to be overridden:
 
-```java
+{{
+<CodeLanguageToggle id="lifecycle-methods" />
+<ToggleableCodeBlock
+
+java={`
 onCreate();
 onStart();
 onResume();
@@ -160,7 +231,21 @@ onStop();
 onSaveInstanceState();
 onLowMemory();
 onDestroy();
-```
+`}
+
+kotlin={`
+onCreate();
+onStart();
+onResume();
+onPause();
+onStop();
+onSaveInstanceState();
+onLowMemory();
+onDestroy();
+`}
+/>
+}}
+
 
 ### 6. Java 8
 
