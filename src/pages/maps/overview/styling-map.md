@@ -3,7 +3,7 @@ title: "Styling the map"
 description: "Learn how to use the Mapbox Maps SDK for Android to change your map style to a custom style or a pre-made style made by the talented Mapbox cartography team."
 ---
 
-The maps SDK allows full customization when it comes to displaying your map. This means you can brand the map with the colors, icons, and fonts that match your apps UI. The customization can either be done using [Mapbox Studio](https://www.mapbox.com/help/studio-manual/) or during runtime using the [Runtime Styling APIs](https://www.mapbox.com/android-docs/map-sdk/overview/runtime-styling/).
+The Maps SDK for Android allows full customization when it comes to displaying your map. This means you can brand the map with the colors, icons, and fonts that match your apps UI. The customization can either be done using [Mapbox Studio](https://www.mapbox.com/help/studio-manual/) or during runtime using the [Runtime Styling APIs](https://www.mapbox.com/android-docs/map-sdk/overview/runtime-styling/).
 
 ## Changing the default style
 
@@ -18,7 +18,7 @@ As powerful as styling the map can be, to get started using the Maps SDK, it off
 
 ## Custom Mapbox Studio style
 
-To use a custom style, paste your style URL into your MapView's mapbox:mapbox_styleUrl attribute in your activity's layout file. If you would like to change the map style later on, call MapboxMap.setStyleUrl() with the new style and your map will update.
+To use a custom style, paste your style URL into your MapView's mapbox:mapbox_styleUrl attribute in your activity's layout file. If you would like to change the map style later on, call `MapboxMap.setStyleUrl()` with the new style and your map will update.
 
 ## Style-related events
 

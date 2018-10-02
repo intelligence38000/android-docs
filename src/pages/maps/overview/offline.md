@@ -1,6 +1,9 @@
 ---
 title: "Offline"
 description: "The Mapbox Maps SDK for Android supports offline maps, which is great for situation when your Android app has no internet connection. Get started with offline docs here."
+prependJs:
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
 Often, you might find your user base spends most of its time off the grid. The Maps SDK enables you to download and store pre-selected regions for usage when the device goes offline. The result of downloading the map is a fully functional map using your styles, tiles, and other resources inside the downloaded region.
@@ -31,9 +34,13 @@ First, you'll need to get the `offlineManager` instance, define the region to do
 - The definition needs the device's screen density. It's best to get this from the activities resources.
 - The bounds used for the download must not go over the 6,000 tile limit.
 
-```java
+{{
+<CodeLanguageToggle id="define-offline-region" />
+<ToggleableCodeBlock
+
+java={`
 // Set up the OfflineManager
-offlineManager = OfflineManager.getInstance(SimpleOfflineMapActivity.this);
+OfflineManager offlineManager = OfflineManager.getInstance(MainActivity.this);
 
 // Create a bounding box for the offline region
 LatLngBounds latLngBounds = new LatLngBounds.Builder()
@@ -48,13 +55,39 @@ OfflineTilePyramidRegionDefinition definition = new OfflineTilePyramidRegionDefi
   10,
   20,
   MainActivity.this.getResources().getDisplayMetrics().density);
-```
+`}
+
+kotlin={`
+// Set up the OfflineManager
+val offlineManager = OfflineManager.getInstance(this@MainActivity)
+
+// Create a bounding box for the offline region
+val latLngBounds = LatLngBounds.Builder()
+	.include(LatLng(37.7897, -119.5073)) // Northeast
+	.include(LatLng(37.6744, -119.6815)) // Southwest
+	.build()
+
+// Define the offline region
+val definition = OfflineTilePyramidRegionDefinition(
+	mapboxMap.styleUrl,
+	latLngBounds,
+	10.0,
+	20.0,this@MainActivity.getResources().getDisplayMetrics().density)
+`}
+
+/>
+}}
+
 
 ### Metadata
 
 Providing a metadata object's encouraged with at least a region name so that various regions your user's download will be distinguishable. Besides the region name, you can store any arbitrary binary region information you'd like. The contents are opaque to the SDK implementation and won't affect your offline region download, it only stores and retrieves a byte array.
 
-```java
+{{
+<CodeLanguageToggle id="metadata" />
+<ToggleableCodeBlock
+
+java={`
 // Implementation that uses JSON to store Yosemite National Park as the offline region name.
 byte[] metadata;
 try {
@@ -66,7 +99,23 @@ try {
   Log.e(TAG, "Failed to encode metadata: " + exception.getMessage());
   metadata = null;
 }
-```
+`}
+
+kotlin={`
+// Implementation that uses JSON to store Yosemite National Park as the offline region name.
+var metadata: ByteArray?
+try {
+	val jsonObject = JSONObject()
+	jsonObject.put(JSON_FIELD_REGION_NAME, "Yosemite National Park")
+	val json = jsonObject.toString()
+	metadata = json.toByteArray(charset(JSON_CHARSET))
+} catch (exception: Exception) {
+    Log.e(TAG, "Failed to encode metadata: " + exception.message)metadata = null
+}
+`}
+
+/>
+}}
 
 Besides creating the metadata, you can also update the information stored, allowing your users, for example, to update the region name. The `offlineManager` object provides a method called `updateMetadata` which takes in both the updated metadata byte array and a callback to be notified when the update is completed, or an error occurs.
 
@@ -74,7 +123,11 @@ Besides creating the metadata, you can also update the information stored, allow
 
 Now that the bounds and definition object are created, you can use the offlineManager to create an asynchronous download calling `createOfflineRegion`. You'll need to pass in the definition and metadata objects we created in both the [Defining a region](#defining-a-region) and [metadata](#metadata) sections. This will provide you with two methods, `onCreate` and `onError`. onError occurs if an error starting or while downloading the region occurs. The `onCreate` method provides an `offlineRegion` object which you can use to check the download and even display the progress to your users. If you need to pause a download, you can use the `offlineRegion.setDownloadState()` to handle this.
 
-```java
+{{
+<CodeLanguageToggle id="region-download" />
+<ToggleableCodeBlock
+
+java={`
 // Create the region asynchronously
 offlineManager.createOfflineRegion(definition, metadata,
   new OfflineManager.CreateOfflineRegionCallback() {
@@ -120,7 +173,52 @@ offlineManager.createOfflineRegion(definition, metadata,
     Log.e(TAG, "Error: " + error);
   }
 });
-```
+`}
+
+kotlin={`
+// Create the region asynchronously
+offlineManager.createOfflineRegion(definition, metadata,
+object : OfflineManager.CreateOfflineRegionCallback {
+	override fun onCreate(offlineRegion: OfflineRegion) {
+	    offlineRegion.setDownloadState(OfflineRegion.STATE_ACTIVE)
+	
+	    // Monitor the download progress using setObserver
+	    offlineRegion.setObserver(object : OfflineRegion.OfflineRegionObserver {
+			override fun onStatusChanged(status: OfflineRegionStatus) {
+			
+				// Calculate the download percentage
+				val percentage = if (status.requiredResourceCount >= 0)
+				    100.0 * status.completedResourceCount /status.requiredResourceCount else 0.0
+					
+				if (status.isComplete) {
+				    // Download complete
+				    Log.d(TAG, "Region downloaded successfully.")
+				} else if (status.isRequiredResourceCountPrecise) {
+				    Log.d(TAG, percentage)
+				}
+			}
+		
+		    override fun onError(error: OfflineRegionError) {
+		        // If an error occurs, print to logcat
+		        Log.e(TAG, "onError reason: " + error.reason)
+		        Log.e(TAG, "onError message: " + error.message)
+		    }
+		
+		    override fun mapboxTileCountLimitExceeded(limit: Long) {
+		        // Notify if offline region exceeds maximum tile count
+		        Log.e(TAG, "Mapbox tile count limit exceeded: $limit")
+		    }
+			})
+	}
+
+	override fun onError(error: String) {
+	    Log.e(TAG, "Error: $error")
+	}
+})                  
+`}
+
+/>
+}}
 
 ## Managing downloaded regions
 
@@ -130,7 +228,11 @@ Once you or your user has downloaded a region, the Maps SDK provides a few optio
 
 The listing of regions is useful for presenting downloaded information to your user or gathering information inside the code itself. The `offlineManager` offers a `listOfflineRegions` method which provides both a method `onList` and `onError`. Use the `OfflineRegion` array to do all the actions in a specific region.
 
-```java
+{{
+<CodeLanguageToggle id="list-offline-regions" />
+<ToggleableCodeBlock
+
+java={`
 // Get the region bounds and zoom and move the camera.
 LatLngBounds bounds = ((OfflineTilePyramidRegionDefinition)
   offlineRegions[regionSelected].getDefinition()).getBounds();
@@ -144,8 +246,28 @@ CameraPosition cameraPosition = new CameraPosition.Builder()
   .build();
 
 // Move camera to new position
-map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-```
+mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+`}
+
+kotlin={`
+// Get the region bounds and zoom and move the camera.
+val bounds = (offlineRegions[regionSelected].getDefinition() as OfflineTilePyramidRegionDefinition).bounds
+
+val regionZoom = (offlineRegions[regionSelected].getDefinition() as OfflineTilePyramidRegionDefinition).minZoom
+
+// Create new camera position
+val cameraPosition = CameraPosition.Builder()
+	.target(bounds.center)
+	.zoom(regionZoom)
+	.build()
+
+// Move camera to new position
+mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+`}
+
+/>
+}}
+
 
 ## Delete region
 
@@ -153,7 +275,11 @@ To remove an offline region from the database, you'll need to first receive the 
 
 Deleting a region will result in also removing the least recently requested resources not required by other regions until the database shrinks below a certain size.
 
-```java
+{{
+<CodeLanguageToggle id="delete-offline-regions" />
+<ToggleableCodeBlock
+
+java={`
 offlineRegions[0].delete(new OfflineRegion.OfflineRegionDeleteCallback() {
   @Override
   public void onDelete() {
@@ -161,7 +287,7 @@ offlineRegions[0].delete(new OfflineRegion.OfflineRegionDeleteCallback() {
     // progressBar and display a toast
     progressBar.setVisibility(View.INVISIBLE);
     progressBar.setIndeterminate(false);
-    Toast.makeText(OfflineManagerActivity.this, "Region deleted", Toast.LENGTH_LONG).show();
+    Toast.makeText(MainActivity.this, "Region deleted", Toast.LENGTH_LONG).show();
   }
 
   @Override
@@ -171,7 +297,28 @@ offlineRegions[0].delete(new OfflineRegion.OfflineRegionDeleteCallback() {
     Log.e(TAG, "Error: " + error);
   }
 });
-```
+`}
+
+kotlin={`
+offlineRegions[0].delete(object : OfflineRegion.OfflineRegionDeleteCallback {
+	override fun onDelete() {
+	    // Once the region is deleted, remove the
+	    // progressBar and display a toast
+	    progressBar.setVisibility(View.INVISIBLE)
+	    progressBar.setIndeterminate(false)
+	    Toast.makeText(this@MainActivity, "Region deleted", Toast.LENGTH_LONG).show()
+	}
+	
+override fun onError(error: String) {
+    progressBar.setVisibility(View.INVISIBLE)
+    progressBar.setIndeterminate(false)
+    Log.e(TAG, "Error: $error")
+}
+})
+`}
+
+/>
+}}
 
 ## Offline Plugin
 
