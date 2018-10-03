@@ -1,6 +1,9 @@
 ---
 title: "Faster-Route Detection"
 description: "Faster-route detection in the Mapbox Navigation SDK for Android. Read all about it in this official Mapbox documentation."
+prependJs:
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
 Similar to off-route detection, a default faster-route detection class is included inside the Navigation SDK. This class checks each location update as well as the progress along the current route to determine if a new route should be retrieved.  
@@ -32,7 +35,11 @@ Finally, you are able to listen to the retrieval of a faster `DirectionsRoute` w
 `FasterRouteListener`.  This listener will fire if a new route is retrieved and meets the
 given criteria of `FasterRoute#isFasterRoute`.
 
-```java
+{{
+<CodeLanguageToggle id="building-plugin" />
+<ToggleableCodeBlock
+
+java={`
 navigation.addFasterRouteListener(new FasterRouteListener() {
   @Override
   public void fasterRouteFound(DirectionsRoute directionsRoute) {
@@ -40,4 +47,14 @@ navigation.addFasterRouteListener(new FasterRouteListener() {
     navigation.startNavigation(directionsRoute);
   }
 });
-```
+`}
+
+kotlin={`
+navigation?.addFasterRouteListener { directionsRoute ->
+// Update MapboxNavigation here
+navigation.startNavigation(directionsRoute)
+}    
+`}
+
+/>
+}}

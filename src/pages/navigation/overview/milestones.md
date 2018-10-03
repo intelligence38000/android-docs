@@ -1,6 +1,9 @@
 ---
 title: "Milestones"
 description: "Trusted documentation about milestones within the Mapbox Navigation SDK for Android. Know when to instruct your users and/or when to hide or show custom UI."
+prependJs:
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
 Navigation milestones inside the SDK provide a powerful way to give your user instructions or get cues to hide or show
@@ -22,12 +25,25 @@ The `BannerInstructionMilestone` will fire every time textual instructions shoul
 
 All the milestones use the `onMilestoneEvent` callback to alert when they get triggered. If you want to make use of the milestones API, you will want to attach a `MilestoneEventListener` inside your app. When all the milestone trigger conditions are true, the callback is invoked and provides you with the latest routeProgress along with the milestone's corresponding `String` instruction and the `Milestone` itself that was triggered. You can use your text-to-speech engine of choice and have it consume the instruction.
 
-```java
+{{
+<CodeLanguageToggle id="on-milestone-event" />
+<ToggleableCodeBlock
+
+java={`
 @Override
 public void onMilestoneEvent(RouteProgress routeProgress, String instruction, Milestone milestone) {
   exampleInstructionPlayer.play(instruction);
 }
-```
+`}
+
+kotlin={`
+override fun onMilestoneEvent(routeProgress: RouteProgress, instruction: String, milestone: Milestone) {
+	exampleInstructionPlayer.play(instruction)
+}
+`}
+
+/>
+}}
 
 ## Building a custom milestone
 
@@ -35,16 +51,33 @@ Milestones bring flexibility to your app and how it handles navigation events. C
 
 The snippet of code provided below shows the creation of a `RouteMilestone` with two conditions, both of which need to be true for the milestone to be triggered. Since it is a `RouteMilestone`, the milestone event only occurs once. The trigger statement can be read as: both the step index must be less than 3 and the current step total distance must be greater than 200 meters for the milestone to be triggered.
 
-```java
+{{
+<CodeLanguageToggle id="route-milestone" />
+<ToggleableCodeBlock
+
+java={`
+navigation.addOffRouteListener(new OffRouteListener() {
+  @Override
+  public void userOffRoute(Location location) {
 navigation.addMilestone(new RouteMilestone.Builder()
   .setIdentifier("begin-route-milestone")
   .setTrigger(
     Trigger.all(
       Trigger.lt(TriggerProperty.STEP_INDEX, 3),
-      Trigger.gt(TriggerProperty.STEP_DISTANCE_TOTAL_METERS, 200)
-    )
-  ).build());
-```
+      Trigger.gt(TriggerProperty.STEP_DISTANCE_TOTAL_METERS, 200))).build());
+`}
+
+kotlin={`
+navigation?.addOffRouteListener {
+	navigation!!.addMilestone(RouteMilestone.Builder()
+		.setIdentifier("begin-route-milestone")
+		.setTrigger(Trigger.all(Trigger.lt(TriggerProperty.STEP_INDEX, 3), Trigger.gt(TriggerProperty.STEP_DISTANCE_TOTAL_METERS, 200))).build())
+}
+`}
+
+/>
+}}
+
 
 ### Trigger conditions
 
@@ -87,11 +120,27 @@ We are actively adding more and more trigger properties every day while we conti
 
 You'll see in the next section about the milestone event listener that the callback provides a `String` instruction value. During the milestone creation process, you can add the logic that generates this instruction. Begin by creating a new `Instruction` object which will provide an override method, `buildInstruction`, which provides a `RouteProgress` object for producing the instructions string. With the provided route progress, you can add information such as distance and duration remaining until the next maneuver. Once the `Instruction` is initialized, you will need to give it to the milestone using `setInstruction`. The example below shows how to add the directions API instruction with no modifications as the milestone instruction.
 
-```java
+{{
+<CodeLanguageToggle id="custom-instruction" />
+<ToggleableCodeBlock
+
+java={`
 Instruction myInstruction = new Instruction() {
   @Override
   public String buildInstruction(RouteProgress routeProgress) {
-    return routeProgress.getCurrentLegProgress().getUpComingStep().getManeuver().getInstruction();
+  return routeProgress.currentLegProgress().upComingStep().maneuver().instruction();
   }
-});
-```
+};
+`}
+
+kotlin={`
+val myInstruction = object : Instruction() {
+	override fun buildInstruction(routeProgress: RouteProgress): String? {
+	return routeProgress.currentLegProgress().upComingStep()!!.maneuver().instruction()
+	}
+}
+`}
+
+/>
+}}
+

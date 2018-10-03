@@ -1,6 +1,9 @@
 ---
 title: "Route Progress Object"
 description: "Read these docs and learn how to use a user's progress information along a route with the Mapbox Navigation SDK for Android."
+prependJs:
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
 The `RouteProgress` class contains all the user's progress information along the route, including leg and steps. This object's provided inside `ProgressChangeListener`, allowing you to get distance measurements, the percentage of route complete, current step index, and much more.
@@ -11,14 +14,28 @@ Like tracking user location changes, this listener's invoked every time the user
 
 Besides receiving information about the route progress, the callback also provides you with the user's current location which can provide their current speed, bearing, etc. If you have the snap to route enabled, the location object will be updated to give the snapped coordinates.
 
-```java
-navigation.addProgressChangeListener(new ProgressChangeListener() {
-  @Override
-  public void onProgressChange(Location location, RouteProgress routeProgress) {
+{{
+<CodeLanguageToggle id="on-progress-changed" />
+<ToggleableCodeBlock
 
-  }
+java={`
+navigation.addProgressChangeListener(new ProgressChangeListener() {
+@Override
+public void onProgressChange(Location location, RouteProgress routeProgress) {
+
+
+}
 });
-```
+`}
+
+kotlin={`
+override fun onProgressChange(location: Location, routeProgress: RouteProgress) {
+
+}
+`}
+
+/>
+}}
 
 | RouteProgress APIs          | Description           |
 | --------------------------- |:---------------------:|

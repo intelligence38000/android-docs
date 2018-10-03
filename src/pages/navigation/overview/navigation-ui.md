@@ -2,11 +2,12 @@
 title: "Navigation turn-by-turn UI"
 description: "Customize the design of your Android app's turn-by-turn navigation experience. How? The Mapbox Navigation SDK for Android. Click for docs and info."
 prependJs:
-- |
-  import {
+	- import {
     NAVIGATION_VERSION
   } from '../../../constants';
-  import AppropriateImage from '../../../components/appropriate-image';
+	- "import AppropriateImage from '../../../components/appropriate-image";
+	- "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+	- "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
 Mapbox Navigation gives you all of the tools that you need to add turn-by-turn navigation to your apps.
@@ -39,7 +40,11 @@ dependencies {
 
 With either a `DirectionsRoute` from `NavigationRoute` or two `Point` objects (origin and destination), you can launch the UI with `NavigationLauncher` from within your `Activity`:
 
-```java
+{{
+<CodeLanguageToggle id="launch-nav-ui" />
+<ToggleableCodeBlock
+
+java={`
 // Route fetched from NavigationRoute
 DirectionsRoute route = ...
 
@@ -53,7 +58,24 @@ NavigationLauncherOptions options = NavigationLauncherOptions.builder()
 
 // Call this method with Context from within an Activity
 NavigationLauncher.startNavigation(this, options);
-```
+`}
+
+kotlin={`
+// Route fetched from NavigationRoute
+val route: DirectionsRoute
+
+val simulateRoute = true
+
+// Create a NavigationLauncherOptions object to package everything together
+val options = NavigationLauncherOptions.builder()
+	.directionsRoute(route)
+	.shouldSimulateRoute(simulateRoute)
+	.build()
+
+// Call this method with Context from within an Activity
+NavigationLauncher.startNavigation(this, options)`}
+/>
+}}
 
 ## NavigationViewOptions
 
@@ -65,12 +87,25 @@ You must provide either a valid `DirectionsRoute` object, or both an origin
 and destination `Point` objects.
 If you provide both, only the `DirectionsRoute` will be used.
 
-```java
+{{
+<CodeLanguageToggle id="nav-view-options" />
+<ToggleableCodeBlock
+
+java={`
 NavigationViewOptions options = NavigationViewOptions.builder()
   .directionsRoute(route)
   .shouldSimulateRoute(simulateRoute)
   .build();
-```
+`}
+
+kotlin={`
+ val options = NavigationViewOptions.builder()
+	.directionsRoute(route)
+	.shouldSimulateRoute(simulateRoute)
+	.build()
+`}
+/>
+}}
 
 #### Unit Type (Metric / Imperial)
 Metric / imperial unit formatting is based on the voice unit type you used for fetching
@@ -79,15 +114,31 @@ from the API request and use this for the UI formatting.  The `NavigationRoute` 
 an Android `Context` so that if you don't specify a voice unit type, the default will be
 based on the device `Locale` (from `Configuration`).
 
-```java
+{{
+<CodeLanguageToggle id="unit-type" />
+<ToggleableCodeBlock
+
+java={`
 // this being Context
 NavigationRoute.builder(this)
-  .accessToken(Mapbox.getAccessToken())
-  .origin(origin)
-  .destination(destination)
-  .voiceUnits(DirectionsCriteria.METRIC)
-  .build()
-```
+	.accessToken(Mapbox.getAccessToken())
+	.origin(origin)
+	.destination(destination)
+	.voiceUnits(DirectionsCriteria.METRIC)
+	.build()
+`}
+
+kotlin={`
+// this being Context
+NavigationRoute.builder(this)
+	.accessToken(Mapbox.getAccessToken()!!)
+	.origin(origin)
+	.destination(destination)
+	.voiceUnits(DirectionsCriteria.METRIC)
+	.build()
+`}
+/>
+}}
 
 ## NavigationView Activity Example
 
@@ -101,7 +152,11 @@ The `NavigationView` has lifecycle methods to ensure the `View` properly handles
 
 Calling `initialize()` will ultimately call `onNavigationReady()` once all components for the `View` have been properly initialized.
 
-``` java
+{{
+<CodeLanguageToggle id="nav-view-activity" />
+<ToggleableCodeBlock
+
+java={`
 @Override
 protected void onCreate(@Nullable Bundle savedInstanceState) {
   setTheme(R.style.Theme_AppCompat_NoActionBar);
@@ -167,7 +222,67 @@ protected void onDestroy() {
   super.onDestroy();
   navigationView.onDestroy();
 }
-```
+`}
+
+kotlin={`
+override fun onCreate(savedInstanceState: Bundle?) {
+setTheme(R.style.Theme_AppCompat_NoActionBar)
+super.onCreate(savedInstanceState)
+	setContentView(R.layout.activity_navigation)
+	navigationView = findViewById(R.id.navigationView)
+	navigationView!!.onCreate(savedInstanceState)
+	navigationView!!.initialize(this)
+}
+
+public override fun onStart() {
+	super.onStart()
+	navigationView!!.onStart()
+}
+
+public override fun onResume() {
+	super.onResume()
+	navigationView!!.onResume()
+}
+
+override fun onLowMemory() {
+	super.onLowMemory()
+	navigationView!!.onLowMemory()
+}
+
+override fun onBackPressed() {
+	// If the navigation view didn't need to do anything, call super
+	if (!navigationView!!.onBackPressed()) {
+	    super.onBackPressed()
+	}
+}
+
+override fun onSaveInstanceState(outState: Bundle) {
+	navigationView!!.onSaveInstanceState(outState)
+	super.onSaveInstanceState(outState)
+}
+
+override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+	super.onRestoreInstanceState(savedInstanceState)
+	navigationView!!.onRestoreInstanceState(savedInstanceState)
+}
+
+public override fun onPause() {
+	super.onPause()
+	navigationView!!.onPause()
+}
+
+public override fun onStop() {
+	super.onStop()
+	navigationView!!.onStop()
+}
+
+override fun onDestroy() {
+	super.onDestroy()
+	navigationView!!.onDestroy()
+}
+`}
+/>
+}}
 
 #### Step 2
 Your `Activity` or `Fragment` must implement `NavigationViewListener`. This interface includes callbacks for the start and end of the turn-by-turn UI. `onNavigationReady()` is your cue to start navigation with `NavigationView#startNavigation(NavigationViewOptions options)`.  
@@ -176,7 +291,11 @@ Your `Activity` or `Fragment` must implement `NavigationViewListener`. This inte
 
 `onNavigationFinished()` is your cue if the navigation session has ended or a user has cancelled the UI.
 
-``` java
+{{
+<CodeLanguageToggle id="nav-listener" />
+<ToggleableCodeBlock
+
+java={`
 @Override
 public void onNavigationReady() {
   NavigationViewOptions options = NavigationViewOptions.builder()
@@ -193,10 +312,22 @@ public void onNavigationReady() {
 public void onNavigationFinished() {
   finish();
 }
-```
+`}
+
+kotlin={`
+
+
+`}
+/>
+}}
+
 ## NavigationView Fragment Example
 
-```java
+{{
+<CodeLanguageToggle id="fragment-example" />
+<ToggleableCodeBlock
+
+java={`
 @Nullable
 @Override
 public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -293,7 +424,100 @@ public void onNavigationFinished() {
 public void onNavigationRunning() {
   // no-op
 }
-```
+`}
+
+kotlin={`
+companion object {
+	private val ORIGIN_LONGITUDE = -77.04012393951416
+	private val ORIGIN_LATITUDE = 38.9111117447887
+	private val DESTINATION_LONGITUDE = -77.03847169876099
+	private val DESTINATION_LATITUDE = 38.91113678979344
+}
+
+override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+savedInstanceState: Bundle?): View? { 
+	return inflater.inflate(R.layout.navigation_view_fragment_layout, container)
+}
+
+override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+	super.onViewCreated(view, savedInstanceState)
+	navigationView = view.findViewById(R.id.navigation_view_fragment)
+	navigationView?.onCreate(savedInstanceState)
+	navigationView?.initialize(this)
+}
+
+override fun onStart() {
+	super.onStart()
+	navigationView?.onStart()
+}
+
+override fun onResume() {
+	super.onResume()
+	navigationView?.onResume()
+}
+
+override fun onSaveInstanceState(outState: Bundle) {
+	navigationView?.onSaveInstanceState(outState)
+	super.onSaveInstanceState(outState)
+}
+
+override fun onViewStateRestored(savedInstanceState: Bundle?) {
+	super.onViewStateRestored(savedInstanceState)
+	if (savedInstanceState != null) {
+	    navigationView?.onRestoreInstanceState(savedInstanceState)
+	}
+}
+
+override fun onPause() {
+	super.onPause()
+	navigationView?.onPause()
+}
+
+override fun onStop() {
+	super.onStop()
+	navigationView?.onStop()
+}
+
+override fun onLowMemory() {
+	super.onLowMemory()
+	navigationView?.onLowMemory()
+}
+
+override fun onDestroyView() {
+    super.onDestroyView()
+    navigationView?.onDestroy()
+}
+
+override fun onNavigationReady(isRunning: Boolean) {
+	val origin = Point.fromLngLat(ORIGIN_LONGITUDE, ORIGIN_LATITUDE)
+	val destination = Point.fromLngLat(DESTINATION_LONGITUDE, DESTINATION_LATITUDE)
+	val options = NavigationViewOptions.builder()
+	        .directionsRoute(directionsRoute)
+	        .shouldSimulateRoute(true)
+	        .navigationListener(this)
+	        .build()
+	
+	navigationView?.startNavigation(options)
+}
+
+override fun onCancelNavigation() {
+	if (activity != null) {
+	    activity?.finish()
+	}
+}
+
+override fun onNavigationFinished() {
+	if (activity != null) {
+	    activity?.finish()
+	}
+}
+
+override fun onNavigationRunning() {
+	// no-op
+}
+`}
+/>
+}}
 
 ## Listening to the NavigationView
 Using `NavigationView` in your XML also gives you the ability to listen to different
@@ -330,13 +554,29 @@ core SDK are able to be added, as well as three others: `NavigationListener`, `R
 
 To add these listeners, you can add them to your `NavigationViewOptions` before
 you call `navigationView.startNavigation(NavigationViewOptions options)`:
-``` java
+
+{{
+<CodeLanguageToggle id="nav-view-options-listeners" />
+<ToggleableCodeBlock
+
+java={`
 NavigationViewOptions options = NavigationViewOptions.builder()
-  .navigationListener(this)
-  .routeListener(this)
-  .feedbackListener(this)
-  .build();
-```
+	.navigationListener(this)
+	.routeListener(this)
+	.feedbackListener(this)
+	.build();
+`}
+
+kotlin={`
+val options = NavigationViewOptions.builder()
+	.navigationListener(this)
+	.routeListener(this)
+	.feedbackListener(this)
+	.build()
+`}
+/>
+}}
+
 **Please note** these listeners are only available if you are adding `NavigationView`
 to your `Activity` or `Fragment` layout XML via `NavigationViewOptions`.  You are not able
 to add them to `NavigationLauncherOptions`.
@@ -486,23 +726,43 @@ The top `View` that displays the maneuver image, instruction text, and sound but
 
 Once inflated in your `Activity`, the `InstructionView` can be updated with a `RouteProgress` object inside a `ProgressChangeListener`.  
 
-Prior to the first time you call `InstructionView#update(RouteProgress)`, you can pass in a `DirectionsCriteria` (IMPERIAL or METRIC)
+Prior to the first time you call `InstructionView#updateDistanceWith(RouteProgress)`, you can pass in a `DirectionsCriteria` (IMPERIAL or METRIC)
 and `Locale` to determine how the `InstructionView` will format the distance data. If you only pass a `Locale`, the view will default
 the `DirectionsCriteria` based on this `Locale`. If neither are provided, we will get the device `Locale` and use this for both.
 
-```java
+{{
+<CodeLanguageToggle id="instruction-view" />
+<ToggleableCodeBlock
+
+java={`
 instructionView.setLocale(Locale.getDefault());
 instructionView.setUnitType(DirectionsCriteria.METRIC);
 
 @Override
 public void onProgressChange(Location location, RouteProgress routeProgress) {
-  instructionView.update(routeProgress);
+	instructionView.updateDistanceWith(routeProgress);
 }
-```
+`}
+
+kotlin={`
+instructionView?.setLocale(Locale.getDefault())
+instructionView?.setUnitType(DirectionsCriteria.METRIC)
+
+override fun onProgressChange(location: Location, routeProgress: RouteProgress) {
+instructionView?.updateDistanceWith(routeProgress)
+}
+`}
+/>
+}}
+
 
 Please make sure to set our default theme: `R.style.NavigationViewLight` (or create your own) and set it in your `Activity` or `Fragment` before `super.onCreate()`. The custom `View`s will now look for the attributes in the default theme to set text and background colors:
 
-```java
+{{
+<CodeLanguageToggle id="set-nav-view" />
+<ToggleableCodeBlock
+
+java={`
 @Override
 protected void onCreate(Bundle savedInstanceState) {
   setTheme(R.style.NavigationViewLight);
@@ -510,18 +770,38 @@ protected void onCreate(Bundle savedInstanceState) {
   setContentView(R.layout.activity_navigation);
   ...
 }
-```
+`}
+
+kotlin={`
+override fun onCreate(savedInstanceState: Bundle?) {
+setTheme(R.style.NavigationViewLight)
+super.onCreate(savedInstanceState)
+setContentView(R.layout.activity_navigation)
+}
+`}
+/>
+}}
 
 ## NavigationMapRoute
 
 You can use `NavigationMapRoute` to draw the route line on your map. Instantiate it with a
 `MapView` and `MapboxMap`, then add a `DirectionsRoute` from our Directions API. The `DirectionsRoute` will automatically be added (even in off-route scenarios) if you instantiate with `MapboxNavigation`. You can also style the route with a given style:
 
-```java
-NavigationMapRoute mapRoute = new NavigationMapRoute(MapboxNavigation navigation, MapView mapView,
-                                                     MapboxMap mapboxMap, int styleRes);
+{{
+<CodeLanguageToggle id="nav-map-route" />
+<ToggleableCodeBlock
 
-```
+java={`
+NavigationMapRoute mapRoute = new NavigationMapRoute(MapboxNavigation navigation, MapView mapView,MapboxMap mapboxMap, int styleRes);
+}
+`}
+
+kotlin={`
+
+
+`}
+/>
+}}
 
 The given style will determine route color, congestion colors, and the route scale:
 
@@ -543,18 +823,41 @@ The given style will determine route color, congestion colors, and the route sca
 Driven by `DynamicCamera` engine, the `NavigationCamera` holds all of the logic needed to drive a `MapboxMap` camera
 that reacts and adjusts to the current progress along a `DirectionsRoute`.
 
-To create an instance of `NavigationCamera`, you need a `MapboxMap` and `MapboxNavigation` object:
+To create an instance of `NavigationCamera`, you need a `MapboxMap` and `MapboxNavigation` object, and an instance of the Location Layer Plugin:
 
-```java
-NavigationCamera camera = new NavigationCamera(MapboxMap map, MapboxNavigation navigation);
-```
+{{
+<CodeLanguageToggle id="nav-map-camera" />
+<ToggleableCodeBlock
+
+java={`
+NavigationCamera camera = new NavigationCamera(mapboxMap, navigation,locationLayerPlugin);
+}
+`}
+
+kotlin={`
+val camera = NavigationCamera(mapboxMap!!, navigation!!, locationLayerPlugin!!)
+`}
+/>
+}}
+
 
 Calling `NavigationCamera#start(DirectionsRoute route)` will begin an animation to the start of the
 `DirectionsRoute` you provided:
 
-```java
-camera.start(DirectionsRoute directionsRoute);
-```
+{{
+<CodeLanguageToggle id="camera-start" />
+<ToggleableCodeBlock
+
+java={`
+camera.start(directionsRoute);
+}
+`}
+
+kotlin={`
+camera.start(directionsRoute)
+`}
+/>
+}}
 
 At the end of this animation or if the user interacts with the screen while it is running and
 subsequently cancels the animation, a `ProgressChangeListener` is added to `MapboxNavigation` so
