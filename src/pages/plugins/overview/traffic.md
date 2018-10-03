@@ -6,6 +6,8 @@ prependJs:
     import {
       TRAFFIC_PLUGIN_VERSION
     } from '../../../constants';
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"    
 ---
 
 The Mapbox Traffic Plugin adds a real-time traffic layer to any Mapbox base map. If you want to display a traffic layer inside your application, you only need to include the dependency in your project and initialize the plugin. Various shades of colors indicate the congestion level for any given part of a road segment. If not enough traffic data available for a given road, no road information will be shown.
@@ -38,13 +40,28 @@ dependencies {
 ## Add traffic
 Since the Traffic Plugin requires the `mapboxMap` object, it's necessary to initialize the plugin either inside `onMapReady` (recommended) or in another place you know the `mapboxMap` will not be null. Once initialized, `trafficPlugin.setVisibility()` to true will enable the traffic. You can use `isVisible()` which returns a boolean true if the traffic's visible, otherwise false.
 
-```java
+{{
+<CodeLanguageToggle id="traffic" />
+<ToggleableCodeBlock
+
+java={`
 @Override
 public void onMapReady(MapboxMap mapboxMap) {
   TrafficPlugin trafficPlugin = new TrafficPlugin(mapView, mapboxMap);
   trafficPlugin.setVisibility(true); // Enable the traffic view
 }
-```
+`}
+
+kotlin={`
+override fun onMapReady(mapboxMap: MapboxMap) {
+	val trafficPlugin = TrafficPlugin(mapView, mapboxMap)
+	trafficPlugin.setVisibility(true) // Enable the traffic view
+}
+`}
+
+/>
+}}
+
 
 ## Traffic colors
 The table below provides information for each color displayed in the traffic layer and what the corresponding congestion level is.

@@ -6,6 +6,9 @@ sideNavSections:
   - title: "Geocoding response"
   - title: "Reverse geocoding"
   - title: "Batch geocoding"
+prependJs:
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
 The Mapbox Geocoding API does two things: forward geocoding and reverse geocoding. **Forward geocoding** lets you convert location text into geographic coordinates, and **reverse geocoding** turns geographic coordinates into place names.
@@ -23,12 +26,26 @@ Before making a geocoding request, you must build the `MapboxGeocoding` object b
 
 _**Note:** If you are using our geocoder to find locations around the user's location, you can use `proximity()` passing in their location as a `Point` object to bias results to around their location._
 
-```java
+{{
+<CodeLanguageToggle id="geocoding-request" />
+<ToggleableCodeBlock
+
+java={`
 MapboxGeocoding mapboxGeocoding = MapboxGeocoding.builder()
   .accessToken(Mapbox.getAccessToken())
   .query("1600 Pennsylvania Ave NW")
   .build();
-```
+`}
+
+kotlin={`
+val mapboxGeocoding = MapboxGeocoding.builder()
+	.accessToken(Mapbox.getAccessToken()!!)
+	.query("1600 Pennsylvania Ave NW")
+	.build()
+`}
+
+/>
+}}
 
 ## Geocoding response
 
@@ -36,27 +53,67 @@ Once you have built your `MapboxGeocoding` object with all the parameters that y
 
 _**Note:** You should use `mapboxGeocoding.cancelCall()` within your `onDestroy()` lifecycle method in case your user leaves the activity or application before the callback is notified._
 
-```java
-mapboxGeocoding.enqueueCall(new Callback<GeocodingResponse>() {
-  @Override
-  public void onResponse(Call<GeocodingResponse> call, Response<GeocodingResponse> response) {
-    List<CarmenFeature> results = response.body().features();
-    if (results.size() > 0) {
-      // Log the first results Point.
-      Point firstResultPoint = results.get(0).center();
-      Log.d(TAG, "onResponse: " + firstResultPoint.toString());
-    } else {
-      // No result for your request were found.
-      Log.d(TAG, "onResponse: No result found");
-    }
-  }
+{{
+<CodeLanguageToggle id="geocoding-response" />
+<ToggleableCodeBlock
 
-  @Override
-  public void onFailure(Call<GeocodingResponse> call, Throwable throwable) {
-    throwable.printStackTrace();
-  }
+java={`
+mapboxGeocoding.enqueueCall(new Callback<GeocodingResponse>() {
+	@Override
+	public void onResponse(Call<GeocodingResponse> call, Response<GeocodingResponse> response) {
+
+		List<CarmenFeature> results = response.body().features();
+	
+		if (results.size() > 0) {
+		  
+		  // Log the first results Point.
+		  Point firstResultPoint = results.get(0).center();
+		  Log.d(TAG, "onResponse: " + firstResultPoint.toString());
+		  
+		} else {
+		
+		  // No result for your request were found.
+		  Log.d(TAG, "onResponse: No result found");
+		  
+		}
+	}
+	
+	@Override
+	public void onFailure(Call<GeocodingResponse> call, Throwable throwable) {
+		throwable.printStackTrace();
+	}
 });
-```
+`}
+
+kotlin={`
+mapboxGeocoding.enqueueCall(object : Callback<GeocodingResponse> {
+	override fun onResponse(call: Call<GeocodingResponse>, response: Response<GeocodingResponse>) {
+
+		val results = response.body()!!.features()
+			
+		if (results.size > 0) {
+			
+		    // Log the first results Point.
+		    val firstResultPoint = results[0].center()
+		    Log.d(FragmentActivity.TAG, "onResponse: " + firstResultPoint!!.toString())
+			
+		} else {
+			
+		    // No result for your request were found.
+		    Log.d(FragmentActivity.TAG, "onResponse: No result found")
+			
+		}
+	}
+		
+	override fun onFailure(call: Call<GeocodingResponse>, throwable: Throwable) {
+		throwable.printStackTrace()
+	}
+})
+`}
+
+/>
+}}
+
 
 ## Reverse geocoding
 
@@ -64,7 +121,11 @@ The process of turning coordinates into a `String` address is called reverse geo
 
 You can narrow the response like forward geocoding by biasing the result using the available parameters provided in the builder.
 
-```java
+{{
+<CodeLanguageToggle id="reverse-geocoding" />
+<ToggleableCodeBlock
+
+java={`
 MapboxGeocoding reverseGeocode = MapboxGeocoding.builder()
         .accessToken(ACCESS_TOKEN)
         .query(Point.fromLngLat(-77.03655, 38.89770))
@@ -72,7 +133,20 @@ MapboxGeocoding reverseGeocode = MapboxGeocoding.builder()
         .build();
 
 // The result of this reverse geocode will give you "Pennsylvania Ave NW"
-```
+`}
+
+kotlin={`
+val reverseGeocode = MapboxGeocoding.builder()
+	.accessToken(ACCESS_TOKEN)
+	.query(Point.fromLngLat(-77.03655, 38.89770))
+	.geocodingTypes(GeocodingCriteria.TYPE_ADDRESS)
+	.build()
+
+// The result of this reverse geocode will give you "Pennsylvania Ave NW"
+`}
+
+/>
+}}
 
 ## Batch geocoding
 
@@ -80,13 +154,29 @@ MapboxGeocoding reverseGeocode = MapboxGeocoding.builder()
 
 Batch requests have the same parameters as normal requests, but can include more than one query by separating queries with the `;` character. The mode parameter also needs to use `MODE_PLACES_PERMANENT`. You can do up to 50 forward or reverse geocoding queries in a single request. The response is an array of individual geocoder responses formatted the same as individual results. Each query in a batch request counts individually against your account's rate limits.
 
-```java
+{{
+<CodeLanguageToggle id="batch-geocoding" />
+<ToggleableCodeBlock
+
+java={`
 MapboxGeocoding client = MapboxGeocoding.builder()
-  .accessToken(ACCESS_TOKEN)
-  .mode(GeocodingCriteria.MODE_PLACES_PERMANENT)
-  .query("20001;20009;22209")
-  .baseUrl(mockUrl.toString())
-  .build();
-```
+	.accessToken(ACCESS_TOKEN)
+	.mode(GeocodingCriteria.MODE_PLACES_PERMANENT)
+	.query("20001;20009;22209")
+	.baseUrl(mockUrl.toString())
+	.build();
+`}
+
+kotlin={`
+val client = MapboxGeocoding.builder()
+	.accessToken(ACCESS_TOKEN)
+	.mode(GeocodingCriteria.MODE_PLACES_PERMANENT)
+	.query("20001;20009;22209")
+	.baseUrl(mockUrl.toString())
+	.build()
+`}
+
+/>
+}}
 
 _**Note**: Batch geocoding is only available with an [Enterprise plan](https://www.mapbox.com/pricing/). On all other plan levels, one geocode is permitted per request. For more information about batch geocoding please [contact us](https://www.mapbox.com/contact/sales)._

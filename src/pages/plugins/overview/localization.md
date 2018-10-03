@@ -6,6 +6,8 @@ prependJs:
     import {
       LOCALIZATION_PLUGIN_VERSION
     } from '../../../constants';
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"   
 
 ---
 
@@ -42,16 +44,32 @@ dependencies {
 
 The plugin's constructor requires a `MapView` and `MapboxMap` object. You should initialize the plugin within the `onMapReady()` method to be sure that the plugin is receiving a `mapboxMap` that's completely ready.
 
-```java
-  mapView.getMapAsync(new OnMapReadyCallback() {
+{{
+<CodeLanguageToggle id="initialize-localization" />
+<ToggleableCodeBlock
+
+java={`
+mapView.getMapAsync(new OnMapReadyCallback() {
     @Override
     public void onMapReady(MapboxMap mapboxMap) {
   	
   	LocalizationPlugin localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
   		
-    }
-  });
-```
+}
+});
+`}
+
+kotlin={`
+mapView?.getMapAsync { mapboxMap -> 
+            
+val localizationPlugin = LocalizationPlugin(mapView!!, mapboxMap) 
+        
+}
+`}
+
+/>
+}}
+
  
 ## Use MapLocale
 
@@ -68,7 +86,11 @@ As described above, the plugin's main benefit is its ability to detect the devic
 
 Calling this method should happen within a try/catch statement because `matchMapLanguageWithDeviceDefault()` can throw a `NullPointerException`. This `NullPointerException` is thrown when the device's `Locale` has no matching `MapLocale` object. You need to create an instance of `MapLocale` and add it to the `MapLocale` cache (`LOCAL_SET`) using the `addMapLocale()` method.
  
-```java
+{{
+<CodeLanguageToggle id="match-language" />
+<ToggleableCodeBlock
+
+java={`
 mapView.getMapAsync(new OnMapReadyCallback() {
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
@@ -82,7 +104,23 @@ mapView.getMapAsync(new OnMapReadyCallback() {
     }
   }
 });
-```
+`}
+
+kotlin={`
+mapView!!.getMapAsync { mapboxMap ->
+	val localizationPlugin = LocalizationPlugin(mapView!!, mapboxMap)
+		
+	try {
+	    localizationPlugin.matchMapLanguageWithDeviceDefault()
+	} catch (exception: RuntimeException) {
+	    Log.d(TAG, exception.toString())
+	}
+}
+`}
+
+/>
+}}
+
 
 ## Set map language
 
@@ -98,26 +136,66 @@ The plugin overloads the `setMapLanguage()` method with three different paramete
 
 A `LatLngBounds` bounding box isn't required to create a `MapLocale` instance. However, the plugin's `setCameraToLocaleCountry()` method can be used if the `MapLocale` has a `LatLngBounds` bounding box. For example, here is the plugin's bounding box for Germany:
 
-```java
-static final LatLngBounds GERMANY_BBOX = new LatLngBounds.Builder()
+{{
+<CodeLanguageToggle id="adjust-camera" />
+<ToggleableCodeBlock
+
+java={`
+private static final LatLngBounds GERMANY_BBOX = new LatLngBounds.Builder()
 .include(new LatLng(55.055637, 5.865639))
 .include(new LatLng(47.275776, 15.039889)).build();
-```
+`}
+
+kotlin={`
+val GERMANY_BBOX = LatLngBounds.Builder()
+	.include(LatLng(55.055637, 5.865639))
+	.include(LatLng(47.275776, 15.039889)).build()
+`}
+
+/>
+}}
+
 
 It is used in creating the Germany `MapLocale`:
 
-```java
+{{
+<CodeLanguageToggle id="germany-locale" />
+<ToggleableCodeBlock
+
+java={`
 public static final MapLocale GERMANY = new MapLocale("name_de", GERMANY_BBOX);
-```
+`}
+
+kotlin={`
+val GERMANY = MapLocale("name_de", GERMANY_BBOX)
+`}
+
+/>
+}}
 
 Setting the camera:
 
-```java
+{{
+<CodeLanguageToggle id="setting-camera" />
+<ToggleableCodeBlock
+
+java={`
 try {
-  localizationPlugin.setCameraToLocaleCountry(GERMANY);
+	localizationPlugin.setCameraToLocaleCountry(GERMANY);
 } catch (RuntimeException exception) {
-  Log.d(TAG, exception.toString());
+	Log.d(TAG, exception.toString());
 }
-```
+`}
+
+kotlin={`
+try {
+	localizationPlugin.setCameraToLocaleCountry(GERMANY)
+} catch (exception: RuntimeException) {
+	Log.d(TAG, exception.toString())
+}
+`}
+
+/>
+}}
 
 Calling the `setCameraToLocaleCountry()` method should happen within a try/catch statement because `setCameraToLocaleCountry()` can throw a `NullPointerException`. This `NullPointerException` is thrown when the `MapLocale` object was expecting to have a `LatLngBounds` bounding box but received `null` instead.

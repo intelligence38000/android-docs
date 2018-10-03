@@ -4,6 +4,9 @@ description: "Official documentation on the Mapbox Java SDK Optimization API"
 sideNavSections:
   - title: "Optimization request"
   - title: "Optimization response"
+prependJs:
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
 The Mapbox Optimization API returns a duration-optimized route between the input coordinates. This is also known as solving the [Traveling Salesperson Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem). A typical use case for this API is planning the route for deliveries in a city. An optimized route can be retrieved for car driving, bicycling, walking, or hiking.
@@ -25,15 +28,36 @@ Before making the Optimization API request, you must build the `MapboxOptimizati
 
 Here's an example `MapboxOptimization` object:
 
-```java
+{{
+<CodeLanguageToggle id="optimization-request" />
+<ToggleableCodeBlock
+
+java={`
 private List<Point> coordinates;
+
 ...
+
 MapboxOptimization optimizedClient = MapboxOptimization.builder()
   .coordinates(coordinates)
   .profile(DirectionsCriteria.PROFILE_DRIVING)
-  .accessToken(Mapbox.getAccessToken())
+  .accessToken(ACCESS_TOKEN)
   .build();
-```
+`}
+
+kotlin={`
+
+private val coordinates: List<Point>? = null
+
+...
+
+val optimizedClient = MapboxOptimization.builder()
+	.coordinates(coordinates)
+	.profile(DirectionsCriteria.PROFILE_DRIVING)
+	.accessToken(ACCESS_TOKEN)
+	.build()  
+`}
+/>
+}}
 
 You can read about optional parameters in the [Optimization API documentation](https://www.mapbox.com/api-documentation/#retrieve-an-optimization).
 
@@ -41,7 +65,11 @@ You can read about optional parameters in the [Optimization API documentation](h
 
 Once you have built your `MapboxOptimization` object with all the parameters that you'd like to use in the request, you'll need to send the request using `enqueueCall()` asynchronously. Once the request receives a response, it will tell the callback where you can handle the response appropriately.
 
-```java
+{{
+<CodeLanguageToggle id="optimization-response" />
+<ToggleableCodeBlock
+
+java={`
 optimizedClient.enqueueCall(new Callback<OptimizationResponse>() {
   @Override
   public void onResponse(Call<OptimizationResponse> call, Response<OptimizationResponse> response) {
@@ -65,18 +93,62 @@ optimizedClient.enqueueCall(new Callback<OptimizationResponse>() {
     Log.d(TAG, "Error: " + throwable.getMessage());
   }
 });
-```
+`}
 
-In case your user leaves the activity or application before the callback's notified, you should use `optimizedClient.cancelCall()` within your `onDestroy()` lifecycle method:
+kotlin={`
+optimizedClient?.enqueueCall(object : Callback<OptimizationResponse> {
+	override fun onResponse(call: Call<OptimizationResponse>, response: Response<OptimizationResponse>) {
+		if (!response.isSuccessful) {
+			Log.d(TAG, "optimization call not successful")
+			return
+		} else {
+			if (response.body()!!.trips()!!.isEmpty()) {
+			Log.d(TAG, "optimization call successful but no routes")
+			return
+		}
+	}
+	
+	val optimizedRoute = response.body()!!.trips()!![0]
+	
+	}
+	
+	override fun onFailure(call: Call<OptimizationResponse>, throwable: Throwable) {
+		Log.d(TAG, "Error: " + throwable.message)
+	}
+})
 
-```java
+`}
+/>
+}}
+
+In case your user leaves the activity or application before the callback's notified, you should use `cancelCall()` within your `onDestroy()` lifecycle method:
+
+{{
+<CodeLanguageToggle id="optimization-on-destroy" />
+<ToggleableCodeBlock
+
+java={`
 @Override
   protected void onDestroy() {
     super.onDestroy();
-
+    
     if (optimizedClient != null) {
       optimizedClient.cancelCall();
     }
     mapView.onDestroy();
 }
-``` 
+`}
+
+kotlin={`
+@Override
+  protected void onDestroy() {
+    super.onDestroy();
+    
+    optimizedClient?.cancelCall()
+
+    mapView?.onDestroy()
+}
+`}
+/>
+}}
+

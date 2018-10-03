@@ -7,6 +7,8 @@ prependJs:
       LOCATION_LAYER_PLUGIN_VERSION
     } from '../../../constants';
     import AppropriateImage from '../../../components/appropriate-image';
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"     
 ---
 
 A popular, often critical feature is showing the users current location as an annotation to give a reference point on the map. This plugin makes use of the latest [runtime styling](/android-docs/map-sdk/overview/runtime-styling/) features to display the location icons/markers within the map itself rather than on top as an Android view. This brings several fixes and performance improvements previously experienced when using the now deprecated `MyLocationView`.
@@ -58,13 +60,27 @@ It's important to include the location layer `onStart()` and `onStop()` lifecycl
 ## Add the location layer
 You'll need to pass in both a `MapView` and `MapboxMap` object to initialize the Location Layer Plugin. Depending on whether or not you'd like the plugin to track the user's location automatically or not, you can either use a default `LocationEngine`, pass in your own or `null`.
 
-```java
+{{
+<CodeLanguageToggle id="add-location-layer" />
+<ToggleableCodeBlock
+
+java={`
 // Use the default engine
 locationLayerPlugin = new LocationLayerPlugin(mapView, mapboxMap);
   
 // Pass in your own
 locationLayerPlugin = new LocationLayerPlugin(mapView, mapboxMap, locationEngine);
-```
+`}
+
+kotlin={`
+// Use the default engine
+locationLayerPlugin = LocationLayerPlugin(mapView!!, mapboxMap)
+
+// Pass in your own
+locationLayerPlugin = LocationLayerPlugin(mapView, mapboxMap, locationEngine)
+`}
+/>
+}}
 
 If a `null` location engine is provided, you are responsible for updating the location position manually using `LocationLayerPlugin#forceLocationUpdate(@Nullable Location location)`.
 
@@ -156,19 +172,45 @@ The plugin is integrated with the Mapbox Gestures library. You have the option t
 - `LocationLayerOptions#trackingMultiFingerMoveThreshold(float)` adjusts minimum multi pointer movement in pixels required to break camera tracking (for example during scale gesture).
 - If either of these thresholds are exceeded and tracking is dismissed, developers can listen to this with a `OnCameraTrackingChangedListener`:
 
-```
-  locationLayerPlugin.addOnCameraTrackingChangedListener(new OnCameraTrackingChangedListener() {
-    @Override
-    public void onCameraTrackingDismissed() {
-      // Tracking has been dismissed
-    }
+{{
+<CodeLanguageToggle id="camera-tracking" />
+<ToggleableCodeBlock
 
-    @Override
-    public void onCameraTrackingChanged(int currentMode) {
-      // CameraMode has been updated
-    }
-  });
-```
+java={`
+locationLayerPlugin.addOnCameraTrackingChangedListener(new OnCameraTrackingChangedListener() {
+	@Override
+	public void onCameraTrackingDismissed() {
+	  
+	  // Tracking has been dismissed
+	  
+	}
+	
+	@Override
+	public void onCameraTrackingChanged(int currentMode) {
+	 
+	  // CameraMode has been updated
+	  
+	}
+});
+`}
+
+kotlin={`
+locationLayerPlugin.addOnCameraTrackingChangedListener(object : OnCameraTrackingChangedListener {
+	override fun onCameraTrackingDismissed() {
+	
+	// Tracking has been dismissed
+	
+	}
+	
+	override fun onCameraTrackingChanged(currentMode: Int) {
+	
+	// CameraMode has been updated
+	
+	}
+})
+`}
+/>
+}}
 
 ## Usage with navigation
 Once a navigation session's started using the [Mapbox Navigation SDK](/android-docs/navigation/overview/), a few adjustments will need to be made to the plugin to improve its performance and behavior.

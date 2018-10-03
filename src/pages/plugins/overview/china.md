@@ -6,6 +6,8 @@ prependJs:
     import {
       CHINA_PLUGIN_VERSION
     } from '../../../constants';
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';" 
 ---
 
 Traditional map services are either blocked in China or suffer from slow internet connections. Our mapbox.cn infrastructure allows for unparalleled speed advantages for anyone using our maps in China or through Chinese mobile carriers internationally. This plugin specifically bundles the Mapbox Maps SDK for Android and automatically configures it to ensure the correct endpoints are being called. Accurate endpoints ensure that the mobile device retrieves the correct map tiles, map styles, and other information. Additionally, one of the dependencies allows for annotation shifting, which ensures all your overlays and annotations are accurately being depicted on the map.
@@ -86,7 +88,11 @@ We shift the base map for our default styles in order to comply with the Chinese
 
 The plugin's China "flavor" has a `ShiftForChina` class with the `String shift(double lon, double lat)` method. You can pass _unshifted_ longitude and latitude coordinates to the `shift()` method. The method returns a `String` that represents a JSONObject. Use this `String` of shifted coordinates to add data to your map.
 
-```java
+{{
+<CodeLanguageToggle id="shifting-coordinates" />
+<ToggleableCodeBlock
+
+java={`
 String shiftedCoordinatesJson = shiftForChina.shift(unshiftedLong, unshiftedLat);
 
 try {
@@ -97,12 +103,35 @@ try {
 
   double shiftedLat = jsonObject.getDouble("lat");
   
-  // You now have `shiftedLong` and `shiftedLat` values, which you can use however you'd like.
+	// You now have longitude and latitude values, which you can use however you'd like.
   
 } catch (JSONException jsonException) {
   jsonException.printStackTrace();
 }
-```    
+`}
+
+kotlin={`
+val shiftedCoordinatesJson = shiftForChina.shift(unshiftedLong, unshiftedLat)
+
+try {
+	
+	val jsonObject = JSONObject(shiftedCoordinatesJson)
+		
+	val shiftedLong = jsonObject.getDouble("lon")
+		
+	val shiftedLat = jsonObject.getDouble("lat")
+	
+	// You now have longitude and latitude values, which you can use however you'd like.
+	
+} catch (jsonException: JSONException) {
+	jsonException.printStackTrace()
+}
+
+`}
+
+/>
+}}
+
 
 Do note that as mentioned above, the shift module is only available in the plugin's `China` flavor. This is the one exception to the rule mentioned above that you only need to switch dependency names if you'd like to support both global and China flavors of your app.
 
@@ -115,18 +144,41 @@ In the case of a global version of your app, you'll need to remove the code that
 
 When a new location update occurs, you'll need to manually feed the `location` object into the plugin's `ShiftLocation` class' `shift()` method. Rather than dealing with raw coordinate values, this method and class handles `Location` objects. For now, the best way to do this is to create your own `LocationEngine` which extends another and listens for location updates. When the update occurs, send the `Location` object through the shift module and have the `locationEngine` provide the modified location.
 
-```java
- /**
-   * Called when the location has changed.
-   */
-  @Override
-  public void onLocationChanged(Location location) {
+{{
+<CodeLanguageToggle id="shifting-location" />
+<ToggleableCodeBlock
+
+java={`
+// Called when the location has changed.
+
+@Override
+public void onLocationChanged(Location location) {
   
-      if (needChinaShifted) {
-        
-        shiftedDeviceLocation = ShiftLocation.shift(location);
-        
-        // You now have `shiftedDeviceLocation`, which you can use however you'd like.
-      }
-  }
-```
+	if (needChinaShifted) {
+	    
+	shiftedDeviceLocation = ShiftLocation.shift(location);
+	    
+	// You now have longitude and latitude values, which you can use however you'd like.
+	
+	}
+}
+
+`}
+
+kotlin={`
+// Called when the location has changed.
+
+override fun onLocationChanged(location: Location) {
+
+	if (needChinaShifted) {
+	
+	    shiftedDeviceLocation = ShiftLocation.shift(location)
+	
+	    // You now have longitude and latitude values, which you can use however you'd like.
+	    
+	}
+}
+`}
+
+/>
+}}

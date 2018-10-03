@@ -7,6 +7,8 @@ prependJs:
       JAVA_SDK_VERSION
     } from '../../../constants';
   - "import { Floater } from '../../../components/floater';"
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 
 ---
 
@@ -72,14 +74,30 @@ All Turf methods deal with spatial data that follows the GeoJSON spec. If you ar
 
 For example, you could use the following code to measure the straight distance (in feet) between the London Tower Bridge and the London Eye:
 
-```java
+{{
+<CodeLanguageToggle id="turf-example" />
+<ToggleableCodeBlock
+
+java={`
 // Create a GeoJSON point representation of the locations.
 private static final Point TOWER_BRIDGE = Point.fromLatLng(51.50551, -0.07515);
 private static final Point LONDON_EYE = Point.fromLatLng(51.50348, -0.12043);
 
 // Run the points through the Turf Measurement method and receive the distance.
 TurfMeasurement.distance(TOWER_BRIDGE, LONDON_EYE, TurfConstants.UNIT_FEET);
-```
+`}
+
+kotlin={`
+// Create a GeoJSON point representation of the locations.
+private val TOWER_BRIDGE = Point.fromLatLng(51.50551, -0.07515)
+private val LONDON_EYE = Point.fromLatLng(51.50348, -0.12043)
+
+// Run the points through the Turf Measurement method and receive the distance.
+TurfMeasurement.distance(TOWER_BRIDGE, LONDON_EYE, TurfConstants.UNIT_FEET)    
+`}
+
+/>
+}}
 
 #### Class and method naming scheme
 

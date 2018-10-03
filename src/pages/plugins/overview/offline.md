@@ -6,6 +6,8 @@ prependJs:
     import {
       OFFLINE_PLUGIN_VERSION
     } from '../../../constants';
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"  
 ---
 
 A user's device won't always have a strong enough internet connection to download and view map tiles. You might want to build an offline mode into your Android project to account for this situation. The Mapbox Offline Plugin for Android is a convenient way to send information to [the Maps SDK's `OfflineManager` class](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/java/com/mapbox/mapboxsdk/offline/OfflineManager.java) and use the manager in a background service to download map tiles for offline use. Once the offline download region is defined and initialized, the plugin handles everything else for you. Because the plugin uses a service, the downloading continues even if your application is running in the background.
@@ -41,7 +43,11 @@ dependencies {
 ## Add the Offline Plugin
 The Offline Plugin requires no permissions and is initialized by eventually passing in a _built_ ` OfflineDownloadOptions` object. But before you do that, you'll want to define the map region that you want to download.
 
-```java
+{{
+<CodeLanguageToggle id="add-offline-plugin" />
+<ToggleableCodeBlock
+
+java={`
 // Define region of map tiles 
 OfflineTilePyramidRegionDefinition definition = new OfflineTilePyramidRegionDefinition(
   styleUrl,
@@ -53,29 +59,73 @@ OfflineTilePyramidRegionDefinition definition = new OfflineTilePyramidRegionDefi
   maxZoom,
   getResources().getDisplayMetrics().density
 );
-```
+`}
+
+kotlin={`
+ // Define region of map tiles
+val definition = OfflineTilePyramidRegionDefinition(
+	styleUrl, LatLngBounds.Builder()
+	    .include(LatLng(latitudeNorth, longitudeEast))
+	    .include(LatLng(latitudeSouth, longitudeWest))
+	    .build(),
+	minZoom,
+	maxZoom,
+	resources.displayMetrics.density
+)
+`}
+
+/>
+}}
 Build a `NotificationOptions` object if you want to show some sort of notification at the top of the device's screen during the download. This is not required.
 
-```java
+{{
+<CodeLanguageToggle id="notifications-options" />
+<ToggleableCodeBlock
+
+java={`
 // Customize the download notification's appearance
 NotificationOptions notificationOptions = NotificationOptions.builder(this)
   .smallIconRes(R.drawable.mapbox_logo_icon)
-  .returnActivity(OfflineRegionDetailActivity.class.getName())
+  .returnActivity(MainActivity.class.getName())
   .build();
-```
+`}
+
+kotlin={`
+// Customize the download notification's appearance
+val notificationOptions = NotificationOptions.builder(this)
+	.smallIconRes(R.drawable.mapbox_logo_icon)
+	.returnActivity(MainActivity::class.java!!.getName())
+	.build()
+`}
+/>
+}}
 
 Finally, start the actual download of the map tiles.
 
-```java
+{{
+<CodeLanguageToggle id="start-download" />
+<ToggleableCodeBlock
+
+java={`
 // Start downloading the map tiles for offline use
 OfflinePlugin.getInstance(this).startDownload(
-  OfflineDownloadOptions.builder()
-    .definition(definition)
-    .metadata(OfflineUtils.convertRegionName(regionName))
-    .notificationOptions(notificationOptions)
-    .build()
+	OfflineDownloadOptions.builder()
+	.definition(definition)
+	.metadata(OfflineUtils.convertRegionName(regionName))
+	.notificationOptions(notificationOptions)
+	.build()
 );
-```
+`}
+
+kotlin={`
+// Customize the download notification's appearance
+val notificationOptions = NotificationOptions.builder(this)
+	.smallIconRes(R.drawable.mapbox_logo_icon)
+	.returnActivity(MainActivity::class.java!!.getName())
+	.build()
+`}
+/>
+}}
 
 ## Offline tile estimator
 
