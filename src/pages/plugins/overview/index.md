@@ -8,6 +8,7 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';" 
   - |
     import {
+      ANNOTATION_PLUGIN_VERSION,
       TRAFFIC_PLUGIN_VERSION,
       LOCATION_LAYER_PLUGIN_VERSION,
       BUILDING_PLUGIN_VERSION,
@@ -21,6 +22,7 @@ prependJs:
   <div className="mb24">
     <OverviewHeader 
       features={[
+        "Show annotations on the map",
         "Add in-app place searching",
         "Load GeoJSON files onto the map",
         "Show user location",

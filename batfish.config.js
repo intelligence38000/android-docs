@@ -27,6 +27,7 @@ const productPageOrder = {
   'maps/tutorials/': ['index'],
   'plugins/overview/': [
     'index',
+    'annotation',
     'building',
     'location-layer',
     'traffic',
