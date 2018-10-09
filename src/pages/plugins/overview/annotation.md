@@ -13,6 +13,8 @@ prependJs:
 
 The Mapbox Annotation Plugin simplifies the way to set and adjust the visual properties of annotations on a Mapbox map. The Mapbox Maps SDK for Android provides developers with fine-grain control over the appearance and location of map annotations. In this context, "annotations" means circles, polygons, lines, text, and icons. Using run-time and data-driven styling to create annotations can require a deep understanding of the Maps SDK and require writing more code than one might like to write. The plugin obfuscates much of the required boilerplate code.
 
+_Note: A `SymbolLayer` is the layer which is responsible for both/either map text and icons._
+
 ## Install the Annotation Plugin
 
 To start developing an application using the Annotation Plugin, you'll need to add the appropriate dependencies inside of your `build.gradle`. The Annotation Plugin dependency includes the Mapbox Maps SDK for Android. All dependencies given below can be found on MavenCentral.
@@ -67,6 +69,7 @@ mapView?.getMapAsync { mapboxMap ->
 
 />
 }} 
+
 
 ## Manager
 
