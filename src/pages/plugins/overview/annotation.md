@@ -11,9 +11,9 @@ prependJs:
 
 ---
 
-The Mapbox Annotation Plugin simplifies the way to set and adjust the visual properties of annotations on a Mapbox map. The Mapbox Maps SDK for Android provides developers with fine-grain control over the appearance and location of map annotations. In this context, "annotations" means circles, polygons, lines, text, and icons. Using run-time and data-driven styling to create annotations can require a deep understanding of the Maps SDK and require writing more code than one might like to write. The plugin obfuscates much of the required boilerplate code.
+The Mapbox Annotation Plugin simplifies the way to set and adjust the visual properties of annotations on a Mapbox map. The Mapbox Maps SDK for Android provides developers with fine-grain control over the appearance and location of map annotations. In this context, "annotations" means circles, polygons, lines, text, and icons. Using runtime and data-driven styling to create annotations can require a deep understanding of the Maps SDK. The plugin obfuscates much of the required boilerplate code.
 
-_Note: A `SymbolLayer` is the layer which is responsible for both/either map text and icons._
+_Note: A `SymbolLayer` is the layer that is responsible for both/either map text and icons._
 
 ## Install the Annotation Plugin
 
@@ -73,7 +73,7 @@ mapView?.getMapAsync { mapboxMap ->
 
 ## Manager
 
-The circle, line, fill, and symbol map layers have accompanying manager classes. Each manager class has methods for setting layer properties which are a bit less related to the visual styling. For example, `SymbolManager` adjusts the position of the `SymbolLayer`'s icon/text with methods such as `setFillTranslate()`, `setFillTranslateAnchor()`.
+The circle, line, fill, and symbol map layers have accompanying manager classes. Each manager class has methods for setting layer properties that are less related to the visual styling. For example, `SymbolManager` adjusts the position of the `SymbolLayer`'s icon or text with methods such as `setFillTranslate()` or `setFillTranslateAnchor()`.
 
 You can also set `onClick` and `onLongClick` listeners to the type of annotations that you're adding to the map.
 
@@ -144,7 +144,7 @@ symbolManager?.iconRotationAlignment = ICON_ROTATION_ALIGNMENT_VIEWPORT
 
 ## Options
 
-The circle, line, fill, and symbol map layers _also_ have accompanying manager classes. The options classes follow the builder pattern, which allows you to set various layer properties which more related to visual styling. For example, `FillOptions` adjusts the look of `SymbolLayer` icon/text with methods such as `withFillColor()`, `withFillOpacity()`, and `withFillPattern()`.
+The circle, line, fill, and symbol map layers _also_ have accompanying options classes. The options classes follow the builder pattern, which allows you to set various layer properties which more related to visual styling. For example, `FillOptions` adjusts the look of `SymbolLayer` icon or text with methods such as `withFillColor()`, `withFillOpacity()`, and `withFillPattern()`.
 
 | Layer type | Option class
 | --- | --- |
