@@ -2,12 +2,12 @@
 title: "Annotation"
 description: "Mapbox Android Annotation Plugin"
 prependJs:
-  - |
-    import {
+  - "import {
       ANNOTATION_PLUGIN_VERSION
-    } from '../../../constants';
+    } from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+  - "import { Floater } from '../../../components/floater';"
 
 ---
 
@@ -217,8 +217,6 @@ fillManager?.create(fillOptionsList)
 />
 }}
 
-As you saw above, the `FillManager#create()` method takes in a single `FillOptions` object as a parameter. A `List<>` of `FillOptions` is also a valid parameter for the `create()` method. This is the same for all of the manager classes. `LineManager` will require a `LineOptions` class and so on.
-
 {{
   <Floater
     url="https://github.com/mapbox/mapbox-plugins-android/tree/master/app/src/main/java/com/mapbox/mapboxsdk/plugins/testapp/activity/annotation"
@@ -227,3 +225,7 @@ As you saw above, the `FillManager#create()` method takes in a single `FillOptio
     text="See more usage of various option classes"
   />
 }}
+
+As you saw above, the `FillManager#create()` method takes in a single `FillOptions` object as a parameter. A `List<>` of `FillOptions` is also a valid parameter for the `create()` method. This is the same for all of the manager classes. `LineManager` will require a `LineOptions` class and so on.
+
+
