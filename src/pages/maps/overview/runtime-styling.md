@@ -23,7 +23,7 @@ Runtime styling expands upon the design power of Mapbox Studio and exposes all t
 
 {{
 <WarningNote title="Annotation Plugin for Android">
-    <p>Sources and layers provide nimble options for customizing the look of a Mapbox map and the data displayed on the map. <a href="/android-docs/plugins/overview/annotation/">The Mapbox Annotation Plugin for Android</a>. The plugin provides a simplified system for interacting with and customizing Mapbox map layers. The plugin could be a great option for you if you would like to control your map in a different way.</p>
+    <p>Sources and layers provide nimble options for customizing the look of a Mapbox map and the data displayed on the map. The <a href="/android-docs/plugins/overview/annotation/">Mapbox Annotation Plugin for Android</a> provides a simplified system for interacting with and customizing Mapbox map layers.</p>
 </WarningNote>
 }}
 

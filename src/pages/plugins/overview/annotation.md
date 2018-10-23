@@ -11,9 +11,9 @@ prependJs:
 
 ---
 
-The Mapbox Annotation Plugin simplifies the way to set and adjust the visual properties of annotations on a Mapbox map. The Mapbox Maps SDK for Android provides developers with fine-grain control over the appearance and location of map annotations. In this context, "annotations" means circles, polygons, lines, text, and icons. Using runtime and data-driven styling to create annotations can require a deep understanding of the Maps SDK. The plugin obfuscates much of the required boilerplate code.
+The Mapbox Annotation Plugin simplifies the way to set and adjust the visual properties of annotations on a Mapbox map. The Mapbox Maps SDK for Android provides developers with fine-grain control over the appearance and location of map annotations. In this context, "annotations" means circles, polygons, lines, text, and icons. Using runtime and data-driven styling to create annotations can require a deep understanding of the Maps SDK. This plugin obfuscates much of the required boilerplate code.
 
-_Note: A `SymbolLayer` is the layer that is responsible for both/either map text and icons._
+_Note: A `SymbolLayer` is the layer that is responsible for both map text and icons._
 
 ## Install the Annotation Plugin
 
@@ -27,7 +27,7 @@ If your application is close or exceeds the 65k method count limit, you can miti
 2. Open up your application's `build.gradle`.
 3. Make sure that your project's `minSdkVersion` is API 14 or higher.
 4. Under dependencies, add a new build rule for the latest `mapbox-android-plugin-annotation`.
-5. Click the Sync Project with Gradle Files near the toolbar in Studio.
+5. Click the **Sync Project with Gradle Files** near the toolbar in Studio.
 
 ```groovy
 repositories {
@@ -144,7 +144,7 @@ symbolManager?.iconRotationAlignment = ICON_ROTATION_ALIGNMENT_VIEWPORT
 
 ## Options
 
-The circle, line, fill, and symbol map layers _also_ have accompanying options classes. The options classes follow the builder pattern, which allows you to set various layer properties which more related to visual styling. For example, `FillOptions` adjusts the look of `SymbolLayer` icon or text with methods such as `withFillColor()`, `withFillOpacity()`, and `withFillPattern()`.
+The circle, line, fill, and symbol map layers _also_ have accompanying options classes. The options classes follow the builder pattern, which allows you to set various layer properties that are more related to visual styling. For example, `FillOptions` adjusts the look of `SymbolLayer` icon or text with methods such as `withFillColor()`, `withFillOpacity()`, and `withFillPattern()`.
 
 | Layer type | Option class
 | --- | --- |
