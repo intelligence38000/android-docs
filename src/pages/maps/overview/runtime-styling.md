@@ -5,6 +5,7 @@ prependJs:
   - "import { Floater } from '../../../components/floater';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+  - "import { WarningNote } from '../../../components/warning-note';" 
 ---
 
 {{
@@ -16,11 +17,16 @@ prependJs:
   />
 }}
 
-Using Runtime styling, you're able to dynamically change the look and feel of your map in real time. Lighten or darken the map based on the time of day, personalize icons and the colors of parks based on your users’ activity, switch languages on the fly, or bump the size of labels based on user preferences to improve legibility. Style existing map data or mix in your own – Runtime Styling is performant even with massive datasets.
+Using runtime styling, you're able to dynamically change the look and feel of your map in real time. Lighten or darken the map based on the time of day, personalize icons and the colors of parks based on your users’ activity, switch languages on the fly, or bump the size of labels based on user preferences to improve legibility. Style existing map data or mix in your own – Runtime Styling is performant even with massive datasets.
 
-Runtime styling expands upon the design power of Mapbox Studio and exposes all the same properties and attributes directly to mobile developers in our SDK.
+Runtime styling expands upon the design power of Mapbox Studio and exposes all the same properties and attributes directly to mobile developers in Mapbox Maps SDK for Android.
 
-If you'd like to add simple annotations on your map quickly, you might want to make use of the [annotations offered](https://www.mapbox.com/android-docs/map-sdk/overview/annotations/).
+{{
+<WarningNote title="Annotation Plugin for Android">
+    <p>Sources and layers provide nimble options for customizing the look of a Mapbox map and the data displayed on the map. <a href="/android-docs/plugins/overview/annotation/">The Mapbox Annotation Plugin for Android</a>. The plugin provides a simplified system for interacting with and customizing Mapbox map layers. The plugin could be a great option for you if you would like to control your map in a different way.</p>
+</WarningNote>
+}}
+
 
 ## Sources
 
