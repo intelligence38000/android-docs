@@ -12,7 +12,7 @@ The Mapbox Maps SDK for Android provides several different ways to mark a single
 
 {{
 <WarningNote title="Plugins to handle annotations">
-    <p>All of the writing and code snippets found below on this page are fine to use with the Mapbox Maps SDK for Android. However, we recommend that you look into the <a href="/android-docs/plugins/overview/annotation/">Mapbox Annotation Plugin for Android</a> and the <a href="/android-docs/plugins/overview/markerview/">Mapbox Markerview Plugin for Android</a> if you plan to add any icons, text, lines, or polygons to the map. These plugins simplify annotations and provide additional flexibility for displaying data.</p>
+    <p>All of the writing and code snippets found below on this page are fine to use with the Mapbox Maps SDK for Android. However, we recommend that you look into the <a href="/android-docs/plugins/overview/annotation/">Mapbox Annotation Plugin for Android</a> if you plan to add any icons, text, lines, or polygons to the map. These plugins simplify annotations and provide additional flexibility for displaying data.</p>
 </WarningNote>
 }}
 
