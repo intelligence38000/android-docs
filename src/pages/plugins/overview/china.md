@@ -136,7 +136,7 @@ java={`
 @Override
 public void onLocationChanged(Location location) {
 	    
-	shiftedDeviceLocation = ShiftLocation.shift(location);
+	Location shiftedDeviceLocation = ShiftLocation.shift(location);
 	    
 	locationComponent.forceLocationUpdate(shiftedLocation);
 
@@ -148,7 +148,7 @@ kotlin={`
 // Called when the location has changed.
 override fun onLocationChanged(location: Location) {
 	
-	shiftedDeviceLocation = ShiftLocation.shift(location)
+	val shiftedDeviceLocation = ShiftLocation.shift(location)
 	
 	locationComponent?.forceLocationUpdate(shiftedLocation)
 	    
