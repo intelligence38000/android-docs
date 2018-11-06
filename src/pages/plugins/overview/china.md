@@ -123,9 +123,11 @@ try {
 
 ## Shifting location
 
-[Read how to use the Mapbox `LocationEngine` in the Mapbox Core Libraries for Android](https://www.mapbox.com/android-docs/core/overview/#locationengine)
 
-When a new location update occurs, you'll need to manually feed the `location` object into the plugin's `ShiftLocation` class' `shift()` method. Rather than dealing with raw coordinate values, this method and class handles `Location` objects. For now, the best way to do this is to create your own `LocationEngine` which extends another and listens for location updates. When the update occurs, send the `Location` object through the shift module and have the `locationEngine` provide the modified location.
+Rather than dealing with raw coordinate values, the `ShiftLocation` class and its `shift` method handle `Location` objects. Showing a device's current location via [the Maps SDK's `LocationComponent`](https://www.mapbox.com/android-docs/maps/overview/location-component/) is one of the most common use cases for using the `ShiftLocation` class. 
+
+[When you set up your own `LocationEngine`](the Mapbox `LocationEngine`), you'll eventually override the `onLocationChanged()` method. When a new location update occurs, you'll need to manually feed the unshifted `Location` object into the `ShiftLocation` class' `shift()` method. `shift()` returns a `Location` object which you can now use however you'd like. If you pass the shifted `Location` object to `forceLocationUpdate()`, the `LocationComponent` will place the device location "puck" in the correct location.
+
 
 {{
 <CodeLanguageToggle id="shifting-location" />
@@ -133,33 +135,25 @@ When a new location update occurs, you'll need to manually feed the `location` o
 
 java={`
 // Called when the location has changed.
-
 @Override
 public void onLocationChanged(Location location) {
-  
-	if (needChinaShifted) {
 	    
 	shiftedDeviceLocation = ShiftLocation.shift(location);
 	    
-	// You now have longitude and latitude values, which you can use however you'd like.
-	
-	}
+	locationComponent.forceLocationUpdate(shiftedLocation);
+
 }
 
 `}
 
 kotlin={`
 // Called when the location has changed.
-
 override fun onLocationChanged(location: Location) {
-
-	if (needChinaShifted) {
 	
-	    shiftedDeviceLocation = ShiftLocation.shift(location)
+	shiftedDeviceLocation = ShiftLocation.shift(location)
 	
-	    // You now have longitude and latitude values, which you can use however you'd like.
+	locationComponent?.forceLocationUpdate(shiftedLocation)
 	    
-	}
 }
 `}
 
