@@ -123,11 +123,9 @@ try {
 
 ## Shifting location
 
+Rather than dealing with raw coordinate values, the `ShiftLocation` class and its `shift` method handle `Location` objects. Showing a device's current location via [the Maps SDK's `LocationComponent`](https://www.mapbox.com/android-docs/maps/overview/location-component/) is one of the most common use cases for using the `ShiftLocation` class.
 
-Rather than dealing with raw coordinate values, the `ShiftLocation` class and its `shift` method handle `Location` objects. Showing a device's current location via [the Maps SDK's `LocationComponent`](https://www.mapbox.com/android-docs/maps/overview/location-component/) is one of the most common use cases for using the `ShiftLocation` class. 
-
-[When you set up your own `LocationEngine`](the Mapbox `LocationEngine`), you'll eventually override the `onLocationChanged()` method. When a new location update occurs, you'll need to manually feed the unshifted `Location` object into the `ShiftLocation` class' `shift()` method. `shift()` returns a `Location` object which you can now use however you'd like. If you pass the shifted `Location` object to `forceLocationUpdate()`, the `LocationComponent` will place the device location "puck" in the correct location.
-
+[After setting up your own Mapbox `LocationEngine`](https://www.mapbox.com/android-docs/core/overview/#locationengine), you'll eventually override the `onLocationChanged()` method. When a new location update occurs, you'll need to manually feed the unshifted `Location` object into the `ShiftLocation` class' `shift()` method. `shift()` returns a `Location` object which you can now use however you'd like. If you pass the shifted `Location` object to `forceLocationUpdate()`, the `LocationComponent` will place the device location "puck" in the correct location.
 
 {{
 <CodeLanguageToggle id="shifting-location" />
