@@ -40,7 +40,7 @@ repositories {
 ```java
 // In the app build.gradle file
 dependencies {
-	implementation 'com.mapbox.mapboxsdk:mapbox-gestures-android:{{ GESTURES_SNAPSHOT_VERSION }}'
+	implementation 'com.mapbox.mapboxsdk:mapbox-android-gestures:{{ GESTURES_SNAPSHOT_VERSION }}'
 }
 ```
 
