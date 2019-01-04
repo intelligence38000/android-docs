@@ -60,7 +60,7 @@ To accomplish this:
 
 java={`
 try {
-	      mapboxMap.addSource(
+	      mapboxMap.getStyle().addSource(
 	        new GeoJsonSource("GEOJSON_SOURCE_ID",
 	          new URL("URL_POINTING_TO_GEOJSON_FILE"),
 	          new GeoJsonOptions()
@@ -76,7 +76,7 @@ try {
 
 kotlin={`
 try {
-	      mapboxMap.addSource(
+	      mapboxMap.style?.addSource(
 	        GeoJsonSource("GEOJSON_SOURCE_ID",
 	          URL("URL_POINTING_TO_GEOJSON_FILE"),
 	          GeoJsonOptions()
@@ -112,7 +112,7 @@ SymbolLayer count = new SymbolLayer("SYMBOL_LAYER_COUNT_LAYER_ID", "GEOJSON_SOUR
       textIgnorePlacement(true),
       textAllowOverlap(true)
     );
-mapboxMap.addLayer(count);
+mapboxMap.getStyle().addLayer(count);
 `}
 
 kotlin={`
@@ -124,7 +124,7 @@ val count = SymbolLayer("SYMBOL_LAYER_COUNT_LAYER_ID", "GEOJSON_SOURCE_ID")
 		textIgnorePlacement(true),
 		textAllowOverlap(true)
     )
-mapboxMap.addLayer(count)
+mapboxMap.style?.addLayer(count)
 `}
 
 />

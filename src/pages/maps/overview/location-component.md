@@ -31,25 +31,19 @@ Once the user has granted location permission, retrieving and activating the `Lo
 <CodeLanguageToggle id="location-component-activation" />
 <ToggleableCodeBlock
  java={`
-@Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
-   
-	mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cjerxnqt3cgvp2rmyuxbeqme7"), style -> {
+
+LocationComponent locationComponent = mapboxMap.getLocationComponent();
 	
-	LocationComponent locationComponent = mapboxMap.getLocationComponent();
-	
-	locationComponent.activateLocationComponent(this, mapboxMap.getStyle());	
-	
-	});
+locationComponent.activateLocationComponent(this, mapboxMap.getStyle());
+
 }
 `}
  kotlin={`
-override fun onMapReady(mapboxMap: MapboxMap) {
 
-	val locationComponent = mapboxMap.locationComponent
-	
-	locationComponent.activateLocationComponent(this, mapboxMap.style!!)	
-}
+val locationComponent = mapboxMap.locationComponent
+
+locationComponent.activateLocationComponent(this, mapboxMap.style)	
+
 `}
  />
 }} 
@@ -80,9 +74,6 @@ See all the attributes that can be customized via the LocationComponent's method
 <CodeLanguageToggle id="location-component-customization" />
 <ToggleableCodeBlock
  java={`
-@Override
-public void onMapReady(MapboxMap mapboxMap) {
-	
 LocationComponentOptions options = LocationComponentOptions.builder(this)
 	.layerBelow(layerId)
 	.foregroundDrawable(R.drawable.drawable_name)
@@ -91,13 +82,10 @@ LocationComponentOptions options = LocationComponentOptions.builder(this)
 	.build();
 	
 locationComponent = mapboxMap.getLocationComponent();
-locationComponent.activateLocationComponent(this, options);
-
+locationComponent.activateLocationComponent(this, mapStyle, options);
 }
 `}
  kotlin={`
-override fun onMapReady(mapboxMap: MapboxMap) {
-
 val options = LocationComponentOptions.builder(this)
 	.layerBelow(layerId)
 	.foregroundDrawable(R.drawable.drawable_name)
@@ -106,9 +94,7 @@ val options = LocationComponentOptions.builder(this)
 	.build()
 
 locationComponent = mapboxMap.locationComponent
-locationComponent?.activateLocationComponent(this, options)
-
-}
+locationComponent?.activateLocationComponent(this, mapStyle, options)
 `}
  />
 }} 

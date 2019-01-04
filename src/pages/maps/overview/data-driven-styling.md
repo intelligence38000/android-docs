@@ -28,13 +28,13 @@ Use the Maps SDK's data-driven styling capabilities to create and display many t
 
 ## Sources
 
-Sources hold the data for layers to use in your map. There are a handful of different source types supported, choosing one depends on your data type. Adding a source won't instantly make data appear on the map because sources don't contain styling details like color or width. Layers refer to a source and give it a visual representation.
+Sources hold the actual data and layers reference sources. That is how to show data on your Mapbox map. There are a handful of different source types supported and choosing the correct one to use depends on your data type. Adding a source won't instantly make data appear on the map because sources don't contain styling details like color or width. Layers refer to a source and give it a visual representation.
 
-When creating a new source, two parameters are required, a source ID (String) and the source date.
+Two parameters are required to use a source. A source requires a unique `String` ID and requires some sort of data.
 
 ### Vector
 
-Vector source tiles must be in [Mapbox Vector Tile format](https://www.mapbox.com/developers/vector-tiles/). All layers that use a vector source must specify a "source-layer" value. For vector tiles hosted by Mapbox, the "url" value should be of the form `mapbox://mapid`.
+`VectorSource` tiles must be in [Mapbox Vector Tile format](https://www.mapbox.com/developers/vector-tiles/). All layers that use a vector source must specify a "source-layer" value. For vector tiles hosted by Mapbox, the URL value should be of the form `mapbox://mapid`.
 
 {{
 <CodeLanguageToggle id="vector-layer" />
@@ -43,13 +43,13 @@ Vector source tiles must be in [Mapbox Vector Tile format](https://www.mapbox.co
 java={`
 // Adding a vector source layer
 VectorSource vectorSource = new VectorSource("vector-source", "mapbox://mapbox.mapbox-terrain-v2");
-mapboxMap.addSource(vectorSource);
+mapboxMap.getStyle().addSource(vectorSource);
 `}
 
 kotlin={`
 // Adding a vector source layer
 val vectorSource = VectorSource("vector-source", "mapbox://mapbox.mapbox-terrain-v2")
-mapboxMap.addSource(vectorSource)
+mapboxMap.style?.addSource(vectorSource)
 `}
 
 />
@@ -58,7 +58,7 @@ mapboxMap.addSource(vectorSource)
 
 ### Raster
 
-Raster source tiles can be added to your map if they are in TileJSON format. If hosted by Mapbox, the "url" value should be of the form `mapbox://mapid`.
+`RasterSource` tiles can be added to your map if they are in TileJSON format. If hosted by Mapbox, the URL value should be of the form `mapbox://mapid`.
 
 {{
 <CodeLanguageToggle id="raster-layer" />
@@ -67,13 +67,13 @@ Raster source tiles can be added to your map if they are in TileJSON format. If 
 java={`
 // Adding a raster source layer
 RasterSource rasterSource = new RasterSource("raster-source", "mapbox://mapbox.u8yyzaor");
-mapboxMap.addSource(rasterSource);
+mapboxMap.getStyle().addSource(rasterSource);
 `}
 
 kotlin={`
 // Adding a raster source layer
 val rasterSource = RasterSource("raster-source", "mapbox://mapbox.u8yyzaor")
-mapboxMap.addSource(rasterSource)
+mapboxMap.style?.addSource(rasterSource)
 `}
 
 />
@@ -90,7 +90,7 @@ mapboxMap.addSource(rasterSource)
   />
 }}
 
-Adding a GeoJSON source can be done in a few different ways. You can provide a URL to the GeoJSON raw data hosted online, provide a link to a GeoJSON file hosted locally inside of the app's assets folder, or you can build your own GeoJSON feature collection directly inside of the code. The snippets of code below show the different ways to add a GeoJSON source to your map.
+Adding a `GeoJsonSource` can be done in a few different ways. You can provide a URL to the GeoJSON raw data hosted online, provide a link to a GeoJSON file hosted locally inside of the app's assets folder, or you can build your own GeoJSON `FeatureCollection` directly inside of the code. The snippets of code below show the different ways to add a GeoJSON source to your map.
 
 Add a GeoJSON source from a URL:
 
@@ -102,7 +102,7 @@ java={`
 try {
   URL geoJsonUrl = new URL("https://url-to-geojson-file.geojson");
   GeoJsonSource geoJsonSource = new GeoJsonSource("geojson-source", geoJsonUrl);
-  mapboxMap.addSource(geoJsonSource);
+  mapboxMap.getStyle().addSource(geoJsonSource);
 } catch (MalformedURLException exception) {
   Log.d(TAG, exception);
 }
@@ -112,7 +112,7 @@ kotlin={`
 try {
 	val geoJsonUrl = URL("https://url-to-geojson-file.geojson")
 	val geoJsonSource = GeoJsonSource("geojson-source", geoJsonUrl)
-	mapboxMap.addSource(geoJsonSource)
+	mapboxMap.style?.addSource(geoJsonSource)
 } catch (exception: MalformedURLException) {
 	Log.d(TAG, exception)
 }
@@ -120,7 +120,6 @@ try {
 
 />
 }}
-
 
 
 Load a locally stored GeoJSON file. Either use the `loadJsonFromAsset()` method found below or use your own preferred way of loading in a JSON file:
@@ -164,7 +163,7 @@ mapboxMap.addSource(source)
 }}
 
 
-Create a GeoJSON feature collection and then add it to your map:
+Create a GeoJSON `FeatureCollection` and add it to your map:
 
 {{
 <CodeLanguageToggle id="create-feature-collection" />
@@ -172,22 +171,25 @@ Create a GeoJSON feature collection and then add it to your map:
 
 java={`
 // Create a list to store our line coordinates.
+
 List routeCoordinates = new ArrayList<Point>();
 routeCoordinates.add(Point.fromLngLat(-118.394391, 33.397676));
 routeCoordinates.add(Point.fromLngLat(-118.370917, 33.391142));
 
-// Create the LineString from the list of coordinates and then make a GeoJSON FeatureCollection
-// so that we can add the line to our map as a layer.
+// Create the LineString from the list of coordinates and then make a GeoJSON FeatureCollection so that we can add the line to our map as a layer.
+
 LineString lineString = LineString.fromLngLats(routeCoordinates);
+
 FeatureCollection featureCollection = FeatureCollection.fromFeatures(
 new Feature[]{Feature.fromGeometry(lineString)});
 
 GeoJsonSource geoJsonSource = new GeoJsonSource("geojson-source", featureCollection);
-mapboxMap.addSource(geoJsonSource);
+mapboxMap.getStyle().addSource(geoJsonSource);
 `}
 
 kotlin={`
  // Create a list to store our line coordinates.
+ 
 val routeCoordinates = ArrayList<Point>()
 routeCoordinates.add(Point.fromLngLat(-118.394391, 33.397676))
 routeCoordinates.add(Point.fromLngLat(-118.370917, 33.391142))
@@ -199,7 +201,7 @@ val featureCollection = FeatureCollection.fromFeatures(
         arrayOf(Feature.fromGeometry(lineString)))
 
 val geoJsonSource = GeoJsonSource("geojson-source", featureCollection)
-mapboxMap.addSource(geoJsonSource)`}
+mapboxMap.style?.addSource(geoJsonSource)`}
 />
 }}
 
@@ -212,11 +214,11 @@ mapboxMap.addSource(geoJsonSource)`}
   />
 }}
 
-A benefit of having your data inside a GeoJSON source is that you can update, remove, or add additional features inside the source at any time, providing a solution to animating data in your map through the Runtime Styling API. For example, using an Android [ValueAnimator](https://developer.android.com/reference/android/animation/ValueAnimator.html), you can move a feature by updating its coordinates within the GeoJSON data.
+A benefit of having your data inside a GeoJSON source is that you can update, remove, or add additional `Feature`s inside the source at any time, providing a solution to animating data in your map through the Runtime Styling API. For example, [an Android ValueAnimator](https://developer.android.com/reference/android/animation/ValueAnimator.html) can move a feature by updating its coordinates within the GeoJSON data.
 
 ### Image
 
-`ImageSource` allows for a georeferenced raster image to be shown on top of the map. The georeferenced image scales and rotates as the user zooms and rotates the map. The geographic location of the raster image content, supplied with `LatLngQuad`, can be non-axis aligned.
+`ImageSource` allows for a georeferenced raster image to be shown on top of the map. The georeferenced image scales and rotates as the user zooms, tilts, and rotates the map. The geographic location of the raster image content, supplied with `LatLngQuad`, can be non-axis aligned.
 
 {{
 <CodeLanguageToggle id="image-source" />
@@ -230,11 +232,11 @@ LatLngQuad quad = new LatLngQuad(
   new LatLng(37.936, -71.516),
   new LatLng(37.936, -80.425));
   
-mapboxMap.addSource(new ImageSource(ID_IMAGE_SOURCE, quad, DRAWABLE_IMAGE_HERE));
+mapboxMap.getStyle().addSource(new ImageSource(ID_IMAGE_SOURCE, quad, DRAWABLE_IMAGE_HERE));
 
 // Add layer
 RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, IMAGE_SOURCE_ID);
-mapboxMap.addLayer(layer);
+mapboxMap.getStyle().addLayer(layer);
 `}
 
 kotlin={`
@@ -246,11 +248,11 @@ val quad = LatLngQuad(
         LatLng(37.936, -71.516),
         LatLng(37.936, -80.425))
 
-mapboxMap.addSource(ImageSource(ID_IMAGE_SOURCE, quad, DRAWABLE_IMAGE_HERE))
+mapboxMap.style?.addSource(ImageSource(ID_IMAGE_SOURCE, quad, DRAWABLE_IMAGE_HERE))
 
 // Add layer
 val layer = RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE)
-mapboxMap.addLayer(layer)
+mapboxMap.style?.addLayer(layer)
 `}
 
 />
@@ -286,12 +288,12 @@ There might be a situation when you want to draw a shape that doesn't fit the st
 
 java={`
 CustomGeometrySource source = new CustomGeometrySource(ID_GRID_SOURCE, GeometryTileProvider);
-mapboxMap.addSource(source);
+mapboxMap.getStyle().addSource(source);
 `}
 
 kotlin={`
 val source = CustomGeometrySource(ID_GRID_SOURCE, GeometryTileProvider)
-mapboxMap.addSource(source)
+mapboxMap.style?.addSource(source)
 `}
 
 />
@@ -312,7 +314,7 @@ The Mapbox terrain tileset is for adding hill terrain to any Mapbox map. Runtime
 
 java={`
 RasterDemSource rasterDemSource = new RasterDemSource("source-id", "mapbox://mapbox.terrain-rgb");
-mapboxMap.addSource(rasterDemSource);
+mapboxMap.getStyle().addSource(rasterDemSource);
 
 // Create hillshade layer source to map
 HillshadeLayer hillshadeLayer = new HillshadeLayer("hillshade-layer-id", "source-id").withProperties(
@@ -321,12 +323,12 @@ HillshadeLayer hillshadeLayer = new HillshadeLayer("hillshade-layer-id", "source
 );
 
 // Add hillshade layer to map
-mapboxMap.addLayer(hillshadeLayer);
+mapboxMap.getStyle().addLayer(hillshadeLayer);
 `}
 
 kotlin={`
 val rasterDemSource = RasterDemSource("source-id", "mapbox://mapbox.terrain-rgb")
-mapboxMap.addSource(rasterDemSource)
+mapboxMap.style?.addSource(rasterDemSource)
 
 // Create hillshade layer source to map
 val hillshadeLayer = HillshadeLayer("hillshade-layer-id", "source-id").withProperties(
@@ -335,7 +337,7 @@ val hillshadeLayer = HillshadeLayer("hillshade-layer-id", "source-id").withPrope
 )
 
 // Add hillshade layer to map
-mapboxMap.addLayer(hillshadeLayer)
+mapboxMap.style?.addLayer(hillshadeLayer)
 `}
 
 />
@@ -346,6 +348,10 @@ mapboxMap.addLayer(hillshadeLayer)
 While sources hold the data, layers are used to style and display the information. Several layer types are offered depending on your source geometry. Except for layers of the background type, each layer needs to refer to a source. You can optionally filter features and then define how those features are styled.
 
 Each layer offers a `setProperties` API which can be used to style the layer in many different ways. Note that instead of creating different layers depending on certain cases inside your source data, it's recommended to use data-driven styling to reduce the number of layers that the map needs to render.
+
+<!-- TODO: will a none enclosed polygon fill be closed automatically? -->
+<!-- TODO: talk about mapboxMap.getLayers(); -->
+<!-- TODO: talk about mapboxMap.addLayerBelow(); -->
 
 ### Background
 
@@ -396,9 +402,6 @@ fillLayer.setProperties(PropertyFactory.fillColor(Color.GREEN))
 
 To alter the shape of the geometry once you have added it, the layer can remain with no changes needed, only the source it's using should be updated. The layer will always display the latest updates inside its source.
 
-<!-- NOTE will a none enclosed polygon fill be closed automatically? -->
-<!-- NOTE talk about mapboxMap.getLayers(); -->
-<!-- NOTE talk about mapboxMap.addLayerBelow(); -->
 
 ### Line
 
@@ -434,7 +437,7 @@ lineLayer.setProperties(
   PropertyFactory.lineColor(Color.parseColor("#e55e5e"))
 );
 
-mapboxMap.addLayer(lineLayer);
+mapboxMap.getStyle().addLayer(lineLayer);
 `}
 
 kotlin={`
@@ -448,7 +451,7 @@ lineLayer.setProperties(
 	PropertyFactory.lineWidth(5f),
 	PropertyFactory.lineColor(Color.parseColor("#e55e5e"))
 )
-mapboxMap.addLayer(lineLayer)
+mapboxMap.style?.addLayer(lineLayer)
 `}
 
 />
@@ -465,24 +468,24 @@ Symbol layers indicate a single location on the map with either an icon or text 
 
 java={`
 Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.my_marker_icon);
-mapboxMap.addImage("my-marker-image", icon);
+mapboxMap.getStyle().addImage("my-marker-image", icon);
 
 SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
 symbolLayer.setProperties(
   PropertyFactory.iconImage("my-marker-image")
 );
 
-mapboxMap.addLayer(symbolLayer);
+mapboxMap.getStyle().addLayer(symbolLayer);
 `}
 
 kotlin={`
 val icon = BitmapFactory.decodeResource(resources, R.drawable.my_marker_icon)
-mapboxMap.addImage("my-marker-image", icon)
+mapboxMap.style?.addImage("my-marker-image", icon)
 
 val symbolLayer = SymbolLayer("layer-id", "source-id")
 symbolLayer.setProperties(PropertyFactory.iconImage("my-marker-image"))
 
-mapboxMap.addLayer(symbolLayer)
+mapboxMap.style?.addLayer(symbolLayer)
 `}
 
 />
@@ -502,7 +505,7 @@ SymbolLayer selectedMarker = new SymbolLayer("selected-marker-layer", "selected-
     PropertyFactory.textOpacity(0.5f)
 );
 
-mapboxMap.addLayer(selectedMarker);
+mapboxMap.getStyle().addLayer(selectedMarker);
 `}
 
 kotlin={`
@@ -512,7 +515,7 @@ val selectedMarker = SymbolLayer("selected-marker-layer", "selected-marker-id")
 	PropertyFactory.textColor(Color.BLACK),
 	PropertyFactory.textOpacity(0.5f)
 )
-mapboxMap.addLayer(selectedMarker)
+mapboxMap.style?.addLayer(selectedMarker)
 `}
 />
 }}
@@ -530,18 +533,18 @@ Raster layers are typically a collection of images that display on top of the ba
 
 java={`
 RasterSource rasterSource = new RasterSource("source-id", "mapbox://mapbox.u8yyzaor");
-mapboxMap.addSource(rasterSource);
+mapboxMap.getStyle().addSource(rasterSource);
 
 RasterLayer rasterLayer = new RasterLayer("layer-id", "source-id");
-mapboxMap.addLayer(rasterLayer);
+mapboxMap.getStyle().addLayer(rasterLayer);
 `}
 
 kotlin={`
 val rasterSource = RasterSource("source-id", "mapbox://mapbox.u8yyzaor")
-mapboxMap.addSource(rasterSource)
+mapboxMap.style?.addSource(rasterSource)
 
 val rasterLayer = RasterLayer("layer-id", "source-id")
-mapboxMap.addLayer(rasterLayer)
+mapboxMap.style?.addLayer(rasterLayer)
 `}
 />
 }}
@@ -556,12 +559,12 @@ One common use case for a `RasterLayer` is adding a layer of satellite tiles to 
 java={`
 // Adding a raster source layer
 RasterSource satelliteRasterSource = new RasterSource("satellite-raster-source", "mapbox://mapbox.satellite",512);
-mapboxMap.addSource(satelliteRasterSource);
+mapboxMap.getStyle().addSource(satelliteRasterSource);
 `}
 
 kotlin={`
 val satelliteRasterSource = RasterSource("satellite-raster-source", "mapbox://mapbox.satellite", 512)
-mapboxMap.addSource(satelliteRasterSource)
+mapboxMap.style?.addSource(satelliteRasterSource)
 `}
 />
 }}
@@ -576,7 +579,7 @@ Circle layers have a single center coordinate which comes from the source data. 
 
 java={`
 VectorSource vectorSource = new VectorSource("source-id", "mapbox://mapbox.2opop9hr");
-mapboxMap.addSource(vectorSource);
+mapboxMap.getStyle().addSource(vectorSource);
 
 CircleLayer circleLayer = new CircleLayer("layer-id", "source-id");
 circleLayer.setSourceLayer("museum-cusco");
@@ -585,6 +588,7 @@ circleLayer.setProperties(
   PropertyFactory.circleRadius(8f),
   PropertyFactory.circleColor(Color.argb(1, 55, 148, 179))
 );
+mapboxMap.getStyle().addLayer(circleLayer);
 `}
 
 kotlin={`
@@ -598,20 +602,21 @@ circleLayer.setProperties(
         PropertyFactory.circleRadius(8f),
         PropertyFactory.circleColor(Color.argb(1, 55, 148, 179))
 )
+mapboxMap.style?.addLayer(circleLayer.setProperties)
 `}
 />
 }}
 
 ## Modify properties
 
-Sources and layers aren't immutable and therefore, can be modified anytime during the map render. For example, to alter the fill color of a layer after it's been added to the map, you use the `mapboxMap` object to get the layer and set the property.
+Sources and layers aren't immutable and therefore, can be modified anytime during the map render. For example, to alter the fill color of a layer after it's been added to the map, you use the map's `Style` object to get the layer and set the property.
 
 {{
 <CodeLanguageToggle id="modify-properties" />
 <ToggleableCodeBlock
 
 java={`
-FillLayer fillLayer = (FillLayer) mapboxMap.getLayer("fill-layer-id");
+FillLayer fillLayer = (FillLayer) mapboxMap.getStyle().getLayer("fill-layer-id");
 if (fillLayer != null) {
   fillLayer.setProperties(
     PropertyFactory.fillColor(Color.GREEN)
@@ -620,7 +625,7 @@ if (fillLayer != null) {
 `}
 
 kotlin={`
-val fillLayer = mapboxMap.getLayer("fill-layer-id") as FillLayer?
+val fillLayer = mapboxMap.style?.getLayer("fill-layer-id") as FillLayer?
 fillLayer?.setProperties(
         PropertyFactory.fillColor(Color.GREEN)
 )
@@ -635,14 +640,14 @@ In a GeoJSON source, you are able to modify, add, remove, or replace the Feature
 <ToggleableCodeBlock
 
 java={`
-GeoJsonSource geoJsonSource = (GeoJsonSource) mapboxMap.getSource("geojson-source-id");
+GeoJsonSource geoJsonSource = (GeoJsonSource) mapboxMap.getStyle().getSource("geojson-source-id");
 if (geoJsonSource != null) {
   geoJsonSource.setGeoJson(featureCollection);
 }
 `}
 
 kotlin={`
-val geoJsonSource = mapboxMap.getSource("geojson-source-id") as GeoJsonSource?
+val geoJsonSource = mapboxMap.style?.getSource("geojson-source-id") as GeoJsonSource?
 geoJsonSource?.setGeoJson(featureCollection)
 `}
 />

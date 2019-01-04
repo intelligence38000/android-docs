@@ -37,7 +37,7 @@ MapSnapshotter.Options snapShotOptions = new MapSnapshotter.Options(500, 500);
 
 snapShotOptions.withRegion(mapboxMap.getProjection().getVisibleRegion().latLngBounds);
 
-snapShotOptions.withStyle(mapboxMap.getStyleUrl());
+snapShotOptions.withStyle(mapboxMap.getStyle().getUrl());
 
 MapSnapshotter mapSnapshotter = new MapSnapshotter(this, snapShotOptions);
 `}
@@ -46,9 +46,9 @@ kotlin={`
 
 val snapShotOptions = MapSnapshotter.Options(500, 500)
 
-snapShotOptions.withRegion(mapboxMap.getProjection().getVisibleRegion().latLngBounds)
+snapShotOptions.withRegion(mapboxMap.projection.visibleRegion.latLngBounds)
 
-snapShotOptions.withStyle(mapboxMap.getStyleUrl())
+snapShotOptions.withStyle(mapboxMap.style!!.url)
 
 val mapSnapshotter = MapSnapshotter(this, options)
 `}
@@ -90,9 +90,9 @@ kotlin={`
 
 mapSnapshotter?.start { snapshot ->
 
-	// Use bitmapImage however you'd like
-	
 	val bitmapOfMapSnapshotImage = snapshot.bitmap
+	
+	// Use bitmapImage however you'd like
 
 }
 `}
