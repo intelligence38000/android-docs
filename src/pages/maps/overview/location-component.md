@@ -13,13 +13,17 @@ Showing the user's current location as a map annotation is a popular and often c
 
 {{
 <DocNote>
-    <p>This <code>LocationComponent</code> has replaced the now-deprecated Location Layer Plugin. The <code>LocationComponent</code> is integrated into the Maps SDK for Android so that you don't need to add additional dependencies. It brings the same set of functionality that you were used to with the plugin, as well as additional bug fixes.</p>
+    <p>This <code>LocationComponent</code> has replaced the now-deprecated Location Layer Plugin. The <code>LocationComponent</code> is integrated into the Maps SDK for Android so that you don't need to add additional dependencies. It brings the same set of functionality that you were used to with the plugin.</p>
 </DocNote>
 }}
 
+## Requesting location permissions
+
+You'll need to request the Android-system location permission before using the `LocationComponent`. If your Android project is built targeting API level 23 or higher your application will need to request permissions during runtime. Handling this directly in your activity produces boilerplate code and can often be hard to manage. [Read more about using the Mapbox Core Library for Android's PermissionsManager](/android-docs/core/overview/#permissionsmanager) class.
+
 ## Activating
 
-Retrieving and activating the `LocationComponent` are the first two steps towards showing the device's location on a Mapbox map.
+Once the user has granted location permission, retrieving and activating the `LocationComponent` are the first two steps towards showing the device's location on a Mapbox map.
  
 `MapboxMap#getLocationComponent()` fetches the component and `LocationComponent#activateLocationComponent()` activates it. Both need to be called before any other `LocationComponent` adjustments, such as its visibility, are performed.
 
@@ -28,21 +32,23 @@ Retrieving and activating the `LocationComponent` are the first two steps toward
 <ToggleableCodeBlock
  java={`
 @Override
-public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+   
+	mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cjerxnqt3cgvp2rmyuxbeqme7"), style -> {
 	
 	LocationComponent locationComponent = mapboxMap.getLocationComponent();
 	
-	locationComponent.activateLocationComponent(this);
+	locationComponent.activateLocationComponent(this, mapboxMap.getStyle());	
 	
+	});
 }
 `}
  kotlin={`
 override fun onMapReady(mapboxMap: MapboxMap) {
 
-	val locationComponent = mapboxMap?.locationComponent
+	val locationComponent = mapboxMap.locationComponent
 	
-	locationComponent?.activateLocationComponent(this)
-	
+	locationComponent.activateLocationComponent(this, mapboxMap.style!!)	
 }
 `}
  />

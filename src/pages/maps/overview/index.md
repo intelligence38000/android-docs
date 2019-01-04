@@ -133,7 +133,7 @@ The Maps SDK also provides a `setToken()` method in case you want to switch the 
 <ToggleableCodeBlock
 
 java={`
-Mapbox.setAccessToken(MAPBOX_ACCESS_TOKEN)
+Mapbox.setAccessToken(MAPBOX_ACCESS_TOKEN);
 `}
 
 kotlin={`
@@ -165,41 +165,53 @@ private MapView mapView;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
-  super.onCreate(savedInstanceState);
-
-  mapView = (MapView) findViewById(R.id.mapView);
-  mapView.onCreate(savedInstanceState);
-  mapView.getMapAsync(new OnMapReadyCallback() {
-    @Override
-    public void onMapReady(MapboxMap mapboxMap) {
-
-      // Customize map with markers, polylines, etc.
-
-    }
-  });
-}
+super.onCreate(savedInstanceState);
+  
+	Mapbox.setAccessToken(MAPBOX_ACCESS_TOKEN);
+	
+	setContentView(R.layout.activity_main);
+	
+	mapView = (MapView) findViewById(R.id.mapView);
+	mapView.onCreate(savedInstanceState);
+	mapView.getMapAsync(new OnMapReadyCallback() {
+	@Override
+	public void onMapReady(@NonNull MapboxMap mapboxMap) {
+	
+		mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+		@Override 
+		public void onStyleLoaded(@NonNull Style style) {
+	
+	  		// Map is set up and the style has loaded. Now you can add data or make other map adjustments
+	
+	
+	
+		}
+	});
+	}
+});
 `}
 
 kotlin={`
 private var mapView: MapView? = null
 
-override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-	// Mapbox access token is configured here. This needs to be called either in your application
-	// object or in the same activity which contains the mapview.
+override fun onCreate(savedInstanceState: Bundle?) {
+	super.onCreate(savedInstanceState)
+	
 	Mapbox.getInstance(this, getString(R.string.access_token))
 	
-	// This contains the MapView in XML and needs to be called after the access token is configured.
-	setContentView(R.layout.activity_basic_simple_mapview)
-	
+	setContentView(R.layout.activity_main)
 	mapView = findViewById(R.id.mapView)
 	mapView?.onCreate(savedInstanceState)
-	mapView?.getMapAsync {
-	    
-	    // Customize map with markers, polylines, etc.
-	    
-	    
+	mapView?.getMapAsync { mapboxMap ->
+	
+		mapboxMap.setStyle(Style.MAPBOX_STREETS) {
+	
+	    // Map is set up and the style has loaded. Now you can add data or make other map adjustments
+
+
+
+		}
 	}
 }
 `}
@@ -214,7 +226,7 @@ Open the acitvity's XML layout file and add the `mapView` within your layout.
   android:id="@+id/mapView"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets" />
+  />
 ```
 
 ### 5. Lifecycle methods
@@ -243,7 +255,7 @@ override fun onStart() {
 }}
 
 
-All the lifecycle methods that need to be overridden:
+Similar to the `onStart()` override above, the following lifecycle methods also need to be overridden and include the matching `MapView` method:
 
 {{
 <CodeLanguageToggle id="lifecycle-methods" />
@@ -303,22 +315,6 @@ fun onDestroyView() {
 }}
 
 
-### 6. Java 8
-
-If you're using an Android Studio version that is `3.1.0` or above, you can ignore this section because the new dex compiler D8 will be enabled by default.
-
-The Mapbox Maps SDK for Android introduces the use of Java 8. To fix any Java versioning issues, ensure that you are using Gradle version of 3.0 or greater. Once you’ve done that, add the following compileOptions to the `android` section of your app-level build.gradle file like so:
-
-```
-android {
-  ...
-  compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-}
-```
-
 This can also be done via your project settings (File > Project Structure > Your_Module > Source Compatibility / Target Compatibility). 
 
 ## Attribution
@@ -343,8 +339,7 @@ Mapbox Telemetry is a [powerful location analytics platform](https://www.mapbox.
 
 ## MapView XML attributes
 
-To further customize the map such as setting the starting camera position, style, or adjusting the UI, attributes can be added inside the XML `MapView`. All `MapView` XML attributes start with
-`mapbox_` for identification and for removing any potential conflicts with other libraries.
+XML attributes can be added inside of the XML `MapView` to further customize map behavior, such as setting the starting camera position, enabling tilt, or adjusting the compass' location. All `MapView` XML attributes start with `mapbox_` for identification and for removing any potential conflicts with other libraries. Due to the current implementation of Android Studio, you can't autogenerate `MapView` attributes by typing. [View the full list of `MapView` attributes here](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/res/values/attrs.xml).
 
 Some examples of `MapView` attributes are:
 
@@ -355,10 +350,7 @@ Some examples of `MapView` attributes are:
   mapbox:mapbox_cameraZoom="10"
   mapbox:mapbox_cameraBearing="34.33"
   mapbox:mapbox_cameraTilt="50.25"
-  mapbox:mapbox_styleUrl="@string/mapbox_style_satellite_streets"
   mapbox:mapbox_cameraZoomMax="12.41"
   mapbox:mapbox_cameraZoomMin="6"
   mapbox:mapbox_uiRotateGestures="false"/>
 ```
-
-Due to the current implementation of Android Studio, you can't autogenerate `MapView` attributes by typing. You can always [view the full list of `MapView` attributes here](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/res/values/attrs.xml).

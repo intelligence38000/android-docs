@@ -11,41 +11,43 @@ The Maps SDK for Android allows full customization of the look of the map. You c
 
 There are two approaches to customizing the look of the map: creating a custom map style with Mapbox Studio and loading it into your application or updating map features at runtime using the Maps SDK for Android.
 
-Using runtime styling, you're able to dynamically change the look and feel of your map in real time. Lighten or darken the map based on the time of day, personalize icons and the colors of parks based on your users’ activity, switch languages on the fly, or bump the size of labels based on user preferences to improve legibility.
+Using runtime styling, you're able to dynamically change the look and feel of your map in real time. Lighten or darken the map based on the time of day, personalize icons and the colors of parks based on your users’ activity, switch languages on the fly, or increase the size of labels based on user preferences to improve legibility.
+
+## Style object
+
+A `Style` object is a representation of the actively shown style on a map. Using the `Style` class provides more flexibility to create and adjust styles. The relationship between the map and the underlying style, becomes clearer with a dedicated `Style` too.
+
+A `Style` object must be created and given to the map for the map to appear properly. Create a `Style` by using a:
+
+- default Mapbox style URL via the `Style` class
+- custom map style URL from a Mapbox account
+- JSON string
+
+If the style fails to load or an invalid style URL is set, the map view will become blank. An error message will be logged in the Android logcat and the `MapView.OnDidFailLoadingMapListener` callback will be triggered.
 
 ## Changing the map style
 
-You can either change the map style URL via XML or change it programatically. If you want to set it in XML, paste your style URL into your `MapView` object's `mapbox:mapbox_styleUrl` XML attribute. If you want to change the map style programatically, call `mapboxMap.setStyleUrl()` with the style URL as the parameter.
+You'll have to change the map style URL programatically if you'd like to load a completely new map style. Call `mapboxMap.setStyle()` with the style URL as the parameter.
 
-**XML:**
-```xml
-<com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
-```
-
-**Programatically:**
+**Custom style URL**
 {{
-<CodeLanguageToggle id="setting-style-url-java" />
+<CodeLanguageToggle id="setting-custom-style-url-java" />
 <ToggleableCodeBlock
 
 java={`
-mapboxMap.setStyleUrl(uniqueStyleUrl);
+mapboxMap.setStyle(new Style.Builder().fromUrl(uniqueStyleUrl));
 `}
 
 kotlin={`
-mapboxMap.setStyleUrl(uniqueStyleUrl)
+mapboxMap.setStyle(Style.Builder().fromUrl(uniqueStyleUrl))
 `}
 
 />
 }}
 
-
 ## Default Mapbox styles
 
-As powerful as styling the map can be, to get started using the Maps SDK, it offers six professional styles that will look great in your project:
+As powerful as styling the map can be, Mapbox offers six professionally designed map styles which will look great in your project:
 
 1. **Mapbox Streets:** Mapbox Streets is a comprehensive, general-purpose map that emphasizes legible styling of road and transit networks.
 2. **Outdoor:** Mapbox Outdoors is a general-purpose map with curated datasets and specialized styling tailored to hiking, biking, and the most adventurous use cases.
@@ -54,19 +56,20 @@ As powerful as styling the map can be, to get started using the Maps SDK, it off
 5. **Satellite Streets:** combines our Mapbox Satellite with vector data from Mapbox Streets. The comprehensive set of road, label, and POI information brings clarity and context to the crisp detail in our high-resolution satellite imagery.
 6. **Traffic:** Visually show realtime traffic using either the provided day or night traffic styles.
 
-[The Maps SDK's `Style` class](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/java/com/mapbox/mapboxsdk/constants/Style.java) has `private static final String`s of the Mapbox styles' URLs so that you can conveniently reference the styles when you have to pass the style URL through the `setStyleUrl()` method or other methods in your project. For example:
+The Maps SDK's `Style` class has `private static final String`s of the default Mapbox styles' URLs, so that you can conveniently reference the styles when you have to pass the style URL through the `setStyle()` method or other methods in your project. For example:
 
 {{
-<CodeLanguageToggle id="dark-style-string" />
+<CodeLanguageToggle id="setting-default-mapbox-style-url-java" />
 <ToggleableCodeBlock
 
 java={`
-String mapboxDarkStyleUrl = Style.DARK;
+mapboxMap.setStyle(Style.LIGHT);
 `}
 
 kotlin={`
-val mapboxDarkStyleUrl = Style.DARK
+mapboxMap.setStyle(Style.LIGHT)
 `}
+
 />
 }}
 
@@ -80,11 +83,11 @@ Retrieving a map layer is the first step to adjusting the visual look of the map
 <ToggleableCodeBlock
 
 java={`
-Layer singleLayer = mapboxMap.getLayer(UNIQUE_LAYER_ID);
+Layer singleLayer = mapboxMap.getStyle().getLayer(UNIQUE_LAYER_ID);
 `}
 
 kotlin={`
-val singleLayer = mapboxMap.getLayer(UNIQUE_LAYER_ID)
+val singleLayer = mapboxMap.getStyle().getLayer(UNIQUE_LAYER_ID)
 `}
 
 />
@@ -99,12 +102,19 @@ You can view the map style's layer order and layer ids in Mapbox Studio. Another
 java={`
 mapView.getMapAsync(new OnMapReadyCallback() {
 @Override
-	public void onMapReady(MapboxMap mapboxMap) {
+	public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-		for (Layer singleLayer : mapboxMap.getLayers()) {
-		  Log.d(TAG, "onMapReady: layer id = " + singleLayer.getId());
-		}
-
+		mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+			@Override
+			public void onStyleLoaded(@NonNull Style style) {
+				
+				for (Layer singleLayer : mapboxMap.getStyle().getLayers()) {
+					Log.d(TAG, "onMapReady: layer id = " + singleLayer.getId());
+				}
+				
+            }
+          }
+        );
 	}
 });
 `}
@@ -112,10 +122,14 @@ mapView.getMapAsync(new OnMapReadyCallback() {
 kotlin={`
 mapView.getMapAsync {
 
-	for (singleLayer in it.layers) {
-	    Log.d(TAG, "onMapReady: layer id = " + singleLayer.getId())
+	mapView?.getMapAsync { mapboxMap -> mapboxMap.setStyle(Style.MAPBOX_STREETS) {
+		
+		for (singleLayer in mapboxMap.style!!.layers) {
+			Log.d(TAG, "onMapReady: layer id = " + singleLayer.id)
+		}
+		
 	}
-
+	}
 }
 `}
 
@@ -133,7 +147,7 @@ button.setOnClickListener(new View.OnClickListener() {
 @Override
 	public void onClick(View view) {
 		
-		mapboxMap.getLayers("park").setProperties(
+		mapboxMap.getStyle().getLayer("park").setProperties(
 		PropertyFactory.fillColor(Color.parseColor("#0e6001")));
 		
 	}
@@ -143,8 +157,8 @@ button.setOnClickListener(new View.OnClickListener() {
 kotlin={`
 button.setOnClickListener { 
 
-	mapboxMap.getLayers("park").setProperties(
-PropertyFactory.fillColor(Color.parseColor("#0e6001"))) 
+		mapboxMap.style?.getLayer("park")?.setProperties(PropertyFactory.fillColor(Color.parseColor("#0e6001")))
+
 }
           
 `}
