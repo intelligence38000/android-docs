@@ -8,6 +8,8 @@ prependJs:
   - "import { MAP_SDK_VERSION } from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+  - "import { WarningNote } from '../../../components/warning-note';" 
+
 ---
 
 {{
@@ -41,6 +43,12 @@ The Mapbox Maps SDK for Android is an open source toolset for displaying maps in
 }}
 
 [Mapbox's demo app on the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo&hl=en) includes many examples of how to use the Mapbox Maps SDK for Android. The demo app and [the examples section of this documentation](https://www.mapbox.com/android-docs/maps/examples/) are great places to start for understanding the power of the Mapbox Maps SDK for Android.
+
+{{
+<WarningNote title="7.0.0 Migration Guide">
+    <p>Have you already installed the Maps SDK for Android and are in the process of making changes to your project to account for the Maps SDK 7.0.0 release? If so, <a href="https://github.com/mapbox/mapbox-gl-native/wiki/Android-6.x-to-7.x-migration-guide">click here to read our 6.x -> 7.x migration guide</a>.</p>
+</WarningNote>
+}}
 
 ## Install the Maps SDK
 
