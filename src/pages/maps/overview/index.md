@@ -227,7 +227,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 />
 }}
 
-Open the acitvity's XML layout file and add the `mapView` within your layout.
+Open the activity's XML layout file and add the `mapView` within your layout.
 
 ```xml
 <com.mapbox.mapboxsdk.maps.MapView

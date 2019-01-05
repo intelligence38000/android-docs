@@ -93,7 +93,7 @@ val singleLayer = mapboxMap.getStyle().getLayer(UNIQUE_LAYER_ID)
 />
 }}
 
-You can view the map style's layer order and layer ids in Mapbox Studio. Another way to view this information is by printing out each layer ID to your Android logcat once the map has been loaded on the device.
+You can view the map style's layer Z-index order and layer ids in Mapbox Studio. Another way to view this information is by printing out each layer ID to your Android logcat once the map has been loaded on the device.
 
 {{
 <CodeLanguageToggle id="printing-layer-ids" />
@@ -112,23 +112,21 @@ mapView.getMapAsync(new OnMapReadyCallback() {
 					Log.d(TAG, "onMapReady: layer id = " + singleLayer.getId());
 				}
 				
-            }
-          }
-        );
+			}
+		});
 	}
 });
 `}
 
 kotlin={`
 mapView.getMapAsync {
-
 	mapView?.getMapAsync { mapboxMap -> mapboxMap.setStyle(Style.MAPBOX_STREETS) {
+			
+			for (singleLayer in mapboxMap.style!!.layers) {
+				Log.d(TAG, "onMapReady: layer id = " + singleLayer.id)
+			}
 		
-		for (singleLayer in mapboxMap.style!!.layers) {
-			Log.d(TAG, "onMapReady: layer id = " + singleLayer.id)
 		}
-		
-	}
 	}
 }
 `}
@@ -146,9 +144,7 @@ java={`
 button.setOnClickListener(new View.OnClickListener() {
 @Override
 	public void onClick(View view) {
-		
-		mapboxMap.getStyle().getLayer("park").setProperties(
-		PropertyFactory.fillColor(Color.parseColor("#0e6001")));
+		mapboxMap.getStyle().getLayer("park").setProperties(PropertyFactory.fillColor(Color.parseColor("#0e6001")));
 		
 	}
 });
@@ -156,8 +152,7 @@ button.setOnClickListener(new View.OnClickListener() {
 
 kotlin={`
 button.setOnClickListener { 
-
-		mapboxMap.style?.getLayer("park")?.setProperties(PropertyFactory.fillColor(Color.parseColor("#0e6001")))
+	mapboxMap.style?.getLayer("park")?.setProperties(PropertyFactory.fillColor(Color.parseColor("#0e6001")))
 
 }
           

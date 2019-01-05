@@ -60,35 +60,42 @@ To accomplish this:
 
 java={`
 try {
-	      mapboxMap.getStyle().addSource(
-	        new GeoJsonSource("GEOJSON_SOURCE_ID",
-	          new URL("URL_POINTING_TO_GEOJSON_FILE"),
-	          new GeoJsonOptions()
-	            .withCluster(true)
-	            .withClusterMaxZoom(MAX_ZOOM)
-	            .withClusterRadius(DESIRED_CLUSTER_RADIUS)
-	        )
-	      );
-	    } catch (MalformedURLException malformedUrlException) {
-	      Log.e(TAG, "Check the URL " + malformedUrlException.getMessage());
-	    }
+
+	mapboxMap.getStyle().addSource(
+		new GeoJsonSource("GEOJSON_SOURCE_ID",
+		  new URL("URL_POINTING_TO_GEOJSON_FILE"),
+		  new GeoJsonOptions()
+		    .withCluster(true)
+		    .withClusterMaxZoom(MAX_ZOOM)
+		    .withClusterRadius(DESIRED_CLUSTER_RADIUS)
+		)
+	);
+	
+} catch (MalformedURLException malformedUrlException) {
+
+	Log.e(TAG, "Check the URL " + malformedUrlException.getMessage());
+	
+}
 `}
 
 kotlin={`
 try {
-	      mapboxMap.style?.addSource(
-	        GeoJsonSource("GEOJSON_SOURCE_ID",
-	          URL("URL_POINTING_TO_GEOJSON_FILE"),
-	          GeoJsonOptions()
-	            .withCluster(true)
-	            .withClusterMaxZoom(MAX_ZOOM)
-	            .withClusterRadius(DESIRED_CLUSTER_RADIUS)
-	        )
-	      );
-	    } catch (malformedUrlException: MalformedURLException) {
-            Log.e(TAG, "Check the URL " + malformedUrlException.message)
-	    }
 
+	mapboxMap.style?.addSource(
+		GeoJsonSource("GEOJSON_SOURCE_ID",
+		  URL("URL_POINTING_TO_GEOJSON_FILE"),
+		  GeoJsonOptions()
+		    .withCluster(true)
+		    .withClusterMaxZoom(MAX_ZOOM)
+		    .withClusterRadius(DESIRED_CLUSTER_RADIUS)
+		)
+	);
+	
+} catch (malformedUrlException: MalformedURLException) {
+	
+	Log.e(TAG, "Check the URL " + malformedUrlException.message)
+	
+}
 `}
 
 />

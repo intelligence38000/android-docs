@@ -98,6 +98,7 @@ if (PermissionsManager.areLocationPermissionsGranted(this)) {
   // Permission sensitive logic called here, such as activating the Maps SDK's LocationComponent to show the device's location
 
 
+
 } else {
 	permissionsManager = PermissionsManager(this)
 	permissionsManager.requestLocationPermissions(this)
@@ -131,8 +132,8 @@ PermissionsListener permissionsListener = new PermissionsListener() {
 	public void onPermissionResult(boolean granted) {
 		if (granted) {
 			
-			// Permission sensitive logic called here, such as activating the Maps SDK's
-			LocationComponent to show the device's location
+			// Permission sensitive logic called here, such as activating the Maps SDK's LocationComponent to show the device's location
+
 			
 			
     	} else {
@@ -153,8 +154,7 @@ var permissionsListener: PermissionsListener = object : PermissionsListener {
 	override fun onPermissionResult(granted: Boolean) {
 		if (granted) {
 		
-			// Permission sensitive logic called here, such as activating the Maps SDK's
-        LocationComponent to show the device's location
+			// Permission sensitive logic called here, such as activating the Maps SDK's LocationComponent to show the device's location
 			
 			
 		} else {
@@ -212,7 +212,11 @@ locationEngine.requestLocationUpdates(request, this, getMainLooper());
 
 @Override
 public void onSuccess(LocationEngineResult result) {
+	
 	// Location logic here
+	
+	Location lastLocation = result.getLastLocation();
+
 }
 
 @Override
@@ -231,7 +235,10 @@ locationEngine.requestLocationUpdates(request, this, mainLooper)
 ...
 
 override fun onSuccess(result: LocationEngineResult) {
+	
 	// Location logic here
+	
+	Location lastLocation = result.lastLocation
 }
 
 override fun onFailure(exception: Exception) {
@@ -322,7 +329,10 @@ locationEngine.getLastLocation(this)
 ...
 
 override fun onSuccess(result: LocationEngineResult?) {
+	
 	// Location logic here
+	
+	Location lastLocation = result.lastLocation
 }
 
 override fun onFailure(exception: Exception) {

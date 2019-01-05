@@ -12,7 +12,7 @@ The Mapbox Maps SDK for Android provides several different ways to mark a single
 
 {{
 <WarningNote title="Plugin to handle annotations">
-    <p>**As of the 7.0.0 release of the Mapbox Maps SDK for Android**, much of the code on this page has been deprecated. Classes such as `Polygon`, `Polyline`, and `Marker` will not longer be maintained. This also means classes such as `PolygonOptions` and `PolylineOptions` should not be used. Lastly, this also means that methods such as `addPolygon()`, `addPolyline()`, or `addMarker()` also should not be used.
+    <p>As of the 7.0.0 release of the Mapbox Maps SDK for Android, much of the code on this page has been deprecated. Classes such as <code>Polygon</code>, <code>Polyline</code>, and <code>Marker</code> will not longer be maintained. This also means classes such as <code>PolygonOptions</code> and <code>PolylineOptions</code> should not be used. Lastly, this also means that methods such as <code>addPolygon()</code>, <code>addPolyline()</code>, or <code>addMarker()</code> also should not be used.
 
 We recommend that you look into the <a href="/android-docs/plugins/overview/annotation/">Mapbox Annotation Plugin for Android</a> if you plan to add any icons, text, lines, or polygons to the map. It simplify annotations and provide additional flexibility for displaying data.</p>
 </WarningNote>

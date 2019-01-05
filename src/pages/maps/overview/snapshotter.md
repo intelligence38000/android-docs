@@ -78,9 +78,11 @@ mapSnapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
 	@Override
 	public void onSnapshotReady(MapSnapshot snapshot) {
 	
+	// Display, share, or use bitmap image however you'd like
+	
 	Bitmap bitmapImage = snapshot.getBitmap();
 		
-	// Use bitmapImage however you'd like
+	
 	
 	}
 });
@@ -90,10 +92,11 @@ kotlin={`
 
 mapSnapshotter?.start { snapshot ->
 
+	// Display, share, or use bitmap image however you'd like
+
 	val bitmapOfMapSnapshotImage = snapshot.bitmap
 	
-	// Use bitmapImage however you'd like
-
+	
 }
 `}
 

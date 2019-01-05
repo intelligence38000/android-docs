@@ -36,13 +36,12 @@ LocationComponent locationComponent = mapboxMap.getLocationComponent();
 	
 locationComponent.activateLocationComponent(this, mapboxMap.getStyle());
 
-}
 `}
  kotlin={`
 
 val locationComponent = mapboxMap.locationComponent
 
-locationComponent.activateLocationComponent(this, mapboxMap.style)	
+locationComponent.activateLocationComponent(this, mapboxMap.style)
 
 `}
  />
@@ -83,7 +82,6 @@ LocationComponentOptions options = LocationComponentOptions.builder(this)
 	
 locationComponent = mapboxMap.getLocationComponent();
 locationComponent.activateLocationComponent(this, mapStyle, options);
-}
 `}
  kotlin={`
 val options = LocationComponentOptions.builder(this)
