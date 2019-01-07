@@ -349,7 +349,6 @@ While sources hold the data, layers are used to style and display the informatio
 
 Each layer offers a `setProperties` API which can be used to style the layer in many different ways. Note that instead of creating different layers depending on certain cases inside your source data, it's recommended to use data-driven styling to reduce the number of layers that the map needs to render.
 
-<!-- TODO: will a none enclosed polygon fill be closed automatically? -->
 <!-- TODO: talk about mapboxMap.getLayers(); -->
 <!-- TODO: talk about mapboxMap.addLayerBelow(); -->
 
@@ -379,7 +378,7 @@ backgroundLayer.setProperties(PropertyFactory.backgroundColor(Color.BLUE))
 
 ### Fill
 
-Fill layers have an enclosed shape geometry that can be useful for marking areas on a map. The geometry's similar to a line layer consisting of a series of coordinates in a particular order with the first and last points having the same coordinate.
+Fill layers have an enclosed shape geometry that can be useful for marking areas on a map. A `FillLayer` is best used with GeoJSON `Polygon` or `MultiPolygon` geometries.  The geometry's similar to a line layer consisting of a series of coordinates in a particular order with the first and last points having the same coordinate. The geometry is "enclosed" when the coordinate list starts and ends with the same coordinates. If the geometry isn't enclosed, the `FillLayer` will render but some vertices and sides might be cut off by the tile boundaries.
 
 {{
 <CodeLanguageToggle id="fill-layer" />
@@ -402,6 +401,8 @@ fillLayer.setProperties(PropertyFactory.fillColor(Color.GREEN))
 
 To alter the shape of the geometry once you have added it, the layer can remain with no changes needed, only the source it's using should be updated. The layer will always display the latest updates inside its source.
 
+
+ 
 
 ### Line
 

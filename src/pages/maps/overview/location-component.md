@@ -7,6 +7,8 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import AppropriateImage from '../../../components/appropriate-image';"
   - "import { DocNote } from '../../../components/note';" 
+  - "import { Floater } from '../../../components/floater';"
+
 ---
 
 Showing the user's current location as a map annotation is a popular and often critical feature of location-based apps. The Maps SDK's `LocationComponent` makes use of the Maps SDK's [runtime styling capabilities](/android-docs/maps/overview/runtime-styling/) to display the device location icon within the map itself rather than on top as a simple Android view. Mapbox map layers and layer styling give you precise control, if you want it, of the way that a device's location is shown on the map.
@@ -22,30 +24,111 @@ Showing the user's current location as a map annotation is a popular and often c
 You'll need to request the Android-system location permission before using the `LocationComponent`. If your Android project is built targeting API level 23 or higher your application will need to request permissions during runtime. Handling this directly in your activity produces boilerplate code and can often be hard to manage. [Read more about using the Mapbox Core Library for Android's PermissionsManager](/android-docs/core/overview/#permissionsmanager) class.
 
 ## Activating
-
-Once the user has granted location permission, retrieving and activating the `LocationComponent` are the first two steps towards showing the device's location on a Mapbox map.
  
 `MapboxMap#getLocationComponent()` fetches the component and `LocationComponent#activateLocationComponent()` activates it. Both need to be called before any other `LocationComponent` adjustments, such as its visibility, are performed.
+
+Retrieve and activate the `LocationComponent` once the user has granted location permission **and** the map has fully loaded.
 
 {{
 <CodeLanguageToggle id="location-component-activation" />
 <ToggleableCodeBlock
  java={`
+@Override
+public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
-LocationComponent locationComponent = mapboxMap.getLocationComponent();
+	mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+      
+        enableLocationComponent();
+        
+      }
+	});	
+}
+
+@SuppressWarnings( {"MissingPermission"})
+private void enableLocationComponent() {
 	
-locationComponent.activateLocationComponent(this, mapboxMap.getStyle());
+	// Check if permissions are enabled and if not request
+	if (PermissionsManager.areLocationPermissionsGranted(this)) {
+	
+		// Get an instance of the component
+		LocationComponent locationComponent = mapboxMap.getLocationComponent();
+		
+		// Activate with options
+		locationComponent.activateLocationComponent(this, mapboxMap.getStyle());
+		
+		// Enable to make component visible
+		locationComponent.setLocationComponentEnabled(true);
+		
+		// Set the component's camera mode
+		locationComponent.setCameraMode(CameraMode.TRACKING);
+		
+		// Set the component's render mode
+		locationComponent.setRenderMode(RenderMode.COMPASS);
+	
+	} else {
 
+		permissionsManager = new PermissionsManager(this);
+		
+		permissionsManager.requestLocationPermissions(this);
+
+	}
+}
+  
 `}
  kotlin={`
 
-val locationComponent = mapboxMap.locationComponent
+override fun onMapReady(mapboxMap: MapboxMap) {
 
-locationComponent.activateLocationComponent(this, mapboxMap.style)
+	mapboxMap.setStyle(Style.MAPBOX_STREETS) {
+	
+		style -> enableLocationComponent()
+	
+	}
+}
 
+@SuppressWarnings("MissingPermission")
+private fun enableLocationComponent() {
+
+	// Check if permissions are enabled and if not request
+	if (PermissionsManager.areLocationPermissionsGranted(this)) {
+	
+		// Get an instance of the component
+		val locationComponent = mapboxMap?.locationComponent
+		
+		// Activate with options
+		locationComponent?.activateLocationComponent(this, mapboxMap?.style!!)
+		
+		// Enable to make component visible
+		locationComponent?.isLocationComponentEnabled = true
+		
+		// Set the component's camera mode
+		locationComponent?.cameraMode = CameraMode.TRACKING
+		
+		// Set the component's render mode
+		locationComponent?.renderMode = RenderMode.COMPASS
+	
+	} else {
+
+		permissionsManager = PermissionsManager(this)
+		
+		permissionsManager?.requestLocationPermissions(this)
+	
+	}
+}
 `}
  />
 }} 
+
+{{
+  <Floater
+    url="https://github.com/mapbox/mapbox-android-demo/blob/master/MapboxAndroidDemo/src/main/java/com/mapbox/mapboxandroiddemo/examples/location/LocationComponentActivity.java"
+    title="Showing device location"
+    category="example"
+    text="Add the device's location to the map."
+  />
+}}
 
 ## Visibility
 

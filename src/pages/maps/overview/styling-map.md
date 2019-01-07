@@ -19,9 +19,9 @@ A `Style` object is a representation of the actively shown style on a map. Using
 
 A `Style` object must be created and given to the map for the map to appear properly. Create a `Style` by using a:
 
-- default Mapbox style URL via the `Style` class
+- default Mapbox style found in the `Style` class constants 
 - custom map style URL from a Mapbox account
-- JSON string
+- raw style JSON string or referenced style JSON via `asset://` or `path://` 
 
 If the style fails to load or an invalid style URL is set, the map view will become blank. An error message will be logged in the Android logcat and the `MapView.OnDidFailLoadingMapListener` callback will be triggered.
 
@@ -29,17 +29,28 @@ If the style fails to load or an invalid style URL is set, the map view will bec
 
 You'll have to change the map style URL programatically if you'd like to load a completely new map style. Call `mapboxMap.setStyle()` with the style URL as the parameter.
 
-**Custom style URL**
 {{
 <CodeLanguageToggle id="setting-custom-style-url-java" />
 <ToggleableCodeBlock
 
 java={`
-mapboxMap.setStyle(new Style.Builder().fromUrl(uniqueStyleUrl));
+mapboxMap.setStyle(new Style.Builder().fromUrl(uniqueStyleUrl), new Style.OnStyleLoaded() {
+	@Override
+	public void onStyleLoaded(@NonNull Style style) {
+	
+	// Custom map style has been loaded and map is now ready
+	    
+	
+	}
+});
 `}
 
 kotlin={`
-mapboxMap.setStyle(Style.Builder().fromUrl(uniqueStyleUrl))
+mapboxMap.setStyle(Style.Builder().fromUrl(uniqueStyleUrl)) {
+
+	// Custom map style has been loaded and map is now ready
+
+}
 `}
 
 />
@@ -63,11 +74,23 @@ The Maps SDK's `Style` class has `private static final String`s of the default M
 <ToggleableCodeBlock
 
 java={`
-mapboxMap.setStyle(Style.LIGHT);
+mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+	@Override
+	public void onStyleLoaded(@NonNull Style style) {
+	
+	// Custom map style has been loaded and map is now ready
+	    
+	
+	}
+});
 `}
 
 kotlin={`
-mapboxMap.setStyle(Style.LIGHT)
+mapboxMap.setStyle(Style.MAPBOX_STREETS) {
+
+	// Custom map style has been loaded and map is now ready
+
+}
 `}
 
 />
@@ -87,7 +110,7 @@ Layer singleLayer = mapboxMap.getStyle().getLayer(UNIQUE_LAYER_ID);
 `}
 
 kotlin={`
-val singleLayer = mapboxMap.getStyle().getLayer(UNIQUE_LAYER_ID)
+val singleLayer = mapboxMap.getStyle()?.getLayer(UNIQUE_LAYER_ID)
 `}
 
 />
@@ -119,10 +142,10 @@ mapView.getMapAsync(new OnMapReadyCallback() {
 `}
 
 kotlin={`
-mapView.getMapAsync {
+mapView?.getMapAsync {
 	mapView?.getMapAsync { mapboxMap -> mapboxMap.setStyle(Style.MAPBOX_STREETS) {
 			
-			for (singleLayer in mapboxMap.style!!.layers) {
+			for (singleLayer in it.layers) {
 				Log.d(TAG, "onMapReady: layer id = " + singleLayer.id)
 			}
 		

@@ -322,9 +322,6 @@ fun onDestroyView() {
 />
 }}
 
-
-This can also be done via your project settings (File > Project Structure > Your_Module > Source Compatibility / Target Compatibility). 
-
 ## Attribution
 
 <!-- {{
