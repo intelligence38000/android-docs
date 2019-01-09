@@ -280,19 +280,19 @@ imageSource?.setImage(DESIRED_IMAGE)
 
 ### Custom geometry
 
-There might be a situation when you want to draw a shape that doesn't fit the standard `Point`, `LineString`, `Polygon`, `MultiPoint`, `MultiLineString`, and `MultiPolygon` GeoJSON geometries. A `CustomGeometrySource` can help you achieve this. 
+A `CustomGeometrySource` is helpful in situations when you have data which is dynamically generated or needs to be loaded on demand. A `FeatureCollection` with any type and number of GeoJSON geometries can be used in a `CustomGeometrySource`.
 
 {{
 <CodeLanguageToggle id="custom-geometry" />
 <ToggleableCodeBlock
 
 java={`
-CustomGeometrySource source = new CustomGeometrySource(ID_GRID_SOURCE, GeometryTileProvider);
+CustomGeometrySource source = new CustomGeometrySource(CUSTOM_SOURCE_ID, GeometryTileProvider);
 mapboxMap.getStyle().addSource(source);
 `}
 
 kotlin={`
-val source = CustomGeometrySource(ID_GRID_SOURCE, GeometryTileProvider)
+val source = CustomGeometrySource(CUSTOM_SOURCE_ID, GeometryTileProvider)
 mapboxMap.style?.addSource(source)
 `}
 
