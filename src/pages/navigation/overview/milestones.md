@@ -1,6 +1,9 @@
 ---
 title: "Milestones"
 description: "Trusted documentation about milestones within the Mapbox Navigation SDK for Android. Know when to instruct your users and/or when to hide or show custom UI."
+products:
+  - Navigation UI
+  - Navigation core
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
@@ -9,19 +12,185 @@ prependJs:
 Navigation milestones inside the SDK provide a powerful way to give your user instructions or get cues to hide or show
 custom UI at defined locations along their route.  You can create custom milestones that fit your particular app needs.
 
-## Default Milestones
+## Navigation UI
 
-### VoiceInstructionMilestone
+### InstructionView
+
+You also have the option to add the custom `View`s used in the turn-by-turn UI to your XML.
+The top `View` that displays the maneuver image, instruction text, and sound button is called `InstructionView`.
+
+```xml
+<com.mapbox.services.android.navigation.ui.v5.instruction.InstructionView
+    android:id="@+id/instructionView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+```
+
+Once inflated in your `Activity`, the `InstructionView` can be updated with `RouteProgress` and `Milestone` objects inside a `ProgressChangeListener` and `MilestoneEventListener` respectively.
+
+{{
+<CodeLanguageToggle id="instruction-view" />
+<ToggleableCodeBlock
+
+java={`
+@Override
+public void onProgressChange(Location location, RouteProgress routeProgress) {
+    instructionView.updateDistanceWith(routeProgress);
+}
+
+@Override
+public void onMilestoneEvent(RouteProgress routeProgress, String instruction, Milestone milestone) {
+  instructionView.updateBannerInstructionsWith(milestone);
+}
+`}
+
+kotlin={`
+override fun onProgressChange(location: Location, routeProgress: RouteProgress) {
+    instructionView.updateDistanceWith(routeProgress)
+}
+
+override fun onMilestoneEvent(routeProgress: RouteProgress, instruction: String, milestone: Milestone) {
+  instructionView.updateBannerInstructionsWith(milestone)
+}
+`}
+/>
+}}
+
+Prior to the first time you want to update the `InstructionView`, you can control the distance formatting with `InstructionView#setDistanceFormatter(DistanceFormatter distanceFormatter)`.
+
+This will determine how distances are displayed in the view:
+
+{{
+<CodeLanguageToggle id="set-distance" />
+<ToggleableCodeBlock
+
+java={`
+String unitType = DirectionsCriteria.METRIC;
+
+String language = Locale.US.getLanguage();
+
+int roundingIncrement = NavigationConstants.ROUNDING_INCREMENT_TWENTY_FIVE;
+
+DistanceFormatter distanceFormatter = new DistanceFormatter(getContext(), language, unitType, roundingIncrement);
+
+instructionView.setDistanceFormatter(distanceFormatter);
+}
+`}
+
+kotlin={`
+val unitType = DirectionsCriteria.METRIC
+
+val language = Locale.US.language
+
+val roundingIncrement = NavigationConstants.ROUNDING_INCREMENT_TWENTY_FIVE
+
+val distanceFormatter = DistanceFormatter(getContext(), language, unitType, roundingIncrement)
+
+instructionView.setDistanceFormatter(distanceFormatter)
+`}
+/>
+}}
+
+
+**Note**: It is fine if this is _not_ set, the view will create its own based on inferred parameters from the device's Android configuration. Please also make sure to set our default theme: `R.style.NavigationViewLight` (or create your own) and set it in your `Activity` or `Fragment` before `super.onCreate()`. The custom `View`s will now look for the attributes in the default theme to set text and background colors:
+
+{{
+<CodeLanguageToggle id="set-nav-view" />
+<ToggleableCodeBlock
+
+java={`
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+  setTheme(R.style.NavigationViewLight);
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_navigation);
+  ...
+}
+`}
+
+kotlin={`
+override fun onCreate(savedInstanceState: Bundle?) {
+    setTheme(R.style.NavigationViewLight)
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_navigation)
+}
+`}
+/>
+}}
+
+### Loading banner instructions into a `TextView`
+
+If you would like to use your own `TextView` and load a given `BannerText` instruction, you can do so
+with the `InstructionLoader`. The loader takes care of organizing text, loading road shields, and abbreviating
+text (if it doesn't fit in the `TextView`). Paired with our `MilestoneEventListener`, you can load instruction updates into
+your `TextView`:
+
+{{
+<CodeLanguageToggle id="textview-instruction-loader" />
+<ToggleableCodeBlock
+
+java={`
+@Override
+public void onMilestoneEvent(RouteProgress routeProgress, String instruction, Milestone milestone) {
+  if (milestone instanceof BannerInstructionMilestone) {
+    BannerText primaryInstruction = ((BannerInstructionMilestone) milestone).getBannerInstructions().primary();
+    InstructionLoader loader = new InstructionLoader(textView, primaryInstruction);
+    loader.loadInstruction();
+  }
+}
+}
+`}
+
+kotlin={`
+override fun onMilestoneEvent(routeProgress: RouteProgress, instruction: String, milestone: Milestone) {
+  if (milestone is BannerInstructionMilestone) {
+    val primaryInstruction = milestone.bannerInstructions.primary()
+    val loader = InstructionLoader(textView, primaryInstruction)
+    loader.loadInstruction()
+  }
+}
+`}
+/>
+}}
+
+## Navigation core
+
+The `onRunning` callback's helpful for being notified when the navigation session has started, the user has canceled the session, or the user has arrived at their final destination. From this information, you can decide when to show navigation notifications, know when it's safe to stop requesting user location updates, and much more.
+
+{{
+<CodeLanguageToggle id="nav-navigation-running" />
+<ToggleableCodeBlock
+
+java={`
+navigation.addNavigationEventListener(new NavigationEventListener() {
+  @Override
+  public void onRunning(boolean running) {
+
+  }
+});
+`}
+
+kotlin={`
+navigation?.addNavigationEventListener { running ->
+
+}
+`}
+/>
+}}
+
+### Default Milestones
+
+#### VoiceInstructionMilestone
 
 The `VoiceInstructionMilestone` will fire every time it's time to announce an instruction along a given `DirectionsRoute`.  This milestone provides
 a plain text instruction with `VoiceInstructionMilestone#getInstruction` as well as a SSML version of the same instruction with `VoiceInstructionMilestone#getSsmlAnnouncement`.  
 SSML stands for Speech Synthesis Markup Language and is designed to work with [AWS Polly](https://aws.amazon.com/documentation/polly/).  
 
-### BannerInstructionMilestone
+#### BannerInstructionMilestone
 
 The `BannerInstructionMilestone` will fire every time textual instructions should be updated, most of the time in the format of a "banner" view on the top of the screen. This milestone provides a `BannerInstructions` object for the given point along the route.  This object contains text and URLs for shield images that can be displayed on screen at the time the milestone fires.  
 
-## Milestone event listener
+### Milestone event listener
 
 All the milestones use the `onMilestoneEvent` callback to alert when they get triggered. If you want to make use of the milestones API, you will want to attach a `MilestoneEventListener` inside your app. When all the milestone trigger conditions are true, the callback is invoked and provides you with the latest routeProgress along with the milestone's corresponding `String` instruction and the `Milestone` itself that was triggered. You can use your text-to-speech engine of choice and have it consume the instruction.
 
@@ -45,7 +214,7 @@ override fun onMilestoneEvent(routeProgress: RouteProgress, instruction: String,
 />
 }}
 
-## Building a custom milestone
+### Building a custom milestone
 
 Milestones bring flexibility to your app and how it handles navigation events. Creating a milestone is done in just a few steps. First, choose how frequently you'd like the milestone to be triggered. Two options are currently provided, `StepMilestone`, which is triggered each step in the route and `RouteMilestone`, which will only get trigger once during the entire route. You can also implement your own behavior for triggers by extending the `Milestone` class. Give the milestone a unique identifier which can be used to determine which milestone triggered the `onMilestoneEvent` callback. Set the triggers using any combination of the properties shown in the table below. It is important to note that trigger properties have different corresponding variable types that need to be accounted for when setting the milestone up. Lastly, build the milestone and pass it into the `MapboxNavigation` instance using `addMilestone()`.
 
@@ -80,7 +249,7 @@ navigation?.addOffRouteListener {
 }}
 
 
-### Trigger conditions
+#### Trigger conditions
 
 Besides the triggers already mentioned above, the SDK comes equipped to handle pretty much any case you'd like to build. The table below shows all the conditions currently offered inside the SDK and whether it is a compound statement or a simple statement.
 
@@ -96,7 +265,7 @@ gte            | Simple   | Greater than or equal. The trigger property's curren
 lt             | Simple   | Less than. The trigger property's current value must be less than the defined value
 lte            | Simple   | Less than or equal. The trigger property's current value must be less than or equal to the defined property.
 
-### Trigger properties
+#### Trigger properties
 
 Below are the available trigger properties that can be used along with the conditions above to filter when a milestone should be triggered. Note that instead of the boolean types using the primitive type `true` or `false`, the `TriggerProperty` class uses custom boolean values for the triggers.
 
@@ -117,7 +286,7 @@ LAST_LEG                        | boolean | When the user is on the last leg.
 
 We are actively adding more and more trigger properties every day while we continue building out the milestones API. Please [open an issue on GitHub](https://github.com/mapbox/mapbox-navigation-android/issues/new) if you feel a trigger property is missing and include the use-case.
 
-## Custom instructions
+### Custom instructions
 
 You'll see in the next section about the milestone event listener that the callback provides a `String` instruction value. During the milestone creation process, you can add the logic that generates this instruction. Begin by creating a new `Instruction` object which will provide an override method, `buildInstruction`, which provides a `RouteProgress` object for producing the instructions string. With the provided route progress, you can add information such as distance and duration remaining until the next maneuver. Once the `Instruction` is initialized, you will need to give it to the milestone using `setInstruction`. The example below shows how to add the directions API instruction with no modifications as the milestone instruction.
 

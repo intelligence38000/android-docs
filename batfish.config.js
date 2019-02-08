@@ -40,15 +40,17 @@ const productPageOrder = {
   'plugins/examples/': ['index'],
   'navigation/overview/': [
     'index',
-    'camera',
-    'faster-route',
-    'map-matching',
+    'user-location',
+    'route-generation',
+    'route-progress',
     'milestones',
-    'navigation-options',
-    'navigation-ui',
     'off-route',
+    'localization',
+    'camera',
+    'map-styling',
     'offline-routing',
-    'route-progress'
+    'faster-route',
+    'map-matching'
   ],
   'java/overview/': [
     'index',
@@ -166,7 +168,8 @@ module.exports = () => {
         rehypeSlug,
         require('@mapbox/dr-ui/plugins/add-links-to-headings'),
         makeTableScroll,
-        require('@mapbox/rehype-prism')
+        require('@mapbox/rehype-prism'),
+        require('@mapbox/dr-ui/plugins/create-sections')
       ]
     }
   };

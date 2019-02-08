@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { withLocation } from '@mapbox/batfish/modules/with-location';
 import ReactPageShell from '../../vendor/docs-page-shell/react-page-shell.js';
 import { routeToPrefixed } from '@mapbox/batfish/modules/route-to';
+import Icon from '@mapbox/mr-ui/icon';
 // dr-ui components
 import TopbarSticker from '@mapbox/dr-ui/topbar-sticker';
 import BackToTopButton from '@mapbox/dr-ui/back-to-top-button';
@@ -79,17 +80,42 @@ class PageShell extends React.Component {
     let pageNavigation = '';
     let pageNavigationNarrowStick = false;
     if (activeTab === 'overview') {
-      pageNavigationNarrowStick = true;
-      const secondLevelItems = frontMatter.headings
-        .filter(heading => {
-          return heading.level === 2;
-        })
-        .map(h2 => {
+      const parseHeadings = arr => {
+        return arr.map((heading, index) => {
           return {
-            title: h2.text,
-            path: h2.slug
+            level: heading.level,
+            text: heading.text,
+            slug: heading.slug,
+            order: index
           };
         });
+      };
+
+      const orderedHeadings = this.props.frontMatter.headings
+        ? parseHeadings(this.props.frontMatter.headings)
+        : parseHeadings(this.props.headings);
+
+      const topLevelHeadings = orderedHeadings.filter(h => h.level === 2);
+      const secondLevelItems = topLevelHeadings.map((h2, index) => {
+        const nextH2 = topLevelHeadings[index + 1];
+        return {
+          title: h2.text,
+          path: h2.slug,
+          thirdLevelItems: orderedHeadings
+            .filter(
+              f =>
+                f.level === 3 &&
+                f.order > h2.order &&
+                (nextH2 ? f.order < nextH2.order : true)
+            )
+            .map(h3 => {
+              return {
+                title: h3.text.replace(/i2157|i2860/, ''),
+                path: h3.slug
+              };
+            })
+        };
+      });
       pageNavigation = (
         <div className="mx0-mm ml-neg24 mr-neg36 relative-mm absolute right left">
           <NavigationAccordion
@@ -97,7 +123,7 @@ class PageShell extends React.Component {
             contents={{
               firstLevelItems:
                 orderedPages[pathPrefixMatch[1] + pathPrefixMatch[2]],
-              secondLevelItems: secondLevelItems
+              secondLevelItems: secondLevelItems || null
             }}
             onDropdownChange={value => {
               routeToPrefixed(value);
@@ -183,11 +209,53 @@ class PageShell extends React.Component {
     let renderedTitle = '';
     if (frontMatter.title === 'Introduction') {
       renderedTitle = <div className="mt0-mm mt60" />;
-    } else {
+    } else if (
+      frontMatter.title === 'Examples' ||
+      frontMatter.title === 'Help'
+    ) {
       renderedTitle = (
         <h1 className="txt-h1 txt-fancy mt0-mm mt60 pt0-mm pt24 pb24">
           {frontMatter.title}
         </h1>
+      );
+    } else {
+      const products = ['Navigation UI', 'Navigation core'].map(p => {
+        return (
+          <div>
+            <span
+              className={
+                frontMatter.products.indexOf(p) > -1
+                  ? 'color-green'
+                  : 'color-red-faint'
+              }
+            >
+              <Icon
+                name={frontMatter.products.indexOf(p) > -1 ? 'check' : 'close'}
+                inline={true}
+              />
+            </span>
+            <span
+              className={
+                frontMatter.products.indexOf(p) > -1
+                  ? 'color-gray-dark'
+                  : 'color-gray-light'
+              }
+            >
+              {p}
+            </span>
+          </div>
+        );
+      });
+      renderedTitle = (
+        <div className="mt0-mm mt60 pt0-mm pt24 pb24 mb24 border-b border--gray-light">
+          <h1 className="txt-h1 txt-fancy">{frontMatter.title}</h1>
+          <div className="mt12">
+            <div className="flex-parent flex-parent--start-cross">
+              <div className="flex-child mr12 txt-bold">Products covered:</div>
+              <div className="flex-child">{products}</div>
+            </div>
+          </div>
+        </div>
       );
     }
 
@@ -226,7 +294,7 @@ class PageShell extends React.Component {
             currentPath={location.pathname}
             sidebarStackedOnNarrowScreens={pageNavigationNarrowStick}
           >
-            {renderedTitle}
+            <React.Fragment>{renderedTitle}</React.Fragment>
             {children}
             <div className="fixed block none-mm mx24 my24 z5 bottom right">
               <BackToTopButton />

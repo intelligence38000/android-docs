@@ -1,12 +1,12 @@
 ---
-title: "Off-Route Detection"
+title: "Off-route detection"
 description: "The Mapbox Navigation SDK for Android offers off-route detection for your Android app's navigation experience. Read this documentation to learn how."
+products:
+  - Navigation core
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
-
-A default off-route detection class, `OffRouteDetector`, is included in the Navigation SDK. This class uses our internal route-following library to run a series of calculations using the incoming `Location` and the current `DirectionsRoute` to determine if a user has strayed too far from the route.
 
 Upon loading a new route and if the `DirectionsRoute` JSON is valid, route-following will start in the `RouteProgressState#INITIALIZED` state. From there, route-following will attempt to gain confidence that the GPS locations being passed to the device, are actually the location where the user is. To establish this trust, at least a few location updates need to be delivered and they must be consecutively coherent in both time and space. While it is in the process of establishing this trust, the route-following logic will report that it's still in the `RouteProgressState#INITIALIZED` state.
 

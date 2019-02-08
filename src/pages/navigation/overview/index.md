@@ -36,12 +36,79 @@ The Navigation SDK for Android allows you to build a complete in-app navigation 
 - Detecting when a user goes off-route
 - Specifying which side of the road to approach a waypoint
 
+## Product options
 
-## Install the Navigation SDK
+Mapbox offers two products for integrating navigation into your Android application: 
 
-You'll need to add the Navigation SDK as a dependency before developing your app with the Navigation SDK. Note that while we show how to insert the stable version of the SDK inside your project, you can also use the nightly build/SNAPSHOT or the beta version if one is available. Find more information about how to do this inside [the Navigation SDK's GitHub repository](https://github.com/mapbox/mapbox-navigation-android/#using-snapshots).
+1. **Navigation UI**: This provides a quick way to get started, but has limited options for customization.
+2. **Navigation core**: Requires more complex implementation, but offers many more options for customization.
 
-###  1. Add the dependency
+
+## Installation
+
+You'll need to add the Navigation UI SDK or Navigation SDK as a dependency before developing your app. Note that while we show how to insert the stable version of the SDK inside your project, you can also use the nightly build/SNAPSHOT or the beta version if one is available. Find more information about how to do this inside [the Navigation SDK's GitHub repository](https://github.com/mapbox/mapbox-navigation-android/#using-snapshots).
+
+### Navigation UI
+
+#### Add the dependency
+
+This dependency is different from the one used to compile the core Mapbox Navigation SDK, but it will still include everything from the core Mapbox Navigation SDK. _If you're using the Navigation UI SDK, you **don't** have to declare the Mapbox Navigation SDK as well. If you only declare the Navigation UI SDK in your project's Gradle file, the Mapbox Navigation SDK will automatically be included._
+
+```groovy
+repositories {
+  mavenCentral()
+  maven { url 'https://mapbox.bintray.com/mapbox' }
+}
+
+dependencies {
+  implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:{{ NAVIGATION_VERSION }}'
+}
+```
+
+#### Launch the Navigation UI
+
+With either a `DirectionsRoute` from `NavigationRoute` or two `Point` objects (origin and destination), you can launch the UI with `NavigationLauncher` from within your `Activity`:
+
+{{
+<CodeLanguageToggle id="launch-nav-ui" />
+<ToggleableCodeBlock
+
+java={`
+// Route fetched from NavigationRoute
+DirectionsRoute route = ...
+
+boolean simulateRoute = true;
+
+// Create a NavigationLauncherOptions object to package everything together
+NavigationLauncherOptions options = NavigationLauncherOptions.builder()
+  .directionsRoute(route)
+  .shouldSimulateRoute(simulateRoute)
+  .build();
+
+// Call this method with Context from within an Activity
+NavigationLauncher.startNavigation(this, options);
+`}
+
+kotlin={`
+// Route fetched from NavigationRoute
+val route: DirectionsRoute
+
+val simulateRoute = true
+
+// Create a NavigationLauncherOptions object to package everything together
+val options = NavigationLauncherOptions.builder()
+  .directionsRoute(route)
+  .shouldSimulateRoute(simulateRoute)
+  .build()
+
+// Call this method with Context from within an Activity
+NavigationLauncher.startNavigation(this, options)`}
+/>
+}}
+
+### Navigation core
+
+#### Add the dependency
 
 1. Start Android Studio
 2. Open up your app's `build.gradle` file
@@ -60,7 +127,7 @@ dependencies {
 }
 ```
 
-### 2. Get an access token
+#### Get an access token
 
 If you don't have a Mapbox account: [sign up](https://www.mapbox.com/signup/), navigate to your [Account page](https://www.mapbox.com/account/), and copy your **default public token** to your clipboard. After you've added the Navigation SDK as a dependency inside your Android project, open the `string.xml` file, create a new string, and paste the access token. Then, pass this into the Navigation SDK.
 
@@ -94,7 +161,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 }}
 
 
-### 3. Setup permissions
+#### Set up permissions
 
 The Navigation SDK makes use of the Android manifest merge feature to reduce the need to include any Navigation SDK requirements inside your application's manifest file. You'll need to include either the Fine or Coarse location permission for navigation to work properly. The user location permission should also be checked during runtime using the PermissionManager if your app targets the Android API 23 or higher.
 
@@ -104,7 +171,7 @@ For best navigation results, we strongly recommend using the fine location permi
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 ```
 
-### 4. Request a route
+#### Request a route
 
 Now that you have created a way for the `MapboxNavigation` object to get the user's location, you can create a route using `NavigationRoute`. Pass in an origin, destination, and a callback to handle the response. Inside the `onResponse`, you can draw the directions route on a map or show time and distance using the full directions response.
 
@@ -159,57 +226,8 @@ NavigationRoute.builder(context)
 />
 }}
 
-## Get the user’s location
 
-Navigation applications often use the user's current location as the `origin` when requesting a route. With the Navigation SDK, this is done using the `LocationEngine` class. For detailed instructions on how to use this class, [see the `LocationEngine` documentation](https://docs.mapbox.com/android/core/overview/#locationengine).
-
-You can set up an instance of a `LocationEngine` and pass it to the `MapboxNavigation` object. This is not required - the SDK will create a default `LocationEngine` with `LocationEngineProvider#getBestLocationEngine` if an engine is not passed before navigation is started.  
-
-{{
-<CodeLanguageToggle id="nav-location-engine" />
-<ToggleableCodeBlock
-
-java={`
-LocationEngine locationEngine = LocationEngineProvider.getBestLocationEngine(context);
-navigation.setLocationEngine(locationEngine);
-`}
-
-kotlin={`
-val locationEngine = LocationEngineProvider.getBestLocationEngine(context)
-navigation.locationEngine = locationEngine
-`}
-
-/>
-}}
-
-You can also pass a `LocationEngineRequest` to `MapboxNavigation`, specifying parameters such as update frequency or preferred accuracy. This is also not required - the SDK will create a default `LocationEngineRequest` with parameters suitable for navigation if a request is not passed before navigation is started.  
-
-{{
-<CodeLanguageToggle id="nav-location-request" />
-<ToggleableCodeBlock
-
-java={`
-LocationEngineRequest locationEngineRequest = new LocationEngineRequest.Builder(DEFAULT_INTERVAL_IN_MILLISECONDS)
-		.setPriority(LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
-		.setMaxWaitTime(DEFAULT_MAX_WAIT_TIME)
-    .build();
-
-navigation.setLocationEngineRequest(locationEngineRequest);
-`}
-
-kotlin={`
-val locationEngineRequest = LocationEngineRequest.Builder(DEFAULT_INTERVAL_IN_MILLISECONDS)
-		.setPriority(LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
-		.setMaxWaitTime(DEFAULT_MAX_WAIT_TIME)
-    .build()
-
-navigation.setLocationEngineRequest(locationEngineRequest)
-`}
-
-/>
-}}
-
-## Replaying a DirectionsRoute
+<!-- ## Replaying a DirectionsRoute
 
 The SDK includes a `ReplayRouteLocationEngine`, which allows you to replay a given `DirectionsRoute` (mainly for testing, so you don't always have to code in a car). After retrieving a `DirectionsRoute`, you can create a replay engine and pass it to `MapboxNavigation`:
 
@@ -240,249 +258,8 @@ navigation.startNavigation(routeToReplay)
 `}
 
 />
-}}
+}} -->
 
-## Localize text and voice instructions
-
-Turn instructions are announced in the user interface language when turn instructions are available in that language. If instructions are not available in the user interface language, they are announced in English. To have instructions announced in a language other than the user interface language, set the `NavigationRoute.Builder#language` property when calculating the route with which to start navigation.
-
-Turn instructions are primarily designed to be announced by either the Mapbox Voice API (powered by [Amazon Polly](https://docs.aws.amazon.com/polly/latest/dg/SupportedLanguage.html)) or [TextToSpeech](https://developer.android.com/reference/android/speech/tts/TextToSpeech). By default, this SDK uses the Mapbox Voice API, which requires an Internet connection at various points along the route. If the Voice API lacks support for the turn instruction language or there is no Internet connection, TextToSpeech announces the instructions instead.
-
-By default, distances are given in the predominant measurement system of the system region, which may not necessarily be the same region in which the user is traveling. To override the measurement system used in spoken instructions, set the `MapboxNavigationOptions.Builder#voiceUnits` property when calculating the route with which to start navigation.
-
-{{
-<CodeLanguageToggle id="override-measurements" />
-<ToggleableCodeBlock
-
-java={`
-// Override measurement system in spoken instructions
-NavigationRoute.builder(context)
-    .accessToken(MAPBOX_ACCESS_TOKEN)
-    .origin(origin, bearing, tolerance)
-    .destination(destination)
-    .voiceUnits(DirectionsCriteria.IMPERIAL)
-    .build();
-`}
-
-kotlin={`
-// Override measurement system in spoken instructions
-NavigationRoute.builder(context)
-    .accessToken(MAPBOX_ACCESS_TOKEN)
-    .origin(origin, bearing, tolerance)
-    .destination(destination)
-    .voiceUnits(DirectionsCriteria.IMPERIAL)
-    .build()
-`}
-
-/>
-}}
-
-The upcoming road or ramp destination is named according to the local or national language. In some regions, the name may be given in multiple languages.
-
-### Supported languages
-
-The table below lists the languages that are supported for user interface elements and for spoken instructions.
-
-| Language   | User interface | [Spoken instructions][apidoc] | Remarks
-|------------|:--------------:|:-----------------------------:|--------
-| Bengali    | ✅             | —
-| Burmese    | ✅             | ✅ | Depends on the device; may require third-party text-to-speech
-| Chinese    | -              | ✅ Mandarin | Depends on the device; may require third-party text-to-speech
-| Czech      | ✅             | -
-| Danish     | ✅             | ✅
-| English    | ✅             | ✅
-| Esperanto  | —              | ✅
-| Finnish    | —              | ✅ | Depends on the device; may require third-party text-to-speech
-| French     | ✅             | ✅
-| German     | ✅             | ✅
-| Hebrew     | ✅             | ✅ | Depends on the device; may require third-party text-to-speech
-| Indonesian | —              | ✅ | Depends on the device; may require third-party text-to-speech
-| Italian    | ✅             | ✅
-| Korean     | ✅             | ✅
-| Norwegian  | —              | ✅
-| Polish     | —              | ✅
-| Portuguese | ✅             | ✅
-| Romanian   | —              | ✅
-| Russian    | ✅             | ✅
-| Spanish    | ✅             | ✅
-| Swedish    | ✅             | ✅
-| Turkish    | —              | ✅
-| Ukrainian  | ✅              | ✅ | Depends on the device; may require third-party text-to-speech
-| Vietnamese | ✅              | ✅ | Depends on the device; may require third-party text-to-speech
-
-**Please note:** For languages marked with `Depends on the device; may require third-party text-to-speech`, instructions are provided by the SDK, but we cannot guarantee the given device will have the appropriate `TextToSpeech` speech engine installed to pronounce these instructions correctly.
-
-### Contributing to localization
-
-See the [contributing guide](https://github.com/mapbox/mapbox-navigation-ios/blob/master/CONTRIBUTING.md#adding-or-updating-a-localization) for instructions on adding a new localization or improving an existing localization.
-
-[apidoc]: https://www.mapbox.com/api-documentation/navigation/#instructions-languages
-
-## Customize route requests
-
-### Request routes in a specific direction
-
-Consider the direction a user’s device is facing, and request a route starting in a specific direction. To receive a route that starts off in the same direction the user is already traveling, pass in the user’s location bearing value (between 0 and 355 degrees).
-
-If you need to request a route that's continuing along the path that the user is traveling, specify a bearing and a tolerance that determines how far you are willing to deviate from the provided bearing. This is useful for off-route scenarios.
-
-This can be applied to the origin, waypoints, and the destination using `NavigationRoute`:
-
-{{
-<CodeLanguageToggle id="location-object" />
-<ToggleableCodeBlock
-
-java={`
-// An Android Location object
-double bearing = Float.valueOf(location.getBearing()).doubleValue();
-double tolerance = 90d;
-NavigationRoute.builder(context)
-    .accessToken(MAPBOX_ACCESS_TOKEN)
-    .origin(origin, bearing, tolerance)
-    .destination(destination)
-    .build();
-`}
-
-kotlin={`
-// An Android Location object
-val bearing = location.bearing.toDouble()
-val tolerance = 90.0
-NavigationRoute.builder(context)
-    .accessToken(MAPBOX_ACCESS_TOKEN)
-    .origin(origin, bearing, tolerance)
-    .destination(destination)
-    .build()
-`}
-
-/>
-}}
-
-### Specify which side of the road to approach
-
-You can indicate from which side of the road to approach a waypoint by adding `approaches` to the `NavigationRoute` builder. There are three options found in `DirectionsCriteria.ApproachesCriteria`:
-
-- `"unrestricted"` (default): the route can approach waypoints from either side of the road.
-- `"curb"`: the route will be returned so that on arrival, the waypoint will be found on the side that corresponds with the `driving_side` of the region in which the returned route is located.
-- `null`: if no option is specified, it is translated internally to `""`, which has the same result as setting an approach to `"unrestricted"`.
-
-If provided, the list of approaches must be the same length as the list of waypoints (including the `origin` and the `destination`) and in that particular order i.e. `origin`, waypoints, `destination`.
-
-If a re-route occurs and `approaches` were used to fetch the `DirectionsRoute` that was originally provided to the `NavigationView`, the new route fetched will take the same `approaches` criteria into account.
-
-{{
-<CodeLanguageToggle id="nav-approaches" />
-<ToggleableCodeBlock
-
-java={`
-NavigationRoute.Builder builder = NavigationRoute.builder(context)
-    .accessToken(MAPBOX_ACCESS_TOKEN)
-    .origin(origin)
-    .addWaypoint(pickup)
-    .destination(destination);
-
-builder.addApproaches("unrestricted", "curb", "curb");
-builder.build();
-`}
-
-kotlin={`
-val builder = NavigationRoute.builder(context)
-  .accessToken(MAPBOX_ACCESS_TOKEN)
-  .origin(origin)
-  .addWaypoint(pickup)
-  .destination(destination!!)
-
-builder.addApproaches("unrestricted", "curb", "curb")
-builder.build()
-`}
-
-/>
-}}
-
-### Include multiple stops
-
-If your navigation involves a bunch of pick-up and drop-off points, you can add up to 25 coordinates to the `NavigationRoute` builder; these are considered stops in between the origin and destination `Points` (in the order that you add them - first waypoint is the first stop):
-
-{{
-<CodeLanguageToggle id="route-builder" />
-<ToggleableCodeBlock
-
-java={`
-NavigationRoute.Builder builder = NavigationRoute.builder(context)
-	.accessToken(MAPBOX_ACCESS_TOKEN)
-	.origin(origin)
-	.destination(destination);
-
-for (Point waypoint : waypoints) {
-  builder.addWaypoint(waypoint);
-}
-
-builder.build();
-`}
-
-kotlin={`
-val builder = NavigationRoute.builder(context)
-	.accessToken(MAPBOX_ACCESS_TOKEN)
-	.origin(origin)
-	.destination(destination)
-
-for (waypoint in waypoints) {
-	builder.addWaypoint(waypoint)
-}
-
-builder.build()
-`}
-
-/>
-}}
-
-## Customize the navigation experience
-
-### Change default behaviors
-
-You will find most of the navigation APIs inside the `MapboxNavigation` class such as starting and ending the navigation session or attaching listeners. Assign and initialize a new instance of `MapboxNavigation` inside your navigation activity. When initializing, you'll need to pass in a `Context` and your Mapbox access token. Read the access token section in this getting started document to learn how to get a free access token.
-
-{{
-<CodeLanguageToggle id="nav-object" />
-<ToggleableCodeBlock
-
-java={`
-MapboxNavigation navigation = new MapboxNavigation(context, MAPBOX_ACCESS_TOKEN);
-`}
-
-kotlin={`
-val navigation = MapboxNavigation(context, MAPBOX_ACCESS_TOKEN)
-`}
-
-/>
-}}
-
-You can also optionally pass in a `MapboxNavigationOptions` object if you’d like to change the default behavior of the navigation SDK. Note that many of the options offered must be set before the `MapboxNavigation` object is initialized.
-
-### Control notifications and location updates
-
-The `onRunning` callback's helpful for being notified when the navigation session has started, the user has canceled the session, or the user has arrived at their final destination. From this information, you can decide when to show navigation notifications, know when it's safe to stop requesting user location updates, and much more.
-
-{{
-<CodeLanguageToggle id="nav-navigation-running" />
-<ToggleableCodeBlock
-
-java={`
-navigation.addNavigationEventListener(new NavigationEventListener() {
-  @Override
-  public void onRunning(boolean running) {
-
-  }
-});
-`}
-
-kotlin={`
-navigation?.addNavigationEventListener { running ->
-
-}
-`}
-
-/>
-}}
 
 ## Prevent memory leaks
 
@@ -497,9 +274,9 @@ java={`
 protected void onDestroy() {
   super.onDestroy();
 
-	// End the navigation session
-	navigation.stopNavigation();
-	navigation.onDestroy();
+    // End the navigation session
+    navigation.stopNavigation();
+    navigation.onDestroy();
 }
 `}
 
@@ -507,11 +284,12 @@ kotlin={`
 override fun onDestroy() {
   super.onDestroy()
 
-	// End the navigation session
-	navigation.stopNavigation()
-	navigation.onDestroy()
+    // End the navigation session
+    navigation.stopNavigation()
+    navigation.onDestroy()
 }
 `}
 
 />
 }}
+

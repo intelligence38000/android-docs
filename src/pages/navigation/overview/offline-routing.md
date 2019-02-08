@@ -1,6 +1,8 @@
 ---
 title: "Offline Routing"
 description: "Mapbox offline navigation provides routing functionality from the Navigation SDK for Android in non-connected environments."
+products:
+  - Navigation core
 prependJs:
   - "import { NAVIGATION_VERSION } from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
@@ -14,6 +16,7 @@ prependJs:
 <p>Offline routing pack downloads are restricted to Mapbox Enterprise customers. If you're interested in moving to an Enterprise plan, <a href="https://www.mapbox.com/contact/sales/">contact us!</a></p>
 </Note>
 }}
+
 Mapbox offline navigation provides routing functionality from the Navigation SDK in non-connected environments. In areas of no cellular connectivity, or on a device with no SIM card, end users can use turn-by-turn navigation and request new routes. If they go off-route, the system can reroute and keep them headed to their destination without requiring network connectivity. Offline routing moves the routing engine and the routing data from the server onto the end user’s device, so there’s no need to make HTTP API calls for routing information.
 
 In order to implement offline routing in your own app, you will need to:
@@ -25,6 +28,7 @@ In order to implement offline routing in your own app, you will need to:
 These steps, along with example code, are described in this guide. For detailed information about the methods discussed in this guide, see the [`MapboxOfflineRouter` documentation](https://docs.mapbox.com/android/api/navigation-sdk/navigation/{{NAVIGATION_VERSION}}/com/mapbox/services/android/navigation/v5/navigation/MapboxOfflineRouter.html).
 
 ## Download the routing data
+
 Before you download data, first you will need to determine which tile version to download using `MapboxOfflineRouter.fetchAvailableTileVersions`:
 
 #### Example use

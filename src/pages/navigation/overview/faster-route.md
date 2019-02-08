@@ -1,12 +1,19 @@
 ---
 title: "Faster-Route Detection"
 description: "Faster-route detection in the Mapbox Navigation SDK for Android. Read all about it in this official Mapbox documentation."
+products:
+  - Navigation UI
+  - Navigation core
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
-Similar to off-route detection, a default faster-route detection class is included inside the Navigation SDK. This class checks each location update as well as the progress along the current route to determine if a new route should be retrieved.  
+## Navigation UI
+
+## Navigation core
+
+<!-- Similar to off-route detection, a default faster-route detection class is included inside the Navigation SDK. This class checks each location update as well as the progress along the current route to determine if a new route should be retrieved.  
 
 The default logic in `FasterRouteDetector` checks for a faster `DirectionsRoute` every two minutes, only if:
 - The current route duration remaining is more than 600 seconds
@@ -58,3 +65,4 @@ navigation.startNavigation(directionsRoute)
 
 />
 }}
+ -->

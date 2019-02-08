@@ -1,6 +1,9 @@
 ---
-title: "Route Progress Object"
+title: "Route progress"
 description: "Read these docs and learn how to use a user's progress information along a route with the Mapbox Navigation SDK for Android."
+products:
+  - Navigation UI
+  - Navigation core
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
@@ -8,7 +11,76 @@ prependJs:
 
 The `RouteProgress` class contains all the user's progress information along the route, including leg and steps. This object's provided inside `ProgressChangeListener`, allowing you to get distance measurements, the percentage of route complete, current step index, and much more.
 
-## On progress change
+## Navigation UI
+
+### Listening to the NavigationView
+
+Using `NavigationView` in your XML also gives you the ability to listen to different updates or events that may occur during navigation. Both the `ProgressChangeListener` and `MilestoneEventListener` from our
+core SDK are able to be added, as well as three others: `NavigationListener`, `RouteListener`, and `FeedbackListener`.
+
+#### `NavigationListener`
+
+- `onCancelNavigation()`: Will be triggered when the user clicks on the cancel "X" icon while navigating.
+- `onNavigationFinished()`: Will be triggered when `MapboxNavigation` has finished and the service is completely shutdown.
+- `onNavigationRunning()`: Will be triggered when `MapboxNavigation` has been initialized and the user is navigating the given route.
+
+#### `RouteListener`
+
+- `allowRerouteFrom(Point offRoutePoint)`: Will trigger in an off-route scenario.
+   - Given the `Point` the user has gone off-route, this listener can return true or false.
+   - Returning true will allow the SDK to proceed with the re-route process and fetch a new route with this given off-route `Point`.
+   - Returning false will stop the re-route process and the user will continue without a new route in the direction they are traveling.
+- `onOffRoute(Point offRoutePoint)`: Will trigger only if `RouteListener#allowRerouteFrom(Point)` returns true.
+   - This serves as the official off-route event and will continue the process to fetch a new route with the given off-route `Point`.
+- `onRerouteAlong(DirectionsRoute directionsRoute)`: Will trigger when a new `DirectionsRoute` has been retrieved post off-route.
+   - This is the new route the user will be following until another off route event is triggered.
+- `onFailedReroute(String errorMessage)`: Will trigger if the request for a new `DirectionsRoute` fails.
+   - Provides the error message from the directions API used to retrieve the `DirectionsRoute`.
+
+#### `FeedbackListener`
+
+- `onFeedbackOpened()`: Will be triggered when the feedback bottomsheet is opened by a user while navigating.
+- `onFeedbackCancelled()`: Will be triggered when the feedback bottomsheet is opened by a user while navigating but then dismissed without clicking on a specific `FeedbackItem` in the list.
+- `onFeedbackSent(FeedbackItem feedbackItem)`: Will be triggered when the feedback bottomsheet is opened by a user while navigating and then the user clicks on a specific `FeedbackItem` in the list.
+
+#### `BannerInstructionsListener`
+
+- `willDisplay(BannerInstructions instructions)`: Will be triggered when a `BannerInstructions` is about to be displayed. The listener gives you the option to override any values and pass as the return value, which will be the value used for the banner instructions. You can return `null` and the instructions will be ignored.
+
+#### `SpeechAnnouncementListener`
+
+- `willVoice(SpeechAnnouncement announcement)`: Will be triggered when a voice announcement is about to be voiced. The listener gives you the option to override any values and pass as the return value, which will be the value used for the voice announcement. You can return `null` and the announcement will be ignored.
+
+To add these listeners, you can add them to your `NavigationViewOptions` before
+you call `navigationView.startNavigation(NavigationViewOptions options)`:
+
+{{
+<CodeLanguageToggle id="nav-view-options-listeners" />
+<ToggleableCodeBlock
+
+java={`
+NavigationViewOptions options = NavigationViewOptions.builder()
+  .navigationListener(this)
+  .routeListener(this)
+  .feedbackListener(this)
+  .build();
+`}
+
+kotlin={`
+val options = NavigationViewOptions.builder()
+  .navigationListener(this)
+  .routeListener(this)
+  .feedbackListener(this)
+  .build()
+`}
+/>
+}}
+
+**Please note** these listeners are only available if you are adding `NavigationView`
+to your `Activity` or `Fragment` layout XML via `NavigationViewOptions`. You are not able
+to add them to `NavigationLauncherOptions`.
+
+## Navigation core
 
 Like tracking user location changes, this listener's invoked every time the user's location changes but provides an updated RouteProgress object. It is strongly encouraged to use this listener since you can typically refresh most of your application's user interface. An example of this will be if you are displaying the user's current progress until the user needs to do the next maneuver. Every time this listener's invoked, you can update your view with the new information from `RouteProgress`.
 
