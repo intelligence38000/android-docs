@@ -608,6 +608,50 @@ mapboxMap.style?.addLayer(circleLayer.setProperties)
 />
 }}
 
+## Removing sources and layers
+
+A source cannot be removed if it's still used by any layer. The removal will fail and log a console warning. Starting in the `7.0.0` release of the Maps SDK, we changed `remove` methods to return a `boolean` which states whether the removal was successful.
+
+All layers using a particular source must be removed before that source can be removed.
+
+Removing a source:
+
+{{
+<CodeLanguageToggle id="removing-a-source" />
+<ToggleableCodeBlock
+
+java={`
+if (mapboxMap!= null && mapboxMap.getStyle() != null) {
+	mapboxMap.getStyle().removeSource("source-id");
+}
+`}
+
+kotlin={`
+mapboxMap?.style?.removeSource("source-id")
+`}
+/>
+}}
+
+
+Removing a layer:
+
+{{
+<CodeLanguageToggle id="removing-a-layer" />
+<ToggleableCodeBlock
+
+java={`
+if (mapboxMap!= null && mapboxMap.getStyle() != null) {
+	mapboxMap.getStyle().removeLayer("layer-id");
+}
+`}
+
+kotlin={`
+mapboxMap?.style?.removeLayer("layer-id")
+`}
+/>
+}}
+
+
 ## Modify properties
 
 Sources and layers aren't immutable and therefore, can be modified anytime during the map render. For example, to alter the fill color of a layer after it's been added to the map, you use the map's `Style` object to get the layer and set the property.
