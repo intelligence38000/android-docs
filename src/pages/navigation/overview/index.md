@@ -7,17 +7,19 @@ prependJs:
   - "import { NAVIGATION_VERSION } from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+  - "import Note from '@mapbox/dr-ui/note';"
+  - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
 {{
   <div className="mb24">
     <OverviewHeader
       features={[
-        "Off-route Detection",
-        "Timed Instructions",
-        "Snap-to-Route",
-        "Route Progress Information",
-        "Traffic Routing"
+        "Off-route detection",
+        "Timed instructions",
+        "Snap-to-route",
+        "Route progress information",
+        "Traffic routing"
       ]}
       title="Navigation SDK for Android"
       version={NAVIGATION_VERSION}
@@ -28,7 +30,7 @@ prependJs:
   </div>
 }}
 
-The Navigation SDK for Android allows you to build a complete in-app navigation experience. With the Navigation SDK you get the power of the [Mapbox Directions API](https://www.mapbox.com/api-documentation/navigation/#directions) along with a collection of features that are critical when building navigation applications for Android, including:
+The Navigation SDK for Android allows you to build a complete in-app navigation experience. With the Navigation SDK you get the power of the [Mapbox Directions API](https://docs.mapbox.com/api/navigation/#directions) along with a collection of features that are critical when building navigation applications for Android, including:
 
 - Detecting the direction a device is facing and start the route accordingly
 - Providing voice instruction announcements
@@ -36,79 +38,33 @@ The Navigation SDK for Android allows you to build a complete in-app navigation 
 - Detecting when a user goes off-route
 - Specifying which side of the road to approach a waypoint
 
-## Product options
+## Products
 
-Mapbox offers two products for integrating navigation into your Android application: 
+There are two products for integrating navigation into your Android application, Navigation Core and Navigation UI:
 
-1. **Navigation UI**: This provides a quick way to get started, but has limited options for customization.
-2. **Navigation core**: Requires more complex implementation, but offers many more options for customization.
+- **Navigation Core** is where the logic lives for generating routes, tracking progress, displaying instructions, and more. You can use this directly via the `MapboxNavigation` class or through the Navigation UI. 
+- **Navigation UI** is built on top of Navigation Core (meaning Navigation Core is included when you add the Navigation UI as a dependency). It consumes data from Navigation Core and arranges it in default UI components that have various customization options. You can use this directly via the `NavigationView` and `NavigationLauncher` classes without touching the core `MapboxNavigation` class directly in your application's code. 
+- **Navigation Core and Navigation UI** can be used together if you want to use a mixture of the Mapbox-provided UI components and your own custom UI fed data from Navigation Core.
 
 
 ## Installation
 
-You'll need to add the Navigation UI SDK or Navigation SDK as a dependency before developing your app. Note that while we show how to insert the stable version of the SDK inside your project, you can also use the nightly build/SNAPSHOT or the beta version if one is available. Find more information about how to do this inside [the Navigation SDK's GitHub repository](https://github.com/mapbox/mapbox-navigation-android/#using-snapshots).
+You'll need to add the Navigation SDK or Navigation UI SDK as a dependency before developing your app. Note that while we show how to insert the stable version of the SDK inside your project, you can also use the nightly build/SNAPSHOT or the beta version if one is available. Find more information about how to do this inside [the Navigation SDK's GitHub repository](https://github.com/mapbox/mapbox-navigation-android/#using-snapshots).
 
-### Navigation UI
+### Navigation Core
+
+Learn how to install the core Navigation SDK and request your first route using `NavigationRoute`.
 
 #### Add the dependency
-
-This dependency is different from the one used to compile the core Mapbox Navigation SDK, but it will still include everything from the core Mapbox Navigation SDK. _If you're using the Navigation UI SDK, you **don't** have to declare the Mapbox Navigation SDK as well. If you only declare the Navigation UI SDK in your project's Gradle file, the Mapbox Navigation SDK will automatically be included._
-
-```groovy
-repositories {
-  mavenCentral()
-  maven { url 'https://mapbox.bintray.com/mapbox' }
-}
-
-dependencies {
-  implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:{{ NAVIGATION_VERSION }}'
-}
-```
-
-#### Launch the Navigation UI
-
-With either a `DirectionsRoute` from `NavigationRoute` or two `Point` objects (origin and destination), you can launch the UI with `NavigationLauncher` from within your `Activity`:
 
 {{
-<CodeLanguageToggle id="launch-nav-ui" />
-<ToggleableCodeBlock
-
-java={`
-// Route fetched from NavigationRoute
-DirectionsRoute route = ...
-
-boolean simulateRoute = true;
-
-// Create a NavigationLauncherOptions object to package everything together
-NavigationLauncherOptions options = NavigationLauncherOptions.builder()
-  .directionsRoute(route)
-  .shouldSimulateRoute(simulateRoute)
-  .build();
-
-// Call this method with Context from within an Activity
-NavigationLauncher.startNavigation(this, options);
-`}
-
-kotlin={`
-// Route fetched from NavigationRoute
-val route: DirectionsRoute
-
-val simulateRoute = true
-
-// Create a NavigationLauncherOptions object to package everything together
-val options = NavigationLauncherOptions.builder()
-  .directionsRoute(route)
-  .shouldSimulateRoute(simulateRoute)
-  .build()
-
-// Call this method with Context from within an Activity
-NavigationLauncher.startNavigation(this, options)`}
-/>
+  <div className="mt18 mb24">
+    <Note 
+    title="Add Navigation Core only when not using Navigation UI"
+    imageComponent={<BookImage width="60" height="60" />}>
 }}
-
-### Navigation core
-
-#### Add the dependency
+If you're using the Navigation UI SDK, you **don't** have to declare the Mapbox Navigation SDK as well. If you only declare the Navigation UI SDK in your project's Gradle file, the Mapbox Navigation SDK will automatically be included.
+{{</Note></div>}}
 
 1. Start Android Studio
 2. Open up your app's `build.gradle` file
@@ -159,7 +115,6 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 />
 }}
-
 
 #### Set up permissions
 
@@ -227,38 +182,65 @@ NavigationRoute.builder(context)
 }}
 
 
-<!-- ## Replaying a DirectionsRoute
+### Navigation UI
 
-The SDK includes a `ReplayRouteLocationEngine`, which allows you to replay a given `DirectionsRoute` (mainly for testing, so you don't always have to code in a car). After retrieving a `DirectionsRoute`, you can create a replay engine and pass it to `MapboxNavigation`:
+The Navigation UI SDK is the fastest way to get a navigation UI in your application. 
+
+#### Add the dependency
+
+This dependency is different from the one used to compile the core Mapbox Navigation SDK, but it will still include everything from the core Mapbox Navigation SDK. _If you're using the Navigation UI SDK, you **don't** have to declare the Mapbox Navigation SDK as well. If you only declare the Navigation UI SDK in your project's Gradle file, the Mapbox Navigation SDK will automatically be included._
+
+```groovy
+repositories {
+  mavenCentral()
+  maven { url 'https://mapbox.bintray.com/mapbox' }
+}
+
+dependencies {
+  implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:{{ NAVIGATION_VERSION }}'
+}
+```
+
+#### Launch the Navigation UI
+
+With either a `DirectionsRoute` from `NavigationRoute` (see [Request a route](#request-a-route) above) or two `Point` objects (origin and destination), you can launch the UI with `NavigationLauncher` from within your `Activity`:
 
 {{
-<CodeLanguageToggle id="nav-replay-engine" />
+<CodeLanguageToggle id="launch-nav-ui" />
 <ToggleableCodeBlock
 
 java={`
-MapboxNavigation navigation = ...
-DirectionsRoute routeToReplay = ...
+// Route fetched from NavigationRoute
+DirectionsRoute route = ...
 
-ReplayRouteLocationEngine replayEngine = new ReplayRouteLocationEngine();
-replayEngine.assign(routeToReplay);
+boolean simulateRoute = true;
 
-navigation.setLocationEngine(replayEngine);
-navigation.startNavigation(routeToReplay);
+// Create a NavigationLauncherOptions object to package everything together
+NavigationLauncherOptions options = NavigationLauncherOptions.builder()
+  .directionsRoute(route)
+  .shouldSimulateRoute(simulateRoute)
+  .build();
+
+// Call this method with Context from within an Activity
+NavigationLauncher.startNavigation(this, options);
 `}
 
 kotlin={`
-val navigation = ...
-val routeToReplay = ...
+// Route fetched from NavigationRoute
+val route: DirectionsRoute
 
-ReplayRouteLocationEngine replayEngine = ReplayRouteLocationEngine()
-replayEngine.assign(routeToReplay)
+val simulateRoute = true
 
-navigation.locationEngine = replayEngine
-navigation.startNavigation(routeToReplay)
-`}
+// Create a NavigationLauncherOptions object to package everything together
+val options = NavigationLauncherOptions.builder()
+  .directionsRoute(route)
+  .shouldSimulateRoute(simulateRoute)
+  .build()
 
+// Call this method with Context from within an Activity
+NavigationLauncher.startNavigation(this, options)`}
 />
-}} -->
+}}
 
 
 ## Prevent memory leaks
@@ -292,4 +274,37 @@ override fun onDestroy() {
 
 />
 }}
+
+<!-- ## Replaying a DirectionsRoute
+
+The SDK includes a `ReplayRouteLocationEngine`, which allows you to replay a given `DirectionsRoute` (mainly for testing, so you don't always have to code in a car). After retrieving a `DirectionsRoute`, you can create a replay engine and pass it to `MapboxNavigation`:
+
+{{
+<CodeLanguageToggle id="nav-replay-engine" />
+<ToggleableCodeBlock
+
+java={`
+MapboxNavigation navigation = ...
+DirectionsRoute routeToReplay = ...
+
+ReplayRouteLocationEngine replayEngine = new ReplayRouteLocationEngine();
+replayEngine.assign(routeToReplay);
+
+navigation.setLocationEngine(replayEngine);
+navigation.startNavigation(routeToReplay);
+`}
+
+kotlin={`
+val navigation = ...
+val routeToReplay = ...
+
+ReplayRouteLocationEngine replayEngine = ReplayRouteLocationEngine()
+replayEngine.assign(routeToReplay)
+
+navigation.locationEngine = replayEngine
+navigation.startNavigation(routeToReplay)
+`}
+
+/>
+}} -->
 
