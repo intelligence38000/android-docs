@@ -26,7 +26,7 @@ Using [data sources](/android/maps/overview/data-driven-styling/#sources) and [m
 - Lines
 - Polygons
 
-See [the data-driven styling page](https://docs.mapbox.com/android/maps/overview/data-driven-styling/) for more information. We recommend you explore the source and layer combination for creating annotations. Below, you'll find information about less complex (and less performant) ways to show annotations.
+See [the data-driven styling page](/android/maps/overview/data-driven-styling/) for more information. We recommend you explore the source and layer combination for creating annotations. Below, you'll find information about less complex (and less performant) ways to show annotations.
 
 ## Markers
 
