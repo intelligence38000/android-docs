@@ -614,24 +614,6 @@ A source cannot be removed if it's still used by any layer. The removal will fai
 
 All layers using a particular source must be removed before that source can be removed.
 
-Removing a source:
-
-{{
-<CodeLanguageToggle id="removing-a-source" />
-<ToggleableCodeBlock
-
-java={`
-if (mapboxMap!= null && mapboxMap.getStyle() != null) {
-	mapboxMap.getStyle().removeSource("source-id");
-}
-`}
-
-kotlin={`
-mapboxMap?.style?.removeSource("source-id")
-`}
-/>
-}}
-
 
 Removing a layer:
 
@@ -651,6 +633,24 @@ mapboxMap?.style?.removeLayer("layer-id")
 />
 }}
 
+
+Removing a source:
+
+{{
+<CodeLanguageToggle id="removing-a-source" />
+<ToggleableCodeBlock
+
+java={`
+if (mapboxMap!= null && mapboxMap.getStyle() != null) {
+	mapboxMap.getStyle().removeSource("source-id");
+}
+`}
+
+kotlin={`
+mapboxMap?.style?.removeSource("source-id")
+`}
+/>
+}}
 
 ## Modify properties
 
