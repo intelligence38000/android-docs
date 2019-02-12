@@ -43,13 +43,14 @@ const productPageOrder = {
     'user-location',
     'route-generation',
     'route-progress',
+    'instructions',
     'milestones',
-    'off-route',
     'localization',
-    'camera',
-    'map-styling',
-    'offline-routing',
+    'off-route',
     'faster-route',
+    'camera',
+    'offline-routing',
+    'map-styling',
     'map-matching'
   ],
   'java/overview/': [
