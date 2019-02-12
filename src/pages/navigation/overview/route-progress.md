@@ -7,84 +7,17 @@ products:
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+  - "import Note from '@mapbox/dr-ui/note';"
+  - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
-The `RouteProgress` class contains all the user's progress information along the route, including leg and steps. This object's provided inside `ProgressChangeListener`, allowing you to get distance measurements, the percentage of route complete, current step index, and much more.
+Tracking a user's progress along a route is key to providing helpful and timely navigation instructions. The `RouteProgress` class contains all the user's progress information along the route, including leg and steps. This object is provided inside `ProgressChangeListener`, allowing you to get distance measurements, the percentage of route complete, current step index, and much more.
 
-## Navigation UI
+## Listening to progress change
 
-### Listening to the NavigationView
+Like tracking user location changes, the `ProgressChangeListener` is invoked every time the user's location changes and provides an updated `RouteProgress` object. The Navigation UI SDK uses this listener by default, but if you are not using the Navigation UI SDK, it is strongly encouraged that you also use this listener. The `ProgressChangeListener` can typically be used to refresh most of your application's user interface when a change occurs. For example, if you are displaying the user's current progress until the user needs to do the next maneuver. Every time this listener's invoked, you can update your view with the new information from `RouteProgress`.
 
-Using `NavigationView` in your XML also gives you the ability to listen to different updates or events that may occur during navigation. Both the `ProgressChangeListener` and `MilestoneEventListener` from our
-core SDK are able to be added, as well as three others: `NavigationListener`, `RouteListener`, and `FeedbackListener`.
-
-#### `NavigationListener`
-
-- `onCancelNavigation()`: Will be triggered when the user clicks on the cancel "X" icon while navigating.
-- `onNavigationFinished()`: Will be triggered when `MapboxNavigation` has finished and the service is completely shutdown.
-- `onNavigationRunning()`: Will be triggered when `MapboxNavigation` has been initialized and the user is navigating the given route.
-
-#### `RouteListener`
-
-- `allowRerouteFrom(Point offRoutePoint)`: Will trigger in an off-route scenario.
-   - Given the `Point` the user has gone off-route, this listener can return true or false.
-   - Returning true will allow the SDK to proceed with the re-route process and fetch a new route with this given off-route `Point`.
-   - Returning false will stop the re-route process and the user will continue without a new route in the direction they are traveling.
-- `onOffRoute(Point offRoutePoint)`: Will trigger only if `RouteListener#allowRerouteFrom(Point)` returns true.
-   - This serves as the official off-route event and will continue the process to fetch a new route with the given off-route `Point`.
-- `onRerouteAlong(DirectionsRoute directionsRoute)`: Will trigger when a new `DirectionsRoute` has been retrieved post off-route.
-   - This is the new route the user will be following until another off route event is triggered.
-- `onFailedReroute(String errorMessage)`: Will trigger if the request for a new `DirectionsRoute` fails.
-   - Provides the error message from the directions API used to retrieve the `DirectionsRoute`.
-
-#### `FeedbackListener`
-
-- `onFeedbackOpened()`: Will be triggered when the feedback bottomsheet is opened by a user while navigating.
-- `onFeedbackCancelled()`: Will be triggered when the feedback bottomsheet is opened by a user while navigating but then dismissed without clicking on a specific `FeedbackItem` in the list.
-- `onFeedbackSent(FeedbackItem feedbackItem)`: Will be triggered when the feedback bottomsheet is opened by a user while navigating and then the user clicks on a specific `FeedbackItem` in the list.
-
-#### `BannerInstructionsListener`
-
-- `willDisplay(BannerInstructions instructions)`: Will be triggered when a `BannerInstructions` is about to be displayed. The listener gives you the option to override any values and pass as the return value, which will be the value used for the banner instructions. You can return `null` and the instructions will be ignored.
-
-#### `SpeechAnnouncementListener`
-
-- `willVoice(SpeechAnnouncement announcement)`: Will be triggered when a voice announcement is about to be voiced. The listener gives you the option to override any values and pass as the return value, which will be the value used for the voice announcement. You can return `null` and the announcement will be ignored.
-
-To add these listeners, you can add them to your `NavigationViewOptions` before
-you call `navigationView.startNavigation(NavigationViewOptions options)`:
-
-{{
-<CodeLanguageToggle id="nav-view-options-listeners" />
-<ToggleableCodeBlock
-
-java={`
-NavigationViewOptions options = NavigationViewOptions.builder()
-  .navigationListener(this)
-  .routeListener(this)
-  .feedbackListener(this)
-  .build();
-`}
-
-kotlin={`
-val options = NavigationViewOptions.builder()
-  .navigationListener(this)
-  .routeListener(this)
-  .feedbackListener(this)
-  .build()
-`}
-/>
-}}
-
-**Please note** these listeners are only available if you are adding `NavigationView`
-to your `Activity` or `Fragment` layout XML via `NavigationViewOptions`. You are not able
-to add them to `NavigationLauncherOptions`.
-
-## Navigation core
-
-Like tracking user location changes, this listener's invoked every time the user's location changes but provides an updated RouteProgress object. It is strongly encouraged to use this listener since you can typically refresh most of your application's user interface. An example of this will be if you are displaying the user's current progress until the user needs to do the next maneuver. Every time this listener's invoked, you can update your view with the new information from `RouteProgress`.
-
-Besides receiving information about the route progress, the callback also provides you with the user's current location which can provide their current speed, bearing, etc. If you have the snap to route enabled, the location object will be updated to give the snapped coordinates.
+In addition to receiving information about the route progress, the callback also provides you with the user's current location, which can provide their current speed, bearing, etc. If you have the snap to route enabled, the location object will be updated to give the snapped coordinates.
 
 {{
 <CodeLanguageToggle id="on-progress-changed" />
@@ -109,8 +42,16 @@ override fun onProgressChange(location: Location, routeProgress: RouteProgress) 
 />
 }}
 
+## Information about progress
+
+There are three classes that contain information on route progress at different levels of granularity. ❓ Is that last statement true? Can we clarify the differences / relationships between routes, legs, and steps here? I could use some help getting started with that language.❓
+
+### RouteProgress
+
+This class contains all progress information at any given time during a navigation session. This progress includes information for the current route, leg and step the user is traversing along. With every new valid location update, a new route progress will be generated using the latest information.
+
 | RouteProgress APIs          | Description           |
-| --------------------------- |:---------------------:|
+|-----------------------------|-----------------------|
 | directionsRoute             | The route acquired from the directions API and being used for navigation. |
 | distanceTraveled            | The total distance the user has traveled along the route.   |
 | legIndex                    | The route's current leg index that the user's on.      |
@@ -125,8 +66,13 @@ override fun onProgressChange(location: Location, routeProgress: RouteProgress) 
 | voiceInstruction            | The current `VoiceInstruction` for the given segment along the route.    |
 | currentState                | `RouteStateProgress` represents the current state of route initialization and location tracking along the route.    |
 
+### RouteLegProgress
+
+This is a progress object specific to the current leg the user is on. If there is only one leg in the directions route, much of this information will be identical to the parent RouteProgress.
+
+
 | RouteLegProgress APIs       | Description           |
-| --------------------------- |:---------------------:|
+|-----------------------------|-----------------------|
 | currentStepProgress         | returns the `stepProgress` object with information specific to the current route step. |
 | stepIndex                   | The route's current step index the user's on.      |
 | distanceTraveled            | Total distance the user has traveled along the current leg. |
@@ -138,11 +84,51 @@ override fun onProgressChange(location: Location, routeProgress: RouteProgress) 
 | upComingStep                | Get the next/upcoming step immediately after the current step. If the user is on the last step on the last leg, this will return null since a next step doesn't exist. |
 | currentLegAnnotation        | Provides the current annotation data that the `Location` updates are traveling along.  Note: the `DirectionsRoute` must be requested with `ANNOTATION_DISTANCE` to enable this within the RouteProgress - we now do this by default in `NavigationRoute`. |
 
-| StepProgress APIs           | Description           |
-| --------------------------- |:---------------------:|
+### RouteStepProgress
+
+This is a progress object specific to the current step the user is on.
+
+| RouteStepProgress APIs           | Description           |
+| --------------------------- |---------------------|
 | distanceTraveled            | Total distance the user has traveled along the current step. |
 | durationRemaining           | The estimated duration remaining till the user reaches the next step maneuver. |
 | fractionTraveled            | A `float` value between 0 and 1 giving the total percentage the user has traveled along the current step. |
 | distanceRemaining           | The total distance the user has traveled along the current step.   |
 | currentIntersection         | An intersection is considered a current intersection once passed through and will remain so until a different intersection is passed through.   |
 | upcomingIntersection        | The intersection being traveled towards on the route. Will be null if the upcoming step is null (last step of the leg). |
+
+
+## Navigation UI
+
+Using `NavigationView` in your XML gives you the ability to listen to different updates or events that may occur during navigation. Both the `ProgressChangeListener` ([see above](#listening-to-progress-change)) and `MilestoneEventListener` (see the [`Instructions`](/android/navigation/overview/instructions/) and [`Custom events`](/android/navigation/overview/milestones/) guides) from our core SDK are able to be added, as well as three others: `NavigationListener`, `RouteListener`, and `FeedbackListener`.
+
+{{<Note title="Route generation and the Navigation UI SDK" imageComponent={<BookImage width="60" height="60" />}>}}
+These listeners are only available if you are adding `NavigationView` to your `Activity` or `Fragment` layout XML via `NavigationViewOptions`. You are not able to add them to `NavigationLauncherOptions`.
+{{</Note>}}
+
+### NavigationListener
+
+| ❓ | Description |
+|---|---|
+| `onCancelNavigation()` | Will be triggered when the user clicks on the cancel "X" icon while navigating. |
+| `onNavigationFinished()` | Will be triggered when `MapboxNavigation` has finished and the service is completely shutdown. |
+| `onNavigationRunning()` | Will be triggered when `MapboxNavigation` has been initialized and the user is navigating the given route. |
+
+### RouteListener
+
+| ❓ | Description |
+|---|---|
+| `allowRerouteFrom(Point offRoutePoint)` | Will trigger in an off-route scenario. <ul><li>Given the `Point` the user has gone off-route, this listener can return true or false.</li><li>Returning true will allow the SDK to proceed with the re-route process and fetch a new route with this given off-route `Point`.</li><li>Returning false will stop the re-route process and the user will continue without a new route in the direction they are traveling.</li></ul> |
+| `onOffRoute(Point offRoutePoint)` | Will trigger only if `RouteListener#allowRerouteFrom(Point)` returns true. (This serves as the official off-route event and will continue the process to fetch a new route with the given off-route `Point`.)
+| `onRerouteAlong(DirectionsRoute directionsRoute)` | Will trigger when a new `DirectionsRoute` has been retrieved post off-route. (This is the new route the user will be following until another off route event is triggered.)
+| `onFailedReroute(String errorMessage)` | Will trigger if the request for a new `DirectionsRoute` fails. (Provides the error message from the directions API used to retrieve the `DirectionsRoute`.) | 
+
+### FeedbackListener
+
+| ❓| Description |
+|---|---|
+| `onFeedbackOpened()` | Will be triggered when the feedback bottomsheet is opened by a user while navigating. |
+| `onFeedbackCancelled()` | Will be triggered when the feedback bottomsheet is opened by a user while navigating but then dismissed without clicking on a specific `FeedbackItem` in the list. |
+| `onFeedbackSent(FeedbackItem feedbackItem)` | Will be triggered when the feedback bottomsheet is opened by a user while navigating and then the user clicks on a specific `FeedbackItem` in the list. |
+
+
