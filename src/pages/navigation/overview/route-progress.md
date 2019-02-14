@@ -25,11 +25,10 @@ In addition to receiving information about the route progress, the callback also
 
 java={`
 navigation.addProgressChangeListener(new ProgressChangeListener() {
-@Override
-public void onProgressChange(Location location, RouteProgress routeProgress) {
+  @Override
+  public void onProgressChange(Location location, RouteProgress routeProgress) {
 
-
-}
+  }
 });
 `}
 
@@ -44,7 +43,7 @@ override fun onProgressChange(location: Location, routeProgress: RouteProgress) 
 
 ## Information about progress
 
-There are three classes that contain information on route progress at different levels of granularity. ❓ Is that last statement true? Can we clarify the differences / relationships between routes, legs, and steps here? I could use some help getting started with that language.❓
+There are three classes that contain information on route progress at different levels of granularity. <!-- ❓ Clarify the differences / relationships between routes, legs, and steps here. -->
 
 ### RouteProgress
 
@@ -106,14 +105,6 @@ Using `NavigationView` in your XML gives you the ability to listen to different 
 These listeners are only available if you are adding `NavigationView` to your `Activity` or `Fragment` layout XML via `NavigationViewOptions`. You are not able to add them to `NavigationLauncherOptions`.
 {{</Note>}}
 
-### NavigationListener
-
-| ❓ | Description |
-|---|---|
-| `onCancelNavigation()` | Will be triggered when the user clicks on the cancel "X" icon while navigating. |
-| `onNavigationFinished()` | Will be triggered when `MapboxNavigation` has finished and the service is completely shutdown. |
-| `onNavigationRunning()` | Will be triggered when `MapboxNavigation` has been initialized and the user is navigating the given route. |
-
 ### RouteListener
 
 | ❓ | Description |
@@ -122,13 +113,3 @@ These listeners are only available if you are adding `NavigationView` to your `A
 | `onOffRoute(Point offRoutePoint)` | Will trigger only if `RouteListener#allowRerouteFrom(Point)` returns true. (This serves as the official off-route event and will continue the process to fetch a new route with the given off-route `Point`.)
 | `onRerouteAlong(DirectionsRoute directionsRoute)` | Will trigger when a new `DirectionsRoute` has been retrieved post off-route. (This is the new route the user will be following until another off route event is triggered.)
 | `onFailedReroute(String errorMessage)` | Will trigger if the request for a new `DirectionsRoute` fails. (Provides the error message from the directions API used to retrieve the `DirectionsRoute`.) | 
-
-### FeedbackListener
-
-| ❓| Description |
-|---|---|
-| `onFeedbackOpened()` | Will be triggered when the feedback bottomsheet is opened by a user while navigating. |
-| `onFeedbackCancelled()` | Will be triggered when the feedback bottomsheet is opened by a user while navigating but then dismissed without clicking on a specific `FeedbackItem` in the list. |
-| `onFeedbackSent(FeedbackItem feedbackItem)` | Will be triggered when the feedback bottomsheet is opened by a user while navigating and then the user clicks on a specific `FeedbackItem` in the list. |
-
-

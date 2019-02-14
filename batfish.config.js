@@ -51,6 +51,7 @@ const productPageOrder = {
     'camera',
     'offline-routing',
     'map-styling',
+    'user-interaction',
     'map-matching'
   ],
   'java/overview/': [

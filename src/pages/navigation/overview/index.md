@@ -42,7 +42,7 @@ The Navigation SDK for Android allows you to build a complete in-app navigation 
 
 There are two products for integrating navigation into your Android application, Navigation Core and Navigation UI:
 
-- **Navigation Core** is where the logic lives for generating routes, tracking progress, displaying instructions, and more. You can use this directly via the `MapboxNavigation` class or through the Navigation UI. 
+- **Navigation Core** is where the logic lives for generating routes, tracking progress, receiving instructions, and more. You can use this directly via the `MapboxNavigation` class or through the Navigation UI. 
 - **Navigation UI** is built on top of Navigation Core (meaning Navigation Core is included when you add the Navigation UI as a dependency). It consumes data from Navigation Core and arranges it in default UI components that have various customization options. You can use this directly via the `NavigationView` and `NavigationLauncher` classes without touching the core `MapboxNavigation` class directly in your application's code. 
 - **Navigation Core and Navigation UI** can be used together if you want to use a mixture of the Mapbox-provided UI components and your own custom UI fed data from Navigation Core.
 
@@ -254,20 +254,16 @@ Inside your application's activity, you'll want to override the onDestroy lifecy
 java={`
 @Override
 protected void onDestroy() {
-  super.onDestroy();
-
+    super.onDestroy();
     // End the navigation session
-    navigation.stopNavigation();
     navigation.onDestroy();
 }
 `}
 
 kotlin={`
 override fun onDestroy() {
-  super.onDestroy()
-
+    super.onDestroy()
     // End the navigation session
-    navigation.stopNavigation()
     navigation.onDestroy()
 }
 `}
@@ -275,9 +271,11 @@ override fun onDestroy() {
 />
 }}
 
-<!-- ## Replaying a DirectionsRoute
+## Testing and development
 
-The SDK includes a `ReplayRouteLocationEngine`, which allows you to replay a given `DirectionsRoute` (mainly for testing, so you don't always have to code in a car). After retrieving a `DirectionsRoute`, you can create a replay engine and pass it to `MapboxNavigation`:
+## Replaying a DirectionsRoute
+
+The Navigation SDK includes a `ReplayRouteLocationEngine`, which allows you to replay a given `DirectionsRoute` (mainly for testing, so you don't always have to code in a car). After retrieving a `DirectionsRoute`, you can create a replay engine and pass it to `MapboxNavigation`:
 
 {{
 <CodeLanguageToggle id="nav-replay-engine" />
@@ -306,5 +304,5 @@ navigation.startNavigation(routeToReplay)
 `}
 
 />
-}} -->
+}}
 

@@ -1,5 +1,5 @@
 ---
-title: "Milestones"
+title: Custom events
 description: "Trusted documentation about milestones within the Mapbox Navigation SDK for Android. Know when to instruct your users and/or when to hide or show custom UI."
 products:
   - Navigation UI
