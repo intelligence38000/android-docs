@@ -9,6 +9,7 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import Note from '@mapbox/dr-ui/note';"
   - "import BookImage from '@mapbox/dr-ui/book-image';"
+  - "import { MustRead } from '../../../components/must-read';"
 ---
 
 {{
@@ -46,6 +47,43 @@ There are two products for integrating navigation into your Android application,
 - The **Navigation UI SDK** is built on top of the core Navigation SDK (meaning the Navigation SDK is included when you add the Navigation UI SDK as a dependency). It consumes data from the core Navigation SDK and arranges it in default UI components that have various customization options. You can use this directly via the `NavigationView` and `NavigationLauncher` classes without touching the core `MapboxNavigation` class directly in your application's code. 
 - The core **Navigation SDK** and the **Navigation UI SDK** can be used together if you want to use a mixture of the Mapbox-provided UI components and your own custom UI fed data from the core Navigation SDK.
 
+
+## Product capabilities
+
+This documentation contains information for both the Navigation SDK and the Navigation UI SDK across a variety of topics:
+
+{{<div className="grid grid--gut12">
+  <div className="col col--6-mm col--12 mb24">}}
+
+**Manage user location**
+- [User location](/android/navigation/overview/user-location/) {{ <MustRead /> }}
+
+{{</div><div className="col col--6-mm col--12 mb24">}}
+
+**Build route requests**
+- [Route generation](/android/navigation/overview/route-generation/) {{ <MustRead /> }}
+- [Localization](/android/navigation/overview/localization/)
+- [Offline routing](/android/navigation/overview/offline-routing/)
+- [Map matching for navigation](/android/navigation/overview/map-matching/)
+
+{{</div><div className="col col--6-mm col--12 mb24">}}
+
+**Track progress along a route**
+- [Route progress](/android/navigation/overview/route-progress/) {{ <MustRead /> }}
+- [Instructions](/android/navigation/overview/instructions/)
+- [Notifications](/android/navigation/overview/notifications/)
+- [Custom events](/android/navigation/overview/milestones/)
+- [Off-route detection](/android/navigation/overview/off-route/)
+- [Faster-route detection](/android/navigation/overview/faster-route/)
+
+{{</div><div className="col col--6-mm col--12 mb24">}}
+
+**Customize the look and feel**
+- [Camera](/android/navigation/overview/camera/)
+- [Map and app styling](/android/navigation/overview/map-design/)
+- [User interaction](/android/navigation/overview/user-interaction/)
+
+{{</div></div>}}
 
 ## Installation
 
@@ -308,6 +346,28 @@ navigation.startNavigation(routeToReplay)
 />
 }}
 
-### Simulate a route
+### Turn on debug logging
 
+Turn on debug logging using `MapboxNavigtionOptions`:
 
+{{
+<CodeLanguageToggle id="debug-logging-enabled" />
+<ToggleableCodeBlock
+
+java={`
+MapboxNavigationOptions options = MapboxNavigationOptions.builder()
+  .isDebugLoggingEnabled(true)
+  .build();
+
+MapboxNavigation mapboxNavigation = new MapboxNavigation(this, accessToken, options);
+`}
+
+kotlin={`
+val options = MapboxNavigationOptions.builder()
+  .isDebugLoggingEnabled(true)
+  .build()
+
+val mapboxNavigation = MapboxNavigation(this, accessToken, options)
+`}
+/>
+}}
