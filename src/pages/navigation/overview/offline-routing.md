@@ -1,6 +1,6 @@
 ---
-title: "Offline Routing"
-description: "Mapbox offline navigation provides routing functionality from the Navigation SDK for Android in non-connected environments."
+title: Offline routing
+description: Mapbox offline navigation provides routing functionality from the Navigation SDK for Android in non-connected environments.
 products:
   - Navigation core
 prependJs:
@@ -11,11 +11,9 @@ prependJs:
   - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
-{{ <Note title="Downloading offline routing packs" imageComponent={<BookImage width="60" height="60" />}>
-
-<p>Offline routing pack downloads are restricted to Mapbox Enterprise customers. If you're interested in moving to an Enterprise plan, <a href="https://www.mapbox.com/contact/sales/">contact us!</a></p>
-</Note>
-}}
+{{ <Note title="Downloading offline routing packs" imageComponent={<BookImage width="60" height="60" />}>}}
+Offline routing pack downloads are restricted to Mapbox Enterprise customers. If you're interested in moving to an Enterprise plan, [contact us](https://www.mapbox.com/contact/sales/).
+{{</Note>}}
 
 Mapbox offline navigation provides routing functionality from the Navigation SDK in non-connected environments. In areas of no cellular connectivity, or on a device with no SIM card, end users can use turn-by-turn navigation and request new routes. If they go off-route, the system can reroute and keep them headed to their destination without requiring network connectivity. Offline routing moves the routing engine and the routing data from the server onto the end user’s device, so there’s no need to make HTTP API calls for routing information.
 

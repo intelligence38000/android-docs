@@ -113,3 +113,10 @@ These listeners are only available if you are adding `NavigationView` to your `A
 | `onOffRoute(Point offRoutePoint)` | Will trigger only if `RouteListener#allowRerouteFrom(Point)` returns true. (This serves as the official off-route event and will continue the process to fetch a new route with the given off-route `Point`.)
 | `onRerouteAlong(DirectionsRoute directionsRoute)` | Will trigger when a new `DirectionsRoute` has been retrieved post off-route. (This is the new route the user will be following until another off route event is triggered.)
 | `onFailedReroute(String errorMessage)` | Will trigger if the request for a new `DirectionsRoute` fails. (Provides the error message from the directions API used to retrieve the `DirectionsRoute`.) | 
+
+## More about route progress
+
+Read more about route progress in: 
+
+- [Off-route detection](/android/navigation/overview/off-route/): Detect whether or not a user is on the generated route throughout their trip. If a user is off-route, provide additional instruction or generate a new route. 
+- [Faster-route detection](/android/navigation/overview/off-route/): Specify when to check for faster routes and how to determine if a route is faster, then retrieve and initialize faster routes.

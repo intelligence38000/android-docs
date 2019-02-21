@@ -7,9 +7,11 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import AppropriateImage from '../../../components/appropriate-image';"
+  - "import Note from '@mapbox/dr-ui/note';"
+  - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
-Design an application that provides a unique experience for your users or fits your brand. Navigation UI offers a wide range of options for customizing the look of your application including navigation instructions, route lines, and the map style.
+Use the Navigation UI SDK to design an application that provides a unique experience for your users or fits your brand. Navigation UI offers a wide range of options for customizing the look of your application including navigation instructions, route lines, and the map style.
 
 ## Day and Night mode
 
@@ -44,10 +46,9 @@ The given style will determine route color, congestion colors, and the route sca
     <item name="routeModerateCongestionColor">@color/mapbox_navigation_route_layer_congestion_yellow</item>
     <item name="routeSevereCongestionColor">@color/mapbox_navigation_route_layer_congestion_red</item>
     <item name="routeShieldColor">@color/mapbox_navigation_route_shield_layer_color</item>
-
     <!-- Scales -->
     <item name="routeScale">1.0</item>
-</style>q
+</style>
 ```
 
 ## Style the NavigationView
@@ -65,7 +66,9 @@ You can also style the `NavigationView` colors. This includes the style of the m
 />
 ```
 
-**Please note**: each style must provide a value for every custom attribute or have a parent style `NavigationViewLight` / `NavigationViewDark` - otherwise the `View` will not properly inflate. Our default Mapbox style will be used if you do not provide a style for either of the light or dark theme attributes.
+{{<Note imageComponent={<BookImage width="60" height="60" />}>}}
+Each style must provide a value for every custom attribute or have a parent style (`NavigationViewLight` or `NavigationViewDark`) or the `View` will not properly inflate. Our default Mapbox style will be used if you do not provide a style for either of the light or dark theme attributes.
+{{</Note>}}
 
 An example of how to create your own style can be found by looking at one of our default styles like `R.style.NavigationViewLight`:
 
@@ -82,56 +85,55 @@ Here are a two more examples of custom themes. `CustomNavigationMapRoute` is for
 
 ```xml
 <resources>
-<style name="CustomNavigationMapRoute" parent="@style/NavigationMapRoute">
-    <!-- Main color for the route line -->
-    <item name="routeColor">#4882C6</item>
-    <!-- Outline color for the route line -->
-    <item name="routeShieldColor">#2C5F99</item>
-    <!-- Color for moderate traffic along the route line -->
-    <item name="routeModerateCongestionColor">#FFAB65</item>
-    <!-- Color for severe traffic along the route line -->
-    <item name="routeSevereCongestionColor">#E85552</item>
-    <!-- Scales -->
-    <item name="routeScale">1.0</item>
-</style>
+    <style name="CustomNavigationMapRoute" parent="@style/NavigationMapRoute">
+        <!-- Main color for the route line -->
+        <item name="routeColor">#4882C6</item>
+        <!-- Outline color for the route line -->
+        <item name="routeShieldColor">#2C5F99</item>
+        <!-- Color for moderate traffic along the route line -->
+        <item name="routeModerateCongestionColor">#FFAB65</item>
+        <!-- Color for severe traffic along the route line -->
+        <item name="routeSevereCongestionColor">#E85552</item>
+        <!-- Scales -->
+        <item name="routeScale">1.0</item>
+    </style>
+    <style name="CustomNavigationViewLight" parent="@style/NavigationViewLight">
+        <!-- The main turn banner view at the top of the screen -->
+        <!-- Background color of the banner -->
+        <item name="navigationViewBannerBackground">#FFFFFF</item>
+        <!-- Color for the primary label that displays the turn name -->
+        <item name="navigationViewBannerPrimaryText">#37516F</item>
+        <!-- Color for the secondary label that occasionally appears underneath the primary label -->
+        <item name="navigationViewBannerSecondaryText">#E637516F</item>
+        <!-- Primary color for the turn arrow icons-->
+        <item name="navigationViewBannerManeuverPrimary">#37516F</item>
+        <!-- Secondary color for the turn arrow icons (e.g. the line segment that forks off) -->
+        <item name="navigationViewBannerManeuverSecondary">#4D37516F</item>
+        <!-- Alternate background color for the dropdown list of upcoming steps -->
+        <item name="navigationViewListBackground">#FAFAFA</item>
 
-<style name="CustomNavigationViewLight" parent="@style/NavigationViewLight">
-    <!-- The main turn banner view at the top of the screen -->
-    <!-- Background color of the banner -->
-    <item name="navigationViewBannerBackground">#FFFFFF</item>
-    <!-- Color for the primary label that displays the turn name -->
-    <item name="navigationViewBannerPrimaryText">#37516F</item>
-    <!-- Color for the secondary label that occasionally appears underneath the primary label -->
-    <item name="navigationViewBannerSecondaryText">#E637516F</item>
-    <!-- Primary color for the turn arrow icons-->
-    <item name="navigationViewBannerManeuverPrimary">#37516F</item>
-    <!-- Secondary color for the turn arrow icons (e.g. the line segment that forks off) -->
-    <item name="navigationViewBannerManeuverSecondary">#4D37516F</item>
-    <!-- Alternate background color for the dropdown list of upcoming steps -->
-    <item name="navigationViewListBackground">#FAFAFA</item>
+        <!-- The summary view along the bottom of the screen -->
+        <!-- Background color of the summary view -->
+        <item name="navigationViewPrimary">#FFFFFF</item>
+        <!-- Tint color for icons in the summary view -->
+        <item name="navigationViewSecondary">#28353D</item>
+        <!-- Accent color for elements such as the recenter button -->
+        <item name="navigationViewAccent">#4882C6</item>
+        <!-- Color for the main duration label in the summary view -->
+        <item name="navigationViewPrimaryText">#424242</item>
+        <!-- Color for the secondary distance and ETA label in the summary view -->
+        <item name="navigationViewSecondaryText">#424242</item>
 
-    <!-- The summary view along the bottom of the screen -->
-    <!-- Background color of the summary view -->
-    <item name="navigationViewPrimary">#FFFFFF</item>
-    <!-- Tint color for icons in the summary view -->
-    <item name="navigationViewSecondary">#28353D</item>
-    <!-- Accent color for elements such as the recenter button -->
-    <item name="navigationViewAccent">#4882C6</item>
-    <!-- Color for the main duration label in the summary view -->
-    <item name="navigationViewPrimaryText">#424242</item>
-    <!-- Color for the secondary distance and ETA label in the summary view -->
-    <item name="navigationViewSecondaryText">#424242</item>
+        <!-- Custom colors for progress bars displayed during navigation -->
+        <item name="navigationViewProgress">#4B75A4</item>
+        <item name="navigationViewProgressBackground">#39587B</item>
 
-    <!-- Custom colors for progress bars displayed during navigation -->
-    <item name="navigationViewProgress">#4B75A4</item>
-    <item name="navigationViewProgressBackground">#39587B</item>
+        <!-- Custom colors for the route line and traffic -->
+        <item name="navigationViewRouteStyle">@style/CustomNavigationMapRoute</item>
 
-    <!-- Custom colors for the route line and traffic -->
-    <item name="navigationViewRouteStyle">@style/CustomNavigationMapRoute</item>
-
-    <!-- Map style -->
-    <item name="navigationViewMapStyle">mapbox://styles/mapbox/navigation-guidance-day-v2</item>
-</style>
+        <!-- Map style -->
+        <item name="navigationViewMapStyle">mapbox://styles/mapbox/navigation-guidance-day-v2</item>
+    </style>
 </resources>
 ```
 
@@ -162,7 +164,3 @@ Please reference the diagram below to see where these attribute names align with
 | Q | navigationViewBannerPrimaryText |
 | R | navigationViewBannerBackground |
 | S | navigationViewBannerManeuverPrimary |
-
-
-<!-- ## Navigation core -->
-

@@ -191,3 +191,10 @@ builder.build()
 
 />
 }}
+
+## More about route generation
+
+Read more about route generation in: 
+
+- [Localization](/android/navigation/overview/localization/): Customize the language and units of measurement for both text and voice instructions or use the language preferences set on the device.
+- [Offline routing](/android/navigation/overview/offline-routing/): Provide routing functionality from the Navigation SDK in non-connected environments.
