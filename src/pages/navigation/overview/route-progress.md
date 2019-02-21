@@ -1,6 +1,6 @@
 ---
-title: "Route progress"
-description: "Read these docs and learn how to use a user's progress information along a route with the Mapbox Navigation SDK for Android."
+title: Route progress
+description: Learn how to use a user's progress information along a route with the Mapbox Navigation SDK and Navigation UI for Android.
 products:
   - Navigation UI SDK
   - Navigation SDK

@@ -1,6 +1,6 @@
 ---
 title: "Off-route detection"
-description: "The Mapbox Navigation SDK for Android offers off-route detection for your Android app's navigation experience. Read this documentation to learn how."
+description: Learn how to use and customize off-route detection with the Mapbox Navigation SDK for Android for your Android app's navigation experience.
 products:
   - Navigation SDK
 prependJs:

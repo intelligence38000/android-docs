@@ -1,6 +1,6 @@
 ---
-title: "Localization"
-description: Some description
+title: Localization
+description: Learn how the Mapbox Navigation SDK determines which language and units of measurement to use for voice and text instructions. Use the default method for selecting a language or customize it for your application.
 products:
   - Navigation SDK
 prependJs:

@@ -1,6 +1,6 @@
 ---
-title: "Map and app design"
-description: "Some description."
+title: Map and app design
+description: Customize the look of your application made with the Mapbox Navigation UI SDK including adding map styles, styling the route line, and styling non-map UI elements.
 products:
   - Navigation UI SDK
 prependJs:

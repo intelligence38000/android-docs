@@ -1,6 +1,6 @@
 ---
 title: Instructions
-description: Some description.
+description: Learn how instructions work in the core Mapbox Navigation SDK and Navigation UI SDK for Android.
 products:
   - Navigation SDK
   - Navigation UI SDK

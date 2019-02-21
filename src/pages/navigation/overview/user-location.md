@@ -1,9 +1,9 @@
 ---
-title: "User location"
-description: Some description
+title: User location
+description: Learn how to retrieve and manager user location in the Mapbox Navigation SDK and Navigation UI SDK for Android.
 products:
-  - Navigation UI SDK
   - Navigation SDK
+  - Navigation UI SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"

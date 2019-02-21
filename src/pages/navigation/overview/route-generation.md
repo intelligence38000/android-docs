@@ -1,6 +1,6 @@
 ---
 title: Route generation
-description: Some description.
+description: Learn how to generate routes for use in the Mapbox Navigation SDK or Navigation UI SDK for Android.
 products:
   - Navigation SDK
 prependJs:

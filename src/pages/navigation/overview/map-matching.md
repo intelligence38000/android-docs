@@ -1,6 +1,6 @@
 ---
-title: "Map Matching with Navigation"
-description: "Using Map Matching with the Navigation SDK"
+title: Map matching with navigation
+description: Use the Mapbox Map Matching API with the Mapbox Navigation SDK or Navigation UI SDK for Android.
 products:
   - Navigation SDK
   - Navigation UI SDK

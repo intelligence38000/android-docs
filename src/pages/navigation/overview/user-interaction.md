@@ -1,11 +1,13 @@
 ---
 title: User interaction
-description: Some description.
+description: Understand how to listen for user interaction with the Mapbox Navigation UI SDK for Android.
 products:
   - Navigation UI SDK
 ---
 
-[WIP]
+There are several UI elements included in the Navigation UI SDK by default. Below are the default behaviors for each kind of user interaction related to the navigation view and the feedback component.
+
+❓ Any and all suggestions welcome here. I know this guide is weak. ❓
 
 ## NavigationListener
 
