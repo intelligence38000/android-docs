@@ -13,7 +13,6 @@ prependJs:
 ---
 
 {{
-  <div className="mb24">
     <OverviewHeader
       features={[
         "Off-route detection",
@@ -28,7 +27,6 @@ prependJs:
       ghLink="https://github.com/mapbox/mapbox-navigation-android"
       image={<AppropriateImage imageId="overviewNavigationSdk" alt="Mobile devices displaying applications using the Mapbox Navigation SDK for Android." />}
     />
-  </div>
 }}
 
 The Navigation SDK for Android allows you to build a complete in-app navigation experience. With the Navigation SDK you get the power of the [Mapbox Directions API](https://docs.mapbox.com/api/navigation/#directions) along with a collection of features that are critical when building navigation applications for Android, including:
@@ -95,14 +93,9 @@ Learn how to install the core Navigation SDK and request your first route using 
 
 #### Add the dependency
 
-{{
-  <div className="mt18 mb24">
-    <Note 
-    title="Add the core Navigation SDK only when not using the Navigation UI SDK"
-    imageComponent={<BookImage width="60" height="60" />}>
-}}
+{{<Note title="Add the core Navigation SDK only when not using the Navigation UI SDK" imageComponent={<BookImage size="60" />}>}}
 If you're using the Navigation UI SDK, you **don't** have to declare the Mapbox Navigation SDK as well. If you only declare the Navigation UI SDK in your project's Gradle file, the Mapbox Navigation SDK will automatically be included.
-{{</Note></div>}}
+{{</Note>}}
 
 1. Start Android Studio
 2. Open up your app's `build.gradle` file

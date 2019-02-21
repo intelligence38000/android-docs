@@ -10,7 +10,6 @@ prependJs:
 ---
 
 {{
-  <div className="mb24">
     <OverviewHeader
       features={[
         "Renders an augmented reality, turn-by-turn navigation route",
@@ -20,12 +19,11 @@ prependJs:
       version={VISION_AR_VERSION}
       image={<AppropriateImage imageId="overviewVisionAr" alt="Mobile devices displaying applications using the Mapbox Vision AR for Android." />}
     />
-  </div>
 }}
 
 {{
 <WarningNote title="Mapbox Vision AR for Android is currently in limited public beta">
-    <div><a className="unprose color-blue txt-bold" href="https://www.mapbox.com/vision/"><ChevronousText text="Request access" /></a></div>
+    <p><a href="https://www.mapbox.com/vision/"><ChevronousText text="Request access" /></a></p>
 </WarningNote>
 }}
 

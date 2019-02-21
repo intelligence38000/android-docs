@@ -90,6 +90,7 @@ export const androidApiReferenceLinks = {
     },
     {
       label: 'mapbox-java-turf',
+      id: 'java-turf',
       href: `/android/api/mapbox-java/libjava-turf/${
         constants.JAVA_SDK_VERSION
       }/index.html`

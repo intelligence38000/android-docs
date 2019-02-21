@@ -25,7 +25,7 @@ The Directions API can be used completely on its own to get routes and other dir
 implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:{{ JAVA_SDK_VERSION }}'
 ```
 
-## Buiding a request
+## Building a request
 
 The Mapbox Directions API requires you to build a URL with various parameters to request the information that you want. This URL has required and optional parameters. The `MapboxDirections.Builder()` class helps you set these various parameters.
 

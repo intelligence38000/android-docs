@@ -13,7 +13,7 @@ prependJs:
 
 Navigation instructions and cues are shown and hidden using milestones set in the core Navigation SDK. ❓ Milestones are...❓.
 
-{{<Note title="Building custom milestones" imageComponent={<BookImage width="60" height="60" />}>}}
+{{<Note title="Building custom milestones" imageComponent={<BookImage size="60" />}>}}
 This guide covers default milestones used to display UI instructions and trigger voice instructions. For information on building custom milestones, see [Custom events](/android/navigation/overview/custom-events/).
 {{</Note>}}
 
@@ -61,7 +61,7 @@ SSML stands for Speech Synthesis Markup Language and is designed to work with [A
 
 In the Navigation UI SDK, banner and voice instructions are triggered by the default milestones described above. There are default styling rules for banner instructions and default settings for voice instructions. Instructions can be customized to an extent including overriding default behaviors when instructions are triggered and customizing the style of banner instructions. Creating [custom milestones](/android/navigation/overview/milestones/) must be done with the core Navigation SDK.
 
-{{<Note imageComponent={<BookImage width="60" height="60" />}>}}
+{{<Note imageComponent={<BookImage size="60" />}>}}
 For customizing the language used in instructions, see [Localization](/android/navigation/overview/).
 {{</Note>}}
 
@@ -178,7 +178,7 @@ instructionView.setDistanceFormatter(distanceFormatter)
 />
 }}
 
-{{<Note imageComponent={<BookImage width="60" height="60" />}>}}
+{{<Note imageComponent={<BookImage size="60" />}>}}
 It is fine if this is _not_ set, the view will create its own based on inferred parameters from the device's Android configuration. Please also make sure to set our default theme: `R.style.NavigationViewLight` (or create your own) and set it in your `Activity` or `Fragment` before `super.onCreate()`.
 {{</Note>}}
 

@@ -20,7 +20,6 @@ prependJs:
 ---
 
 {{
-  <div className="mb24">
     <OverviewHeader
       features={[
         "Show annotations on the map",
@@ -36,7 +35,6 @@ prependJs:
       ghLink="https://github.com/mapbox/mapbox-plugins-android"
       image={<AppropriateImage imageId="overviewPlugins" alt="Mobile devices displaying applications using the Mapbox Java SDK for Android." />}
     />
-  </div>
 }}
 
 Mapbox Plugins build on top of the [Maps SDK](/android/maps/overview/getting-started/) providing extra features in lightweight dependencies. Whether you're looking to include traffic on top of your map or show the user location as a layer, plugins offer customizable APIs with a few lines of code to get started. Separating features into different plugins also allows for a more aggressive updating timeline.

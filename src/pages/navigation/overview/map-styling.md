@@ -66,7 +66,7 @@ You can also style the `NavigationView` colors. This includes the style of the m
 />
 ```
 
-{{<Note imageComponent={<BookImage width="60" height="60" />}>}}
+{{<Note imageComponent={<BookImage size="60" />}>}}
 Each style must provide a value for every custom attribute or have a parent style (`NavigationViewLight` or `NavigationViewDark`) or the `View` will not properly inflate. Our default Mapbox style will be used if you do not provide a style for either of the light or dark theme attributes.
 {{</Note>}}
 

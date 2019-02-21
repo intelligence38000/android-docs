@@ -11,7 +11,7 @@ prependJs:
   - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
-{{<Note title="Route generation and the Navigation UI SDK" imageComponent={<BookImage width="60" height="60" />}>}}
+{{<Note title="Route generation and the Navigation UI SDK" imageComponent={<BookImage size="60" />}>}}
 This guide does not describe any specific options in the Navigation UI SDK, however, the concepts described in this guide are important to understand if you are using the Navigation UI SDK. You will need to provide either a valid `DirectionsRoute` object or both an origin and destination `Point` objects to the `NavigationView`. If you provide both, only the `DirectionsRoute` will be used.
 
 For details on default and custom route _styling_ using the Navigation UI, see [Map and application design](/android/navigation/overview/map-styling/).

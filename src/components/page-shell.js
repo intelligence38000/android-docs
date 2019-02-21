@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { withLocation } from '@mapbox/batfish/modules/with-location';
 import ReactPageShell from '../../vendor/docs-page-shell/react-page-shell.js';
 import { routeToPrefixed } from '@mapbox/batfish/modules/route-to';
-import Icon from '@mapbox/mr-ui/icon';
 // dr-ui components
 import TopbarSticker from '@mapbox/dr-ui/topbar-sticker';
 import BackToTopButton from '@mapbox/dr-ui/back-to-top-button';
@@ -45,7 +44,12 @@ class PageShell extends React.Component {
   componentDidMount() {
     // initialize analytics
     if (window && window.initializeMapboxAnalytics) {
-      window.initializeMapboxAnalytics();
+      window.initializeMapboxAnalytics({
+        sentry: {
+          sentryDsn:
+            'https://6ba8cfeeedad4fb7acb8576f0fd6e266@sentry.io/1384508'
+        }
+      });
     }
   }
 
@@ -205,60 +209,6 @@ class PageShell extends React.Component {
       );
     }
 
-    // Determine what to display as the title
-    let renderedTitle = '';
-    if (frontMatter.title === 'Introduction') {
-      renderedTitle = <div className="mt0-mm mt60" />;
-    } else if (
-      frontMatter.title === 'Examples' ||
-      frontMatter.title === 'Help'
-    ) {
-      renderedTitle = (
-        <h1 className="txt-h1 txt-fancy mt0-mm mt60 pt0-mm pt24 pb24">
-          {frontMatter.title}
-        </h1>
-      );
-    } else {
-      const products = ['Navigation SDK', 'Navigation UI SDK'].map(p => {
-        return (
-          <div>
-            <span
-              className={
-                frontMatter.products.indexOf(p) > -1
-                  ? 'color-green'
-                  : 'color-red-faint'
-              }
-            >
-              <Icon
-                name={frontMatter.products.indexOf(p) > -1 ? 'check' : 'close'}
-                inline={true}
-              />
-            </span>
-            <span
-              className={
-                frontMatter.products.indexOf(p) > -1
-                  ? 'color-gray-dark'
-                  : 'color-gray-light'
-              }
-            >
-              {p}
-            </span>
-          </div>
-        );
-      });
-      renderedTitle = (
-        <div className="mt0-mm mt60 pt0-mm pt24 pb24 mb24 border-b border--gray-light">
-          <h1 className="txt-h1 txt-fancy">{frontMatter.title}</h1>
-          <div className="mt12">
-            <div className="flex-parent flex-parent--start-cross">
-              <div className="flex-child mr12 txt-bold">Products covered:</div>
-              <div className="flex-child">{products}</div>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
     return (
       <ReactPageShell {...this.props} meta={meta} darkHeaderText={true}>
         <Helmet>
@@ -272,10 +222,10 @@ class PageShell extends React.Component {
           <div className="limiter">
             <div className="grid grid--gut36 mr-neg36 mr0-mm">
               <div className="col col--4-mm col--12">
-                <div className="ml24 pt12">
+                <div className="ml24-mm pt12">
                   <ProductMenu
                     productName={productNames[product]}
-                    homePage="/android/"
+                    homePage={`/android/${product}/overview/`}
                   />
                 </div>
               </div>
@@ -294,8 +244,15 @@ class PageShell extends React.Component {
             currentPath={location.pathname}
             sidebarStackedOnNarrowScreens={pageNavigationNarrowStick}
           >
-            <React.Fragment>{renderedTitle}</React.Fragment>
-            {children}
+            <div
+              className={
+                activeTab === 'overview'
+                  ? 'mt60 pt30 mt0-mm pt0-mm'
+                  : 'mt30 mt0-mm'
+              }
+            >
+              {children}
+            </div>
             <div className="fixed block none-mm mx24 my24 z5 bottom right">
               <BackToTopButton />
             </div>

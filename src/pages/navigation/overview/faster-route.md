@@ -14,7 +14,7 @@ The Navigation SDK includes a faster-route detection class. This class checks ea
 
 Fetching faster routes is _disabled_ by default in the Navigation SDK. To enable either the default logic or your own custom logic, you can create a `MapboxNavigationOptions` object and set `MapboxNavigationOptions#enableFasterRouteDetection(boolean);` to true. `MapboxNavigationOptions` is then passed into the constructor of `MapboxNavigation`.
 
-{{<Note title="Faster-route detection and the Navigation UI SDK" imageComponent={<BookImage width="60" height="60" />}>}}
+{{<Note title="Faster-route detection and the Navigation UI SDK" imageComponent={<BookImage size="60" />}>}}
 This guide does not describe any specific options in the Navigation UI SDK. You need to enable faster-route detection using the core Navigation SDK directly.
 {{</Note>}}
 

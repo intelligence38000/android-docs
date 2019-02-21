@@ -110,7 +110,7 @@ camera.updateCameraTrackingMode(NavigationCamera.NAVIGATION_TRACKING_MODE_NORTH)
 
 The Navigation SDK provides a `SimpleCamera` by default. You're also able to create your own `CameraEngine` and give it to the Navigation SDK like so: `MapboxNavigation#setCameraEngine(CameraEngine cameraEngine)`.
 
-{{<Note title="Example" imageComponent={<BookImage width="60" height="60" />}>}}
+{{<Note title="Example" imageComponent={<BookImage size="60" />}>}}
 The `DynamicCamera` provided by the `libandroid-navigation-ui` library (described above) is an example of a custom `CameraEngine`. In [`DynamicCamera`](/android/navigation/overview/navigation-ui/#navigationcamera), calculations are being made based on the user's location along the given route.
 {{</Note>}}
 

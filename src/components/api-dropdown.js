@@ -17,14 +17,12 @@ class ApiTabDropdown extends React.PureComponent {
       >
         <div className="py0">
           API reference
-          <Icon
-            name="chevron-down"
-            themeIcon="none inline-mm color-gray-light ml6 mb-neg3"
-          />
-          <Icon
-            name="share"
-            themeIcon="none-mm inline color-gray-light ml6 mb-neg3"
-          />
+          <span className="color-gray-light ml6">
+            <Icon name="chevron-down" inline={true} />
+          </span>
+          <span className="none-mm color-gray-light ml6">
+            <Icon name="share" inline={true} />
+          </span>
         </div>
       </PopoverTrigger>
     );

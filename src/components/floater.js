@@ -6,8 +6,13 @@ export class Floater extends React.PureComponent {
   static propTypes = {
     url: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    category: PropTypes.oneOf(['example', 'guide', 'tutorial', 'help'])
-      .isRequired,
+    category: PropTypes.oneOf([
+      'example',
+      'guide',
+      'tutorial',
+      'help',
+      'playground'
+    ]).isRequired,
     text: PropTypes.string.isRequired,
     clear: PropTypes.bool
   };

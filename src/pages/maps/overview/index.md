@@ -13,7 +13,6 @@ prependJs:
 ---
 
 {{
-  <div className="mb24 mt60 pt30 mt0-mm pt0-mm">
     <OverviewHeader
       features={[
         "Map styles",
@@ -31,7 +30,6 @@ prependJs:
       installLink="https://www.mapbox.com/install/android"
       image={<AppropriateImage imageId="overviewMapSdk" alt="Mobile devices displaying applications using the Mapbox Maps SDK for Android." />}
     />
-  </div>
 }}
 
 The Mapbox Maps SDK for Android is an open source toolset for displaying maps inside of your Android application.

@@ -10,7 +10,6 @@ prependJs:
 ---
 
 {{
-  <div className="mb24">
     <OverviewHeader
       features={[
         "Global directions",
@@ -28,7 +27,6 @@ prependJs:
       ghLink="https://github.com/mapbox/mapbox-java"
       image={<AppropriateImage imageId="overviewServicesSdk" alt="Mobile devices displaying applications using the Mapbox Java SDK for Android." />}
     />
-  </div>
 }}
 
 The Mapbox Java SDK is an open source toolset for building applications that need navigation, directions, geocoding, static map imagery, etc. It conveniently wraps Mapbox APIs and builds off of them with tools which are useful for your applications. This SDK has no dependency on the Android API and can be used in any of your Java projects.

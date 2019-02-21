@@ -338,7 +338,7 @@ This document describes how to generate these offline packages and how to make t
 
 {{
 <Note title="How is sideloading different than downloading maps?"
-  imageComponent={<BookImage width="60" height="60" />}
+  imageComponent={<BookImage size="60" />}
 >
   <p>Applications built with the <a href="https://docs.mapbox.com/android/maps/overview/">Mapbox Maps SDK for Android</a> can download maps of pre-selected regions for use when the device does not have network connectivity. This process is documented in detail in the <a href="https://www.mapbox.com/help/mobile-offline">Offline maps troubleshooting page</a>.</p>
   <p>This system works well for smaller regions where you don’t have a large number of resources to download. (You can use the <a href="https://www.mapbox.com/help/offline-estimator/">offline tile count estimator</a> to understand the number of tiles in a specific region.) However, because tiles are downloaded individually, this approach can be too slow for larger regions and might result in a poor user experience. In cases like this, offline sideloading can provide a better solution.</p>
@@ -445,4 +445,3 @@ On Android, you can move the location of the main Maps SDK database from interna
     ...
 </application>
 ```
-

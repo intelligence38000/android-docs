@@ -104,14 +104,5 @@
 
 #docs-content .unprose pre,
 .prose pre {
-  display: block;
-  font-family: 'Menlo', 'Bitstream Vera Sans Mono', 'Monaco', 'Consolas',
-    monospace;
-  font-size: 12px;
-  line-height: 1.5em;
-  overflow-x: auto;
-  background: #f4f7fb;
   color: #273d56;
-  padding: 12px;
-  border-radius: 3px;
 }

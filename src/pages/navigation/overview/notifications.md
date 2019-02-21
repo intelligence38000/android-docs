@@ -12,7 +12,7 @@ prependJs:
 
 ## Custom notifications
 
-You can also pass in a custom notification when creating `MapboxNavigtionOptions`. This notificiation will show once navigation begins.
+You can also pass in a custom notification when creating `MapboxNavigationOptions`. This notificiation will show once navigation begins.
 
 {{
 <CodeLanguageToggle id="custom-nav-notification" />

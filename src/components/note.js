@@ -7,11 +7,7 @@ class DocNote extends React.Component {
   render() {
     const { props } = this;
     return (
-      <div className="mt12 mb18">
-        <Note imageComponent={<BookImage width="60" height="60" />}>
-          {props.children}
-        </Note>
-      </div>
+      <Note imageComponent={<BookImage size="60" />}>{props.children}</Note>
     );
   }
 }

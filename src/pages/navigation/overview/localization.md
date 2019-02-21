@@ -16,7 +16,7 @@ By default, distances are given in the predominant measurement system of the sys
 
 The upcoming road or ramp destination is named according to the local or national language. In some regions, the name may be given in multiple languages.
 
-{{<Note title="Localization and the Navigation UI SDK" imageComponent={<BookImage width="60" height="60" />}>}}
+{{<Note title="Localization and the Navigation UI SDK" imageComponent={<BookImage size="60" />}>}}
 Because language and units of measurement are specified when the route is generated, this guide does not describe any specific options in the Navigation UI SDK. The defaults described above will be fed to the Navigation UI SDK. If you would like to customize the language or units of measurement used in text and voice instructions, you must use the `NavigationRoute.Builder`.
 {{</Note>}}
 

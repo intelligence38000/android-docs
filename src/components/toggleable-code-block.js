@@ -4,7 +4,7 @@ import CodeSnippet from '@mapbox/react-code-snippet';
 import { highlightCodeSnippet } from '../util/highlight-code-snippet';
 import { AppContext } from '../context.js';
 
-const highlightTheme = require('raw-loader!../css/prism.css');
+const highlightTheme = require('raw-loader!@mapbox/dr-ui/css/prism.css');
 
 export default class OtherCodeBlock extends React.Component {
   static propTypes = {

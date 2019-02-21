@@ -5,4 +5,5 @@ coverage
 _site
 _tmp
 api
-_batfish_*
+_site
+_site_tmp

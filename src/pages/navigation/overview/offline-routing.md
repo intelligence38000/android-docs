@@ -11,7 +11,7 @@ prependJs:
   - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
-{{ <Note title="Downloading offline routing packs" imageComponent={<BookImage width="60" height="60" />}>}}
+{{<Note title="Downloading offline routing packs" imageComponent={<BookImage size="60" />}>}}
 Offline routing pack downloads are restricted to Mapbox Enterprise customers. If you're interested in moving to an Enterprise plan, [contact us](https://www.mapbox.com/contact/sales/).
 {{</Note>}}
 
