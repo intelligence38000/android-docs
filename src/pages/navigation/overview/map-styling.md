@@ -2,7 +2,7 @@
 title: "Map and app design"
 description: "Some description."
 products:
-  - Navigation UI
+  - Navigation UI SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
@@ -11,7 +11,7 @@ prependJs:
   - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
-Use the Navigation UI SDK to design an application that provides a unique experience for your users or fits your brand. Navigation UI offers a wide range of options for customizing the look of your application including navigation instructions, route lines, and the map style.
+Use the Navigation UI SDK to design an application that provides a unique experience for your users or fits your brand. The Navigation UI SDK offers a wide range of options for customizing the look of your application including navigation instructions, route lines, and the map style.
 
 ## Day and Night mode
 

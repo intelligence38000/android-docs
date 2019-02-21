@@ -2,8 +2,8 @@
 title: "Route progress"
 description: "Read these docs and learn how to use a user's progress information along a route with the Mapbox Navigation SDK for Android."
 products:
-  - Navigation UI
-  - Navigation core
+  - Navigation UI SDK
+  - Navigation SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
@@ -97,7 +97,7 @@ This is a progress object specific to the current step the user is on.
 | upcomingIntersection        | The intersection being traveled towards on the route. Will be null if the upcoming step is null (last step of the leg). |
 
 
-## Navigation UI
+## Navigation UI SDK
 
 Using `NavigationView` in your XML gives you the ability to listen to different updates or events that may occur during navigation. Both the `ProgressChangeListener` ([see above](#listening-to-progress-change)) and `MilestoneEventListener` (see the [`Instructions`](/android/navigation/overview/instructions/) and [`Custom events`](/android/navigation/overview/milestones/) guides) from our core SDK are able to be added, as well as three others: `NavigationListener`, `RouteListener`, and `FeedbackListener`.
 

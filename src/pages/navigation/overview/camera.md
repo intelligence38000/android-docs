@@ -2,8 +2,8 @@
 title: Camera
 description: Fine grain control over the map camera during your Android app navigation experience with the Mapbox Navigation SDK for Android. Click to learn how.
 products:
-  - Navigation UI
-  - Navigation core
+  - Navigation SDK
+  - Navigation UI SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
@@ -13,7 +13,7 @@ prependJs:
 
 The Navigation SDK provides control over the map camera throughout the navigation app experience. This guide provides instructions on how to set the map camera using `NavigationView` and `MapboxNavigation`. You can find more details on how the map camera works in the [Maps SDK for Android documentation](/android/maps/overview/camera/).
 
-## Navigation UI
+## Navigation UI SDK
 
 Using the Navigation UI SDK, you can specify the initial camera position and update the camera position as the user progresses along the route or when the user interacts with the UI.
 

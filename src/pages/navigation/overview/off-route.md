@@ -2,7 +2,7 @@
 title: "Off-route detection"
 description: "The Mapbox Navigation SDK for Android offers off-route detection for your Android app's navigation experience. Read this documentation to learn how."
 products:
-  - Navigation core
+  - Navigation SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"

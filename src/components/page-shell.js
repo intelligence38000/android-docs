@@ -219,7 +219,7 @@ class PageShell extends React.Component {
         </h1>
       );
     } else {
-      const products = ['Navigation core', 'Navigation UI'].map(p => {
+      const products = ['Navigation SDK', 'Navigation UI SDK'].map(p => {
         return (
           <div>
             <span

@@ -2,8 +2,7 @@
 title: Custom events
 description: "Trusted documentation about milestones within the Mapbox Navigation SDK for Android. Know when to instruct your users and/or when to hide or show custom UI."
 products:
-  - Navigation UI
-  - Navigation core
+  - Navigation SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"

@@ -2,12 +2,13 @@
 title: "Custom Navigation Options"
 description: "Mapbox documentation about navigation options within the Mapbox Navigation SDK for Android such as custom notifications and even more."
 products:
-  - Navigation UI
-  - Navigation core
+  - Navigation SDK
+  - Navigation UI SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
+
 ## Configuring `MapboxNavigtionOptions`
 
 The `MapboxNavigtionOptions` object allows you to configure certain aspects of the navigation experience. For example, if you wanted

@@ -2,8 +2,8 @@
 title: Instructions
 description: Some description.
 products:
-  - Navigation UI
-  - Navigation core
+  - Navigation SDK
+  - Navigation UI SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
@@ -57,7 +57,7 @@ SSML stands for Speech Synthesis Markup Language and is designed to work with [A
 `BannerInstructionMilestone` fires every time textual instructions should be updated, most of the time in the format of a "banner" view on the top of the screen. This milestone provides a `BannerInstructions` object for the given point along the route.  This object contains text and URLs for shield images that can be displayed on screen at the time the milestone fires.  
 
 
-## Navigation UI instructions
+## Navigation UI SDK
 
 In the Navigation UI SDK, banner and voice instructions are triggered by the default milestones described above. There are default styling rules for banner instructions and default settings for voice instructions. Instructions can be customized to an extent including overriding default behaviors when instructions are triggered and customizing the style of banner instructions. Creating [custom milestones](/android/navigation/overview/milestones/) must be done with the core Navigation SDK.
 

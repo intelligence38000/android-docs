@@ -2,8 +2,8 @@
 title: "Map Matching with Navigation"
 description: "Using Map Matching with the Navigation SDK"
 products:
-  - Navigation core
-  - Navigation UI
+  - Navigation SDK
+  - Navigation UI SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"

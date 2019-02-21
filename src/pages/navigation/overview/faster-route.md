@@ -2,7 +2,7 @@
 title: Faster-route detection
 description: Faster-route detection in the Mapbox Navigation SDK for Android. Read all about it in this official Mapbox documentation.
 products:
-  - Navigation core
+  - Navigation SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"

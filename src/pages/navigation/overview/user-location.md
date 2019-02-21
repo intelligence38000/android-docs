@@ -2,8 +2,8 @@
 title: "User location"
 description: Some description
 products:
-  - Navigation UI
-  - Navigation core
+  - Navigation UI SDK
+  - Navigation SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
@@ -17,7 +17,7 @@ The Navigation SDK will create a default `LocationEngine` with `LocationEnginePr
 For detailed instructions on how to use `LocationEngine`, [see the `LocationEngine` documentation](https://docs.mapbox.com/android/core/overview/#locationengine). 
 
 
-## Navigation UI options
+## Navigation UI SDK
 
 The logic for getting user location lives in the core Navigation SDK. If you are using the Navigation UI SDK, that data will be styled and displayed in a UI component. Read about default and customization options for the Navigation UI below.
 

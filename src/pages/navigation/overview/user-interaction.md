@@ -2,7 +2,7 @@
 title: User interaction
 description: Some description.
 products:
-  - Navigation UI
+  - Navigation UI SDK
 ---
 
 [WIP]

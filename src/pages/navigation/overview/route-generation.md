@@ -2,7 +2,7 @@
 title: Route generation
 description: Some description.
 products:
-  - Navigation core
+  - Navigation SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"

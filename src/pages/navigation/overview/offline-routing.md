@@ -2,7 +2,7 @@
 title: Offline routing
 description: Mapbox offline navigation provides routing functionality from the Navigation SDK for Android in non-connected environments.
 products:
-  - Navigation core
+  - Navigation SDK
 prependJs:
   - "import { NAVIGATION_VERSION } from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"

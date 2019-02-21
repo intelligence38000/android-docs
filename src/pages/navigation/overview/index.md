@@ -40,18 +40,18 @@ The Navigation SDK for Android allows you to build a complete in-app navigation 
 
 ## Products
 
-There are two products for integrating navigation into your Android application, Navigation Core and Navigation UI:
+There are two products for integrating navigation into your Android application, the core Navigation SDK and Navigation UI SDK:
 
-- **Navigation Core** is where the logic lives for generating routes, tracking progress, receiving instructions, and more. You can use this directly via the `MapboxNavigation` class or through the Navigation UI. 
-- **Navigation UI** is built on top of Navigation Core (meaning Navigation Core is included when you add the Navigation UI as a dependency). It consumes data from Navigation Core and arranges it in default UI components that have various customization options. You can use this directly via the `NavigationView` and `NavigationLauncher` classes without touching the core `MapboxNavigation` class directly in your application's code. 
-- **Navigation Core and Navigation UI** can be used together if you want to use a mixture of the Mapbox-provided UI components and your own custom UI fed data from Navigation Core.
+- The **Navigation SDK** is where the logic lives for generating routes, tracking progress, receiving instructions, and more. You can use this directly via the `MapboxNavigation` class or through the Navigation UI. 
+- The **Navigation UI SDK** is built on top of the core Navigation SDK (meaning the Navigation SDK is included when you add the Navigation UI SDK as a dependency). It consumes data from the core Navigation SDK and arranges it in default UI components that have various customization options. You can use this directly via the `NavigationView` and `NavigationLauncher` classes without touching the core `MapboxNavigation` class directly in your application's code. 
+- The core **Navigation SDK** and the **Navigation UI SDK** can be used together if you want to use a mixture of the Mapbox-provided UI components and your own custom UI fed data from the core Navigation SDK.
 
 
 ## Installation
 
 You'll need to add the Navigation SDK or Navigation UI SDK as a dependency before developing your app. Note that while we show how to insert the stable version of the SDK inside your project, you can also use the nightly build/SNAPSHOT or the beta version if one is available. Find more information about how to do this inside [the Navigation SDK's GitHub repository](https://github.com/mapbox/mapbox-navigation-android/#using-snapshots).
 
-### Navigation Core
+### Navigation SDK
 
 Learn how to install the core Navigation SDK and request your first route using `NavigationRoute`.
 
@@ -60,7 +60,7 @@ Learn how to install the core Navigation SDK and request your first route using 
 {{
   <div className="mt18 mb24">
     <Note 
-    title="Add Navigation Core only when not using Navigation UI"
+    title="Add the core Navigation SDK only when not using the Navigation UI SDK"
     imageComponent={<BookImage width="60" height="60" />}>
 }}
 If you're using the Navigation UI SDK, you **don't** have to declare the Mapbox Navigation SDK as well. If you only declare the Navigation UI SDK in your project's Gradle file, the Mapbox Navigation SDK will automatically be included.
@@ -182,7 +182,7 @@ NavigationRoute.builder(context)
 }}
 
 
-### Navigation UI
+### Navigation UI SDK
 
 The Navigation UI SDK is the fastest way to get a navigation UI in your application. 
 
@@ -273,7 +273,9 @@ override fun onDestroy() {
 
 ## Testing and development
 
-## Replaying a DirectionsRoute
+There are a few methods that can be helpful when developing and testing your application.
+
+### Replay a DirectionsRoute
 
 The Navigation SDK includes a `ReplayRouteLocationEngine`, which allows you to replay a given `DirectionsRoute` (mainly for testing, so you don't always have to code in a car). After retrieving a `DirectionsRoute`, you can create a replay engine and pass it to `MapboxNavigation`:
 
@@ -305,4 +307,7 @@ navigation.startNavigation(routeToReplay)
 
 />
 }}
+
+### Simulate a route
+
 
