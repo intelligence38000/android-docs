@@ -7,9 +7,9 @@ class MarkdownPageshell extends React.Component {
   render() {
     let productInfo = null;
     if (this.props.frontMatter.products) {
-      const products = ['Navigation SDK', 'Navigation UI SDK'].map(p => {
+      const products = ['Navigation SDK', 'Navigation UI SDK'].map((p, i) => {
         return (
-          <div>
+          <div key={i}>
             <span
               className={
                 this.props.frontMatter.products.indexOf(p) > -1
