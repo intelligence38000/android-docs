@@ -69,6 +69,7 @@ module.exports = () => {
   const config = {
     siteBasePath: '/android',
     siteOrigin: 'https://docs.mapbox.com',
+    productionDevtool: 'source-map',
     browserslist: mapboxAssembly.browsersList,
     postcssPlugins: mapboxAssembly.postcssPipeline.plugins,
     outputDirectory: path.join(__dirname, '_site/'),
