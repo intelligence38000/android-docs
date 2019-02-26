@@ -4,9 +4,12 @@ description: Learn how to use a user's progress information along a route with t
 products:
   - Navigation UI SDK
   - Navigation SDK
+tag: fundamentals
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+  - "import { RouteLegStepMap } from '../../../components/route-leg-step-map';"
+  - "import AppropriateImage from '../../../components/appropriate-image'"
   - "import Note from '@mapbox/dr-ui/note';"
   - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
@@ -43,7 +46,28 @@ override fun onProgressChange(location: Location, routeProgress: RouteProgress) 
 
 ## Information about progress
 
-There are three classes that contain information on route progress at different levels of granularity. <!-- ❓ Clarify the differences / relationships between routes, legs, and steps here. -->
+There are three classes that contain information on route progress at different levels of granularity: route, leg, and step.
+
+{{
+<div className="grid grid--gut18">
+<div className="col col--8-ml col--12 mb18">
+    <RouteLegStepMap />
+</div>
+<div className="col col--4-ml col--12">
+}}
+
+<!-- <AppropriateImage imageId="navigationRouteLegStep" /> -->
+
+**Route**: The <span className="color-blue txt-bold">blue line</span> represents a route. A route stretches between the origin and destination. 
+
+**Leg**: The larger circles with a <span className="color-pink txt-bold">pink stroke</span> represent waypoints, or stops, along the route. A leg is the portion of the route between two waypoints.
+
+**Step**: The smaller circles with a <span className="color-gray txt-bold">gray stroke</span> represent [milestones??]. A step is the portion of the leg between two [milestones??]. 
+
+{{
+</div>
+</div>
+}}
 
 ### RouteProgress
 

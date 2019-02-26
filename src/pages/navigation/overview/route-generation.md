@@ -3,6 +3,7 @@ title: Route generation
 description: Learn how to generate routes for use in the Mapbox Navigation SDK or Navigation UI SDK for Android.
 products:
   - Navigation SDK
+tag: fundamentals
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
@@ -79,7 +80,7 @@ NavigationRoute.builder(context)
 
 ## Request a route in a specific direction
 
-Consider the direction a user’s device is facing, and request a route starting in a specific direction. To receive a route that starts off in the same direction the user is already traveling, pass in the user’s location bearing value (between 0 and 355 degrees).
+Consider the direction a user’s device is facing, and request a route starting in a specific direction. To receive a route that starts off in the same direction the user is already traveling, pass in the user’s location [`bearing`](https://docs.mapbox.com/mapbox-gl-js/style-spec/#root-bearing) value (between 0 and 355 degrees).
 
 If you need to request a route that's continuing along the path that the user is traveling, specify a bearing and a tolerance that determines how far you are willing to deviate from the provided bearing. This is useful for off-route scenarios.
 
@@ -157,7 +158,7 @@ builder.build()
 
 ## Include multiple stops
 
-If your navigation involves a bunch of pick-up and drop-off points, you can add up to 25 coordinates to the `NavigationRoute` builder; these are considered stops in between the origin and destination `Points` (in the order that you add them - first waypoint is the first stop):
+If your navigation involves a bunch of pick-up and drop-off points, you can add up to 25 coordinates to the `NavigationRoute` builder using the `driving` profile (or three coordinates using the `driving-traffic` profile).  these are considered stops in between the origin and destination `Points` (in the order that you add them - first waypoint is the first stop):
 
 {{
 <CodeLanguageToggle id="route-builder" />

@@ -1,5 +1,5 @@
 ---
-title: Notifications
+title: Device notifications
 description: Mapbox documentation about how notifications work in the Mapbox Navigation SDK for Android.
 products:
   - Navigation SDK
@@ -8,7 +8,7 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
-❓ How do default notifications work ❓
+By default, device notifications display the upcoming maneuver icon and instruction text, as well as the distance remaining to said maneuver. This default notification will always be displayed unless otherwise overridden by a custom notification as outlined below.
 
 ## Custom notifications
 

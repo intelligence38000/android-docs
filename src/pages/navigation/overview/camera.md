@@ -1,5 +1,5 @@
 ---
-title: Camera
+title: Map camera
 description: Fine grain control over the map camera during your Android app navigation experience with the Mapbox Navigation SDK for Android. Click to learn how.
 products:
   - Navigation SDK

@@ -19,6 +19,7 @@ import { productNames } from '../data/product-names';
 import listExamples from '@mapbox/batfish/data/list-examples';
 import orderedPages from '@mapbox/batfish/data/ordered-pages';
 import TopNavTabs from './top-nav-tabs';
+import { MustRead } from './must-read';
 
 class PageShell extends React.Component {
   static propTypes = {
@@ -120,13 +121,24 @@ class PageShell extends React.Component {
             })
         };
       });
+      const orderedPagesWithTags = orderedPages[
+        pathPrefixMatch[1] + pathPrefixMatch[2]
+      ].map(page => {
+        return {
+          title: (
+            <span>
+              {page.title} {page.tag !== '' ? <MustRead /> : ''}
+            </span>
+          ),
+          path: page.path
+        };
+      });
       pageNavigation = (
         <div className="mx0-mm ml-neg24 mr-neg36 relative-mm absolute right left">
           <NavigationAccordion
             currentPath={location.pathname}
             contents={{
-              firstLevelItems:
-                orderedPages[pathPrefixMatch[1] + pathPrefixMatch[2]],
+              firstLevelItems: orderedPagesWithTags,
               secondLevelItems: secondLevelItems || null
             }}
             onDropdownChange={value => {

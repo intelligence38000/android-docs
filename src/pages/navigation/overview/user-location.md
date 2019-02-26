@@ -4,18 +4,20 @@ description: Learn how to retrieve and manager user location in the Mapbox Navig
 products:
   - Navigation SDK
   - Navigation UI SDK
+tag: fundamentals
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import AppropriateImage from '../../../components/appropriate-image'"
+  - "import Note from '@mapbox/dr-ui/note';"
+  - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
-Navigation applications often use the user's current location as the `origin` when requesting a route. With the Navigation SDK, this is done using the `LocationEngine` class. 
+Navigation applications often use the user's current location as the `origin` when requesting a route. With the Navigation SDK, this is done using the `LocationEngine` class. By default, the Navigation SDK will use the best location engine available and display the user's location with the default styles described below. This guide walks through how to customize both the style of the user location icon and the location engine.
 
-The Navigation SDK will create a default `LocationEngine` with `LocationEngineProvider#getBestLocationEngine` and if an engine is not passed and a default `LocationEngineRequest` with parameters suitable for navigation if a request is not passed before navigation is started. 
-
-For detailed instructions on how to use `LocationEngine`, [see the `LocationEngine` documentation](https://docs.mapbox.com/android/core/overview/#locationengine). 
-
+{{<Note title="More on LocationEngine" imageComponent={<BookImage size="60" />}>}}
+For more details on how `LocationEngine` works, [see the `LocationEngine` documentation](https://docs.mapbox.com/android/core/overview/#locationengine). 
+{{</Note>}}
 
 ## Navigation UI SDK
 
@@ -30,16 +32,6 @@ The logic for getting user location lives in the core Navigation SDK. If you are
 By default, the style of the user location dot that is added to the map is inherited from the default in the Mapbox Maps SDK for Android. This is a blue dot with a white stroke and a small blue triangle that indicates the direction the device is facing.
 
 You can read more about custom styling options for the user location dot in the [Maps SDK documentation](/android/maps/overview/location-component/#active-styling-options).
-
-❓ <-- How: 
-
-```
-Is there any 
-code we should
-be sharing here?
-```
-
---> ❓
 
 {{
   </div>
@@ -59,15 +51,22 @@ There is a different icon used to indicate the user's location in the Navigation
 
 You can read more about custom styling options for the user location GPS icon in the [Maps SDK documentation](/android/maps/overview/location-component/#rendermode).
 
-❓ <-- How: 
+{{
+<CodeLanguageToggle id="code-user-location-along-route-progress" />
+<ToggleableCodeBlock
 
-```
-Is there any 
-code we should
-be sharing here?
-```
+java={`
+NavigationMapboxMap map = navigationView.retrieveNavigationMapboxMap();
+map.updateLocationLayerRenderMode(RenderMode.NORMAL);
+`}
 
---> ❓
+kotlin={`
+val map = navigationView.retrieveNavigationMapboxMap()
+map?.updateLocationLayerRenderMode(RenderMode.NORMAL)
+`}
+
+/>
+}}
 
 {{
   </div>

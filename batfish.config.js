@@ -83,7 +83,8 @@ module.exports = () => {
       require.resolve('@mapbox/dr-ui/css/prism.css'),
       path.join(__dirname, './vendor/docs-page-shell/page-shell-styles.css'),
       path.join(__dirname, './src/css/site.css'),
-      require.resolve('@mapbox/dr-ui/css/docs-prose.css')
+      require.resolve('@mapbox/dr-ui/css/docs-prose.css'),
+      'https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css'
     ],
     dataSelectors: {
       platform: function() {
@@ -94,7 +95,8 @@ module.exports = () => {
       orderedPages: data => {
         const pages = data.pages.map(p => ({
           title: p.frontMatter.title,
-          path: p.path
+          path: p.path,
+          tag: p.frontMatter.tag ? p.frontMatter.tag : ''
         }));
         const result = _.reduce(
           productPageOrder,

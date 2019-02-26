@@ -37,9 +37,9 @@ The Navigation SDK for Android allows you to build a complete in-app navigation 
 - Detecting when a user goes off-route
 - Specifying which side of the road to approach a waypoint
 
-## Products
+## Available SDKs
 
-There are two products for integrating navigation into your Android application, the core Navigation SDK and Navigation UI SDK:
+There are two SDKs that can be used to integrate navigation into your Android application, the core **Navigation SDK** and the **Navigation UI SDK**:
 
 - The **Navigation SDK** is where the logic lives for generating routes, tracking progress, receiving instructions, and more. You can use this directly via the `MapboxNavigation` class or through the Navigation UI. 
 - The **Navigation UI SDK** is built on top of the core Navigation SDK (meaning the Navigation SDK is included when you add the Navigation UI SDK as a dependency). It consumes data from the core Navigation SDK and arranges it in default UI components that have various customization options. You can use this directly via the `NavigationView` and `NavigationLauncher` classes without touching the core `MapboxNavigation` class directly in your application's code. 
@@ -48,23 +48,22 @@ There are two products for integrating navigation into your Android application,
 
 ## Product capabilities
 
-This documentation contains information for both the Navigation SDK and the Navigation UI SDK across a variety of topics:
+This documentation contains information for both the core Navigation SDK and the Navigation UI SDK across a variety of topics:
 
 {{<div className="grid grid--gut12">
-  <div className="col col--6-mm col--12 mb24">}}
+  <div className="col col--6-ml col--12 mb24">}}
 
 **Manage user location**
 - [User location](/android/navigation/overview/user-location/) {{ <MustRead /> }}
 
-{{</div><div className="col col--6-mm col--12 mb24">}}
+{{</div><div className="col col--6-ml col--12 mb24">}}
 
 **Build route requests**
 - [Route generation](/android/navigation/overview/route-generation/) {{ <MustRead /> }}
-- [Localization](/android/navigation/overview/localization/)
 - [Offline routing](/android/navigation/overview/offline-routing/)
 - [Map matching for navigation](/android/navigation/overview/map-matching/)
 
-{{</div><div className="col col--6-mm col--12 mb24">}}
+{{</div><div className="col col--6-ml col--12 mb24">}}
 
 **Track progress along a route**
 - [Route progress](/android/navigation/overview/route-progress/) {{ <MustRead /> }}
@@ -74,10 +73,11 @@ This documentation contains information for both the Navigation SDK and the Navi
 - [Off-route detection](/android/navigation/overview/off-route/)
 - [Faster-route detection](/android/navigation/overview/faster-route/)
 
-{{</div><div className="col col--6-mm col--12 mb24">}}
+{{</div><div className="col col--6-ml col--12 mb24">}}
 
 **Customize the look and feel**
-- [Camera](/android/navigation/overview/camera/)
+- [Map camera](/android/navigation/overview/camera/)
+- [Localization](/android/navigation/overview/localization/)
 - [Map and app styling](/android/navigation/overview/map-design/)
 - [User interaction](/android/navigation/overview/user-interaction/)
 
@@ -85,7 +85,11 @@ This documentation contains information for both the Navigation SDK and the Navi
 
 ## Installation
 
-You'll need to add the Navigation SDK or Navigation UI SDK as a dependency before developing your app. Note that while we show how to insert the stable version of the SDK inside your project, you can also use the nightly build/SNAPSHOT or the beta version if one is available. Find more information about how to do this inside [the Navigation SDK's GitHub repository](https://github.com/mapbox/mapbox-navigation-android/#using-snapshots).
+You'll need to add the Navigation SDK or Navigation UI SDK as a dependency before developing your app. 
+
+{{<Note title="Using nightly builds and beta versions" imageComponent={<BookImage size="60" />}>}}
+Note that while we show how to insert the stable version of the SDK inside your project, you can also use the nightly build/SNAPSHOT or the beta version if one is available. Find more information about how to do this inside [the Navigation SDK's GitHub repository](https://github.com/mapbox/mapbox-navigation-android/#using-snapshots).
+{{</Note>}}
 
 ### Navigation SDK
 
@@ -116,7 +120,9 @@ dependencies {
 
 #### Get an access token
 
-If you don't have a Mapbox account: [sign up](https://www.mapbox.com/signup/), navigate to your [Account page](https://www.mapbox.com/account/), and copy your **default public token** to your clipboard. After you've added the Navigation SDK as a dependency inside your Android project, open the `string.xml` file, create a new string, and paste the access token. Then, pass this into the Navigation SDK.
+If you don't have a Mapbox account: [sign up](https://www.mapbox.com/signup/) and navigate to your [Account page](https://www.mapbox.com/account/). For quick development and testing, you can use your **default public token**. Later in development, you may want to create an access token specifically for this project. Find more details on managing access tokens in our guide on [how access tokens work](https://docs.mapbox.com/help/how-mapbox-work/access-tokens/).
+
+After you've added the Navigation SDK as a dependency inside your Android project, open the `string.xml` file, create a new string, and paste the access token. Then, pass this into the Navigation SDK.
 
 {{
 <CodeLanguageToggle id="access-token" />
@@ -160,6 +166,10 @@ For best navigation results, we strongly recommend using the fine location permi
 #### Request a route
 
 Now that you have created a way for the `MapboxNavigation` object to get the user's location, you can create a route using `NavigationRoute`. Pass in an origin, destination, and a callback to handle the response. Inside the `onResponse`, you can draw the directions route on a map or show time and distance using the full directions response.
+
+{{<Note title="More about route generation" imageComponent={<BookImage size="60" />}>}}
+Find more detailed information about requesting routes in the [Route generation](/android/navigation/overview/route-generation/) guide.
+{{</Note>}}
 
 {{
 <CodeLanguageToggle id="route-request" />
@@ -341,7 +351,7 @@ navigation.startNavigation(routeToReplay)
 
 ### Turn on debug logging
 
-Turn on debug logging using `MapboxNavigtionOptions`:
+Turn on debug logging using `MapboxNavigationOptions`:
 
 {{
 <CodeLanguageToggle id="debug-logging-enabled" />

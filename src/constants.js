@@ -1,4 +1,6 @@
 /* SDK Versions */
+export const ACCESS_TOKEN =
+  'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2lqbmpqazdlMDBsdnRva284cWd3bm11byJ9.V6Hg2oYJwMAxeoR9GEzkAA';
 export const JAVA_SDK_VERSION = '4.5.0';
 export const MAP_SDK_VERSION = '7.1.2';
 export const NAVIGATION_VERSION = '0.30.0';

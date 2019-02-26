@@ -1,5 +1,5 @@
 ---
-title: Instructions
+title: Turn-by-turn instructions
 description: Learn how instructions work in the core Mapbox Navigation SDK and Navigation UI SDK for Android.
 products:
   - Navigation SDK
@@ -11,36 +11,11 @@ prependJs:
   - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
-Navigation instructions and cues are shown and hidden using milestones set in the core Navigation SDK. ❓ Milestones are...❓.
+Navigation instructions and cues are shown and hidden using milestones set in the core Navigation SDK. `Milestone`s are event triggers that can be added and then triggered at points along the route based on the current progress of the user.
 
 {{<Note title="Building custom milestones" imageComponent={<BookImage size="60" />}>}}
 This guide covers default milestones used to display UI instructions and trigger voice instructions. For information on building custom milestones, see [Custom events](/android/navigation/overview/custom-events/).
 {{</Note>}}
-
-
-## Milestone event listener
-
-All milestones use the `onMilestoneEvent` callback to alert when they get triggered. If you want to make use of the milestones API, you will want to attach a `MilestoneEventListener` inside your app. When all the milestone trigger conditions are true, the callback is invoked and provides you with the latest routeProgress along with the milestone's corresponding `String` instruction and the `Milestone` itself that was triggered. You can use your text-to-speech engine of choice and have it consume the instruction.
-
-{{
-<CodeLanguageToggle id="on-milestone-event" />
-<ToggleableCodeBlock
-
-java={`
-@Override
-public void onMilestoneEvent(RouteProgress routeProgress, String instruction, Milestone milestone) {
-  exampleInstructionPlayer.play(instruction);
-}
-`}
-
-kotlin={`
-override fun onMilestoneEvent(routeProgress: RouteProgress, instruction: String, milestone: Milestone) {
-    exampleInstructionPlayer.play(instruction)
-}
-`}
-
-/>
-}}
 
 ## Default milestones
 
@@ -55,7 +30,6 @@ SSML stands for Speech Synthesis Markup Language and is designed to work with [A
 ### BannerInstructionMilestone
 
 `BannerInstructionMilestone` fires every time textual instructions should be updated, most of the time in the format of a "banner" view on the top of the screen. This milestone provides a `BannerInstructions` object for the given point along the route.  This object contains text and URLs for shield images that can be displayed on screen at the time the milestone fires.  
-
 
 ## Navigation UI SDK
 
@@ -205,6 +179,30 @@ override fun onCreate(savedInstanceState: Bundle?) {
     setContentView(R.layout.activity_navigation)
 }
 `}
+/>
+}}
+
+## Milestone event listener
+
+All milestones use the `onMilestoneEvent` callback to alert when they get triggered. If you want to make use of the milestones API, you will want to attach a `MilestoneEventListener` inside your app. When all the milestone trigger conditions are true, the callback is invoked and provides you with the latest routeProgress along with the milestone's corresponding `String` instruction and the `Milestone` itself that was triggered. You can use your text-to-speech engine of choice and have it consume the instruction.
+
+{{
+<CodeLanguageToggle id="on-milestone-event" />
+<ToggleableCodeBlock
+
+java={`
+@Override
+public void onMilestoneEvent(RouteProgress routeProgress, String instruction, Milestone milestone) {
+  exampleInstructionPlayer.play(instruction);
+}
+`}
+
+kotlin={`
+override fun onMilestoneEvent(routeProgress: RouteProgress, instruction: String, milestone: Milestone) {
+    exampleInstructionPlayer.play(instruction)
+}
+`}
+
 />
 }}
 
