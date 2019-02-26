@@ -13,7 +13,7 @@ prependJs:
   - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
-Navigation applications often use the user's current location as the `origin` when requesting a route. With the Navigation SDK, this is done using the `LocationEngine` class. By default, the Navigation SDK will use the best location engine available and display the user's location with the default styles described below. This guide walks through how to customize both the style of the user location icon and the location engine.
+Navigation applications often use the user's current location as the `origin` when requesting a route. With the Navigation SDK, this is done using the `LocationEngine` class. By default, the Navigation SDK will use the best location engine available and display the user's location with the default styles described below. This guide walks through how to customize both the user location icon and the location engine.
 
 {{<Note title="More on LocationEngine" imageComponent={<BookImage size="60" />}>}}
 For more details on how `LocationEngine` works, [see the `LocationEngine` documentation](https://docs.mapbox.com/android/core/overview/#locationengine). 
@@ -47,7 +47,7 @@ You can read more about custom styling options for the user location dot in the 
 <div className="grid grid--gut36 my24">
   <div className="col col--8-mm col--12">
 }}
-There is a different icon used to indicate the user's location in the NavigationView while the user is progressing through the route. By default, the user location icon that is displayed when the NavigationView is launched is a white circle containing a blue arrow. 
+There is a different icon used to indicate the user's location while the user is progressing through the route. By default, the user location icon during navigation is a white circle containing a blue arrow. 
 
 You can read more about custom styling options for the user location GPS icon in the [Maps SDK documentation](/android/maps/overview/location-component/#rendermode).
 

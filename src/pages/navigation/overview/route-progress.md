@@ -20,7 +20,7 @@ Tracking a user's progress along a route is key to providing helpful and timely 
 
 Like tracking user location changes, the `ProgressChangeListener` is invoked every time the user's location changes and provides an updated `RouteProgress` object. The Navigation UI SDK uses this listener by default, but if you are not using the Navigation UI SDK, it is strongly encouraged that you also use this listener. The `ProgressChangeListener` can typically be used to refresh most of your application's user interface when a change occurs. For example, if you are displaying the user's current progress until the user needs to do the next maneuver. Every time this listener's invoked, you can update your view with the new information from `RouteProgress`.
 
-In addition to receiving information about the route progress, the callback also provides you with the user's current location, which can provide their current speed, bearing, etc. If you have the snap to route enabled, the location object will be updated to give the snapped coordinates.
+In addition to receiving information about the route progress, the callback also provides you with the user's current location, which can provide their current speed, bearing, etc. If you have the snap-to-route enabled, the location object will be updated to give the snapped coordinates.
 
 {{
 <CodeLanguageToggle id="on-progress-changed" />
@@ -55,8 +55,6 @@ There are three classes that contain information on route progress at different 
 </div>
 <div className="col col--4-ml col--12">
 }}
-
-<!-- <AppropriateImage imageId="navigationRouteLegStep" /> -->
 
 **Route**: The <span className="color-blue txt-bold">blue line</span> represents a route. A route stretches between the origin and destination. 
 
@@ -123,24 +121,24 @@ This is a progress object specific to the current step the user is on.
 
 ## Navigation UI SDK
 
-Using `NavigationView` in your XML gives you the ability to listen to different updates or events that may occur during navigation. Both the `ProgressChangeListener` ([see above](#listening-to-progress-change)) and `MilestoneEventListener` (see the [`Instructions`](/android/navigation/overview/instructions/) and [`Custom events`](/android/navigation/overview/milestones/) guides) from our core SDK are able to be added, as well as three others: `NavigationListener`, `RouteListener`, and `FeedbackListener`.
+Using `NavigationView` in your XML gives you the ability to listen to different updates or events that may occur during navigation. Both the `ProgressChangeListener` ([see above](#listening-to-progress-change)) and `MilestoneEventListener` (see the [`Instructions`](/android/navigation/overview/instructions/) and [`Custom events`](/android/navigation/overview/milestones/) guides) from our core SDK are able to be added, as well as `RouteListener`.
 
 {{<Note imageComponent={<BookImage size="60" />}>}}
-These listeners are only available if you are adding `NavigationView` to your `Activity` or `Fragment` layout XML via `NavigationViewOptions`. You are not able to add them to `NavigationLauncherOptions`.
+This listeners is only available if you are adding `NavigationView` to your `Activity` or `Fragment` layout XML via `NavigationViewOptions`. You are not able to add them to `NavigationLauncherOptions`.
 {{</Note>}}
 
 ### RouteListener
 
-| ❓ | Description |
+| Callback | Description |
 |---|---|
-| `allowRerouteFrom(Point offRoutePoint)` | Will trigger in an off-route scenario. <ul><li>Given the `Point` the user has gone off-route, this listener can return true or false.</li><li>Returning true will allow the SDK to proceed with the re-route process and fetch a new route with this given off-route `Point`.</li><li>Returning false will stop the re-route process and the user will continue without a new route in the direction they are traveling.</li></ul> |
-| `onOffRoute(Point offRoutePoint)` | Will trigger only if `RouteListener#allowRerouteFrom(Point)` returns true. (This serves as the official off-route event and will continue the process to fetch a new route with the given off-route `Point`.)
-| `onRerouteAlong(DirectionsRoute directionsRoute)` | Will trigger when a new `DirectionsRoute` has been retrieved post off-route. (This is the new route the user will be following until another off route event is triggered.)
-| `onFailedReroute(String errorMessage)` | Will trigger if the request for a new `DirectionsRoute` fails. (Provides the error message from the directions API used to retrieve the `DirectionsRoute`.) | 
+| `allowRerouteFrom(Point offRoutePoint)` | Will trigger in an off-route scenario: <ul><li>Given the `Point` the user has gone off-route, this listener can return true or false.</li><li>Returning true will allow the SDK to proceed with the re-route process and fetch a new route with this given off-route `Point`.</li><li>Returning false will stop the re-route process and the user will continue without a new route in the direction they are traveling.</li></ul> |
+| `onOffRoute(Point offRoutePoint)` | Will trigger only if `RouteListener#allowRerouteFrom(Point)` returns true. This serves as the official off-route event and will continue the process to fetch a new route with the given off-route `Point`. |
+| `onRerouteAlong(DirectionsRoute directionsRoute)` | Will trigger when a new `DirectionsRoute` has been retrieved post off-route. This is the new route the user will be following until another off route event is triggered. | 
+| `onFailedReroute(String errorMessage)` | Will trigger if the request for a new `DirectionsRoute` fails. Provides the error message from the directions API used to retrieve the `DirectionsRoute`. | 
 
 ## More about route progress
 
 Read more about route progress in: 
 
 - [Off-route detection](/android/navigation/overview/off-route/): Detect whether or not a user is on the generated route throughout their trip. If a user is off-route, provide additional instruction or generate a new route. 
-- [Faster-route detection](/android/navigation/overview/off-route/): Specify when to check for faster routes and how to determine if a route is faster, then retrieve and initialize faster routes.
+- [Faster-route detection](/android/navigation/overview/faster-route/): Specify when to check for faster routes and how to determine if a route is faster, then retrieve and initialize faster routes.

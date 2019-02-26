@@ -41,7 +41,7 @@ The Navigation SDK for Android allows you to build a complete in-app navigation 
 
 There are two SDKs that can be used to integrate navigation into your Android application, the core **Navigation SDK** and the **Navigation UI SDK**:
 
-- The **Navigation SDK** is where the logic lives for generating routes, tracking progress, receiving instructions, and more. You can use this directly via the `MapboxNavigation` class or through the Navigation UI. 
+- The **Navigation SDK** is where the logic lives for generating routes, tracking progress, receiving instructions, and more. You can use this directly via the `MapboxNavigation` class or through the Navigation UI SDK. 
 - The **Navigation UI SDK** is built on top of the core Navigation SDK (meaning the Navigation SDK is included when you add the Navigation UI SDK as a dependency). It consumes data from the core Navigation SDK and arranges it in default UI components that have various customization options. You can use this directly via the `NavigationView` and `NavigationLauncher` classes without touching the core `MapboxNavigation` class directly in your application's code. 
 - The core **Navigation SDK** and the **Navigation UI SDK** can be used together if you want to use a mixture of the Mapbox-provided UI components and your own custom UI fed data from the core Navigation SDK.
 
@@ -67,15 +67,15 @@ This documentation contains information for both the core Navigation SDK and the
 
 **Track progress along a route**
 - [Route progress](/android/navigation/overview/route-progress/) {{ <MustRead /> }}
-- [Instructions](/android/navigation/overview/instructions/)
-- [Notifications](/android/navigation/overview/notifications/)
+- [Turn-by-turn instructions](/android/navigation/overview/instructions/)
+- [Device notifications](/android/navigation/overview/notifications/)
 - [Custom events](/android/navigation/overview/milestones/)
 - [Off-route detection](/android/navigation/overview/off-route/)
 - [Faster-route detection](/android/navigation/overview/faster-route/)
 
 {{</div><div className="col col--6-ml col--12 mb24">}}
 
-**Customize the look and feel**
+**Customize the visual experience**
 - [Map camera](/android/navigation/overview/camera/)
 - [Localization](/android/navigation/overview/localization/)
 - [Map and app styling](/android/navigation/overview/map-design/)
@@ -101,10 +101,10 @@ Learn how to install the core Navigation SDK and request your first route using 
 If you're using the Navigation UI SDK, you **don't** have to declare the Mapbox Navigation SDK as well. If you only declare the Navigation UI SDK in your project's Gradle file, the Mapbox Navigation SDK will automatically be included.
 {{</Note>}}
 
-1. Start Android Studio
-2. Open up your app's `build.gradle` file
-3. Make sure that your project's `minSdkVersion` is at API 14 or higher
-4. Under dependencies, add a new build rule for the latest `mapbox-android-navigation`
+1. Start Android Studio.
+2. Open up your app's `build.gradle` file.
+3. Make sure that your project's `minSdkVersion` is at API 14 or higher.
+4. Under dependencies, add a new build rule for the latest `mapbox-android-navigation`.
 5. Click the `Sync Project with Gradle Files` near the toolbar in Studio.
 
 ```groovy
@@ -120,7 +120,7 @@ dependencies {
 
 #### Get an access token
 
-If you don't have a Mapbox account: [sign up](https://www.mapbox.com/signup/) and navigate to your [Account page](https://www.mapbox.com/account/). For quick development and testing, you can use your **default public token**. Later in development, you may want to create an access token specifically for this project. Find more details on managing access tokens in our guide on [how access tokens work](https://docs.mapbox.com/help/how-mapbox-work/access-tokens/).
+If you don't have a Mapbox account: [sign up](https://www.mapbox.com/signup/) and navigate to your [Account page](https://www.mapbox.com/account/). For quick development and testing, you can use your **default public token**. Later in development, you may want to create an access token specifically for this project. Find more details on managing access tokens in our guide on [how access tokens work](https://docs.mapbox.com/help/how-mapbox-works/access-tokens/).
 
 After you've added the Navigation SDK as a dependency inside your Android project, open the `string.xml` file, create a new string, and paste the access token. Then, pass this into the Navigation SDK.
 
@@ -155,7 +155,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 #### Set up permissions
 
-The Navigation SDK makes use of the Android manifest merge feature to reduce the need to include any Navigation SDK requirements inside your application's manifest file. You'll need to include either the Fine or Coarse location permission for navigation to work properly. The user location permission should also be checked during runtime using the PermissionManager if your app targets the Android API 23 or higher.
+The Navigation SDK makes use of the Android manifest merge feature to reduce the need to include any Navigation SDK requirements inside your application's manifest file. You'll need to include either the fine or coarse location permission for navigation to work properly. The user location permission should also be checked during runtime using the PermissionManager if your app targets the Android API 23 or higher.
 
 For best navigation results, we strongly recommend using the fine location permission, which gives a more precise fix on the user's current location.
 
@@ -225,11 +225,11 @@ NavigationRoute.builder(context)
 
 ### Navigation UI SDK
 
-The Navigation UI SDK is the fastest way to get a navigation UI in your application. 
+The Navigation UI SDK is the fastest way to get a navigation UI into your application. 
 
 #### Add the dependency
 
-This dependency is different from the one used to compile the core Mapbox Navigation SDK, but it will still include everything from the core Mapbox Navigation SDK. _If you're using the Navigation UI SDK, you **don't** have to declare the Mapbox Navigation SDK as well. If you only declare the Navigation UI SDK in your project's Gradle file, the Mapbox Navigation SDK will automatically be included._
+This dependency is different from the one used to compile the core Mapbox Navigation SDK, but it will still include everything from the core Mapbox Navigation SDK. _If you're using the Navigation UI SDK, you **don't** have to declare the Mapbox Navigation SDK. If you only declare the Navigation UI SDK in your project's Gradle file, the Mapbox Navigation SDK will automatically be included._
 
 ```groovy
 repositories {
@@ -244,7 +244,7 @@ dependencies {
 
 #### Launch the Navigation UI
 
-With either a `DirectionsRoute` from `NavigationRoute` (see [Request a route](#request-a-route) above) or two `Point` objects (origin and destination), you can launch the UI with `NavigationLauncher` from within your `Activity`:
+With either a `DirectionsRoute` from `NavigationRoute` (see [Request a route](#request-a-route) above) or two `Point` objects (origin and destination), you can launch the UI with `NavigationLauncher` from within your `Activity`.
 
 {{
 <CodeLanguageToggle id="launch-nav-ui" />
@@ -286,7 +286,7 @@ NavigationLauncher.startNavigation(this, options)`}
 
 ## Prevent memory leaks
 
-Inside your application's activity, you'll want to override the onDestroy lifecycle method, end the navigation session (if running) and use the `MabpoxNavigation#onDestroy` method. Doing this prevents any memory leaks and ensures proper shutdown of the service.
+Inside your application's activity, you'll want to override the onDestroy lifecycle method, end the navigation session (if it's running), and use the `MabpoxNavigation#onDestroy` method. Doing this prevents any memory leaks and ensures proper shutdown of the service.
 
 {{
 <CodeLanguageToggle id="nav-stop-navigation" />
@@ -318,7 +318,7 @@ There are a few methods that can be helpful when developing and testing your app
 
 ### Replay a DirectionsRoute
 
-The Navigation SDK includes a `ReplayRouteLocationEngine`, which allows you to replay a given `DirectionsRoute` (mainly for testing, so you don't always have to code in a car). After retrieving a `DirectionsRoute`, you can create a replay engine and pass it to `MapboxNavigation`:
+The Navigation SDK includes a `ReplayRouteLocationEngine`, which allows you to replay a given `DirectionsRoute` (mainly for testing, so you don't always have to code in a car). After retrieving a `DirectionsRoute`, you can create a replay engine and pass it to `MapboxNavigation`.
 
 {{
 <CodeLanguageToggle id="nav-replay-engine" />

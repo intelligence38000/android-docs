@@ -6,9 +6,17 @@ products:
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+  - "import Note from '@mapbox/dr-ui/note';"
+  - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
-The Navigation SDK provides information about whether or not a user's device is on the route that was generated. If a user is off-route, you can provide additional instruction to the user and generate a new route. ❓ Does a reroute happen by default ❓
+The Navigation SDK provides information about whether or not a user's device is on the route that was generated. If a user is off-route, you can provide additional instruction to the user and generate a new route. 
+
+Off-route detection is not enabled by default in the Navigation SDK, but when you add an `OffRouteListener`, off-route detection will be enabled using default criteria for determining when a user is considered off-route and what to do next.
+
+{{<Note title="Off-route detection and the Navigation UI SDK" imageComponent={<BookImage size="60" />}>}}
+This guide does not describe any specific options in the Navigation UI SDK. You need to enable off-route detection using the core Navigation SDK directly.
+{{</Note>}}
 
 ## RouteProgressState
 
@@ -92,8 +100,7 @@ navigation?.addOffRouteListener {
 
 ## Further customization
 
-If you would like to provide your own implementation for `OffRoute` detection, you can replace the default `OffRouteDetector` class.
-To do this, create your own class that extends from `OffRoute` and set this new class using `MapboxNavigation#setOffRouteEngine(OffRoute)`:
+If you would like to provide your own implementation for `OffRoute` detection, you can replace the default `OffRouteDetector` class. To do this, create your own class that extends from `OffRoute` and set this new class using `MapboxNavigation#setOffRouteEngine(OffRoute)`:
 
 {{
 <CodeLanguageToggle id="off-route-custom" />

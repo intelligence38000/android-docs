@@ -17,15 +17,15 @@ By default, distances are given in the predominant measurement system of the sys
 The upcoming road or ramp destination is named according to the local or national language. In some regions, the name may be given in multiple languages.
 
 {{<Note title="Localization and the Navigation UI SDK" imageComponent={<BookImage size="60" />}>}}
-Because language and units of measurement are specified when the route is generated, this guide does not describe any specific options in the Navigation UI SDK. The defaults described above will be fed to the Navigation UI SDK. If you would like to customize the language or units of measurement used in text and voice instructions, you must use the `NavigationRoute.Builder`.
+Because language and units of measurement are specified when the route is generated, this guide does not describe any specific options in the Navigation UI SDK. The defaults described above will be fed to the Navigation UI SDK. If you would like to customize the language or units of measurement used in text and voice instructions, you must use the `NavigationRoute.Builder` class.
 {{</Note>}}
 
 ## Supported languages
 
 The table below lists the languages that are supported for user interface elements and for spoken instructions.
 
-| Language   | User interface | [Spoken instructions][apidoc] | Remarks
-|------------|:--------------:|:-----------------------------:|--------
+| Language   | User interface | Spoken instructions | Remarks
+|------------|--------------|-----------------------------|--------
 | Bengali    | ✅             | —
 | Burmese    | ✅             | ✅ | Depends on the device; may require third-party text-to-speech
 | Chinese    | -              | ✅ <br/>Mandarin | Depends on the device; may require third-party text-to-speech
@@ -51,17 +51,17 @@ The table below lists the languages that are supported for user interface elemen
 | Ukrainian  | ✅              | ✅ | Depends on the device; may require third-party text-to-speech
 | Vietnamese | ✅              | ✅ | Depends on the device; may require third-party text-to-speech
 
-{{<Note imageComponent={<BookImage width="60" height="60" />}>}}
+{{<Note imageComponent={<BookImage size="60" />}>}}
 For languages marked with `Depends on the device; may require third-party text-to-speech`, instructions are provided by the SDK, but we cannot guarantee the given device will have the appropriate `TextToSpeech` speech engine installed to pronounce these instructions correctly.
 {{</Note>}}
 
 ### Contributing to localization
 
-To add a new localization or improve an existing localization see the [contributing guide](https://github.com/mapbox/mapbox-navigation-ios/blob/master/CONTRIBUTING.md#adding-or-updating-a-localization) for detailed instructions.
+To add a new localization or improve an existing localization see the [contributing guide](https://github.com/mapbox/mapbox-navigation-android/blob/master/CONTRIBUTING.md#adding-or-updating-a-localization) for detailed instructions.
 
 ## Voice instruction sources
 
-Turn instructions are primarily designed to be announced by either the Mapbox Voice API (powered by [Amazon Polly](https://docs.aws.amazon.com/polly/latest/dg/SupportedLanguage.html)) or [TextToSpeech](https://developer.android.com/reference/android/speech/tts/TextToSpeech). By default, this SDK uses the Mapbox Voice API, which requires an Internet connection at various points along the route. If the Voice API lacks support for the turn instruction language or there is no Internet connection, TextToSpeech announces the instructions instead.
+Turn instructions are primarily designed to be announced by either the Mapbox Voice API (powered by [Amazon Polly](https://docs.aws.amazon.com/polly/latest/dg/SupportedLanguage.html)) or [TextToSpeech](https://developer.android.com/reference/android/speech/tts/TextToSpeech). By default, the Navigation SDK uses the Mapbox Voice API, which requires an Internet connection at various points along the route. If the Voice API lacks support for the turn instruction language or there is no Internet connection, TextToSpeech announces the instructions instead.
 
 ## Further customization
 

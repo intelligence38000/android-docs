@@ -41,9 +41,8 @@ const productPageOrder = {
     'user-location',
     'route-generation',
     'route-progress',
-    'instructions',
-    'notifications',
     'milestones',
+    'notifications',
     'localization',
     'off-route',
     'faster-route',
@@ -76,6 +75,7 @@ module.exports = () => {
     siteOrigin: 'https://docs.mapbox.com',
     browserslist: mapboxAssembly.browsersList,
     postcssPlugins: mapboxAssembly.postcssPipeline.plugins,
+    webpackStaticIgnore: [/mapbox-gl.js$/],
     outputDirectory: path.join(__dirname, '_site/'),
     temporaryDirectory: path.join(__dirname, '_site_tmp/'),
     stylesheets: [

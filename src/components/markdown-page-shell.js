@@ -41,7 +41,7 @@ class MarkdownPageshell extends React.Component {
       productInfo = (
         <div className="mt0-mm mt60 pt0-mm pt24 pb24 mb24 border-b border--gray-light">
           <div className="flex-parent flex-parent--start-cross">
-            <div className="flex-child mr12 txt-bold">Products covered:</div>
+            <div className="flex-child mr12 txt-bold">SDKs covered:</div>
             <div className="flex-child">{products}</div>
           </div>
         </div>

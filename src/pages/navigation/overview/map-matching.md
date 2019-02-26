@@ -13,7 +13,7 @@ In some cases, you may want to have the user stick to a very specific route that
 
 ## Use a map matching response to generate a route
 
-Map Matching is the art of taking coordinates and aligning them along a road network. In the parking example above, you would provide coordinates to the device, the coordinates would be passed to the Mapbox Map Matching API, and then the API would return a route that can be used in the Navigation SDK for Android.
+Map matching is the art of taking coordinates and aligning them along a road network. In the parking example above, you would provide coordinates to the device, the coordinates would be passed to the Mapbox Map Matching API, and then the API would return a route that can be used in the Navigation SDK for Android.
 
 Here is an example of converting a `MapboxMapMatching` response into a `DirectionsRoute`:
 
