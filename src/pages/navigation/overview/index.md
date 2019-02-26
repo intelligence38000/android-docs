@@ -67,9 +67,8 @@ This documentation contains information for both the core Navigation SDK and the
 
 **Track progress along a route**
 - [Route progress](/android/navigation/overview/route-progress/) {{ <MustRead /> }}
-- [Turn-by-turn instructions](/android/navigation/overview/instructions/)
+- [Turn-by-turn instructions](/android/navigation/overview/milestones/)
 - [Device notifications](/android/navigation/overview/notifications/)
-- [Custom events](/android/navigation/overview/milestones/)
 - [Off-route detection](/android/navigation/overview/off-route/)
 - [Faster-route detection](/android/navigation/overview/faster-route/)
 

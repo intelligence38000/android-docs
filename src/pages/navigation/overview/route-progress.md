@@ -121,7 +121,7 @@ This is a progress object specific to the current step the user is on.
 
 ## Navigation UI SDK
 
-Using `NavigationView` in your XML gives you the ability to listen to different updates or events that may occur during navigation. Both the `ProgressChangeListener` ([see above](#listening-to-progress-change)) and `MilestoneEventListener` (see the [`Instructions`](/android/navigation/overview/instructions/) and [`Custom events`](/android/navigation/overview/milestones/) guides) from our core SDK are able to be added, as well as `RouteListener`.
+Using `NavigationView` in your XML gives you the ability to listen to different updates or events that may occur during navigation. Both the `ProgressChangeListener` ([see above](#listening-to-progress-change)) and `MilestoneEventListener` (see the [`Turn-by-turn instructions`](/android/navigation/overview/milestones/) guide) from our core SDK are able to be added, as well as `RouteListener`.
 
 {{<Note imageComponent={<BookImage size="60" />}>}}
 This listeners is only available if you are adding `NavigationView` to your `Activity` or `Fragment` layout XML via `NavigationViewOptions`. You are not able to add them to `NavigationLauncherOptions`.
