@@ -1,40 +1,20 @@
 ---
-title: "Custom Navigation Options"
-description: "Mapbox documentation about navigation options within the Mapbox Navigation SDK for Android such as custom notifications and even more."
+title: Device notifications
+description: Mapbox documentation about how notifications work in the Mapbox Navigation SDK for Android.
+products:
+  - Navigation SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
-## Configuring `MapboxNavigationOptions`
 
-The `MapboxNavigationOptions` object allows you to configure certain aspects of the navigation experience. For example, if you wanted
-to turn on debug logging, you would be able to do so with `MapboxNavigationOptions#isDebugLoggingEnabled(boolean debugLoggingEnabled)`:
+By default, device notifications display the upcoming maneuver icon and instruction text, as well as the distance remaining to said maneuver. This default notification will always be displayed unless otherwise overridden by a custom notification as outlined below.
 
-{{
-<CodeLanguageToggle id="debug-logging-enabled" />
-<ToggleableCodeBlock
+The method `NavigationNotification#updateNotification(RouteProgress routeProgress)` will be called every time that the Navigation SDK creates a new `RouteProgress` update. This is your opportunity to change anything in your notification that you'd like to update. Use a `NotificationManager` and your notification ID to notify the manager.
 
-java={`
-MapboxNavigationOptions options = MapboxNavigationOptions.builder()
-	.isDebugLoggingEnabled(true)
-	.build();
+## Custom notifications
 
-MapboxNavigation mapboxNavigation = new MapboxNavigation(this, accessToken, options);
-`}
-
-kotlin={`
-val options = MapboxNavigationOptions.builder()
-	.isDebugLoggingEnabled(true)
-	.build()
-
-val mapboxNavigation = MapboxNavigation(this, accessToken, options)
-`}
-/>
-}}
-
-## Creating a custom notification
-
-You can also pass in a custom notification when creating `MapboxNavigationOptions`. This notificiation will show once navigation begins.
+You can also pass in a custom notification when creating `MapboxNavigationOptions`. This notification will show once navigation begins.
 
 {{
 <CodeLanguageToggle id="custom-nav-notification" />
@@ -169,5 +149,3 @@ class CustomNavigationNotification(context: Context) : NavigationNotification {
 
 />
 }}
-
-The method `NavigationNotification#updateNotification(RouteProgress routeProgress)` will be called every time that the Navigation SDK creates a new `RouteProgress` update. This is your opportunity to change anything in your notification that you'd like to update. Use a `NotificationManager` and your notification ID to notify the manager.

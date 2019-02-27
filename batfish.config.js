@@ -38,15 +38,19 @@ const productPageOrder = {
   'plugins/examples/': ['index'],
   'navigation/overview/': [
     'index',
-    'camera',
-    'faster-route',
-    'map-matching',
+    'user-location',
+    'route-generation',
+    'route-progress',
     'milestones',
-    'navigation-options',
-    'navigation-ui',
+    'notifications',
+    'localization',
     'off-route',
+    'faster-route',
     'offline-routing',
-    'route-progress'
+    'camera',
+    'map-styling',
+    'user-interaction',
+    'map-matching'
   ],
   'java/overview/': [
     'index',
@@ -72,6 +76,7 @@ module.exports = () => {
     productionDevtool: 'source-map',
     browserslist: mapboxAssembly.browsersList,
     postcssPlugins: mapboxAssembly.postcssPipeline.plugins,
+    webpackStaticIgnore: [/mapbox-gl.js$/],
     outputDirectory: path.join(__dirname, '_site/'),
     temporaryDirectory: path.join(__dirname, '_site_tmp/'),
     stylesheets: [
@@ -79,7 +84,8 @@ module.exports = () => {
       require.resolve('@mapbox/dr-ui/css/prism.css'),
       path.join(__dirname, './vendor/docs-page-shell/page-shell-styles.css'),
       path.join(__dirname, './src/css/site.css'),
-      require.resolve('@mapbox/dr-ui/css/docs-prose.css')
+      require.resolve('@mapbox/dr-ui/css/docs-prose.css'),
+      'https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css'
     ],
     dataSelectors: {
       platform: function() {
@@ -90,7 +96,8 @@ module.exports = () => {
       orderedPages: data => {
         const pages = data.pages.map(p => ({
           title: p.frontMatter.title,
-          path: p.path
+          path: p.path,
+          tag: p.frontMatter.tag ? p.frontMatter.tag : ''
         }));
         const result = _.reduce(
           productPageOrder,
@@ -166,6 +173,7 @@ module.exports = () => {
       rehypePlugins: [
         rehypeSlug,
         require('@mapbox/dr-ui/plugins/add-links-to-headings'),
+        require('@mapbox/dr-ui/plugins/create-sections'),
         require('@mapbox/dr-ui/plugins/make-table-scroll'),
         require('@mapbox/rehype-prism')
       ]

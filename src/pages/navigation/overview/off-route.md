@@ -1,20 +1,51 @@
 ---
-title: "Off-Route Detection"
-description: "The Mapbox Navigation SDK for Android offers off-route detection for your Android app's navigation experience. Read this documentation to learn how."
+title: "Off-route detection"
+description: Learn how to use and customize off-route detection with the Mapbox Navigation SDK for Android for your Android app's navigation experience.
+products:
+  - Navigation SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+  - "import Note from '@mapbox/dr-ui/note';"
+  - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
-A default off-route detection class, `OffRouteDetector`, is included in the Navigation SDK. This class uses our internal route-following library to run a series of calculations using the incoming `Location` and the current `DirectionsRoute` to determine if a user has strayed too far from the route.
+The Navigation SDK provides information about whether or not a user's device is on the route that was generated. If a user is off-route, you can provide additional instruction to the user and generate a new route. 
 
-Upon loading a new route and if the `DirectionsRoute` JSON is valid, route-following will start in the `RouteProgressState#INITIALIZED` state. From there, route-following will attempt to gain confidence that the GPS locations being passed to the device, are actually the location where the user is. To establish this trust, at least a few location updates need to be delivered and they must be consecutively coherent in both time and space. While it is in the process of establishing this trust, the route-following logic will report that it's still in the `RouteProgressState#INITIALIZED` state.
+Off-route detection is not enabled by default in the Navigation SDK, but when you add an `OffRouteListener`, off-route detection will be enabled using default criteria for determining when a user is considered off-route and what to do next.
 
-Once trust of the user's current stream of location updates has been established, route-following will attempt to measure the user's progress along the currently loaded route. If the user's location is found to be unreasonably far from the route itself, the state is flipped to the `RouteProgressState#OFFROUTE` state.
+{{<Note title="Off-route detection and the Navigation UI SDK" imageComponent={<BookImage size="60" />}>}}
+This guide does not describe any specific options in the Navigation UI SDK. You need to enable off-route detection using the core Navigation SDK directly.
+{{</Note>}}
 
-If the user's current location is within a reasonable distance from the currently loaded route but not close enough to be considered on-route (`RouteProgressState#TRACKING`), the `RouteProgressState#INITIALIZED` state will be return until user to makes their way to the route. We call this "corralling". Corralling allows a user, in the user's driveway or a store's parking lot for example, to load up a route and not immediately get marked as `RouteProgressState#OFFROUTE`.
+## RouteProgressState
+
+The user's on or off-route status is tracked using `RouteProgressState`. There are three possible states:
+
+- `RouteProgressState#INITIALIZED`
+- `RouteProgressState#TRACKING`
+- `RouteProgressState#OFFROUTE`
+
+### Initialized
+
+Upon loading a new route and if the `DirectionsRoute` JSON is valid, route-following will start in the `RouteProgressState#INITIALIZED` state. From there, route-following will attempt to gain confidence that the GPS locations being passed to the device are actually the user's location. To establish this trust, at least a few location updates need to be delivered and they must be consecutively coherent in both time and space. While it is in the process of establishing this trust, the route-following logic will report that it's still in the `RouteProgressState#INITIALIZED` state.
+
+### Tracking
+
+Once the user's location is considered to be on-route, the state will change to `RouteProgressState#TRACKING`.
+
+
+### Off-route
+
+Once trust of the user's current stream of location updates has been established, route-following will attempt to measure the user's progress along the currently loaded route. If the user's location is found to be unreasonably far from the route, the state is flipped to the `RouteProgressState#OFFROUTE` state.
+
+### Corralling
+
+If the user's current location is within a reasonable distance from the currently loaded route but not close enough to be considered on-route (`RouteProgressState#TRACKING`), the `RouteProgressState#INITIALIZED` state will be returned until user to makes their way to the route. We call this "corralling". Corralling allows a user, in the user's driveway or a store's parking lot for example, to load up a route and not immediately get marked as `RouteProgressState#OFFROUTE`.
 
 If the user continually makes progress away from the route the user will eventually be marked `OFFROUTE`.
+
+## OffRouteListener
 
 The `OffRouteListener` can be used to handle reroute events. Listen for when a user goes off route using the `OffRouteListener`, fetch a new `DirectionsRoute`, and use `MapboxNavigation#startNavigation(DirectionsRoute)` with the fresh route to restart navigation.
 
@@ -67,8 +98,9 @@ navigation?.addOffRouteListener {
 />
 }}
 
-If you would like to provide your own implementation for `OffRoute` detection, you can replace the default `OffRouteDetector` class.
-To do this, create your own class that extends from `OffRoute` and set this new class using `MapboxNavigation#setOffRouteEngine(OffRoute)`:
+## Further customization
+
+If you would like to provide your own implementation for `OffRoute` detection, you can replace the default `OffRouteDetector` class. To do this, create your own class that extends from `OffRoute` and set this new class using `MapboxNavigation#setOffRouteEngine(OffRoute)`:
 
 {{
 <CodeLanguageToggle id="off-route-custom" />

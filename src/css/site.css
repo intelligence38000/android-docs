@@ -31,12 +31,7 @@
 }
 
 #docs-content.prose th {
-  text-align: center;
   background-color: #f4f7fb;
-}
-
-#docs-content.prose td {
-  text-align: center;
 }
 
 #docs-content.prose img {

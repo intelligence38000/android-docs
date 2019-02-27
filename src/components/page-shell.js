@@ -19,6 +19,7 @@ import { productNames } from '../data/product-names';
 import listExamples from '@mapbox/batfish/data/list-examples';
 import orderedPages from '@mapbox/batfish/data/ordered-pages';
 import TopNavTabs from './top-nav-tabs';
+import { FundamentalsTag } from './fundamentals-tag';
 
 class PageShell extends React.Component {
   static propTypes = {
@@ -85,24 +86,60 @@ class PageShell extends React.Component {
     let pageNavigationNarrowStick = false;
     if (activeTab === 'overview') {
       pageNavigationNarrowStick = true;
-      const secondLevelItems = frontMatter.headings
-        .filter(heading => {
-          return heading.level === 2;
-        })
-        .map(h2 => {
+      const parseHeadings = arr => {
+        return arr.map((heading, index) => {
           return {
-            title: h2.text,
-            path: h2.slug
+            level: heading.level,
+            text: heading.text,
+            slug: heading.slug,
+            order: index
           };
         });
+      };
+
+      const orderedHeadings = this.props.frontMatter.headings
+        ? parseHeadings(this.props.frontMatter.headings)
+        : parseHeadings(this.props.headings);
+
+      const topLevelHeadings = orderedHeadings.filter(h => h.level === 2);
+      const secondLevelItems = topLevelHeadings.map((h2, index) => {
+        const nextH2 = topLevelHeadings[index + 1];
+        return {
+          title: h2.text,
+          path: h2.slug,
+          thirdLevelItems: orderedHeadings
+            .filter(
+              f =>
+                f.level === 3 &&
+                f.order > h2.order &&
+                (nextH2 ? f.order < nextH2.order : true)
+            )
+            .map(h3 => {
+              return {
+                title: h3.text.replace(/i2157|i2860/, ''),
+                path: h3.slug
+              };
+            })
+        };
+      });
+      const orderedPagesWithTags = orderedPages[
+        pathPrefixMatch[1] + pathPrefixMatch[2]
+      ].map(page => {
+        let label = '';
+        if (page.tag !== '') label = <FundamentalsTag />;
+        return {
+          title: page.title,
+          tag: label,
+          path: page.path
+        };
+      });
       pageNavigation = (
         <div className="mx0-mm ml-neg24 mr-neg36 relative-mm absolute right left">
           <NavigationAccordion
             currentPath={location.pathname}
             contents={{
-              firstLevelItems:
-                orderedPages[pathPrefixMatch[1] + pathPrefixMatch[2]],
-              secondLevelItems: secondLevelItems
+              firstLevelItems: orderedPagesWithTags,
+              secondLevelItems: secondLevelItems || null
             }}
             onDropdownChange={value => {
               routeToPrefixed(value);

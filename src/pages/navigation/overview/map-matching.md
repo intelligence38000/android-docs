@@ -1,14 +1,19 @@
 ---
-title: "Map Matching with Navigation"
-description: "Using Map Matching with the Navigation SDK."
+title: Custom routes
+description: Use the Mapbox Map Matching API with the Mapbox Navigation SDK or Navigation UI SDK for Android.
+products:
+  - Navigation SDK
+  - Navigation UI SDK
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
-In some cases, you may want to have the user stick to a very specific route that doesn't fit into the scope covered by the Mapbox Directions API. For example, a company would like to use its own custom truck routing API, but also allow people to navigate on it with the Mapbox Navigation SDK for Android. The Mapbox Map Matching API is an appropriate fit for this situation.
+In some cases, you may want to have the user stick to a very specific route that doesn't fit into the scope covered by the Mapbox Directions API. For example, a parking finder app where you want to guide a user past specific blocks with parking, but also allow people to navigate on it with the Mapbox Navigation SDK for Android. The Mapbox Map Matching API is an appropriate fit for this situation.
 
-Map Matching is the art of taking coordinates and aligning them along a road network. In the truck example above, a truck routing API would deliver coordinates to the device, the coordinates would be passed to the Mapbox Map Matching API, and then the API would return a route that can be used in the Navigation SDK for Android.
+## Use a map matching response to generate a route
+
+Map matching is the art of taking coordinates and aligning them along a road network. In the parking example above, you would provide coordinates to the device, the coordinates would be passed to the Mapbox Map Matching API, and then the API would return a route that can be used in the Navigation SDK for Android.
 
 Here is an example of converting a `MapboxMapMatching` response into a `DirectionsRoute`:
 
@@ -69,15 +74,53 @@ MapboxMapMatching.builder()
 />
 }}
 
+## Navigation UI SDK
 
-There are several rules you must adhere to when using the Map Matching API with the Navigation SDK for Android:
+When using `MapboxMapMatching` with the Navigation UI SDK's `NavigationView`, you need to make a few changes to your setup to ensure re-routes are successful.  A `RouteListener` must be added to your `NavigationViewOptions` and you must return `false` in the `allowRerouteFrom` callback. This will ensure that the `NavigationView` does not make a Directions API request. Instead, it will wait for the new `DirectionsRoute` provided by your map matching response.
 
-### Map Matching with MapboxNavigation
+{{
+<CodeLanguageToggle id="nav-map-matching-nav-view" />
+<ToggleableCodeBlock
 
-In the `libandroid-navigation` module of the Navigation SDK for Android, `MapboxMapMatching` requests will replace your `NavigationRoute` requests.
+java={`
+@Override
+public boolean allowRerouteFrom(Point offRoutePoint) {
 
-To start navigation initially or to restart navigation after an off-route event has been fired, you can make
-a map matching request and then convert the `MapMatchingMatching` response to a `DirectionsRoute` with `MapMatchingMatching#toDirectionRoute`.
+  // Fetch new route with MapboxMapMatching
+
+  // Create new options with map matching response route
+  NavigationViewOptions options = NavigationViewOptions.builder()
+    .directionsRoute(mapMatchingDirectionsRoute)
+    .build();
+  navigationView.startNavigation(options);
+
+  // Ignore internal routing, allowing MapboxMapMatching call
+  return false;
+}
+`}
+
+kotlin={`
+override fun allowRerouteFrom(offRoutePoint: Point): Boolean {
+
+  // Fetch new route with MapboxMapMatching
+
+  // Create new options with map matching response route
+  val options = NavigationViewOptions.builder()
+    .directionsRoute(mapMatchingDirectionsRoute)
+    .build()
+
+  navigationView.startNavigation(options)
+
+  // Ignore internal routing, allowing MapboxMapMatching call
+  return false
+}
+`}
+/>
+}}
+
+## Map matching with MapboxNavigation
+
+In the core Navigation SDK, `MapboxMapMatching` requests replace `NavigationRoute` requests. To start navigation initially or to restart navigation after an off-route event has been fired, you can make a map matching request and then convert the `MapMatchingMatching` response to a `DirectionsRoute` with `MapMatchingMatching#toDirectionRoute`.
 
 {{
 <CodeLanguageToggle id="nav-map-matching-off-route" />
@@ -105,51 +148,3 @@ navigation?.addOffRouteListener { location ->
 />
 }}
 
-
-### Map Matching with NavigationView
-
-When using `MapboxMapMatching` with the `NavigationView`, you need to make a few changes to your
-setup to ensure re-routes are successful.  A `RouteListener` must be added to your `NavigationViewOptions`
-and you must return `false` in the `allowRerouteFrom` callback. This will ensure that the `NavigationView`
-does not make a Directions API request. Instead, it will wait for the new `DirectionsRoute` provided by your
-map matching response.
-
-{{
-<CodeLanguageToggle id="nav-map-matching-nav-view" />
-<ToggleableCodeBlock
-
-java={`
-@Override
-public boolean allowRerouteFrom(Point offRoutePoint) {
-
-  // Fetch new route with MapboxMapMatching
-
-  // Create new options with map matching response route
-  NavigationViewOptions options = NavigationViewOptions.builder()
-    .directionsRoute(mapMatchingDirectionsRoute)
-    .build();
-  navigationView.startNavigation(options);
-
-  // Ignore internal routing, allowing MapboxMapMatching call
-  return false;
-}
-`}
-
-kotlin={`
-override fun allowRerouteFrom(offRoutePoint: Point): Boolean {
-
-	// Fetch new route with MapboxMapMatching
-
-	// Create new options with map matching response route
-	val options = NavigationViewOptions.builder()
-		.directionsRoute(mapMatchingDirectionsRoute)
-		.build()
-
-	navigationView.startNavigation(options)
-
-  // Ignore internal routing, allowing MapboxMapMatching call
-  return false
-}
-`}
-/>
-}}

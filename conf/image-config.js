@@ -452,6 +452,14 @@ module.exports = {
   // ------------------------
   // OVERVIEW GUIDES
   // ------------------------
+  defaultUserLocation: {
+    basename: 'default-user-location.png',
+    sizes: [{ width: 800 }, { width: 400 }]
+  },
+  defaultUserGpsIcon: {
+    basename: 'default-user-gps-icon.png',
+    sizes: [{ width: 800 }, { width: 400 }]
+  },
   // ------------------------
   // EXAMPLES
   // ------------------------

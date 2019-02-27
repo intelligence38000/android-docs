@@ -26,7 +26,7 @@
   "homepage": "https://github.com/mapbox/android-docs/",
   "dependencies": {
     "@mapbox/appropriate-images-react": "^1.0.0",
-    "@mapbox/dr-ui": "^0.6.0",
+    "@mapbox/dr-ui": "^0.7.0",
     "@mapbox/mbx-assembly": "^0.28.2",
     "@mapbox/mr-ui": "^0.5.0",
     "@mapbox/page-loading-indicator": "^0.1.0",
@@ -42,6 +42,7 @@
     "github-slugger": "^1.2.1",
     "live-region": "^1.0.2",
     "lodash": "^4.17.4",
+    "mapbox-gl": "^0.53.0",
     "prop-types": "^15.5.10",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
