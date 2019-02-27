@@ -70,7 +70,7 @@ export const androidApiReferenceLinks = {
       id: 'china',
       href: `/android/api/plugins/china/${
         constants.CHINA_PLUGIN_VERSION
-      }/china-release/index.html`
+      }/index.html`
     }
   ],
   java: [
