@@ -1,6 +1,6 @@
 ---
 title: "Tilequery"
-description: "Official documentation on the Mapbox Java SDK Tilequery API"
+description: "Official documentation on the Mapbox Java SDK Tilequery API."
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"

@@ -1,6 +1,6 @@
 ---
 title: Adjust light location and color
-description: Change the location and color of the light that's shined on extrusions
+description: Change the location and color of the light that's shined on extrusions.
 thumbnail: thumbnailAdjustLightLocationAndColor
 topic: Extrusions
 prependJs:
@@ -11,7 +11,7 @@ prependJs:
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoAdjustLightLocationColor}
     rotation="horizontal"
     device="pixel-2"
@@ -21,7 +21,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

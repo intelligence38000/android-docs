@@ -1,11 +1,8 @@
 ---
 title: "Localization"
-description: "Mapbox Android Localization Plugin"
+description: "Mapbox Android Localization Plugin."
 prependJs:
-  - |
-    import {
-      LOCALIZATION_PLUGIN_VERSION
-    } from '../../../constants';
+  - "import constants from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"   
 
@@ -36,7 +33,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-localization-v7:{{ LOCALIZATION_PLUGIN_VERSION }}'
+  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-localization-v7:{{constants.LOCALIZATION_PLUGIN_VERSION }}'
 }
 ```
 
@@ -52,25 +49,25 @@ java={`
 mapView.getMapAsync(new OnMapReadyCallback() {
     @Override
     public void onMapReady(MapboxMap mapboxMap) {
-  	
+
   	LocalizationPlugin localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
-  		
+
 }
 });
 `}
 
 kotlin={`
-mapView?.getMapAsync { mapboxMap -> 
-            
-val localizationPlugin = LocalizationPlugin(mapView!!, mapboxMap) 
-        
+mapView?.getMapAsync { mapboxMap ->
+
+val localizationPlugin = LocalizationPlugin(mapView!!, mapboxMap)
+
 }
 `}
 
 />
 }}
 
- 
+
 ## Use MapLocale
 
 The `MapLocale` class powers much of the Localization Plugin and increases its flexibility. The class doesn't extend the Android system's `Locale` class, but rather, interacts with the `Locale` class in the form of a key/value `HashMap`. The plugin supports all of the same default locales found inside the `Locale` class.
@@ -78,14 +75,14 @@ The `MapLocale` class powers much of the Localization Plugin and increases its f
 More generally, the `MapLocale` class handles the retrieval of map languages and bounding boxes for regions that your app might interact with. The `MapLocale` object can be used to acquire the matching Locale's map language. This is useful for translating the map language into one found in the `Languages` interface.
 
 A handful of `MapLocale` objects are already constructed and offered through this class as static variables. If a country is missing and you'd like to add it, you can use one of the `MapLocale` constructors to build a valid map locale. Once this is done, you need to add it to the Locale cache using `MapLocale.addMapLocale(Locale, MapLocale)` where the first parameter is the `Locale` object which matches up with your newly created `MapLocale`.
- 
- 
+
+
 ##  Match map with device language
 
 As described above, the plugin's main benefit is its ability to detect the device's language and change the map text to use that language. The quickest way to do this is using the `matchMapLanguageWithDeviceDefault()` method.
 
 Calling this method should happen within a try/catch statement because `matchMapLanguageWithDeviceDefault()` can throw a `NullPointerException`. This `NullPointerException` is thrown when the device's `Locale` has no matching `MapLocale` object. You need to create an instance of `MapLocale` and add it to the `MapLocale` cache (`LOCAL_SET`) using the `addMapLocale()` method.
- 
+
 {{
 <CodeLanguageToggle id="match-language" />
 <ToggleableCodeBlock
@@ -94,9 +91,9 @@ java={`
 mapView.getMapAsync(new OnMapReadyCallback() {
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
-	
+
 	LocalizationPlugin localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
-	
+
 	try {
       localizationPlugin.matchMapLanguageWithDeviceDefault();          
     } catch (RuntimeException exception) {
@@ -109,7 +106,7 @@ mapView.getMapAsync(new OnMapReadyCallback() {
 kotlin={`
 mapView!!.getMapAsync { mapboxMap ->
 	val localizationPlugin = LocalizationPlugin(mapView!!, mapboxMap)
-		
+
 	try {
 	    localizationPlugin.matchMapLanguageWithDeviceDefault()
 	} catch (exception: RuntimeException) {

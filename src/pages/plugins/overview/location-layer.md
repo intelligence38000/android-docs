@@ -2,10 +2,8 @@
 title: "Location"
 description: "Offical documentation about the Mapbox Android Location Layer Plugin. Show the Android device's location on a Mapbox Map in just a few quick steps."
 prependJs:
-  - import {
-      LOCATION_LAYER_PLUGIN_VERSION
-    } from '../../../constants';
-    import AppropriateImage from '../../../components/appropriate-image';
+  - "import constants from '../../../constants';"
+  - "import AppropriateImage from '../../../components/appropriate-image';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import { WarningNote } from '../../../components/warning-note';"
@@ -38,7 +36,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:{{ LOCATION_LAYER_PLUGIN_VERSION }}'
+  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:{{constants.LOCATION_LAYER_PLUGIN_VERSION }}'
 }
 ```
 
@@ -58,7 +56,7 @@ Before using the location layer plugin, you'll need to include either the coarse
 </manifest>
 ```
 
-If your application's targeting Android 6.0 (API 23) or higher, you'll want to use the new permissions model which request permissions at runtime rather than during the installation process. It's important to request the permission either during the application startup or when the location layer gets initialized. [PermissionsManager](/android/telemetry/overview/#permissionsmanager) is a utility offered as part of the Mapbox Java SDK package inside of the Maps SDK. It streamlines the permission request process.
+If your application's targeting Android 6.0 (API 23) or higher, you'll want to use the new permissions model which request permissions at runtime rather than during the installation process. It's important to request the permission either during the application startup or when the location layer gets initialized. [PermissionsManager](/android/maps/overview/#telemetry-opt-out) is a utility offered as part of the Mapbox Java SDK package inside of the Maps SDK. It streamlines the permission request process.
 
 ### Lifecycles
 It's important to include the location layer `onStart()` and `onStop()` lifecycle events in their respective activity methods. This prevents memory leaks from occurring and reduces battery consumption. The plugin has support for the new `LifecycleObserver` APIs, by adding the plugin as a lifecycle observer in your activity, you won't need to handle the lifecycles manually.
@@ -146,7 +144,7 @@ There are currently 7 modes available:
 | `TRACKING_GPS` | Camera tracks the user location, with bearing provided by a normalized `Location#getBearing()`. |
 | `TRACKING_GPS_NORTH` | Camera tracks the user location, with bearing always set to north (0). |
 
-Here are a few examples from [the `LocationLayerModesActivity` in the plugin's test application](https://github.com/mapbox/mapbox-plugins-android/blob/master/app/src/main/java/com/mapbox/mapboxsdk/plugins/testapp/activity/location/LocationLayerModesActivity.java):
+Here are a few examples from [the `LocationLayerModesActivity` in the plugin's test application](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDKTestApp/src/main/java/com/mapbox/mapboxsdk/testapp/activity/location/LocationModesActivity.java):
 
 **CameraMode.NORMAL**
 
@@ -227,6 +225,6 @@ If you plan to use the snapped location provided by the Navigation SDK, you'll n
 For more specific information and code snippets about displaying a user's location during the navigation experience, see the [Mapbox tutorial for building a navigation app for Android](https://www.mapbox.com/help/android-navigation-sdk/#display-user-location).
 
 ## Customization
-The plugin allows for several customizations such as drawables, opacities, and more by passing in a style or a [LocationLayerOptions](https://github.com/mapbox/mapbox-plugins-android/blob/master/plugin-locationlayer/src/main/java/com/mapbox/mapboxsdk/plugins/locationlayer/LocationLayerOptions.java) object either while constructing the plugin or by using the provided `applyStyle()` API.
+The plugin allows for several customizations such as drawables, opacities, and more by passing in a style or a [LocationLayerOptions](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/java/com/mapbox/mapboxsdk/location/LocationComponentOptions.java) object either while constructing the plugin or by using the provided `applyStyle()` API.
 
-For example, if you'd like to change the location layer icon from the default blue to a red, you first generate a new icon drawable showing the change. Then add the drawable to your project and then create a new style with the `parentLayout` being `LocationLayer`. [Here is a list of all of the attributes that can be customized](https://github.com/mapbox/mapbox-plugins-android/blob/master/plugin-locationlayer/src/main/res-public/values/public_attrs.xml).
+For example, if you'd like to change the location layer icon from the default blue to a red, you first generate a new icon drawable showing the change. Then add the drawable to your project and then create a new style with the `parentLayout` being `LocationLayer`. [Here is a list of all of the attributes that can be customized](/android/maps/overview/location-component/#active-styling-options).

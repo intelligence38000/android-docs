@@ -4,7 +4,7 @@ description: "Official documentation for the Mapbox Java SDK."
 prependJs:
   - "import OverviewHeader from '@mapbox/dr-ui/overview-header';"
   - "import AppropriateImage from '../../../components/appropriate-image';"
-  - "import { JAVA_SDK_VERSION } from '../../../constants';"
+  - "import constants from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
@@ -22,7 +22,7 @@ prependJs:
         "Geospatial analysis"
       ]}
       title="Java SDK for Android"
-      version={JAVA_SDK_VERSION}
+      version={constants.JAVA_SDK_VERSION}
       changelogLink="https://github.com/mapbox/mapbox-java/blob/master/CHANGELOG.md"
       ghLink="https://github.com/mapbox/mapbox-java"
       image={<AppropriateImage imageId="overviewServicesSdk" alt="Mobile devices displaying applications using the Mapbox Java SDK for Android." />}
@@ -98,7 +98,7 @@ To start developing your application using the Mapbox Java SDK, you'll need to f
 > **Note:** If your application is close or exceeds the 65k method count limit, you can mitigate this problem by specifying only the specific Mapbox Android Service APIs. See the selectively compiling APIs section below.
 
 ```groovy
-implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:{{ JAVA_SDK_VERSION }}'
+implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:{{constants.JAVA_SDK_VERSION }}'
 ```
 
 ### Maven
@@ -109,7 +109,7 @@ If your project's using Maven instead of Gradle, you can add the dependency insi
 <dependency>
     <groupId>com.mapbox.mapboxsdk</groupId>
     <artifactId>mapbox-sdk-services</artifactId>
-    <version>{{ JAVA_SDK_VERSION }}</version>
+    <version>{{constants.JAVA_SDK_VERSION }}</version>
 </dependency>
 ```
 
@@ -124,10 +124,10 @@ The list below shows all the current separated dependencies you can use in your 
 If you're using a version _above_ 3.0.0:
 
 ```groovy
-implementation 'com.mapbox.mapboxsdk:mapbox-sdk-core:{{ JAVA_SDK_VERSION }}'
-implementation 'com.mapbox.mapboxsdk:mapbox-sdk-geojson:{{ JAVA_SDK_VERSION }}'
-implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:{{ JAVA_SDK_VERSION }}'
-implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:{{ JAVA_SDK_VERSION }}'
+implementation 'com.mapbox.mapboxsdk:mapbox-sdk-core:{{constants.JAVA_SDK_VERSION }}'
+implementation 'com.mapbox.mapboxsdk:mapbox-sdk-geojson:{{constants.JAVA_SDK_VERSION }}'
+implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:{{constants.JAVA_SDK_VERSION }}'
+implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:{{constants.JAVA_SDK_VERSION }}'
 ```
 
 If you're using a version _below_ 3.0.0:

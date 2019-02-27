@@ -1,6 +1,6 @@
 ---
 title: Extrude polygons for 3D indoor mapping
-description: Create a 3D indoor map with the full-extrude-height paint property
+description: Create a 3D indoor map with the full-extrude-height paint property.
 thumbnail: thumbnailExtrudePolygonsFor3DIndoorMapping
 topic: Extrusions
 prependJs:
@@ -16,7 +16,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

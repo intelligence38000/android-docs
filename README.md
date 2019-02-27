@@ -1,6 +1,6 @@
 # Android documentation
 
-[![CircleCI](https://circleci.com/gh/mapbox/android-docs.svg?style=svg)](https://circleci.com/gh/mapbox/android-docs)
+[![Build Status](https://travis-ci.com/mapbox/android-docs.svg?branch=publisher-production)](https://travis-ci.com/mapbox/android-docs)
 
 This repo hosts all of the Android documentation for the Mapbox platform, including the Maps SDK, the Java SDK, the Navigation SDK, and Mapbox Plugins. Visit [Mapbox Android Docs](https://docs.mapbox.com/android/maps/overview/) to view the live website.
 
@@ -55,6 +55,23 @@ npm start
 ```
 
 This will set up a server running at http://localhost:8080/android/. If you make changes to the source content, your browser should automatically refresh using livereload once you save the file.
+
+### Running tests locally
+
+To run the tests locally, run:
+
+```sh
+npm test
+```
+
+The test suite will lint JavaScript as well as run remark-linters that lint markdown files.
+
+The remark-linters perform the following tasks:
+- check for [broken links](https://github.com/mapbox/remark-lint-mapbox/tree/master/link-checker)
+- [validate the frontmatter](https://github.com/mapbox/remark-lint-mapbox/tree/master/frontmatter) on each page
+- check for [non-descriptive link text](https://github.com/mapbox/remark-lint-link-text)
+
+If the linters log an error or warning to the console, follow the guidance from the test to fix it.
 
 ## Contributing new documentation
 

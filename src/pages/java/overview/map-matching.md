@@ -1,6 +1,6 @@
 ---
 title: "Map Matching"
-description: "Official documentation on the Mapbox Java SDK Map Matching API"
+description: "Official documentation on the Mapbox Java SDK Map Matching API."
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"

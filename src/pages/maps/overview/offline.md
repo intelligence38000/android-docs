@@ -7,7 +7,7 @@ prependJs:
   - "import { WarningNote } from '../../../components/warning-note';"
   - "import Note from '@mapbox/dr-ui/note';"
   - "import BookImage from '@mapbox/dr-ui/book-image';"
-  - "import { MAP_SDK_VERSION } from '../../../constants';"
+  - "import constants from '../../../constants';"
   - "import { WarningNote } from '../../../components/warning-note';"
 ---
 
@@ -360,7 +360,7 @@ Using a command line tool is ideal if you want to build your offline packages se
 ##### CLI build instructions
 1. Clone the Maps SDK: `git clone https://github.com/mapbox/mapbox-gl-native.git`
 1. Change to the root folder: `cd mapbox-gl-native`
-1. Checkout the release commit equivalent to the version of the Maps SDK that you are using: ` git checkout {commit hash}` (all release commits can be found [here](https://github.com/mapbox/mapbox-gl-native/releases))
+1. Checkout the release commit equivalent to the version of the Maps SDK that you are using: ` git checkout {commit hash}` (view [all release commits](https://github.com/mapbox/mapbox-gl-native/releases))
 1. Compile the binary: `make offline`
 
 Once the build is complete, you'll see the message `Build Succeeded` in the terminal. The binary is available under the `build` folder (for example, on a Mac the file will be in `build/macos/Debug/mbgl-offline`).
@@ -433,7 +433,7 @@ To merge a secondary database into the main Maps SDK database:
     - `path` provides the secondary database (writable) path. If the app’s process doesn’t have write-access to the provided path, the file will be copied to the temporary, internal directory for the duration of the merge. (The secondary database may need to be upgraded to the latest schema. This is done in-place and requires write-access to the provided path.)
     - `callback` is the completion/error callback. When the merge is completed, or fails, the `OfflineManager.MergeOfflineRegionsCallback` will be invoked on the main thread.
 
-For a complete example, take a look at [`MergeOfflineRegionsActivity`](https://github.com/mapbox/mapbox-gl-native/blob/android-v{{MAP_SDK_VERSION}}/platform/android/MapboxGLAndroidSDKTestApp/src/main/java/com/mapbox/mapboxsdk/testapp/activity/offline/MergeOfflineRegionsActivity.kt) and the [sample database](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDKTestApp/src/main/assets/offline.db). For further details, see the [`mergeOfflineRegions` documentation](https://docs.mapbox.com/android/api/map-sdk/{{MAP_SDK_VERSION}}/com/mapbox/mapboxsdk/offline/OfflineManager.html#mergeOfflineRegions-java.lang.String-com.mapbox.mapboxsdk.offline.OfflineManager.MergeOfflineRegionsCallback-).
+For a complete example, take a look at [`MergeOfflineRegionsActivity`](https://github.com/mapbox/mapbox-gl-native/blob/android-v{{constants.MAP_SDK_VERSION}}/platform/android/MapboxGLAndroidSDKTestApp/src/main/java/com/mapbox/mapboxsdk/testapp/activity/offline/MergeOfflineRegionsActivity.kt) and the [sample database](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDKTestApp/src/main/assets/offline_test.db). For further details, see the [`mergeOfflineRegions` documentation](https://docs.mapbox.com/android/api/map-sdk/{{constants.MAP_SDK_VERSION}}/com/mapbox/mapboxsdk/offline/OfflineManager.html#mergeOfflineRegions-java.lang.String-com.mapbox.mapboxsdk.offline.OfflineManager.MergeOfflineRegionsCallback-).
 
 ##### Database location on Android
 On Android, you can move the location of the main Maps SDK database from internal storage to external storage. To do so, make sure the application has the `WRITE_EXTERNAL_STORAGE` permission inside the `AndroidManifest.xml` and the following flag:

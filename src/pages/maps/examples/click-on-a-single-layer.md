@@ -1,6 +1,6 @@
 ---
 title: Click on a single layer
-description: Click on and highlight a selected a GeoJSON polygon
+description: Click on and highlight a selected a GeoJSON polygon.
 thumbnail: thumbnailClickOnASingleLayer
 topic: User interaction
 prependJs:
@@ -11,7 +11,7 @@ prependJs:
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoClickOnSingleLayer}
     rotation="vertical"
     device="pixel-2"
@@ -21,7 +21,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

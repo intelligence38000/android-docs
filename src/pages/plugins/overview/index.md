@@ -1,22 +1,12 @@
 ---
 title: "Introduction"
-description: "Overview of Mapbox Android plugins"
+description: "Overview of Mapbox Android plugins."
 prependJs:
   - "import OverviewHeader from '@mapbox/dr-ui/overview-header';"
   - "import AppropriateImage from '../../../components/appropriate-image';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
-  - |
-    import {
-      ANNOTATION_PLUGIN_VERSION,
-      TRAFFIC_PLUGIN_VERSION,
-      LOCATION_LAYER_PLUGIN_VERSION,
-      BUILDING_PLUGIN_VERSION,
-      PLACES_PLUGIN_VERSION,
-      LOCALIZATION_PLUGIN_VERSION,
-      OFFLINE_PLUGIN_VERSION,
-      MARKERVIEW_PLUGIN_VERSION
-    } from '../../../constants';
+  - "import constants from '../../../constants';"
 ---
 
 {{
@@ -37,7 +27,7 @@ prependJs:
     />
 }}
 
-Mapbox Plugins build on top of the [Maps SDK](/android/maps/overview/getting-started/) providing extra features in lightweight dependencies. Whether you're looking to include traffic on top of your map or show the user location as a layer, plugins offer customizable APIs with a few lines of code to get started. Separating features into different plugins also allows for a more aggressive updating timeline.
+Mapbox Plugins build on top of the [Maps SDK](/android/maps/overview/#install-the-maps-sdk) providing extra features in lightweight dependencies. Whether you're looking to include traffic on top of your map or show the user location as a layer, plugins offer customizable APIs with a few lines of code to get started. Separating features into different plugins also allows for a more aggressive updating timeline.
 
 ## What are Mapbox Plugins?
 
@@ -70,7 +60,7 @@ Before using any of the Mapbox Plugins for Android, you will need:
 ## Available documentation
 
 - **Guides**. Each plugin has an associated guide which contains both technical descriptions about the plugin and its features, as well as, conceptual explanations of the different components and how they work together.
-- [**Examples**]({{prefixUrl('plugins/examples')}}) See the code in action inside of [our demo app](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo) and use the source code as a good starting point for your project.
+- [**Examples**](/android/plugins/examples/) See the code in action inside of [our demo app](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo) and use the source code as a good starting point for your project.
 
 <!-- - Tutorials — The tutorials section contains several step-by-step guides for creating apps using Mapbox SDKs for Android alongside plugins. -->
 

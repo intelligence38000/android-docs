@@ -1,11 +1,11 @@
 ---
 title: "Directions"
-description: "Official documentation on the Mapbox Java SDK Directions API"
+description: "Official documentation on the Mapbox Java SDK Directions API."
 prependJs:
   - "import { Floater } from '../../../components/floater';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
-  - "import { JAVA_SDK_VERSION } from '../../../constants';"
+  - "import constants from '../../../constants';"
 
 ---
 
@@ -22,7 +22,7 @@ Along with the API documentation, you can also view [the Directions API example 
 The Directions API can be used completely on its own to get routes and other directional information. You should also know that [the Mapbox Navigation SDK for Android](https://docs.mapbox.com/android/navigation/overview/) is built "on top of" the Directions API. The Navigation SDK enables users to more easily interact with and use the information inside of the Directions API response. _Use the Mapbox Java Services dependency if you want to use the Mapbox Directions API without using the entire Mapbox Navigation SDK._
 
 ```groovy
-implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:{{ JAVA_SDK_VERSION }}'
+implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:{{constants.JAVA_SDK_VERSION }}'
 ```
 
 ## Building a request

@@ -6,7 +6,7 @@ prependJs:
   - "import AppropriateImage from '../../../components/appropriate-image';"
   - "import { WarningNote } from '../../../components/warning-note';"
   - "import ChevronousText from '@mapbox/mr-ui/chevronous-text';"
-  - "import { VISION_AR_VERSION } from '../../../constants';"
+  - "import constants from '../../../constants';"
 ---
 
 {{
@@ -16,7 +16,7 @@ prependJs:
         "Works with the device’s built-in camera"
       ]}
       title="Vision AR for Android"
-      version={VISION_AR_VERSION}
+      version={constants.VISION_AR_VERSION}
       image={<AppropriateImage imageId="overviewVisionAr" alt="Mobile devices displaying applications using the Mapbox Vision AR for Android." />}
     />
 }}
@@ -81,4 +81,4 @@ While Vision AR is using the camera you must display the Mapbox watermark on scr
 
 ## Available resources
 
-Learn more about the capabilities of Vision AR in the [API reference](/android/api/vision-ar/{{VISION_AR_VERSION}}/index.html) and data types reference. Contact our team to [request access](https://www.mapbox.com/vision/).
+Learn more about the capabilities of Vision AR in the [API reference](/android/api/vision-ar/{{constants.VISION_AR_VERSION}}/index.html) and data types reference. Contact our team to [request access](https://www.mapbox.com/vision/).

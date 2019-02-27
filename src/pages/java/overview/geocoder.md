@@ -1,6 +1,6 @@
 ---
 title: "Geocoder"
-description: "Official documentation on the Mapbox Java SDK Geocoding API"
+description: "Official documentation on the Mapbox Java SDK Geocoding API."
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
@@ -58,21 +58,21 @@ mapboxGeocoding.enqueueCall(new Callback<GeocodingResponse>() {
 	public void onResponse(Call<GeocodingResponse> call, Response<GeocodingResponse> response) {
 
 		List<CarmenFeature> results = response.body().features();
-	
+
 		if (results.size() > 0) {
-		  
+
 		  // Log the first results Point.
 		  Point firstResultPoint = results.get(0).center();
 		  Log.d(TAG, "onResponse: " + firstResultPoint.toString());
-		  
+
 		} else {
-		
+
 		  // No result for your request were found.
 		  Log.d(TAG, "onResponse: No result found");
-		  
+
 		}
 	}
-	
+
 	@Override
 	public void onFailure(Call<GeocodingResponse> call, Throwable throwable) {
 		throwable.printStackTrace();
@@ -85,21 +85,21 @@ mapboxGeocoding.enqueueCall(object : Callback<GeocodingResponse> {
 	override fun onResponse(call: Call<GeocodingResponse>, response: Response<GeocodingResponse>) {
 
 		val results = response.body()!!.features()
-			
+
 		if (results.size > 0) {
-			
+
 		    // Log the first results Point.
 		    val firstResultPoint = results[0].center()
 		    Log.d(FragmentActivity.TAG, "onResponse: " + firstResultPoint!!.toString())
-			
+
 		} else {
-			
+
 		    // No result for your request were found.
 		    Log.d(FragmentActivity.TAG, "onResponse: No result found")
-			
+
 		}
 	}
-		
+
 	override fun onFailure(call: Call<GeocodingResponse>, throwable: Throwable) {
 		throwable.printStackTrace()
 	}

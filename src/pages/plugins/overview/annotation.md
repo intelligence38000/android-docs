@@ -1,10 +1,8 @@
 ---
 title: "Annotation"
-description: "Mapbox Android Annotation Plugin"
+description: "Mapbox Android Annotation Plugin."
 prependJs:
-  - "import {
-      ANNOTATION_PLUGIN_VERSION
-    } from '../../../constants';"
+  - "import constants from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import { Floater } from '../../../components/floater';"
@@ -35,7 +33,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v7:{{ ANNOTATION_PLUGIN_VERSION }}'
+  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v7:{{constants.ANNOTATION_PLUGIN_VERSION }}'
 }
 ```
 

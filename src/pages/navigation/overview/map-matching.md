@@ -1,6 +1,6 @@
 ---
 title: "Map Matching with Navigation"
-description: "Using Map Matching with the Navigation SDK"
+description: "Using Map Matching with the Navigation SDK."
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"

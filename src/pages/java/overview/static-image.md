@@ -1,6 +1,6 @@
 ---
 title: "Static Image"
-description: "Official documentation on the Mapbox Java SDK Static API"
+description: "Official documentation on the Mapbox Java SDK Static API."
 sideNavSections:
   - title: "Building the URL"
   - title: "Overlays"
@@ -41,7 +41,7 @@ val staticImage = MapboxStaticMap.builder()
 	.width(320) // Image width
 	.height(320) // Image height
 	.retina(true) // Retina 2x image will be returned
-	.build()) 
+	.build())
 `}
 />
 }}
@@ -86,7 +86,3 @@ Picasso.with(this).load(imageUrl).into(imageView)
 `}
 />
 }}
-
-
-
-

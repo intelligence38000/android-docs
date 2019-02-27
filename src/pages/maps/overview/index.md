@@ -5,7 +5,7 @@ prependJs:
   - "import OverviewHeader from '@mapbox/dr-ui/overview-header';"
   - "import AppropriateImage from '../../../components/appropriate-image';"
   - "import { Floater } from '../../../components/floater';"
-  - "import { MAP_SDK_VERSION } from '../../../constants';"
+  - "import constants from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import { WarningNote } from '../../../components/warning-note';"
@@ -24,7 +24,7 @@ prependJs:
         "Map images"
       ]}
       title="Maps SDK for Android"
-      version={MAP_SDK_VERSION}
+      version={constants.MAP_SDK_VERSION}
       changelogLink="https://www.github.com/mapbox/mapbox-gl-native/blob/master/platform/android/CHANGELOG.md"
       ghLink="https://github.com/mapbox/mapbox-gl-native"
       installLink="https://www.mapbox.com/install/android"
@@ -77,14 +77,14 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:{{ MAP_SDK_VERSION }}'
+  implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:{{constants.MAP_SDK_VERSION }}'
 }
 ```
 
 _Note: You might have mismatching gradle dependencies once you add the Mapbox Maps SDK for Android. Don't forget that you can use `exclude group` like below, to remove certain dependencies:_
 
 ```
-implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:{{ MAP_SDK_VERSION }}'){
+implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:{{constants.MAP_SDK_VERSION }}'){
     exclude group: 'group_name', module: 'module_name'
 }
 ```
@@ -92,7 +92,7 @@ Additionally, running `gradle app_module_name_here:dependencies` in your command
 
 ### 2. Get an access token
 
-If you don't have a Mapbox account, sign up for one [here](https://www.mapbox.com/signup/), and then navigate to your [Account page](https://www.mapbox.com/account/). Copy your **default public token** to your clipboard. After you've added the Maps SDK as a dependency inside of your Android project, open the `R.strings.xml` file, create a new String resource, and paste the access token.
+If you don't have a Mapbox account, [sign up](https://www.mapbox.com/signup/), and then navigate to your [Account page](https://www.mapbox.com/account/). Copy your **default public token** to your clipboard. After you've added the Maps SDK as a dependency inside of your Android project, open the `R.strings.xml` file, create a new String resource, and paste the access token.
 
 ```xml
 <string name="mapbox_access_token">MAPBOX_ACCESS_TOKEN</string>

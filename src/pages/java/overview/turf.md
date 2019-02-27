@@ -1,15 +1,11 @@
 ---
 title: "Turf for Java"
-description: "Official documentation on the Mapbox Java SDK Turf library"
+description: "Official documentation on the Mapbox Java SDK Turf library."
 prependJs:
-  - |
-    import {
-      JAVA_SDK_VERSION
-    } from '../../../constants';
+  - "import constants from '../../../constants';"
   - "import { Floater } from '../../../components/floater';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
-
 ---
 
 Turf is a modular geospatial engine written in JavaScript. The Turf for Java library allows Android-based projects to use Turf algorithms as well. Turf algorithms can be done completely on device and don't require any type of call/response to any API or internet database.
@@ -39,7 +35,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:{{ JAVA_SDK_VERSION }}'
+  implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:{{constants.JAVA_SDK_VERSION }}'
 }
 ```
 
@@ -51,7 +47,7 @@ If your project's using Maven instead of Gradle, you can add the dependency insi
 <dependency>
     <groupId>com.mapbox.mapboxsdk</groupId>
     <artifactId>mapbox-sdk-turf</artifactId>
-    <version>{{ JAVA_SDK_VERSION }}</version>
+    <version>{{constants.JAVA_SDK_VERSION }}</version>
 </dependency>
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: "Optimization"
-description: "Official documentation on the Mapbox Java SDK Optimization API"
+description: "Official documentation on the Mapbox Java SDK Optimization API."
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"

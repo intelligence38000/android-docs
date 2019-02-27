@@ -1,6 +1,6 @@
 ---
 title: Inset map
-description: Show a smaller inset map fragment and link it to a larger map for two map interaction. Great for gaming!
+description: Show a smaller inset map fragment and link it to a larger map for two map interaction. Great for gaming.
 thumbnail: thumbnailInsetMap
 topic: User interaction
 prependJs:
@@ -11,7 +11,7 @@ prependJs:
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoInsetMap}
     rotation="horizontal"
     device="pixel-2"
@@ -21,7 +21,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

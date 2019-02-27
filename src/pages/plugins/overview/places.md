@@ -2,9 +2,8 @@
 title: "Places"
 description: "Read docs on the Mapbox Places Plugin for Android. Easily search destinations, explore what's nearby, or find favorite restaurants, coffee shops, or stores."
 prependJs:
-  - |
-    import { PLACES_PLUGIN_VERSION } from '../../../constants';
-    import AppropriateImage from '../../../components/appropriate-image';
+  - "import constants from '../../../constants';"
+  - "import AppropriateImage from '../../../components/appropriate-image';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"   
 ---
@@ -17,7 +16,7 @@ The **Places plugin for Android** lets users search for a destination, explore w
 
 ## Install the Places plugin
 
-To start developing an application using the Places Plugin, you'll need to add the appropriate dependencies inside your `build.gradle` file. This dependency includes the Maps SDK for Android and the [Mapbox Java SDK's Geocoding API]({{prefixUrl('java/overview/geocoder/')}}). All dependencies given below can be found on MavenCentral.
+To start developing an application using the Places Plugin, you'll need to add the appropriate dependencies inside your `build.gradle` file. This dependency includes the Maps SDK for Android and the [Mapbox Java SDK's Geocoding API](/android/java/overview/geocoder/). All dependencies given below can be found on MavenCentral.
 
 If your application is close or exceeds the 65k method count limit, you can mitigate this problem by enabling ProGuard inside your application. ProGuard directives are included in the Android dependencies to preserve the required classes.
 
@@ -35,7 +34,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-places-v7:{{ PLACES_PLUGIN_VERSION }}'
+  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-places-v7:{{constants.PLACES_PLUGIN_VERSION }}'
 }
 ```
 
@@ -119,7 +118,7 @@ PlaceAutocompleteFragment autocompleteFragment;
 
 if (savedInstanceState == null) {
 	autocompleteFragment = PlaceAutocompleteFragment.newInstance("<access_token>");
-	
+
 final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 transaction.add(R.id.fragment_container, autocompleteFragment,TAG);
 transaction.commit();
@@ -178,7 +177,7 @@ kotlin={`
 	            carmenFeature.text(), Toast.LENGTH_LONG).show()
 	    finish()
 	}
-	
+
 	override fun onCancel() {
 	    finish()
 	}
@@ -284,7 +283,7 @@ PlaceAutocomplete.clearRecentHistory(this);
 
 The Autocomplete UI component described above, searches for a place based on an address or name. The **Place Picker** UI component retrieves information about a selected map location. With the Place Picker, you can launch an activity for result and provide your users a way to pick a location on the map. The result returned is a `CarmenFeature`, which can be used to get information such as the coordinate, place name, address, phone number, and more.
 
-To begin, create the Place Picker `IntentBuilder`, which builds an intent ready to be launched by the `startActivityForResult` method. 
+To begin, create the Place Picker `IntentBuilder`, which builds an intent ready to be launched by the `startActivityForResult` method.
 
 {{
 <CodeLanguageToggle id="build-intent" />
@@ -344,9 +343,9 @@ java={`
 protected void onActivityResult(int requestCode, int resultCode, Intent data) { super.onActivityResult(requestCode, resultCode, data);
 
 	if (requestCode == REQUEST_CODE && resultCode == RESULT_OK){
-	    
+
 	// Retrieve the information from the selected location's CarmenFeature
-		
+
 	CarmenFeature carmenFeature = PlacePicker.getPlace(data);
 	}
 }
@@ -358,9 +357,9 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
 	if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
 	// Retrieve the information from the selected location's CarmenFeature
-	
+
 	val carmenFeature = PlacePicker.getPlace(data)
-	
+
    }
 }
 `}

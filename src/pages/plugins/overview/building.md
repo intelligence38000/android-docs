@@ -1,11 +1,8 @@
 ---
 title: "Building"
-description: "Read official documentation on the Mapbox Android Building Plugin and how its several lines of code can help you add 3D buildings to your Android app's map. "
+description: "Read official documentation on the Mapbox Android Building Plugin and how its several lines of code can help you add 3D buildings to your Android app's map."
 prependJs:
-  - |
-    import {
-      BUILDING_PLUGIN_VERSION
-    } from '../../../constants';
+  - "import constants from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
@@ -31,7 +28,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-building-v7:{{ BUILDING_PLUGIN_VERSION }}'
+  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-building-v7:{{constants.BUILDING_PLUGIN_VERSION }}'
 }
 ```
 5. Click the Sync Project with Gradle Files near the toolbar in Studio.

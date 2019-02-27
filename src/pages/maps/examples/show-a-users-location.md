@@ -1,6 +1,6 @@
 ---
 title: Show a user's location
-description: Use the LocationComponent to indicate the user's current location on the map
+description: Use the LocationComponent to indicate the user's current location on the map.
 thumbnail: thumbnailLocationComponent
 topic: Getting started
 prependJs:
@@ -11,7 +11,7 @@ prependJs:
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoShowAUsersLocation}
     rotation="vertical"
     device="pixel-2"
@@ -21,7 +21,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

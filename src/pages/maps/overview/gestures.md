@@ -1,11 +1,10 @@
 ---
 title: "Gestures"
-description: "Detecting gestures in the Mapbox Maps SDK for Android"
+description: "Detecting gestures in the Mapbox Maps SDK for Android."
 prependJs:
-  - "import { GESTURES_VERSION } from '../../../constants';"
-  - "import { GESTURES_SNAPSHOT_VERSION } from '../../../constants';"
+  - "import constants from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
-  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';" 
+  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
 The [Mapbox Gestures for Android library](https://github.com/mapbox/mapbox-gestures-android) is used inside of the Mapbox Maps SDK for Android for gesture detection based on user's input. This library wraps [GestureDetectorCompat](https://developer.android.com/reference/android/support/v4/view/GestureDetectorCompat.html) and [ScaleGestureDetector](https://developer.android.com/reference/android/view/ScaleGestureDetector.html) as well as introduces implementation of rotate, move, shove, and tap gesture detectors.
@@ -23,7 +22,7 @@ The library is implemented in both the [Mapbox Maps SDK for Android](https://git
 5. Click on `Sync Project with Gradle Files` near the toolbar in Android Studio.
 
 ```groovy
-implementation 'com.mapbox.mapboxsdk:mapbox-android-gestures:{{ GESTURES_VERSION }}'
+implementation 'com.mapbox.mapboxsdk:mapbox-android-gestures:{{constants.GESTURES_VERSION }}'
 ```
 
 _**Note:** ProGuard directives are included in the Android dependencies to preserve the required classes._
@@ -40,7 +39,7 @@ repositories {
 ```java
 // In the app build.gradle file
 dependencies {
-	implementation 'com.mapbox.mapboxsdk:mapbox-android-gestures:{{ GESTURES_SNAPSHOT_VERSION }}'
+	implementation 'com.mapbox.mapboxsdk:mapbox-android-gestures:{{constants.GESTURES_SNAPSHOT_VERSION }}'
 }
 ```
 
@@ -158,7 +157,7 @@ java={`
 public boolean onScaleBegin(StandardScaleGestureDetector detector) {
   // forbid movement when scaling
   androidGesturesManager.getMoveGestureDetector().setEnabled(false); // this interrupts a gesture as well
-    
+
   // increase rotate angle threshold when scale is detected, then interrupt to force re-check
   RotateGestureDetector rotateGestureDetector = androidGesturesManager.getRotateGestureDetector();
   rotateGestureDetector.setAngleThreshold(ROTATION_THRESHOLD_WHEN_SCALING);
@@ -166,14 +165,14 @@ public boolean onScaleBegin(StandardScaleGestureDetector detector) {
 
   return true;
 }
-    
+
 @Override
 public boolean onScale(StandardScaleGestureDetector detector) {
   float scaleFactor = detector.getScaleFactor();
 
   return true;
 }
-    
+
 @Override
 public void onScaleEnd(StandardScaleGestureDetector detector) {
   // revert thresholds values
@@ -236,7 +235,7 @@ Detects a vertical movement of two pointers if they are placed within a certain 
 Behaves similarly to `#onScroll()` contained in the `StandardGestureDetector`, however, its a `ProgressiveGesture` that enables better filtering options, as well as thresholds.
 
 #### SidewaysShoveGesturesDetector
-A sibling of the `ShoveGestureDetector`, however, it recognizes the two-finger shove gesture executed in a horizontal, rather than vertical, line. 
+A sibling of the `ShoveGestureDetector`, however, it recognizes the two-finger shove gesture executed in a horizontal, rather than vertical, line.
 
 
 ## Usage with the Maps SDK
@@ -279,7 +278,7 @@ mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
 
 kotlin={`
 mapboxMap.addOnMapClickListener { point ->
- 
+
 }
 `}
 
@@ -315,11 +314,11 @@ mapboxMap.addOnMoveListener(object : MapboxMap.OnMoveListener {
 	override fun onMoveBegin(detector: MoveGestureDetector) {
 	    // user started moving the map
 	}
-	
+
 	override fun onMove(detector: MoveGestureDetector) {
 	    // user is moving the map
 	}
-	
+
 	override fun onMoveEnd(detector: MoveGestureDetector) {
 	    // user stopped moving the map
 	}
@@ -338,7 +337,7 @@ Other popular listener interfaces that you can implement are:
  - `OnRotateListener` fires when the map is rotated.
  - `OnScaleListener` fires when the map is zoomed in or out.
  - `OnShoveListener` fires when map is tilted.
- 
+
 ### Custom AndroidGesturesManager
 
 The Maps SDK offers a `MapboxMap#setGesturesManager()` method. If you create a custom `AndroidGesturesManager` object, you can use it as a parameter for that method and for the custom mapping experience that you want to create.

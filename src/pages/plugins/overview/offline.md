@@ -1,11 +1,8 @@
 ---
 title: "Offline"
-description: "Mapbox Android Offline Plugin"
+description: "Mapbox Android Offline Plugin."
 prependJs:
-  - |
-    import {
-      OFFLINE_PLUGIN_VERSION
-    } from '../../../constants';
+  - "import constants from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
@@ -35,7 +32,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-offline-v7:{{ OFFLINE_PLUGIN_VERSION }}'
+  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-offline-v7:{{constants.OFFLINE_PLUGIN_VERSION }}'
 }
 ```
 5. Click the Sync Project with Gradle Files near the toolbar in Studio.

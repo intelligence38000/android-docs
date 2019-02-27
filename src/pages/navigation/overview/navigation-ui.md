@@ -2,7 +2,7 @@
 title: "Navigation turn-by-turn UI"
 description: "Customize the design of your Android app's turn-by-turn navigation experience. How? The Mapbox Navigation SDK for Android. Click for docs and info."
 prependJs:
-  - "import { NAVIGATION_VERSION } from '../../../constants';"
+  - "import constants from '../../../constants';"
   - "import AppropriateImage from '../../../components/appropriate-image';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:{{ NAVIGATION_VERSION }}'
+  implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:{{constants.NAVIGATION_VERSION }}'
 }
 ```
 

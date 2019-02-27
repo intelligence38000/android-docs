@@ -1,6 +1,6 @@
 ---
 title: Data time lapse
-description: Use data-driven styling to visualize point data with a time lapse effect; rainfall in China in this example
+description: Use data-driven styling to visualize point data with a time lapse effect; rainfall in China in this example.
 thumbnail: thumbnailDataTimeLapse
 topic: Data visualization
 prependJs:
@@ -11,7 +11,7 @@ prependJs:
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoDataTimeLapse}
     rotation="vertical"
     device="pixel-2"
@@ -21,7 +21,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

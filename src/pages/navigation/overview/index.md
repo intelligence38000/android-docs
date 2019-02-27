@@ -4,7 +4,7 @@ description: "Official documentation and overview of the Mapbox Navigation SDK f
 prependJs:
   - "import OverviewHeader from '@mapbox/dr-ui/overview-header';"
   - "import AppropriateImage from '../../../components/appropriate-image';"
-  - "import { NAVIGATION_VERSION } from '../../../constants';"
+  - "import constants from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
@@ -19,7 +19,7 @@ prependJs:
         "Traffic Routing"
       ]}
       title="Navigation SDK for Android"
-      version={NAVIGATION_VERSION}
+      version={constants.NAVIGATION_VERSION}
       changelogLink="https://github.com/mapbox/mapbox-navigation-android/blob/master/CHANGELOG.md"
       ghLink="https://github.com/mapbox/mapbox-navigation-android"
       image={<AppropriateImage imageId="overviewNavigationSdk" alt="Mobile devices displaying applications using the Mapbox Navigation SDK for Android." />}
@@ -54,7 +54,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation:{{ NAVIGATION_VERSION }}'
+  implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation:{{constants.NAVIGATION_VERSION }}'
 }
 ```
 

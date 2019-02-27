@@ -1,6 +1,6 @@
 ---
 title: "Snapshotter"
-description: "Take a static snapshot photo of the map to use on the device in your app, a notification, or even to share with others"
+description: "Take a static snapshot photo of the map to use on the device in your app, a notification, or even to share with others."
 prependJs:
   - "import { Floater } from '../../../components/floater';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
@@ -22,7 +22,7 @@ Unless you have the map tiles already cached, the device _will_ need an internet
 
 Snapshot generation can happen on the device's background thread and won't compromise the user experience.
 
-This snapshot feature is different than [the Mapbox Static API](https://docs.mapbox.com/android/java-sdk/overview/static-image). [The `MapboxStaticMap` class](https://github.com/mapbox/mapbox-java/blob/afe9e88c9a09a413405571678d17499aa0a5f25c/services-staticmap/src/main/java/com/mapbox/api/staticmap/v1/MapboxStaticMap.java) helps you build a URL to request a static map image which looks like an embedded map without interactivity or controls.
+This snapshot feature is different than [the Mapbox Static API](/android/java/overview/static-image). [The `MapboxStaticMap` class](https://github.com/mapbox/mapbox-java/blob/afe9e88c9a09a413405571678d17499aa0a5f25c/services-staticmap/src/main/java/com/mapbox/api/staticmap/v1/MapboxStaticMap.java) helps you build a URL to request a static map image which looks like an embedded map without interactivity or controls.
 
 ## Taking a map snapshot
 
@@ -125,4 +125,3 @@ The Mapbox Android demo app has two examples that show how the snapshot `Bitmap`
     text="Use the map snapshot image in a notification"
   />
 }}
-

@@ -2,8 +2,7 @@
 title: "MarkerView"
 description: "Read docs on the Mapbox MarkerView Plugin for Android. Quickly customize and add Android view-based markers to a Mapbox map."
 prependJs:
-  - |
-    import { MARKERVIEW_PLUGIN_VERSION } from '../../../constants';
+  - "import constants from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import { WarningNote } from '../../../components/warning-note';"
@@ -37,7 +36,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-markerview-v7:{{ MARKERVIEW_PLUGIN_VERSION }}'
+  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-markerview-v7:{{constants.MARKERVIEW_PLUGIN_VERSION }}'
 }
 ```
 
@@ -178,6 +177,3 @@ super.onDestroyView()
 
 />
 }}
-
-
-

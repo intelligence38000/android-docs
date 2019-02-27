@@ -1,6 +1,6 @@
 ---
 title: Dashed directions route line
-description: Retrieve and show a dashed directions route line based on map movement
+description: Retrieve and show a dashed directions route line based on map movement.
 thumbnail: thumbnailDashedDrivingRoute
 topic: Getting started
 prependJs:
@@ -11,7 +11,7 @@ prependJs:
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoDashedDirectionsLine}
     rotation="horizontal"
     device="pixel-2"
@@ -21,7 +21,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

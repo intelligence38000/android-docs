@@ -1,8 +1,8 @@
 ---
 title: "Showing device location"
-description: "Showing device location with the Mapbox Maps SDK for Android"
+description: "Showing device location with the Mapbox Maps SDK for Android."
 prependJs:
-  - "import { GESTURES_VERSION } from '../../../constants';"
+  - "import constants from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import AppropriateImage from '../../../components/appropriate-image';"

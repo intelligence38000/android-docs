@@ -2,10 +2,7 @@
 title: "Traffic"
 description: "Discover how to display real-time road traffic on your Android map with the Mapbox Android Traffic Plugin. All it requires is two lines of code."
 prependJs:
-  - |
-    import {
-      TRAFFIC_PLUGIN_VERSION
-    } from '../../../constants';
+  - "import constants from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"    
 ---
@@ -33,7 +30,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-traffic-v7:{{ TRAFFIC_PLUGIN_VERSION }}'
+  implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-traffic-v7:{{constants.TRAFFIC_PLUGIN_VERSION }}'
 }
 ```
 

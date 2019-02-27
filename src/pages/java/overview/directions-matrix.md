@@ -1,6 +1,6 @@
 ---
 title: "Directions Matrix"
-description: "Official documentation on the Mapbox Java SDK Matrix API"
+description: "Official documentation on the Mapbox Java SDK Matrix API."
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
@@ -58,13 +58,13 @@ client.enqueueCall(new Callback<MatrixResponse>() {
   @Override
   public void onResponse(Call<MatrixResponse> call,
     Response<MatrixResponse> response) {
-    
+
     }
   }
 
   @Override
   public void onFailure(Call<MatrixResponse> call, Throwable throwable) {
-    
+
   }
 });
 `}
@@ -73,14 +73,13 @@ kotlin={`
 directionsMatrixClient.enqueueCall(object : Callback<MatrixResponse> {
 	override fun onResponse(call: Call<MatrixResponse>, response: Response<MatrixResponse>) {
 
-	
+
 	}
-	
+
 	override fun onFailure(call: Call<MatrixResponse>, throwable: Throwable) {
-	
+
 	}
 })        
 `}
 />
 }}
-

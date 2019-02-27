@@ -1,6 +1,6 @@
 ---
 title: Use GeoJSON data to set extrusion height
-description: Use data-driven styling and GeoJSON data to set extrusions' heights
+description: Use data-driven styling and GeoJSON data to set extrusions' heights.
 thumbnail: thumbnailUseGeojsonDataToSetExtrusionHeight
 topic: Extrusions
 prependJs:
@@ -12,7 +12,7 @@ prependJs:
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoGeojsonMarathonExtrusion}
     rotation="horizontal"
     device="pixel-2"
@@ -23,7 +23,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

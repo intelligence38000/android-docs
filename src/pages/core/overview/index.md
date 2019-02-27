@@ -4,7 +4,7 @@ description: "Overview of the Mapbox Core Libraries for Android. Easily handle d
 prependJs:
   - "import OverviewHeader from '@mapbox/dr-ui/overview-header';"
   - "import AppropriateImage from '../../../components/appropriate-image';"
-  - "import { CORE_VERSION } from '../../../constants';"
+  - "import constants from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
@@ -17,7 +17,7 @@ prependJs:
         "Connectivity"
       ]}
       title="Android Core library"
-      version={CORE_VERSION}
+      version={constants.CORE_VERSION}
       changelogLink="https://github.com/mapbox/mapbox-events-android/blob/master/CHANGELOG.md"
       ghLink="https://github.com/mapbox/mapbox-events-android"
       image={<AppropriateImage imageId="overviewCoreLibSdk" alt="Mobile devices displaying applications using the Mapbox Core for Android." />}
@@ -44,7 +44,7 @@ This core module has no dependencies on any of the other Mapbox Java modules and
 5. Click on `Sync Project with Gradle Files` near the toolbar in Android Studio.
 
 ```groovy
-implementation 'com.mapbox.mapboxsdk:mapbox-android-core:{{ CORE_VERSION }}'
+implementation 'com.mapbox.mapboxsdk:mapbox-android-core:{{constants.CORE_VERSION }}'
 ```
 
 _**Note:** ProGuard directives are included in the Android dependencies to preserve the required classes._
@@ -129,7 +129,7 @@ PermissionsListener permissionsListener = new PermissionsListener() {
 	@Override
 	public void onPermissionResult(boolean granted) {
 		if (granted) {
-		
+
 		// Permission sensitive logic called here, such as activating the Maps SDK's LocationComponent to show the device's location
 
 
@@ -208,25 +208,25 @@ private static class LocationListeningCallback
     LocationListeningCallback(MainActivity activity) {
       this.activityWeakReference = new WeakReference<>(activity);
     }
-       
+
     @Override
     public void onSuccess(LocationEngineResult result) {
-    
+
     // The LocationEngineCallback interface's method which fires when the device's location has changed.
 
-    
+
     Location lastLocation = result.getLastLocation();
 
 
     }
-    
+
     @Override
     public void onFailure(@NonNull Exception exception) {
-    
+
     // The LocationEngineCallback interface's method which fires when the device's location can not be captured
 
 
-      
+
     }
 }
 `}
@@ -236,26 +236,26 @@ private class LocationListeningCallback internal constructor(activity: MainActiv
 private val activityWeakReference: WeakReference<MainActivity>
 
 	init {this.activityWeakReference = WeakReference(activity)}
-	
+
 	override fun onSuccess(result: LocationEngineResult) {
 
-    // The LocationEngineCallback interface's method which fires when the device's location has changed.	
-    
+    // The LocationEngineCallback interface's method which fires when the device's location has changed.
+
 	    result.getLastLocation()
-	    
+
 	}
-	
+
 	/**
 	 * The LocationEngineCallback interface's method which fires when the device's location can not be captured
 	 *
 	 * @param exception the exception message
 	 */
 	override fun onFailure(exception: Exception) {
-	    
+
 	// The LocationEngineCallback interface's method which fires when the device's location can not be captured
 
 
-	    
+
 	}
 }
 `}
@@ -284,8 +284,8 @@ Request location updates once you know location permissions have been granted:
 <ToggleableCodeBlock
  java={`
 long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
-long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5; 
- 
+long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
+
 LocationEngine locationEngine = LocationEngineProvider.getBestLocationEngine(this);
 
 LocationEngineRequest request = new LocationEngineRequest.Builder(DEFAULT_INTERVAL_IN_MILLISECONDS)
@@ -321,20 +321,20 @@ To prevent your application from having a memory leak, it is a good idea to stop
 @Override
   protected void onStop() {
     super.onStop();
-    
+
     if (locationEngine != null) {
         locationEngine.removeLocationUpdates(callback);
     }
-    
+
     mapView.onStop();
 }
 `}
 kotlin={`
 override fun onStop() {
     super.onStop()
-    
+
     locationEngine?.removeLocationUpdates(callback)
-    
+
     mapView.onStop()
 }
 `}
