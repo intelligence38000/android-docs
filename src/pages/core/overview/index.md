@@ -215,7 +215,7 @@ private static class LocationListeningCallback
     // The LocationEngineCallback interface's method which fires when the device's location has changed.
 
     
-    Location lastLocation = result.lastLocation
+    Location lastLocation = result.getLastLocation();
 
 
     }
@@ -241,7 +241,7 @@ private val activityWeakReference: WeakReference<MainActivity>
 
     // The LocationEngineCallback interface's method which fires when the device's location has changed.	
     
-	    result.lastLocation
+	    result.getLastLocation()
 	    
 	}
 	
