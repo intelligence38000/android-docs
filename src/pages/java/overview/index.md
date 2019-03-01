@@ -91,7 +91,7 @@ To start developing your application using the Mapbox Java SDK, you'll need to f
 
 1. Start Android Studio
 2. Open up your applications `build.gradle`
-3. Make sure your projects `minSdkVersion` is at API 15 or higher
+3. Make sure your projects `minSdkVersion` is at API 14 or higher
 4. Under dependencies add a new build rule for the latest mapbox-android-services
 5. Click the Sync Project with Gradle Files near the toolbar in Studio
 
