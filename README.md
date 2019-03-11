@@ -18,7 +18,7 @@ This repository uses git submodules, so it needs to be cloned recursively to inc
 - `examples/navigation`, sourced from [`mapbox-navigation-android`](https://github.com/mapbox/mapbox-navigation-android/tree/master/app/src/main/java/com/mapbox/services/android/navigation/testapp/activity)
 
 ```
-git clone --recursive https://github.com/mapbox/android-docs.git
+git clone --recursive git@github.com:mapbox/android-docs.git
 ```
 
 Change your working directory to the cloned repository:
