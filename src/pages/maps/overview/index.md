@@ -69,7 +69,7 @@ If your application is close or exceeds the 65k method count limit, you can miti
 2. Open up your application's `build.gradle` file.
 3. Make sure that your project's `minSdkVersion` is at API 14 or higher.
 4. Under dependencies, add a new `implementation` dependency line for the latest `mapbox-android-sdk`.
-5. Find the `File` in the toolbar and then clik on `Sync Project with Gradle Files`.
+5. Find the `File` in the toolbar and then click on `Sync Project with Gradle Files`.
 
 ```groovy
 repositories {
