@@ -5,13 +5,14 @@ import ApiTabDropdown from './api-dropdown';
 import { listTabs } from '../util/list-tabs';
 import listSubfolders from '@mapbox/batfish/data/list-subfolders';
 import { androidApiReferenceLinks } from '../data/android-api-reference-links';
+import constants from '../constants';
 import _ from 'lodash';
 
 class TopNavTabs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: 0
+      width: 641
     };
   }
 
@@ -31,15 +32,109 @@ class TopNavTabs extends React.Component {
   }, 200);
   render() {
     const { props } = this;
-    const dropdownItems = androidApiReferenceLinks[props.product].map(
-      (link, index) => {
-        return (
-          <li key={index}>
-            <a href={link.href}>{link.label}</a>
-          </li>
-        );
+
+    const config = {
+      // MAPS DROPDOWN
+      maps: {
+        dropdownItems: androidApiReferenceLinks[props.product].map(
+          (link, index) => {
+            return (
+              <li key={index}>
+                <a
+                  href={link.href}
+                  className={
+                    index === 0 ? 'link--blue link txt-bold' : 'link link--gray'
+                  }
+                >
+                  {link.label}
+                  {index === 0 ? <span> &mdash; latest stable</span> : ''}
+                </a>
+              </li>
+            );
+          }
+        ),
+        apiDropdownMenu: [
+          {
+            label: 'API reference',
+            id: 'api',
+            href: `/ios/api/map-sdk/${constants.MAP_SDK_VERSION}`
+          }
+        ]
+      },
+      // NAVIGATION DROPDOWN
+      navigation: {
+        dropdownItems: androidApiReferenceLinks[props.product].map(
+          (link, index) => {
+            return (
+              <li className={index === 0 ? 'txt-bold' : 'mt12'} key={index}>
+                <span className="block">
+                  {link.label}{' '}
+                  {index === 0 ? <span> &mdash; latest stable</span> : ''}{' '}
+                </span>
+                <a
+                  className={`${
+                    index === 0 ? 'link--blue' : 'link--gray'
+                  } link block`}
+                  href={`/android/api/navigation-sdk/navigation/${
+                    link.label
+                  }/index.html`}
+                >
+                  navigation
+                </a>
+                <a
+                  className={`${
+                    index === 0 ? 'link--blue' : 'link--gray'
+                  } link block`}
+                  href={`/android/api/navigation-sdk/navigation-ui/${
+                    link.label
+                  }/index.html`}
+                >
+                  navigation-ui
+                </a>
+              </li>
+            );
+          }
+        ),
+        apiDropdownMenu: [
+          {
+            label: 'API reference (navigation)',
+            id: 'api',
+            href: `/ios/api/navigation/${constants.NAVIGATION_VERSION}`
+          },
+          {
+            label: 'API reference (navigation-ui)',
+            id: 'api',
+            href: `/ios/api/navigation-ui/${constants.NAVIGATION_VERSION}`
+          }
+        ]
+      },
+      // DEFAULT DROPDOWN
+      default: {
+        dropdownItems: androidApiReferenceLinks[props.product].map(
+          (link, index) => {
+            return (
+              <li key={index}>
+                <a className="link link--gray" href={link.href}>
+                  {link.label}
+                </a>
+              </li>
+            );
+          }
+        ),
+        apiDropdownMenu: androidApiReferenceLinks[props.product].map(item => {
+          return {
+            label: item.label,
+            id: item.id,
+            href: item.href
+          };
+        })
       }
-    );
+    };
+
+    const dropdownItems = config[props.product]
+      ? config[props.product].dropdownItems
+      : config['default'].dropdownItems;
+
     let apiDropdownMenu = [];
     if (dropdownItems.length > 1) {
       if (this.state.width > 640) {
@@ -53,19 +148,17 @@ class TopNavTabs extends React.Component {
           }
         ];
       } else {
-        apiDropdownMenu = androidApiReferenceLinks[props.product].map(item => {
-          return {
-            label: item.label,
-            id: item.id,
-            href: item.href
-          };
-        });
-        apiDropdownMenu.unshift({
-          label: 'API reference',
-          id: 'api',
-          href: '#',
-          disabled: true
-        });
+        apiDropdownMenu = config[props.product]
+          ? config[props.product].apiDropdownMenu
+          : config['default'].apiDropdownMenu;
+        if (!config[props.product]) {
+          apiDropdownMenu.unshift({
+            label: 'API reference',
+            id: 'api',
+            href: '#',
+            disabled: true
+          });
+        }
       }
     } else {
       apiDropdownMenu = [

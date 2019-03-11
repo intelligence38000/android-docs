@@ -1,13 +1,26 @@
 import * as constants from '../constants';
+import mapVersionNumbers from './map-version-numbers';
+import navigationVersionNumbers from './navigation-version-numbers';
+import { sortVersions } from '@mapbox/dr-ui/helpers/version-sort';
+
+const mapVersionsOrdered = sortVersions(mapVersionNumbers).versionsToDisplay;
+const navigationVersionsOrdered = sortVersions(navigationVersionNumbers)
+  .versionsToDisplay;
 
 export const androidApiReferenceLinks = {
-  maps: [
-    {
-      label: 'Maps SDK for Android',
-      id: 'maps',
-      href: `/android/api/map-sdk/${constants.MAP_SDK_VERSION}/index.html`
-    }
-  ],
+  maps: mapVersionsOrdered.map(number => {
+    return {
+      label: number,
+      id: `maps-v${number}`,
+      href: `/android/api/map-sdk/${number}/index.html`
+    };
+  }),
+  navigation: navigationVersionsOrdered.map(number => {
+    return {
+      label: number,
+      id: `navigation-v${number}`
+    };
+  }),
   plugins: [
     {
       label: 'MarkerView',
@@ -100,22 +113,6 @@ export const androidApiReferenceLinks = {
       id: 'java-services',
       href: `/android/api/mapbox-java/libjava-services/${
         constants.JAVA_SDK_VERSION
-      }/index.html`
-    }
-  ],
-  navigation: [
-    {
-      label: 'navigation',
-      id: 'navigation',
-      href: `/android/api/navigation-sdk/navigation/${
-        constants.NAVIGATION_VERSION
-      }/index.html`
-    },
-    {
-      label: 'navigation-ui',
-      id: 'navigation-ui',
-      href: `/android/api/navigation-sdk/navigation-ui/${
-        constants.NAVIGATION_VERSION
       }/index.html`
     }
   ],

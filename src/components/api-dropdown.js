@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PopoverTrigger from '@mapbox/mr-ui/popover-trigger';
+import PopoverTrigger from '@mapbox/react-popover-trigger';
 import Icon from '@mapbox/mr-ui/icon';
 
 class ApiTabDropdown extends React.PureComponent {
@@ -12,8 +12,9 @@ class ApiTabDropdown extends React.PureComponent {
         popoverProps={{
           placement: 'bottom',
           themePopover:
-            'round shadow-darken25 scroll-auto scroll-styled bg-white px18 py12 none block-mm'
+            'round shadow-darken25 hmax480 scroll-auto scroll-styled px24 py12'
         }}
+        respondsToHover={true}
       >
         <div className="py0">
           API reference

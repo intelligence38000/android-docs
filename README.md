@@ -77,6 +77,21 @@ The test suite will lint JavaScript as well as:
 
 If the tests return an error or warning, follow the guidance from the test to fix it.
 
+## Updating for SDK releases
+
+To update the site for a Maps SDK or Navigation SDK release:
+
+1. Run `node scripts/update.js <product> <version>`. Where :
+    - `<product>` is either `maps` or `navigation`
+    - `<version>` is the version number. It must follow the format `X.X.X`, where `X` is an integer. Optional: append the version number with `-beta.X` or `-rc.X` where `X` is also an integer.
+2. Commit and push the commits that are created.
+
+Running `scripts/update.js` will:
+
+- Update the relevant variable in [`src/constants.json`](/src/constants.json).
+- Add the new version number to the relevant data file ([`src/data/*-version-numbers.json`](/src/data/)).
+- Rewrite the relevant HTML redirects in the [`api/`](/api/) folder to point to the docs for the new version number.
+
 ## Contributing new documentation
 
 If you'd like to add to this repo's Android documentation, please read [the contribution guide](/CONTRIBUTING.md) to learn how to get started.

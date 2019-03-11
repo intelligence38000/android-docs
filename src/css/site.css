@@ -55,6 +55,10 @@
   height: 480px !important;
 }
 
+.hmax480 {
+  max-height: 480px !important;
+}
+
 .w200 {
   width: 200px !important;
 }
