@@ -24,7 +24,7 @@ prependJs:
 }}
 
 {{
-<WarningNote title="The Mapbox Vision SDK for Android is currently in limited public beta">
+<WarningNote title="The Mapbox Vision SDK for Android is in limited public beta">
     <p><a href="https://www.mapbox.com/vision/"><ChevronousText text="Request access" /></a></p>
 </WarningNote>
 }}
@@ -35,7 +35,7 @@ The Vision SDK uses highly efficient neural networks to process imagery directly
 - Classification and display of regulatory and warning signs
 - Object detection for vehicles, pedestrians, road signs, and traffic lights
 - Semantic segmentation of the roadway into 14 different classes (other, road, road_markup, flat_non_road, sky, building, car, cycle, person, road_markings_other, curb, double_yellow, traffic_sign, traffic_light)
-- Distance detection that indicates spacing to lead vehicle
+- Distance detection that shows spacing to lead vehicle
 
 
 ## Uses
@@ -68,22 +68,22 @@ Some of devices that will work with VisionSDK:
 - HTC U11, U11+ // U12, U12+
 - OnePlus 5 // 6
 
-You can also check more details at [Vison SDK FAQ](https://vision.mapbox.com/faq).
+You can also check more details at [Vision SDK FAQ](https://vision.mapbox.com/faq).
 
-In addition to software and hardware requirements, use of the Vision SDK requires that the device is pointed with a view of the road. We strongly recommend using a dashboard or windshield mount to keep your phone oriented correctly while you drive. We have tested a few options and have seen positive results with two mounts ([option 1](https://www.amazon.com/gp/product/B06ZZWYQF7/) and [option 2](https://www.amazon.com/Getron-Windshield-Dashboard-Universal-Smartphones/dp/B00XJE2YHQ/)).
+Besides software and hardware requirements, use of the Vision SDK requires that the device is pointed with a view of the road. Use a dashboard or windshield mount to keep your phone oriented correctly while you drive, such as [Car Phone Mount Windshield](https://www.amazon.com/gp/product/B06ZZWYQF7/) and [Car Mount Holder](https://www.amazon.com/Getron-Windshield-Dashboard-Universal-Smartphones/dp/B00XJE2YHQ/).
 
 ## Installation and setup
 
 ### SDK installation
 
-**The Vision SDK is currently in limited public beta. Contact our team to [request access](https://www.mapbox.com/vision) and receive installation instructions.**
+**The Vision SDK is in limited public beta. Contact our team to [request access](https://www.mapbox.com/vision) and receive installation instructions.**
 
 ### Device setup
 
-In addition to installing the framework, you will need to set up the device in the vehicle. Some things to consider when choosing and setting up a mount:
+Besides installing the framework, you will need to set up the device in the vehicle. Some things to consider when choosing and setting up a mount:
 
 - Generally, shorter length mounts will vibrate less. Mounting to your windshield or to the dashboard itself are both options.
-- The Vision SDK will do best with detections when the phone is near or behind where your rearview mirror is. However, note that your local jurisdiction may have limits on where mounts may be placed.
+- Place the phone near or behind where your rearview mirror. Note that your local jurisdiction may have limits on where mounts may be placed.
 - Make sure the phone’s camera view is unobstructed (you will be able to tell with any of the video screens open).
 
 ## Conditions

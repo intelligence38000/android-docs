@@ -17,11 +17,11 @@ Navigation milestones inside the SDK provide a powerful way to give your user in
 
 There are two default milestones that are used to trigger voice and text instructions: `VoiceInstructionMilestone` and `BannerInstructionMilestone`.
 
-### BannerInstructionMilestone
+### `BannerInstructionMilestone`
 
-`BannerInstructionMilestone` fires every time textual instructions should be updated, most of the time in the format of a "banner" view on the top of the screen. This milestone provides a `BannerInstructions` object for the given point along the route.  This object contains text and URLs for shield images that can be displayed on screen at the time the milestone fires. 
+`BannerInstructionMilestone` fires every time textual instructions should be updated, most of the time in the format of a "banner" view on the top of the screen. This milestone provides a `BannerInstructions` object for the given point along the route.  This object contains text and URLs for shield images that can be displayed on screen at the time the milestone fires.
 
-### VoiceInstructionMilestone
+### `VoiceInstructionMilestone`
 
 `VoiceInstructionMilestone` fires every time it's time to announce an instruction along a given `DirectionsRoute`.  This milestone provides
 a plain text instruction with `VoiceInstructionMilestone#getInstruction` as well as a SSML version of the same instruction with `VoiceInstructionMilestone#getSsmlAnnouncement`.  
@@ -30,7 +30,7 @@ SSML stands for Speech Synthesis Markup Language and is designed to work with [A
 
 ## Navigation UI SDK
 
-In the Navigation UI SDK, banner and voice instructions are triggered by the default milestones described above. There are default styling rules for banner instructions and default settings for voice instructions. Instructions can be customized to an extent including overriding default behaviors when instructions are triggered and customizing the style of banner instructions. Creating [custom milestones](#custom-milestones) must be done with the core Navigation SDK.
+In the Navigation UI SDK, banner and voice instructions are triggered by the default milestones described above. There are default styling rules for banner instructions and default settings for voice instructions. Instructions can be customized to an extent including overriding default behaviors when instructions are triggered and customizing the style of banner instructions. You must create [custom milestones](#custom-milestones) with the core Navigation SDK.
 
 {{<Note imageComponent={<BookImage size="60" />}>}}
 For customizing the language used in instructions, see [Localization](/android/navigation/overview/).
@@ -290,14 +290,14 @@ navigation?.addNavigationEventListener { running ->
 
 ## Custom milestones
 
-Milestones bring flexibility to your app and how it handles navigation events. Creating a milestone is done in a few steps. First, choose how frequently you'd like the milestone to be triggered. Two options are currently provided:
+Milestones bring flexibility to your app and how it handles navigation events. You can create a milestone in a few steps. First, choose how often you'd like the milestone to be triggered. Two options are provided:
 
 - `StepMilestone`, which is triggered each step in the route.
-- `RouteMilestone`, which will only be triggered once during the entire route. 
-  
+- `RouteMilestone`, which will only be triggered once during the entire route.
+
 You can also implement your own behavior for triggers by extending the `Milestone` class. Give the milestone a unique identifier that can be used to determine which milestone triggered the `onMilestoneEvent` callback. Set the triggers using any combination of the properties shown in the table below. It is important to note that trigger properties have different corresponding variable types that need to be accounted for when setting up the milestone. Lastly, build the milestone and pass it into the `MapboxNavigation` instance using `addMilestone()`.
 
-The snippet of code below shows the creation of a `RouteMilestone` with two conditions, both of which need to be true for the milestone to be triggered. Since it is a `RouteMilestone`, the milestone event only occurs once along the route. The trigger statement can be read as: _both the step index must be less than three **and** the current step total distance must be greater than 200 meters for the milestone to be triggered._
+The snippet of code below shows the creation of a `RouteMilestone` with two conditions, both of which need to be true for the milestone to be triggered. Since it is a `RouteMilestone`, the milestone event only occurs once along the route. You can read the trigger statement as: _both the step index must be less than three **and** the current step total distance must be greater than 200 meters for the milestone to be triggered._
 
 {{
 <CodeLanguageToggle id="route-milestone" />
@@ -329,7 +329,8 @@ navigation?.addOffRouteListener {
 
 ### Trigger conditions
 
-Besides the triggers already mentioned above, the SDK comes equipped to handle pretty much any case you'd like to build. The table below shows all the conditions currently offered inside the SDK and whether it is a compound statement or a simple statement.
+<!--copyeditor ignore simple-->
+Besides the triggers already mentioned above, the SDK comes equipped to handle pretty much any case you'd like to build. The table below shows all the conditions offered inside the SDK and whether it is a compound statement or a simple statement.
 
 Condition name | Type     | Description
 -------------- | -------- | ---------------------------------------------------------------------------------------------------------------
@@ -356,11 +357,10 @@ STEP_DURATION_REMAINING_SECONDS | double  | Will trigger the milestone based on 
 STEP_DURATION_TOTAL_SECONDS     | double  | Will trigger the milestone based on the total step duration.
 STEP_DISTANCE_TRAVELED_METERS   | double  | Will trigger the milestone based on the distance the user has traveled along the step already.
 NEW_STEP                        | boolean | When the user completes a maneuver and begins traversing along a new step.
-FIRST_STEP                      | boolean | When the user begins a navigation session and is currently on the first step.
+FIRST_STEP                      | boolean | When the user begins a navigation session and is on the first step.
 LAST_STEP                       | boolean | When the user is on the second to last step. Note the final step in direction route will only contain a point representing the final maneuver.
 NEXT_STEP_DISTANCE_METERS       | double  | The next step's total distance in meters.
 FIRST_LEG                       | boolean | When the user is on the first leg.
 LAST_LEG                        | boolean | When the user is on the last leg.
 
-We are actively adding more and more trigger properties every day while we continue building out the milestones API. Please [open an issue on GitHub](https://github.com/mapbox/mapbox-navigation-android/issues/new) if you feel a trigger property is missing and include the use case.
-
+[Open an issue on GitHub](https://github.com/mapbox/mapbox-navigation-android/issues/new) if you feel a trigger property is missing and include the use case.

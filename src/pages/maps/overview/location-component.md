@@ -11,7 +11,7 @@ prependJs:
 
 ---
 
-Showing the user's current location as a map annotation is a popular and often critical feature of location-based apps. The Maps SDK's `LocationComponent` makes use of the Maps SDK's [runtime styling capabilities](/android/maps/overview/data-driven-styling/) to display the device location icon within the map itself rather than on top as a simple Android view. Mapbox map layers and layer styling give you precise control, if you want it, of the way that a device's location is shown on the map.
+Showing the user's current location as a map annotation is a popular and often critical feature of location-based apps. The Maps SDK's `LocationComponent` makes use of the Maps SDK's [runtime styling capabilities](/android/maps/overview/data-driven-styling/) to display the device location icon within the map itself rather than on top as an Android view. Mapbox map layers and layer styling give you precise control over how you show a device's location on the map.
 
 {{
 <DocNote>
@@ -21,7 +21,7 @@ Showing the user's current location as a map annotation is a popular and often c
 
 ## Requesting location permissions
 
-You'll need to request the Android-system location permission before using the `LocationComponent`. If your Android project is built targeting API level 23 or higher your application will need to request permissions during runtime. Handling this directly in your activity produces boilerplate code and can often be hard to manage. [Read more about using the Mapbox Core Library for Android's PermissionsManager](/android/core/overview/#permissionsmanager) class.
+You'll need to request the Android-system location permission before using the `LocationComponent`. If you build your Android project targeting API level 23 or higher your application will need to request permissions during runtime. Handling this directly in your activity produces boilerplate code and can often be hard to manage. [Read more about using the Mapbox Core Library for Android's `PermissionsManager`](/android/core/overview/#permissionsmanager) class.
 
 ## Activating
 
@@ -133,7 +133,7 @@ private fun enableLocationComponent() {
 
 ## Visibility
 
-There is a single method to either enable or disable the `LocationComponent`'s visibility after activation. The `setLocationComponentEnabled()` method requires a `true`/`false` boolean parameter. When set to `false`, this method will hide the device location icon and cease map camera animations from occurring.
+There is a single method to either enable or disable the `LocationComponent`'s visibility after activation. The `setLocationComponentEnabled()` method requires a `true`/`false` boolean parameter. When set to `false`, this method will hide the device location icon and stop map camera animations from occurring.
 
 {{
 <CodeLanguageToggle id="location-component-visibility" />
@@ -149,7 +149,7 @@ locationComponent.isLocationComponentEnabled = true
 
 ## Customization
 
-The `LocationComponent` can be customized in many different ways. You can set the image drawables, opacities, colors, and more. [See a full list of XML attributes for styling the `LocationComponent` via XML](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/res-public/values/public.xml#L109-L154). [The `LocationComponentOptions` class](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/java/com/mapbox/mapboxsdk/location/LocationComponentOptions.java) can be used if you prefer to customize the `LocationComponent` programatically. Create a [LocationComponentOptions](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/java/com/mapbox/mapboxsdk/location/LocationComponentOptions.java) object and then use whichever `LocationComponentOptions.builder()`'s various methods you'd like. Then use the built `LocationComponentOptions` object either while activating the component or by passing it through as a parameter of the `LocationComponent#applyStyle()` method at a later time.
+The `LocationComponent` can be customized in many different ways. You can set the image drawables, opacities, colors, and more. [See a full list of XML attributes for styling the `LocationComponent` via XML](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/res-public/values/public.xml#L109-L154). [The `LocationComponentOptions` class](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/java/com/mapbox/mapboxsdk/location/LocationComponentOptions.java) can be used if you prefer to customize the `LocationComponent` programmatically. Create a [LocationComponentOptions](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/java/com/mapbox/mapboxsdk/location/LocationComponentOptions.java) object and then use whichever `LocationComponentOptions.builder()`'s various methods you'd like. Then use the built `LocationComponentOptions` object either while activating the component or by passing it through as a parameter of the `LocationComponent#applyStyle()` method at a later time.
 
 {{
 <CodeLanguageToggle id="location-component-customization" />
@@ -224,7 +224,7 @@ locationComponent?.activateLocationComponent(this, mapStyle, options)
 | mapbox_backgroundStaleTintColor | Drawable image which would replace the white circle |
 
 
-## RenderMode
+## `RenderMode`
 
 The `RenderMode` class contains preset options for the device location image.
 
@@ -255,7 +255,7 @@ There are three types of `RenderMode` options:
 }}
 
 
-## CameraMode
+## `CameraMode`
 
 The method `LocationComponent#setCameraMode(@CameraMode.Mode int cameraMode)` allows developers to set specific camera tracking instructions as the device location changes.
 
@@ -271,7 +271,7 @@ locationComponent?.cameraMode = CameraMode.TRACKING
  />
 }}
 
-There are currently 7 `CameraMode` options available:
+There are 7 `CameraMode` options available:
 
 | `CameraMode` | Description |
 | --- | --- |
@@ -328,7 +328,7 @@ The `LocationComponent` is integrated with [the Mapbox Gestures for Android libr
 
 To enable the feature use `LocationComponentOptions#trackingGesturesManagement(boolean)`.
 
-You can adjust thresholds that need to be exceeded in order to break the tracking for one pointer gestures (like panning the map, double-tap to zoom in) and multi-pointer gestures (like scale gesture, two-tap to zoom out):
+You can adjust thresholds that need to be exceeded to break the tracking for one pointer gestures (like panning the map, double-tap to zoom in) and multi-pointer gestures (like scale gesture, two-tap to zoom out):
 - `LocationComponentOptions#trackingInitialMoveThreshold(float)` adjusts the minimum single pointer movement in pixels required to break camera tracking.
 - `LocationComponentOptions#trackingMultiFingerMoveThreshold(float)` adjusts minimum multi pointer movement in pixels required to break camera tracking (for example during scale gesture).
 - If either of these thresholds are exceeded and tracking is dismissed, developers can listen to this with a `OnCameraTrackingChangedListener`:

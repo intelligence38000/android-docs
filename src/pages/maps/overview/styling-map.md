@@ -11,7 +11,7 @@ The Maps SDK for Android allows full customization of the look of the map. You c
 
 There are two approaches to customizing the look of the map: creating a custom map style with Mapbox Studio and loading it into your application or updating map features at runtime using the Maps SDK for Android.
 
-Using runtime styling, you're able to dynamically change the look and feel of your map in real time. Lighten or darken the map based on the time of day, personalize icons and the colors of parks based on your users’ activity, switch languages on the fly, or increase the size of labels based on user preferences to improve legibility.
+Using runtime styling, you're able to dynamically change the look and feel of your map in real time. Lighten or darken the map based on the time of day, personalize icons and the colors of parks based on your users’ activity, switch languages dynamically, or increase the size of labels based on user preferences to improve legibility.
 
 ## Style object
 
@@ -23,11 +23,11 @@ A `Style` object must be created and given to the map for the map to appear prop
 - custom map style URL from a Mapbox account
 - raw style JSON string or referenced style JSON via `asset://` or `path://`
 
-If the style fails to load or an invalid style URL is set, the map view will become blank. An error message will be logged in the Android logcat and the `MapView.OnDidFailLoadingMapListener` callback will be triggered.
+If the style fails to load or you set an invalid style URL, the map view will become blank. An error message will be logged in the Android logcat and the `MapView.OnDidFailLoadingMapListener` callback will be triggered.
 
 ## Changing the map style
 
-You'll have to change the map style URL programatically if you'd like to load a completely new map style. Call `mapboxMap.setStyle()` with the style URL as the parameter.
+You'll have to change the map style URL programmatically if you'd like to load a completely new map style. Call `mapboxMap.setStyle()` with the style URL as the parameter.
 
 {{
 <CodeLanguageToggle id="setting-custom-style-url-java" />
@@ -58,12 +58,12 @@ mapboxMap.setStyle(Style.Builder().fromUrl(uniqueStyleUrl)) {
 
 ## Default Mapbox styles
 
-As powerful as styling the map can be, Mapbox offers six professionally designed map styles which will look great in your project:
+As powerful as styling the map can be, Mapbox offers six professionally designed map styles:
 
 1. **Mapbox Streets:** Mapbox Streets is a comprehensive, general-purpose map that emphasizes legible styling of road and transit networks.
 2. **Outdoor:** Mapbox Outdoors is a general-purpose map with curated datasets and specialized styling tailored to hiking, biking, and the most adventurous use cases.
 3. **Light and Dark:** Mapbox Light and Mapbox Dark are subtle, full-featured maps designed to provide geographic context while highlighting the data on your analytics dashboard, data visualization, or data overlay.
-4. **Satellite:** is our full global base map that is perfect as a blank canvas or an overlay for your own data.
+4. **Satellite:** is our full global basemap that works as a blank canvas or an overlay for your own data.
 5. **Satellite Streets:** combines our Mapbox Satellite with vector data from Mapbox Streets. The comprehensive set of road, label, and POI information brings clarity and context to the crisp detail in our high-resolution satellite imagery.
 6. **Traffic:** Visually show realtime traffic using either the provided day or night traffic styles.
 
@@ -157,7 +157,7 @@ mapView?.getMapAsync {
 />
 }}
 
-Once you have an invidual map layer, you can then use [data-driven styling](/android/maps/overview/data-driven-styling/) and [expressions](/android/maps/overview/expressions/) to adjust the layer's properties. For example, here's how you'd use runtime styling to change the `park` layer's green color to a deeper green color:
+Once you have an individual map layer, you can then use [data-driven styling](/android/maps/overview/data-driven-styling/) and [expressions](/android/maps/overview/expressions/) to adjust the layer's properties. For example, here's how you'd use runtime styling to change the `park` layer's green color to a deeper green color:
 
 {{
 <CodeLanguageToggle id="changing-park-layer" />
@@ -185,4 +185,4 @@ button.setOnClickListener {
 
 ## Style-related events
 
-Changing the map's style triggers a "map event". Read [the map change event documentation](https://docs.mapbox.com/android/maps/overview/events/#map-change-events) for more information about the events and how to display or re-display data on your map _after_ a map style has finished loading.
+Changing the map's style triggers a "map event". Read the [map change event documentation](https://docs.mapbox.com/android/maps/overview/events/#map-change-events) for more information about the events and how to display or re-display data on your map _after_ a map style has finished loading.

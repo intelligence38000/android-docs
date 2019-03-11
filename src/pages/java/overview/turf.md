@@ -8,17 +8,17 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
-Turf is a modular geospatial engine written in JavaScript. The Turf for Java library allows Android-based projects to use Turf algorithms as well. Turf algorithms can be done completely on device and don't require any type of call/response to any API or internet database.
+Turf is a modular geospatial engine written in JavaScript. The Turf for Java library allows Android-based projects to use Turf algorithms as well. You can do Turf algorithms completely on device and don't require any type of call/response to any API or internet database.
 
 This page walks you through the powerful ways you can use Turf, setting up Turf inside of your project, and the appropriate times to use Turf.
 
-Read [the official Turf.js library documentation](http://turfjs.org/) for a full list of Turf methods created across platforms. It takes time to port over JavaScript Turf methods into Java, test them, and ensure proper usage. This is why, when using this Java library, you might encounter a Turf method that has not been ported yet.
+Read the [official Turf.js library documentation](http://turfjs.org/) for a full list of Turf methods created across platforms. It takes time to port over JavaScript Turf methods into Java, test them, and make sure proper usage. This is why, when using this Java library, you might find a Turf method that has not been ported yet.
 
 ## Installation
 
-Mapbox uses Turf heavily inside of our SDKs for Android, which means that if you are, for example, using one of our map plugins or our Navigation SDK, you already have access to this library. Therefore, this dependency would be available to you transitively in your app.
+Mapbox uses Turf heavily inside of our SDKs for Android, which means that if you are, for example, using one of our map plugins or our Navigation SDK, you already have access to this library. So, this dependency would be available to you transitively in your app.
 
-To start developing an application using Turf for Java, you'll need to add the appropriate dependencies inside of your app by either placing it inside of your Maven's POM file or inside of Gradle's `build.gradle` file. The dependency can be found on MavenCentral.
+To start developing an application using Turf for Java, you'll need to add the appropriate dependencies inside of your app by either placing it inside of your Maven's `POM` file or inside of Gradle's `build.gradle` file. You can find the dependency on MavenCentral.
 
 ### Add the dependency
 
@@ -62,7 +62,7 @@ While the Java port follows the same algorithms, naming schemes, and testing, th
     url="https://www.mapbox.com/help/define-geojson/"
     title="About GeoJSON"
     category="Info"
-    text="Learn more about GeoJSON, the basic file format for geolocation data"
+    text="Learn more about GeoJSON, the file format for geolocation data"
   />
 }}
 
@@ -99,11 +99,11 @@ TurfMeasurement.distance(TOWER_BRIDGE, LONDON_EYE, TurfConstants.UNIT_FEET)
 
 #### Class and method naming scheme
 
-In the Java port of Turf, we followed the documentation categories that represent the class name. For example, the "Measurement" category in the Turf.js API documentation will be the `TurfMeasurement` class in the Java port. This will include all of the methods that fall underneath the category.
+The Java port of Turf uses categories that represent the class name. For example, the "Measurement" category in the Turf.js API documentation will be the `TurfMeasurement` class in the Java port. This will include all the methods that fall underneath the category.
 
 ## Available methods
 
-The project currently has an ongoing list of methods being ported. [GitHub issues](https://github.com/mapbox/mapbox-java/issues) are always welcome when your project is in need of a method which has not yet been ported. As mentioned above, this project is a work in progress. Therefore, only Turf methods we have seen demand for or were required inside one of our other SDKs, are the ones exposed in the Java Library. The chart below displays the available methods:
+The project has an ongoing list of methods being ported. [GitHub issues](https://github.com/mapbox/mapbox-java/issues) are always welcome when your project is in need of a method which has not yet been ported. The chart below displays the available methods:
 
 | Turf Java class | Description | Available methods |
 | --- | --- | --- |
@@ -114,6 +114,6 @@ The project currently has an ongoing list of methods being ported. [GitHub issue
 | `TurfException` | This is a runtime exception that is thrown when the parameters of a method aren't adequate, the GeoJSON object is missing information, or an arithmetic issue occurs. | |
 | `TurfJoins` | Contains methods that can determine if points lie within a polygon or not. | `inside` <br> `pointsWithinPolygon`
 | `TurfMeasurement` | Contains an assortment of methods used to calculate measurements such as bearing, destination, midpoint, etc. | `bearing` <br> `destination` <br> `distance` <br> `length` <br> `midpoint` <br> `along` <br> `bbox` |
-| `TurfMeta` | Contains methods that are useful for getting all of the coordinates from a specific GeoJSON geometry. | `coordAll` <br> `getCoord` |
-| `TurfMisc` | Contains all of the miscellaneous methods that Turf can perform. | `lineSlice`<br> `lineSliceAlong` <br> `nearestPointOnLine` |
+| `TurfMeta` | Contains methods that are useful for getting all the coordinates from a specific GeoJSON geometry. | `coordAll` <br> `getCoord` |
+| `TurfMisc` | Contains all the miscellaneous methods that Turf can perform. | `lineSlice`<br> `lineSliceAlong` <br> `nearestPointOnLine` |
 | `TurfTransformation` | Methods in this class consume one GeoJSON object and output a new object with the defined parameters provided. | `circle` |

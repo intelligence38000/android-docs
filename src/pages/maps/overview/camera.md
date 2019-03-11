@@ -42,7 +42,7 @@ val position = CameraPosition.Builder()
 />
 }}
 
-Read all about [mapView XML attributes](https://docs.mapbox.com/android/maps/overview/#mapview-xml-attributes) to learn about setting the camera's initial position. It's best to either set the initial camera position in XML or through `MapboxMapOptions` to prevent unnecessary downloading of map tiles using up your user's data.
+Read all about [mapView XML attributes](https://docs.mapbox.com/android/maps/overview/#mapview-xml-attributes) to learn about setting the camera's initial position. You should either set the initial camera position in XML or through `MapboxMapOptions` to prevent unnecessary downloading of map tiles using up your user's data.
 
 ### Target
 
@@ -56,9 +56,9 @@ The map camera tilt can also adjust by placing two fingertips on the map and mov
 
 ### Bearing
 
-Bearing represents the direction that the camera is pointing in and measured in degrees _clockwise from north_.
+Bearing is the direction that the camera is pointing in and measured in degrees _clockwise from north_.
 
-The camera's default bearing is 0 degrees (i.e. "true north") causing the map compass to hide until the camera bearing becomes a non-zero value. [The `mapbox_uiCompass` boolean XML attribute](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/res/values/attrs.xml#L45) allows adjustment of the compass' visibility. Bearing levels use six decimal point precision, which enables you to restrict/set/lock a map's bearing with extreme precision. In addition to programmatically adjusting the camera bearing, the user can place two fingertips on the map and rotate their fingers.
+The camera's default bearing is 0 degrees (i.e. "true north") causing the map compass to hide until the camera bearing becomes a non-zero value. [The `mapbox_uiCompass` boolean XML attribute](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/res/values/attrs.xml#L45) allows adjustment of the compass' visibility. Bearing levels use six decimal point precision, which enables you to restrict/set/lock a map's bearing with extreme precision. Besides programmatically adjusting the camera bearing, the user can place two fingertips on the map and rotate their fingers.
 
 ### Zoom
 
@@ -68,7 +68,7 @@ Zoom controls the scale of the map and consumes any value between 0 and 22. At z
 - Quickly tap twice on the map with a single finger _to zoom in_.
 - Quickly tap twice on the map with a single finger and hold your finger down on the screen after the second tap. Then slide the finger up _to zoom out_ and down _to zoom out_.
 
-Check out [this Mapbox blog post](https://www.mapbox.com/blog/designing-maps-for-mobile-devices/) about the art/science of maps and visual information to ensure your map style shows the right data at the correct camera positions.
+Read [Designing maps for mobile devices](https://blog.mapbox.com/designing-maps-for-mobile-devices-32d2e49d2096), about the art/science of maps and visual information, to make sure your map style shows the right data at the correct camera positions.
 
 ## Update the camera position
 
@@ -109,7 +109,7 @@ Aside from consuming a Camera Update object, a cancelable callback can be added 
 
 ## Get the current camera position
 
-The `MapboxMap` class' `getCameraPosition()` method makes it easy for your code to understand what is going on with your map's camera and what the user's currently viewing. The method returns a `CameraPosition` object, and once you have the object, you can easily get and use the camera's target, tilt, zoom, and bearing values. For example, `mapboxMap.getCameraPosition().zoom` is how you would get the camera's current zoom value.
+The `MapboxMap` class' `getCameraPosition()` method helps your code understand what is going on with your map's camera and what the user's viewing. The method returns a `CameraPosition` object, and once you have the object, you can get and use the camera's target, tilt, zoom, and bearing values. For example, `mapboxMap.getCameraPosition().zoom` is how you would get the camera's current zoom value.
 
 ## Center the camera within a map area
 
@@ -122,7 +122,7 @@ The `MapboxMap` class' `getCameraPosition()` method makes it easy for your code 
   />
 }}
 
-Similar to how a camera can be restricted to a region (see below), the camera can also center within a map area. First you'll need a defined `LatLngBounds` object which includes at least two coordinates. You'll then be able to update the camera position using the available `newLatLngBounds()` API which takes your bounding box and adjust the viewport so the specified region will be within view. Besides the bounding box being passed into the camera update factory, you will also need to provide an integer value defining the padding between the edge of the screen and the actual bounded region. You also have the option to provide different padding values for each side of the box.
+Like how a camera can be restricted to a region (see below), the camera can also center within a map area. First you'll need a defined `LatLngBounds` object which includes at least two coordinates. You'll then be able to update the camera position using the available `newLatLngBounds()` API which takes your bounding box and adjust the viewport so the specified region will be within view. Besides the bounding box being passed into the camera update factory, you will also need to provide an integer value defining the padding between the edge of the screen and the actual bounded region. You also have the option to provide different padding values for each side of the box.
 
 {{
 <CodeLanguageToggle id="lat-lng-bounds" />
@@ -160,7 +160,7 @@ mapboxMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 10));
   />
 }}
 
-The `setLatLngBoundsForCameraTarget` method in the `MapboxMap` class can limit the map camera to any area of the world that you'd like. If you feed the `LatLngBounds` object a minimum of two `LatLng` objects/coordinates, a _invisible_ rectangle will automatically be created to restrict the camera to the region.
+The `setLatLngBoundsForCameraTarget` method in the `MapboxMap` class can limit the map camera to any area of the world that you'd like. If you feed the `LatLngBounds` object a minimum of two `LatLng` objects/coordinates, an _invisible_ rectangle will automatically be created to restrict the camera to the region.
 
 
 ## Camera and device location

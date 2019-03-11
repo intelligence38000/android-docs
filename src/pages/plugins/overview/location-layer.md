@@ -1,6 +1,6 @@
 ---
 title: "Location"
-description: "Offical documentation about the Mapbox Android Location Layer Plugin. Show the Android device's location on a Mapbox Map in just a few quick steps."
+description: "Offical documentation about the Mapbox Android Location Layer Plugin. Show the Android device's location on a Mapbox Map in a few quick steps."
 prependJs:
   - "import constants from '../../../constants';"
   - "import AppropriateImage from '../../../components/appropriate-image';"
@@ -13,12 +13,12 @@ prependJs:
 
 {{
 <WarningNote title="The Mapbox Location Layer Plugin for Android has been deprecated">
-    <p>Device location work is continuing in the <code>LocationComponent</code> class which is in the Mapbox Maps SDK for Android. We highly recommend that you use the Maps SDK's <code>LocationComponent</code> instead of this Location Layer Plugin. See the <a href="/android/maps/overview/location-component/">Maps SDK <code>LocationComponent</code> documentation</a>.</p>
+    <p>Device location work is continuing in the <code>LocationComponent</code> class which is in the Mapbox Maps SDK for Android. Use the Maps SDK's <code>LocationComponent</code> instead of this Location Layer Plugin. See the <a href="/android/maps/overview/location-component/">Maps SDK <code>LocationComponent</code> documentation</a>.</p>
 </WarningNote>
 }}
 
 ## Install the Location Layer Plugin
-To start developing an application using the Location Layer Plugin, you'll need to add the appropriate dependencies inside your `build.gradle` file. This dependency includes the Maps SDK for Android. All dependencies given below can be found on MavenCentral.
+To start developing an application using the Location Layer Plugin, you'll need to add the appropriate dependencies inside your `build.gradle` file. This dependency includes the Maps SDK for Android. You can find all dependencies given below on MavenCentral.
 
 If your application is close or exceeds the 65k method count limit, you can mitigate this problem by enabling ProGuard inside your application. ProGuard directives are included in the Android dependencies to preserve the required classes.
 
@@ -56,13 +56,13 @@ Before using the location layer plugin, you'll need to include either the coarse
 </manifest>
 ```
 
-If your application's targeting Android 6.0 (API 23) or higher, you'll want to use the new permissions model which request permissions at runtime rather than during the installation process. It's important to request the permission either during the application startup or when the location layer gets initialized. [PermissionsManager](/android/maps/overview/#telemetry-opt-out) is a utility offered as part of the Mapbox Java SDK package inside of the Maps SDK. It streamlines the permission request process.
+If your application's targeting Android 6.0 (API 23) or higher, you'll want to use the new permissions model which request permissions at runtime rather than during the installation process. It's important to request the permission either during the application startup or when the location layer gets initialized. [`PermissionsManager`](/android/maps/overview/#telemetry-opt-out) is a utility offered as part of the Mapbox Java SDK package inside of the Maps SDK. It streamlines the permission request process.
 
 ### Lifecycles
 It's important to include the location layer `onStart()` and `onStop()` lifecycle events in their respective activity methods. This prevents memory leaks from occurring and reduces battery consumption. The plugin has support for the new `LifecycleObserver` APIs, by adding the plugin as a lifecycle observer in your activity, you won't need to handle the lifecycles manually.
 
 ## Add the location layer
-You'll need to pass in both a `MapView` and `MapboxMap` object to initialize the Location Layer Plugin. Depending on whether or not you'd like the plugin to track the user's location automatically or not, you can either use a default `LocationEngine`, pass in your own or `null`.
+You'll need to pass in both a `MapView` and `MapboxMap` object to initialize the Location Layer Plugin. Depending on whether you'd like the plugin to track the user's location automatically or not, you can either use a default `LocationEngine`, pass in your own or `null`.
 
 {{
 <CodeLanguageToggle id="add-location-layer" />
@@ -88,15 +88,15 @@ val locationLayerPlugin = LocationLayerPlugin(mapView, mapboxMap, locationEngine
 
 If a `null` location engine is provided, you are responsible for updating the location position manually using `LocationLayerPlugin#forceLocationUpdate(@Nullable Location location)`.
 
-### Enabling or disabling the LocationLayerPlugin
+### Enabling or disabling the `LocationLayerPlugin`
 
 There is a single method to either enable or disable the plugin:
 
 - `LocationLayerPlugin#setLocationLayerEnabled(boolean isEnabled)`
-- When disabled, this method will hide the icon showing the user location and cease map camera animations from occurring.
+- When disabled, this method will hide the icon showing the user location and stop map camera animations from occurring.
 - The plugin is enabled by default.
 
-### Showing the user location with RenderMode
+### Showing the user location with `RenderMode`
 
 `LocationLayerPlugin#setLocationLayerEnabled()` has now been replaced with `LocationLayerPlugin#setRenderMode(@RenderMode.Mode int renderMode)`.  This new method is not in charge of enabling or disabling the plugin.  If you change the render mode while the plugin is disabled, nothing will happen with regard to how the location is rendered.
 
@@ -128,10 +128,10 @@ There are three types of `RenderMode`:
 
 **Note:** the `Drawable` icon for `RenderMode.GPS` is highly customizable with methods such as `LocationLayerOptions#foregroundDrawable()` and `LocationLayerOptions#backgroundDrawable()`.
 
-### Following the device location with CameraMode
+### Following the device location with `CameraMode`
 
 The method `LocationLayerPlugin#setCameraMode(@CameraMode.Mode int cameraMode)` allows developers to track `Location` updates with the `MapboxMap` camera.
-There are currently 7 modes available:
+There are 7 modes available:
 <br>
 
 | `CameraMode` | Description |
@@ -171,7 +171,7 @@ When instantiating the location layer plugin for the first time, the map's max/m
 
 ### Gesture thresholds to dismiss camera tracking
 
-The plugin is integrated with the Mapbox Gestures library. You have the option to adjust thresholds for tracking a user’s interaction with the map, and subsequently, breaking camera tracking if the threshold is exceeded:
+The plugin is integrated with the Mapbox Gestures library. You have the option to adjust thresholds for tracking a user’s interaction with the map, and then, breaking camera tracking if the threshold is exceeded:
 
 - `LocationLayerOptions#trackingInitialMoveThreshold(float)` adjusts the minimum single pointer movement in pixels required to break camera tracking.
 - `LocationLayerOptions#trackingMultiFingerMoveThreshold(float)` adjusts minimum multi pointer movement in pixels required to break camera tracking (for example during scale gesture).
@@ -218,7 +218,7 @@ locationLayerPlugin.addOnCameraTrackingChangedListener(object : OnCameraTracking
 }}
 
 ## Usage with navigation
-Once a navigation session's started using the [Mapbox Navigation SDK](/android/navigation/overview/), a few adjustments will need to be made to the plugin to improve its performance and behavior.
+Once a navigation session has started using the [Mapbox Navigation SDK](/android/navigation/overview/), you will need to make a few adjustments to the plugin to improve its performance and behavior.
 
 If you plan to use the snapped location provided by the Navigation SDK, you'll need to use `locationLayerPlugin.setLocationEngine()` to `null` to prevent location coordinates that aren't snapped to update the icon's location. Instead, you'll need to add `forceLocationUpdate()` inside of the Navigation SDK's `onProgressChange()` callback, which _does_ provide the snapped location.
 
@@ -227,4 +227,4 @@ For more specific information and code snippets about displaying a user's locati
 ## Customization
 The plugin allows for several customizations such as drawables, opacities, and more by passing in a style or a [LocationLayerOptions](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/java/com/mapbox/mapboxsdk/location/LocationComponentOptions.java) object either while constructing the plugin or by using the provided `applyStyle()` API.
 
-For example, if you'd like to change the location layer icon from the default blue to a red, you first generate a new icon drawable showing the change. Then add the drawable to your project and then create a new style with the `parentLayout` being `LocationLayer`. [Here is a list of all of the attributes that can be customized](/android/maps/overview/location-component/#active-styling-options).
+For example, if you'd like to change the location layer icon from the default blue to a red, you first generate a new icon drawable showing the change. Then add the drawable to your project and then create a new style with the `parentLayout` being `LocationLayer`. [Here is a list of all the attributes that can be customized](/android/maps/overview/location-component/#active-styling-options).

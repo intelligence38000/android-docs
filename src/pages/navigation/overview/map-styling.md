@@ -51,7 +51,7 @@ The given style will determine route color, congestion colors, and the route sca
 </style>
 ```
 
-## Style the NavigationView
+## Style the `NavigationView`
 
 You can also style the `NavigationView` colors. This includes the style of the map and/or route. To do this, provide a light and dark style in the XML where you have put your `NavigationView`:
 

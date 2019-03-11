@@ -78,7 +78,7 @@ mapSnapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
 	@Override
 	public void onSnapshotReady(MapSnapshot snapshot) {
 
-	// Display, share, or use bitmap image however you'd like
+	// Display, share, or use bitmap image how you'd like
 
 	Bitmap bitmapImage = snapshot.getBitmap();
 
@@ -92,7 +92,7 @@ kotlin={`
 
 mapSnapshotter?.start { snapshot ->
 
-	// Display, share, or use bitmap image however you'd like
+	// Display, share, or use bitmap image how you'd like
 
 	val bitmapOfMapSnapshotImage = snapshot.bitmap
 
@@ -104,7 +104,7 @@ mapSnapshotter?.start { snapshot ->
 }}
 
 
-Once you have the `Bitmap` image, you're free to use it however you'd like.
+Once you have the `Bitmap` image, you're free to use it how you'd like.
 
 The Mapbox Android demo app has two examples that show how the snapshot `Bitmap` images can be used:
 

@@ -1,6 +1,6 @@
 ---
 title: Pulsing layer opacity
-description: Use the style API to adjust layers' opacity in order to highlight data. Los Angeles' parks, hotels, and attractions are displayed in this example.
+description: Use the style API to adjust layers' opacity to highlight data. Los Angeles' parks, hotels, and attractions are displayed in this example.
 thumbnail: thumbnailPulsingOpacity
 topic: Dynamic styling
 prependJs:

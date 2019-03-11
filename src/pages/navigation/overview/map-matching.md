@@ -9,7 +9,7 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
-In some cases, you may want to have the user stick to a very specific route that doesn't fit into the scope covered by the Mapbox Directions API. For example, a parking finder app where you want to guide a user past specific blocks with parking, but also allow people to navigate on it with the Mapbox Navigation SDK for Android. The Mapbox Map Matching API is an appropriate fit for this situation.
+In some cases, you may want to have the user stick to a specific route that doesn't fit into the scope covered by the Mapbox Directions API. For example, a parking finder app where you want to guide a user past specific blocks with parking, but also allow people to navigate on it with the Mapbox Navigation SDK for Android. The Mapbox Map Matching API is an appropriate fit for this situation.
 
 ## Use a map matching response to generate a route
 
@@ -76,7 +76,7 @@ MapboxMapMatching.builder()
 
 ## Navigation UI SDK
 
-When using `MapboxMapMatching` with the Navigation UI SDK's `NavigationView`, you need to make a few changes to your setup to ensure re-routes are successful.  A `RouteListener` must be added to your `NavigationViewOptions` and you must return `false` in the `allowRerouteFrom` callback. This will ensure that the `NavigationView` does not make a Directions API request. Instead, it will wait for the new `DirectionsRoute` provided by your map matching response.
+When using `MapboxMapMatching` with the Navigation UI SDK's `NavigationView`, you need to make a few changes to your setup to make sure re-routes are successful.  A `RouteListener` must be added to your `NavigationViewOptions` and you must return `false` in the `allowRerouteFrom` callback. This will make sure that the `NavigationView` does not make a Directions API request. Instead, it will wait for the new `DirectionsRoute` provided by your map matching response.
 
 {{
 <CodeLanguageToggle id="nav-map-matching-nav-view" />
@@ -147,4 +147,3 @@ navigation?.addOffRouteListener { location ->
 
 />
 }}
-

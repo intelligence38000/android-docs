@@ -49,19 +49,19 @@ implementation 'com.mapbox.mapboxsdk:mapbox-android-core:{{constants.CORE_VERSIO
 
 _**Note:** ProGuard directives are included in the Android dependencies to preserve the required classes._
 
-## ConnectivityReceiver
+## `ConnectivityReceiver`
 
 [`ConnectivityReceiver`](https://github.com/mapbox/mapbox-events-android/blob/39bd70151bded5413fa6db8378ba9e5d349b01d5/libcore/src/main/java/com/mapbox/android/core/connectivity/ConnectivityReceiver.java) is a `BroadcastReceiver` that helps you keep track of the device's connectivity status. When used statically by calling `getSystemConnectivity()`, the `ConnectivityReceiver` will always return the connectivity status as reported by the Android system. You have the option to set a `connectedFlag` when instantiating `ConnectivityReceiver`.
 
 You can override the connectivity value reported by the system by setting this flag to `true` or `false`. If left in its default value (`null`), `ConnectivityReceiver` will report the system value. `ConnectivityReceiver` also lets you subscribe to connectivity changes using a `ConnectivityListener` interface.
 
-### ConnectivityListener
+### `ConnectivityListener`
 
-`ConnectivityListener` is a callback that is used with the `ConnectivityReceiver`. You can implement the `ConnectivityListener` interface where you'd like and then will need to override its `onConnectivityChanged()` method. This method returns a `boolean`, which represents whether the device's new connectivity state is connected or not.
+`ConnectivityListener` is a callback that is used with the `ConnectivityReceiver`. You can implement the `ConnectivityListener` interface where you'd like and then will need to override its `onConnectivityChanged()` method. This method returns a `boolean`, which is whether the device's new connectivity state is connected or not.
 
-## PermissionsManager
+## `PermissionsManager`
 
-If your Android project is built targeting API level 23 or higher your application will need to request permission during runtime. Handling this directly in your activity produces boilerplate code and can often be hard to manage. That's where the `PermissionsManager` class comes into play. With the `PermissionsManager` class, you can check whether the user has granted location permission and request permissions if the user hasn't granted them yet. You can use `PermissionsManager permissionsManager = new PermissionsManager(this);` if you're implementing `PermissionsListener`.
+If you build your Android project targeting API level 23 or higher, then your application will need to request permission during runtime. Handling this directly in your activity produces boilerplate code and can often be hard to manage. That's where the `PermissionsManager` class comes into play. With the `PermissionsManager` class, you can check whether the user has granted location permission and request permissions if the user hasn't granted them yet. You can use `PermissionsManager permissionsManager = new PermissionsManager(this);` if you're implementing `PermissionsListener`.
 
 Once you have set up your permissions manager, you will still need to override `onRequestPermissionsResult()` and call the `permissionsManager`'s same method.
 
@@ -110,11 +110,11 @@ override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<Str
  />
 }}
 
-### PermissionsListener
+### `PermissionsListener`
 
 The `PermissionsListener` is an interface that needs to be set up and passed into the `PermissionsManager`'s constructor. You can use `permissionsManager = new PermissionsManager(this);` if you're implementing `PermissionsListener`. You'll notice that `PermissionsListener` overrides the `onExplanationNeeded()` and `onPermissionResult()` methods. An explanation isn't required but strongly encouraged to allow the user to understand why you are requesting this permission.
 
-The permission result is invoked once the user decides whether to allow or deny the permission. A boolean value is given, which you can then use to write an `if` statement. Both cases should be handled correctly. Continue with your permission-sensitive logic if the user approves. Otherwise, if the user denies, we recommend displaying a message that tells the user that the permission is required for your application to work.
+The permission result is invoked once the user decides whether to allow or deny the permission. A boolean value is given, which you can then use to write an `if` statement. Both cases should be handled correctly. Continue with your permission-sensitive logic if the user approves. Otherwise, if the user denies, display a message that tells the user that the permission is required for your application to work.
 
 {{
 <CodeLanguageToggle id="permissions-listener" />
@@ -167,7 +167,7 @@ var permissionsListener: PermissionsListener = object : PermissionsListener {
  />
 }}
 
-## LocationEngine
+## `LocationEngine`
 
 If your application needs location information, the `LocationEngine` class can help you get this information while also simplifying the process and being flexible enough to use different services. The `LocationEngine` found in the core module now supports the following location providers:
 
@@ -188,13 +188,15 @@ var locationEngine = LocationEngineProvider.getBestLocationEngine(this)
  />
 }}
 
+<!--copyeditor ignore best-->
+
 This will obtain the best location engine that is available and eliminate the need to create a new `LocationEngine` from scratch.
 
 ## Requesting location updates
 
 You'll need a class that implements `LocationEngineCallback<LocationEngineResult>`. Make sure the class requires Android system `Activity` as a constructor parameter. This class will serve as a "callback" and it's needed because a `LocationEngine` memory leak is possible if the activity/fragment directly implements the `LocationEngineCallback<LocationEngineResult>`. The `WeakReference` setup avoids the leak.
 
-When implementing the `LocationEngineCallback` interface, you are also required to override the `onSuccess()` and `onFailure()` methods. `OnSuccess()` runs whenever the Mapbox Core Libraries identifies a change in the device's location. `result.getLastLocation()` gives you a `Location` object that contains the latitude and longitude values. Now you can display the values in your app's UI, save it in memory, send it to your backend server, or use the device location information however you'd like.
+When implementing the `LocationEngineCallback` interface, you are also required to override the `onSuccess()` and `onFailure()` methods. `OnSuccess()` runs whenever the Mapbox Core Libraries identifies a change in the device's location. `result.getLastLocation()` gives you a `Location` object that contains the latitude and longitude values. Now you can display the values in your app's UI, save it in memory, send it to your backend server, or use the device location information how you'd like.
 
 {{
 <CodeLanguageToggle id="weak-reference-class" />
@@ -262,7 +264,7 @@ private val activityWeakReference: WeakReference<MainActivity>
  />
 }}
 
-Globally declare an instance of the class you just created above:
+Globally declare an instance of the class you created above:
 
 {{
 <CodeLanguageToggle id="global-declaration" />

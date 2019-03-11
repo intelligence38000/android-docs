@@ -8,13 +8,13 @@ prependJs:
   - "import { WarningNote } from '../../../components/warning-note';"
 ---
 
-The Mapbox Maps SDK for Android provides several different ways to mark a single point, create a circle, add a line between many points, or draw a polygon. Often, these objects are drawn either on top of the map or in some cases, within the map itself.
+The Mapbox Maps SDK for Android provides several different ways to mark a single point, create a circle, add a line between many points, or draw a polygon. Usually, you can draw these objects either on top of the map or in some cases, within the map itself.
 
 {{
 <WarningNote title="Plugin to handle annotations">
     <p>As of the 7.0.0 release of the Mapbox Maps SDK for Android, much of the code on this page has been deprecated. Classes such as <code>Polygon</code>, <code>Polyline</code>, and <code>Marker</code> will not longer be maintained. This also means classes such as <code>PolygonOptions</code> and <code>PolylineOptions</code> should not be used. Lastly, this also means that methods such as <code>addPolygon()</code>, <code>addPolyline()</code>, or <code>addMarker()</code> also should not be used.</p>
 
-<p>We recommend that you look into the <a href="/android/plugins/overview/annotation/">Mapbox Annotation Plugin for Android</a> if you plan to add any icons, text, lines, or polygons to the map. It simplifies annotations and provides additional flexibility for displaying data.</p>
+<p>If you plan to add any icons, text, lines, or polygons to the map, look into the <a href="/android/plugins/overview/annotation/">Mapbox Annotation Plugin for Android</a>. It simplifies annotations and provides additional flexibility for displaying data.</p>
 </WarningNote>
 }}
 
@@ -26,11 +26,11 @@ Using [data sources](/android/maps/overview/data-driven-styling/#sources) and [m
 - Lines
 - Polygons
 
-See [the data-driven styling page](/android/maps/overview/data-driven-styling/) for more information. We recommend you explore the source and layer combination for creating annotations. Below, you'll find information about less complex (and less performant) ways to show annotations.
+See [data-driven styling](/android/maps/overview/data-driven-styling/) for more information. You can explore the source and layer combination for creating annotations. Below, you'll find information about less complex (and less performant) ways to show annotations.
 
 ## Markers
 
-Markers are useful when identifying a single point on the map. The SDK comes with a default marker icon which can be configured to fit your specific needs. APIs are exposed to optionally change this icon to any bitmap image you wish. To create a marker for you map, you are only required to provide a `LatLng` position which defines where the marker will be placed on the map. Call `mapboxMap.addMarker()` to actually add the marker to the map.
+Markers are useful when identifying a single point on the map. The SDK comes with a default marker icon which can be configured to fit your specific needs. APIs are exposed to optionally change this icon to any bitmap image you wish. To create a marker for you map, you are only required to provide a `LatLng` position which defines where the marker will be placed on the map. Call `mapboxMap.addMarker()` to add the marker to the map.
 
 {{
   <Floater
@@ -104,7 +104,7 @@ mapboxMap?.addMarker(MarkerViewOptions()
 
 ### Capturing marker events
 
-The Mapbox Maps SDK for Android provides a handy listener for capturing when a user taps on a marker. By default, all markers come with an onMarkerClick event listener for displaying and hiding info windows. You can override this default event listener and set your own with the `setOnMarkerClickListener` method.
+The Mapbox Maps SDK for Android provides a handy listener for capturing when a user taps on a marker. By default, all markers come with an `onMarkerClick` event listener for displaying and hiding info windows. You can override this default event listener and set your own with the `setOnMarkerClickListener` method.
 
 To display a toast message with the clicked marker’s title, listen for a click event with `setOnMarkerClickListener` and finally call `Toast.makeText()`. To prevent displaying a toast message and an info window at the same time, return true at the end:
 
@@ -146,7 +146,7 @@ Toast.makeText(this, marker.getTitle(), Toast.LENGTH_LONG).show()
   />
 }}
 
-If you have intentions to update a marker rather than completely removing it, the SDK provides a few update methods. Using these mean less boilerplate code and an increase in performance since you are only updating the marker. Using these update APIs, you can create animating markers using a [ValueAnimator](https://developer.android.com/reference/android/animation/ValueAnimator.html) for example. The APIs for updating either the marker position or icon bitmap are found inside of your marker object reference.
+If you have intentions to update a marker rather than completely removing it, the SDK provides a few update methods. Using these mean less boilerplate code and an increase in performance since you are only updating the marker. Using these update APIs, you can create animating markers using a [`ValueAnimator`](https://developer.android.com/reference/android/animation/ValueAnimator.html) for example. You can find the APIs for updating either the marker position or icon bitmap inside your marker object reference.
 
 
 {{

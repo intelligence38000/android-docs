@@ -1,6 +1,6 @@
 ---
 title: Inset map
-description: Show a smaller inset map fragment and link it to a larger map for two map interaction. Great for gaming.
+description: Show a smaller inset map fragment and link it to a larger map for two map interaction. Ideal for gaming.
 thumbnail: thumbnailInsetMap
 topic: User interaction
 prependJs:

@@ -19,7 +19,7 @@ Along with the API documentation, you can also view [the Directions API example 
 
 ## Installation
 
-The Directions API can be used completely on its own to get routes and other directional information. You should also know that [the Mapbox Navigation SDK for Android](https://docs.mapbox.com/android/navigation/overview/) is built "on top of" the Directions API. The Navigation SDK enables users to more easily interact with and use the information inside of the Directions API response. _Use the Mapbox Java Services dependency if you want to use the Mapbox Directions API without using the entire Mapbox Navigation SDK._
+The Directions API can be used completely on its own to get routes and other directional information. Built on top of the Directions API, the [Mapbox Navigation SDK for Android](https://docs.mapbox.com/android/navigation/overview/) enables you to interact with and use the information inside of the Directions API response. _Use the Mapbox Java Services dependency if you want to use the Mapbox Directions API without using the entire Mapbox Navigation SDK._
 
 ```groovy
 implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:{{constants.JAVA_SDK_VERSION }}'
@@ -64,13 +64,13 @@ val client = MapboxDirections.builder()
 
 **Profiles**:
 
-- *Traffic*: For automotive routing. This profile factors in current and historic traffic conditions to avoid slowdowns. Traffic information is available in [these supported geographies](https://www.mapbox.com/api-documentation/pages/traffic-countries.html).
+- *Traffic*: For automotive routing. This profile factors in current and historical traffic conditions to avoid slowdowns. Traffic information is available in [these supported geographies](https://www.mapbox.com/api-documentation/pages/traffic-countries.html).
 - *Driving*: For automotive routing. This profile shows the fastest routes by preferring high-speed roads like highways.
 - *Walking*: For pedestrian and hiking routing. This profile shows the shortest path by using sidewalks and trails.
 - *Cycling*: For bicycle routing. This profile shows routes that are short and safer for cyclists by avoiding highways and preferring streets with bike lanes.
 
 
-For additional information on all of the available optional parameters, see the [Directions API documentation](https://www.mapbox.com/api-documentation/navigation/#directions).
+For additional information on all the available optional parameters, see the [Directions API documentation](https://www.mapbox.com/api-documentation/navigation/#directions).
 
 Directions API requests for driving, walking, and cycling routes can specify up to 25 total waypoints along the route.
 
@@ -83,7 +83,7 @@ Requests using the traffic profile can specify up to 3 waypoints.
 
 ## Handling the response
 
-You can access the Directions API's response inside of the `onResponse` callback. The callback is a Retrofit callback, similar to all of the Mapbox Java SDK's other API calls.
+You can access the Directions API's response inside of the `onResponse` callback. The callback is a Retrofit callback, like all the Mapbox Java SDK's other API calls.
 
 The response object will include:
 
@@ -160,7 +160,7 @@ client?.enqueueCall(object : Callback<DirectionsResponse> {
 }}
 
 
-Rather than re-iterating what's already been written, we encourage you to dive into [the full documentation on the Mapbox Directions API](https://www.mapbox.com/api-documentation/navigation/#directions). The Java SDK's Services dependency has equivalent Java classes for the various objects and information in the full Directions API response. Each object has a `.Builder()` class as well. For example:
+Read the [full documentation on the Mapbox Directions API](https://www.mapbox.com/api-documentation/navigation/#directions) to learn more. The Java SDK's Services dependency has equivalent Java classes for the various objects and information in the full Directions API response. Each object has a `.Builder()` class as well. For example:
 
 {{
 <CodeLanguageToggle id="RouteLeg" />

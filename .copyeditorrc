@@ -1,0 +1,20 @@
+{
+  "allow": [
+    "failure",
+    "geojson",
+    "lie",
+    "destroy",
+    "clear",
+    "utilization",
+    "benefit",
+    "accurate",
+    "info",
+    "modify",
+    "notify"
+  ],
+  "spell": true,
+  "equality": true,
+  "simplify": true,
+  "passive": true,
+  "dictionary": "android.dic"
+}

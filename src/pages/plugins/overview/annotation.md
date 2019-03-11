@@ -15,7 +15,7 @@ _Note: A `SymbolLayer` is the layer that is responsible for both map text and ic
 
 ## Install the Annotation Plugin
 
-To start developing an application using the Annotation Plugin, you'll need to add the appropriate dependencies inside of your `build.gradle`. The Annotation Plugin dependency includes the Mapbox Maps SDK for Android. All dependencies given below can be found on MavenCentral.
+To start developing an application using the Annotation Plugin, you'll need to add the appropriate dependencies inside of your `build.gradle`. The Annotation Plugin dependency includes the Mapbox Maps SDK for Android. You can find all dependencies given below on MavenCentral.
 
 If your application is close or exceeds the 65k method count limit, you can mitigate this problem by enabling ProGuard inside your application. ProGuard directives are included in the Android dependencies to preserve the required classes.
 
@@ -225,4 +225,4 @@ fillManager?.create(fillOptionsList)
   />
 }}
 
-As you saw above, the `FillManager#create()` method takes in a single `FillOptions` object as a parameter. A `List<>` of `FillOptions` is also a valid parameter for the `create()` method. This is the same for all of the manager classes. `LineManager` will require a `LineOptions` class and so on.
+As you saw above, the `FillManager#create()` method takes in a single `FillOptions` object as a parameter. A `List<>` of `FillOptions` is also a valid parameter for the `create()` method. This is the same for all the manager classes. `LineManager` will require a `LineOptions` class and so on.

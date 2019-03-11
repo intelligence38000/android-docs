@@ -13,10 +13,12 @@ prependJs:
   - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
+<!--copyeditor ignore best-->
+
 Navigation applications often use the user's current location as the `origin` when requesting a route. With the Navigation SDK, this is done using the `LocationEngine` class. By default, the Navigation SDK will use the best location engine available and display the user's location with the default styles described below. This guide walks through how to customize both the user location icon and the location engine.
 
 {{<Note title="More on LocationEngine" imageComponent={<BookImage size="60" />}>}}
-For more details on how `LocationEngine` works, [see the `LocationEngine` documentation](https://docs.mapbox.com/android/core/overview/#locationengine). 
+For more details on how `LocationEngine` works, [see the `LocationEngine` documentation](https://docs.mapbox.com/android/core/overview/#locationengine).
 {{</Note>}}
 
 ## Navigation UI SDK
@@ -29,7 +31,7 @@ The logic for getting user location lives in the core Navigation SDK. If you are
 <div className="grid grid--gut36 my24">
   <div className="col col--8-mm col--12">
 }}
-By default, the style of the user location dot that is added to the map is inherited from the default in the Mapbox Maps SDK for Android. This is a blue dot with a white stroke and a small blue triangle that indicates the direction the device is facing.
+By default, the style of the user location dot that is added to the map is inherited from the default in the Mapbox Maps SDK for Android. This is a blue dot with a white stroke and a small blue triangle that shows the direction the device is facing.
 
 You can read more about custom styling options for the user location dot in the [Maps SDK documentation](/android/maps/overview/location-component/#active-styling-options).
 
@@ -47,7 +49,7 @@ You can read more about custom styling options for the user location dot in the 
 <div className="grid grid--gut36 my24">
   <div className="col col--8-mm col--12">
 }}
-There is a different icon used to indicate the user's location while the user is progressing along the route. By default, the user location icon during navigation is a white circle containing a blue arrow. 
+There is a different icon used to show the user's location while the user is progressing along the route. By default, the user location icon during navigation is a white circle containing a blue arrow.
 
 You can read more about custom styling options for the user location GPS icon in the [Maps SDK documentation](/android/maps/overview/location-component/#rendermode).
 

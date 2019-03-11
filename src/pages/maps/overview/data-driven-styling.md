@@ -176,7 +176,7 @@ List routeCoordinates = new ArrayList<Point>();
 routeCoordinates.add(Point.fromLngLat(-118.394391, 33.397676));
 routeCoordinates.add(Point.fromLngLat(-118.370917, 33.391142));
 
-// Create the LineString from the list of coordinates and then make a GeoJSON FeatureCollection so that we can add the line to our map as a layer.
+// Create the LineString from the list of coordinates and then make a GeoJSON FeatureCollection so that you can add the line to our map as a layer.
 
 LineString lineString = LineString.fromLngLats(routeCoordinates);
 
@@ -194,7 +194,7 @@ val routeCoordinates = ArrayList<Point>()
 routeCoordinates.add(Point.fromLngLat(-118.394391, 33.397676))
 routeCoordinates.add(Point.fromLngLat(-118.370917, 33.391142))
 
-// Create the LineString from the list of coordinates and then make a GeoJSON FeatureCollection so that we can add the line to our map as a layer.
+// Create the LineString from the list of coordinates and then make a GeoJSON FeatureCollection so that you can add the line to our map as a layer.
 
 val lineString = LineString.fromLngLats(routeCoordinates)
 val featureCollection = FeatureCollection.fromFeatures(
@@ -214,7 +214,7 @@ mapboxMap.style?.addSource(geoJsonSource)`}
   />
 }}
 
-A benefit of having your data inside a GeoJSON source is that you can update, remove, or add additional `Feature`s inside the source at any time, providing a solution to animating data in your map through the Runtime Styling API. For example, [an Android ValueAnimator](https://developer.android.com/reference/android/animation/ValueAnimator.html) can move a feature by updating its coordinates within the GeoJSON data.
+A benefit of having your data inside a GeoJSON source is that you can update, remove, or add additional `Feature`s inside the source at any time, providing a solution to animating data in your map through the Runtime Styling API. For example, [an Android `ValueAnimator`](https://developer.android.com/reference/android/animation/ValueAnimator.html) can move a feature by updating its coordinates within the GeoJSON data.
 
 ### Image
 
@@ -304,7 +304,7 @@ One example of `CustomGeometrySource` usage is to create a black grid on top of 
 
 ### Raster DEM
 
-`RasterDemSource` currently supports Mapbox Terrain RGB (mapbox://mapbox.terrain-rgb) and [Mapzen Terrarium](https://mapzen.com/documentation/terrain-tiles/formats/#terrarium) tile formats.
+`RasterDemSource` supports Mapbox Terrain RGB (mapbox://mapbox.terrain-rgb) and [Mapzen Terrarium](https://mapzen.com/documentation/terrain-tiles/formats/#terrarium) tile formats.
 
 The Mapbox terrain tileset is for adding hill terrain to any Mapbox map. Runtime styling can also be used to change the hillshade appearance.
 
@@ -378,7 +378,7 @@ backgroundLayer.setProperties(PropertyFactory.backgroundColor(Color.BLUE))
 
 ### Fill
 
-Fill layers have an enclosed shape geometry that can be useful for marking areas on a map. A `FillLayer` is best used with GeoJSON `Polygon` or `MultiPolygon` geometries.  The geometry's similar to a line layer consisting of a series of coordinates in a particular order with the first and last points having the same coordinate. The geometry is "enclosed" when the coordinate list starts and ends with the same coordinates. If the geometry isn't enclosed, the `FillLayer` will render but some vertices and sides might be cut off by the tile boundaries.
+Fill layers have an enclosed shape geometry that can be useful for marking areas on a map. Use a `FillLayer` with GeoJSON `Polygon` or `MultiPolygon` geometries.  The geometry is like a line layer consisting of a series of coordinates in a particular order with the first and last points having the same coordinate. The geometry is "enclosed" when the coordinate list starts and ends with the same coordinates. If the geometry isn't enclosed, the `FillLayer` will render but some vertices and sides might be cut off by the tile boundaries.
 
 {{
 <CodeLanguageToggle id="fill-layer" />
@@ -399,7 +399,7 @@ fillLayer.setProperties(PropertyFactory.fillColor(Color.GREEN))
 />
 }}
 
-To alter the shape of the geometry once you have added it, the layer can remain with no changes needed, only the source it's using should be updated. The layer will always display the latest updates inside its source.
+To alter the shape of the geometry once you have added it, the layer can stay with no changes needed, only the source it's using should be updated. The layer will always display the latest updates inside its source.
 
 
 
@@ -419,7 +419,7 @@ A series of coordinates can be combined to create a line segment that shows on a
 
 <!-- NOTE add something visual here building the line layer? -->
 
-Before beginning, you'll want to ensure that the Source your layer will be using has lineStrings as part of its geometry, an example creating this can be seen in the GeoJSON source section. Once the source has been created and added to the map, a lineLayer can be initiated, and properties can be set.
+Before beginning, you'll want to make sure that the Source your layer will be using has lineStrings as part of its geometry and you can find an example of this in the GeoJSON source section. Once the source has been created and added to the map, a `lineLayer` can be started, and properties can be set.
 
 {{
 <CodeLanguageToggle id="line-layer" />
@@ -428,7 +428,7 @@ Before beginning, you'll want to ensure that the Source your layer will be using
 java={`
 LineLayer lineLayer = new LineLayer("line-layer", "line-source");
 
-// The layer properties for our line. This is where we make the line dotted, set the
+// The layer properties for our line. This is where you can make the line dotted, set the
 // color, etc.
 lineLayer.setProperties(
   PropertyFactory.lineDasharray(new Float[]{0.01f, 2f}),
@@ -444,7 +444,7 @@ mapboxMap.getStyle().addLayer(lineLayer);
 kotlin={`
 val lineLayer = LineLayer("line-layer", "line-source")
 
-// The layer properties for our line. This is where we make the line dotted, set the color, etc.
+// The layer properties for our line. This is where you can make the line dotted, set the color, etc.
 lineLayer.setProperties(
 	PropertyFactory.lineDasharray(arrayOf(0.01f, 2f)),
 	PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
@@ -461,7 +461,7 @@ mapboxMap.style?.addLayer(lineLayer)
 
 ### Symbol
 
-Symbol layers indicate a single location on the map with either an icon or text label. Similar to GL Markers and Marker Views, the symbol layer can represent the same data and offers the most power for in map displaying. To begin with, we will show how to add a marker image to the map and then display it as your symbol layer.
+Symbol layers show a single location on the map with either an icon or text label. Like GL Markers and Marker Views, the symbol layer can represent the same data and offers the most power for in map displaying. To begin with, you will add a marker image to the map and then display it as a symbol layer.
 
 {{
 <CodeLanguageToggle id="symbol-layer" />
@@ -492,7 +492,7 @@ mapboxMap.style?.addLayer(symbolLayer)
 />
 }}
 
-Not only can symbol layers mark locations on the map using an image, but they can also display text directly on the map. Text symbol layers are done in a similar process to the image snippet given above, only the properties of the layer change.
+Not only can symbol layers mark locations on the map using an image, but they can also display text directly on the map. The SDK handles text symbol layers in a similar process to the image snippet given above, only the properties of the layer change.
 
 {{
 <CodeLanguageToggle id="text-symbol-layer" />
@@ -610,7 +610,7 @@ mapboxMap.style?.addLayer(circleLayer.setProperties)
 
 ## Removing sources and layers
 
-A source cannot be removed if it's still used by any layer. The removal will fail and log a console warning. Starting in the `7.0.0` release of the Maps SDK, we changed `remove` methods to return a `boolean` which states whether the removal was successful.
+A source cannot be removed if it's still used by any layer. The removal will fail and log a console warning. Starting in the `7.0.0` release of the Maps SDK, the SDK changed `remove` methods to return a `boolean` which states whether the removal was successful.
 
 All layers using a particular source must be removed before that source can be removed.
 
@@ -654,7 +654,7 @@ mapboxMap?.style?.removeSource("source-id")
 
 ## Modify properties
 
-Sources and layers aren't immutable and therefore, can be modified anytime during the map render. For example, to alter the fill color of a layer after it's been added to the map, you use the map's `Style` object to get the layer and set the property.
+Sources and layers aren't immutable so they can be modified anytime during the map render. For example, to alter the fill color of a layer after it's been added to the map, you use the map's `Style` object to get the layer and set the property.
 
 {{
 <CodeLanguageToggle id="modify-properties" />
@@ -678,7 +678,7 @@ fillLayer?.setProperties(
 />
 }}
 
-In a GeoJSON source, you are able to modify, add, remove, or replace the FeatureCollection like so:
+In a GeoJSON source, you are able to change, add, remove, or replace the FeatureCollection like so:
 
 {{
 <CodeLanguageToggle id="change-geojson" />

@@ -8,7 +8,7 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"   
 ---
 
-The **Places plugin for Android** lets users search for a destination, explore what's nearby, or find their favorite restaurants, coffee shops, or stores. The Places Plugin is built on top of our [Mapbox Geocoding API](https://www.mapbox.com/api-documentation/search/#geocoding) and offers UI components that can be integrated inside your app with a few lines of code.
+The **Places plugin for Android** lets users search for a destination, explore what's nearby, or find their favorite restaurants, coffee shops, or stores. Built on top of the [Mapbox Geocoding API](https://www.mapbox.com/api-documentation/search/#geocoding), the plugin offers UI components that you can integrated inside your app with a few lines of code.
 
 {{
 <AppropriateImage imageId="placesSplash" className="block mx-auto pt18" />
@@ -16,7 +16,7 @@ The **Places plugin for Android** lets users search for a destination, explore w
 
 ## Install the Places plugin
 
-To start developing an application using the Places Plugin, you'll need to add the appropriate dependencies inside your `build.gradle` file. This dependency includes the Maps SDK for Android and the [Mapbox Java SDK's Geocoding API](/android/java/overview/geocoder/). All dependencies given below can be found on MavenCentral.
+To start developing an application using the Places Plugin, you'll need to add the appropriate dependencies inside your `build.gradle` file. This dependency includes the Maps SDK for Android and the [Mapbox Java SDK's Geocoding API](/android/java/overview/geocoder/). You can find all dependencies given below on MavenCentral.
 
 If your application is close or exceeds the 65k method count limit, you can mitigate this problem by enabling ProGuard inside your application. ProGuard directives are included in the Android dependencies to preserve the required classes.
 
@@ -25,7 +25,7 @@ If your application is close or exceeds the 65k method count limit, you can miti
 1. Start Android Studio.
 2. Open up your application's `build.gradle`.
 3. Make sure that your project's `minSdkVersion` is API 14 or higher.
-4. Under dependencies, add a new build rule for the latest `mapbox-android-plugin-places.
+4. Under dependencies, add a new build rule for the latest `mapbox-android-plugin-places`.
 5. Click the Sync Project with Gradle Files near the toolbar in Studio.
 
 ```groovy
@@ -40,7 +40,7 @@ dependencies {
 
 ## Add Autocomplete
 
-The **Autocomplete** UI component offers users the ability to search addresses or places and receive information including the latitude and longitude, phone number, categories, and an abundance of other info. As the user types, place predictions display immediately to the user along with any previously searched places.
+The **Autocomplete** UI component offers users the ability to search addresses or places and receive information including the latitude and longitude, phone number, categories, and plenty of other information. As the user types, place predictions display at once to the user along with any searched places.
 
 There are two ways to use the Autocomplete service:
 
@@ -107,7 +107,7 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
 
 ### Display as a fragment
 
-If you need more control over the UI and would like to place the Autocomplete component inside an activity container, you can use the provided `PlaceAutocompleteFragment` to include the search UI. This class extends the [Support Library Fragment](https://developer.android.com/reference/android/support/v4/app/Fragment.html) implementation, which means the `SupportFragmentManager` should be used. In the code snippet provided below, we first check to ensure no more than one `autocompleteFragment` instance is always being used. If there isn't an instance of `autocompleteFragment`, we create a new one and add it to the container. If there is, we simply display the `autocompleteFragment` to the user using the `TAG`.
+If you need more control over the UI and would like to place the Autocomplete component inside an activity container, you can use the provided `PlaceAutocompleteFragment` to include the search UI. This class extends the [Support Library Fragment](https://developer.android.com/reference/android/support/v4/app/Fragment.html) implementation, which means the `SupportFragmentManager` should be used. In the code snippet provided below, it checks to make sure no more than one `autocompleteFragment` instance is always being used. If there isn't an instance of `autocompleteFragment`, it creates a new one and adds it to the container. If there is, it displays the `autocompleteFragment` to the user using the `TAG`.
 
 {{
 <CodeLanguageToggle id="display-fragment" />
@@ -189,7 +189,7 @@ kotlin={`
 
 ## Customize Autocomplete results
 
-Create a **PlaceOptions** object to customize the Autocomplete search results and the UI component.
+Create a `PlaceOptions` object to customize the Autocomplete search results and the UI component.
 
 
 Once your `PlaceOptions` object's created you'll need to pass it in either by using the `PlaceAutocompleteFragment.newInstance(<access token>, placeOptions);` if you are using the fragment or `new PlaceAutocomplete.IntentBuilder().placeOptions(placeOptions)` otherwise.
@@ -223,9 +223,9 @@ There are two modes to further change the Autocomplete component UI to fit your 
 
 
 ### Add suggestions
-When users are searching for places inside your app, oftentimes, they have a few places that are frequently visited and thus searched. Make things simpler for them by adding specific place suggestions such as their home, work, or favorite restaurant. This feature can also be used to insert store locations, or popular places your app is advertising.
+When users are searching for places inside your app, oftentimes, they have a few places that are visited often and thus searched. Make things simpler for them by adding specific place suggestions such as their home, work, or favorite restaurant. This feature can also be used to insert store locations, or popular places your app is advertising.
 
-To get started, you'll need to first acquire or create the `CarmenFeature` which describes this place. an example of creating a `CarmenFeature`s given below which only includes the necessary information for our app, neglecting the large amount of additional information we could provide to describe the location.
+To get started, you'll need to first get or create the `CarmenFeature` which describes this place. See an example of creating a `CarmenFeature` below which only includes the necessary information for your app, neglecting the large amount of additional information you could provide to describe the location.
 
 {{
 <CodeLanguageToggle id="carmen-feature" />
@@ -258,7 +258,7 @@ Once this is done, you will need to pass this feature into the `PlaceOptions` ob
 
 ## Clear search history
 
-Typically found inside any application which offers search history like the places plugin does by default, they will also need to occasionally clear the search history. It's recommended to add a setting in your apps preferences to do just this. If the user request clearing of the search history, you can use the static method provided inside the `PlaceAutocomplete` class called `clearRecentHistory()` which will immediately clear all the data from the saved database.
+Typically found inside any application which offers search history like the places plugin does by default, they will also need to occasionally clear the search history. It's recommended to add a setting in your apps preferences to do this. If the user request clearing of the search history, you can use the static method provided inside the `PlaceAutocomplete` class called `clearRecentHistory()` which will clear all the data from the saved database at once.
 
 {{
 <CodeLanguageToggle id="clear-history" />
@@ -366,6 +366,6 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
 
 />
 }}
-### PlaceOptions for Place Picker
+### `PlaceOptions` for Place Picker
 
-In addition to some of the options listed in the `PlaceOptions` documentation above, the Place Picker includes options for setting the initial map camera position. This is useful when you want the map location to initiate at the user's current location.
+Besides some of the options listed in the `PlaceOptions` documentation above, the Place Picker includes options for setting the initial map camera position. This is useful when you want the map location to start at the user's current location.

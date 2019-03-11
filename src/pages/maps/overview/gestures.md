@@ -7,7 +7,7 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
-The [Mapbox Gestures for Android library](https://github.com/mapbox/mapbox-gestures-android) is used inside of the Mapbox Maps SDK for Android for gesture detection based on user's input. This library wraps [GestureDetectorCompat](https://developer.android.com/reference/android/support/v4/view/GestureDetectorCompat.html) and [ScaleGestureDetector](https://developer.android.com/reference/android/view/ScaleGestureDetector.html) as well as introduces implementation of rotate, move, shove, and tap gesture detectors.
+The [Mapbox Gestures for Android library](https://github.com/mapbox/mapbox-gestures-android) is used inside of the Mapbox Maps SDK for Android for gesture detection based on user's input. This library wraps [`GestureDetectorCompat`](https://developer.android.com/reference/android/support/v4/view/GestureDetectorCompat.html) and [`ScaleGestureDetector`](https://developer.android.com/reference/android/view/ScaleGestureDetector.html) as well as introduces implementation of rotate, move, shove, and tap gesture detectors.
 
 The library is implemented in both the [Mapbox Maps SDK for Android](https://github.com/mapbox/mapbox-gl-native/tree/master/platform/android) and [the library's test application](https://github.com/mapbox/mapbox-gestures-android/tree/master/app/src/main/res).
 
@@ -55,7 +55,7 @@ Set any gesture listeners that you are interested in and pass all `MotionEvent` 
 
 Mutually-exclusive gestures are possible thanks to the `AndroidGestureManager` class, which serves as a single entry point to all gesture detectors.
 
-This means that you can pass a list of `GestureType` sets. Whenever a gesture is detected, it will check whether there are any `ProgressiveGesture`s currently started that are contained within the same set. If there aren't any, the listener for our detected gesture will not be notified.
+This means that you can pass a list of `GestureType` sets. Whenever a gesture is detected, it will check whether there are any `ProgressiveGesture`s started that are contained within the same set. If there aren't any, the listener for our detected gesture will not be notified.
 
 You can pass mutually exclusive gesture sets in a constructor of `AndroidGestureManager` or with `AndroidGestureManager#setMutuallyExclusiveGestures()`.
 
@@ -102,7 +102,7 @@ In the second set, when either a shove or scale is detected, you won't be notifi
 
 ## Thresholds
 
-You can set thresholds for supported gestures, which means that a gesture detector won't fire until the threshold (like minimum rotation angle) is met. This allows you to personalize the gestures experience however you would like.
+You can set thresholds for supported gestures, which means that a gesture detector won't fire until it meets the threshold (like minimum rotation angle). This allows you to personalize the gestures experience how you would like.
 
 Set thresholds using `dimen` values, rather than raw pixels, to accommodate for various screen sizes and pixel densities across Android devices. For example:
 
@@ -146,7 +146,7 @@ Each progressive gesture with its respective `#onEnd()` callback will provide `X
 
 Every gesture detector can be enabled/disabled at any time using the `#setEnabled()` method.
 
-Additionally, every progressive gesture can be interrupted, which will force it to meet start conditions again in order to resume. A popular use case would be to increase the gesture's threshold when another gesture is detected:
+Additionally, every progressive gesture can be interrupted, which will force it to meet start conditions again to resume. A popular use case would be to increase the gesture's threshold when another gesture is detected:
 
 {{
 <CodeLanguageToggle id="enable-and-disable" />
@@ -216,33 +216,33 @@ override fun onScaleEnd(detector: StandardScaleGestureDetector) {
 
 With this library you will be able to recognize gestures using detectors provided by the Support Library and more.
 
-#### StandardGestureDetector
-Wraps [GestureDetectorCompat](https://developer.android.com/reference/android/support/v4/view/GestureDetectorCompat.html) exposed via the Support Library that recognizes gestures like tap, double tap or scroll.
+#### `StandardGestureDetector`
+Wraps [`GestureDetectorCompat`](https://developer.android.com/reference/android/support/v4/view/GestureDetectorCompat.html) exposed via the Support Library that recognizes gestures like tap, double tap or scroll.
 
-#### StandardScaleGestureDetector
-Wraps [ScaleGestureDetector](https://developer.android.com/reference/android/view/ScaleGestureDetector.html) exposed via the Support Library that recognizes scale/pinch gesture.
+#### `StandardScaleGestureDetector`
+Wraps [`ScaleGestureDetector`](https://developer.android.com/reference/android/view/ScaleGestureDetector.html) exposed via the Support Library that recognizes scale/pinch gesture.
 
-#### MultiFingerTapGestureDetector
-Simple gesture detector that notify listeners whenever a multi finger tap occurred and how many fingers where involved.
+#### `MultiFingerTapGestureDetector`
+Gesture detector that tell listeners whenever a multi finger tap occurred and how many fingers where involved.
 
-#### RotateGestureDetector
+#### `RotateGestureDetector`
 A detector that finds the angle difference between previous and current line made with two pointers (fingers).
 
-#### ShoveGestureDetector
+#### `ShoveGestureDetector`
 Detects a vertical movement of two pointers if they are placed within a certain horizontal angle.
 
-#### MoveGestureDetector
-Behaves similarly to `#onScroll()` contained in the `StandardGestureDetector`, however, its a `ProgressiveGesture` that enables better filtering options, as well as thresholds.
+#### `MoveGestureDetector`
+Behaves similarly to `#onScroll()` contained in the `StandardGestureDetector`, but, it's a `ProgressiveGesture` that enables better filtering options, as well as thresholds.
 
-#### SidewaysShoveGesturesDetector
-A sibling of the `ShoveGestureDetector`, however, it recognizes the two-finger shove gesture executed in a horizontal, rather than vertical, line.
+#### `SidewaysShoveGesturesDetector`
+A sibling of the `ShoveGestureDetector`, but, it recognizes the two-finger shove gesture executed in a horizontal, rather than vertical, line.
 
 
 ## Usage with the Maps SDK
 
 This library is shipped as a part of the [Mapbox Maps SDK for Android](https://github.com/mapbox/mapbox-gl-native/tree/master/platform/android) and you don't have to declare any other dependencies.
 
-To get the `AndroidGesturesManager` object which holds references to all of the gesture detectors, use:
+To get the `AndroidGesturesManager` object which holds references to all the gesture detectors, use:
 
 {{
 <CodeLanguageToggle id="usage-with-maps-sdk" />
@@ -259,7 +259,7 @@ val gesturesManager = mapboxMap.gesturesManager
 />
 }}
 
-In order to react to the user's input, you can register several different listeners that will be notified whenever a user interacts with a Mapbox map.
+To react to the user's input, you can register several different listeners that will be notified whenever a user interacts with a Mapbox map.
 
 `OnMapClickListener`:
 
@@ -338,6 +338,6 @@ Other popular listener interfaces that you can implement are:
  - `OnScaleListener` fires when the map is zoomed in or out.
  - `OnShoveListener` fires when map is tilted.
 
-### Custom AndroidGesturesManager
+### Custom `AndroidGesturesManager`
 
 The Maps SDK offers a `MapboxMap#setGesturesManager()` method. If you create a custom `AndroidGesturesManager` object, you can use it as a parameter for that method and for the custom mapping experience that you want to create.

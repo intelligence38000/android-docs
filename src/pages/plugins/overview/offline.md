@@ -14,7 +14,7 @@ View [our offline documentation for more information about how the Mapbox Maps S
 
 ## Install the Offline Plugin
 
-To start developing an application using the Offline Plugin, you'll need to add the appropriate dependencies inside of your `build.gradle` file. This dependency includes the Maps SDK for Android. All dependencies given below can be found on MavenCentral.
+To start developing an application using the Offline Plugin, you'll need to add the appropriate dependencies inside of your `build.gradle` file. This dependency includes the Maps SDK for Android. You can find all dependencies given below on MavenCentral.
 
 If your application is close or exceeds the 65k method count limit, you can mitigate this problem by enabling ProGuard inside of your application. ProGuard directives are included in the Android dependencies to preserve the required classes.
 
@@ -129,4 +129,4 @@ OfflinePlugin.getInstance(this).startDownload(
 
 ## Offline tile estimator
 
-An app can download multiple regions for offline use, but the total offline download is capped at a maximum tile count “ceiling” across all downloaded regions. The tile ceiling is set to 6,000 tiles by default but can be raised [for paid plans](https://www.mapbox.com/pricing/). Use our [Tile Count Estimator](https://www.mapbox.com/labs/offline-estimator/) to calculate the number of tiles required for your offline use case. Six thousand tiles cover a region roughly the size of Greater London within the M25 at zoom levels 0–15 or the contiguous United States at zoom levels 0–9. The size of these tiles on disk will vary according to the selected style.
+An app can download multiple regions for offline use, but the total offline download is capped at a maximum tile count “ceiling” across all downloaded regions. The plugin set the tile ceiling to 6,000 tiles by default but can be raised [for paid plans](https://www.mapbox.com/pricing/). Use our [Tile Count Estimator](https://www.mapbox.com/labs/offline-estimator/) to calculate the number of tiles required for your offline use case. Six thousand tiles cover a region roughly the size of Greater London within the `M25` at zoom levels 0–15 or the contiguous United States at zoom levels 0–9. The size of these tiles on disk will vary according to the selected style.

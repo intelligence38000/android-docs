@@ -10,14 +10,14 @@ prependJs:
   - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
-The Navigation SDK allows you to customize the language for both text and voice instructions. Instructions are announced in the user interface language when turn instructions are available in that language. If instructions are not available in the user interface language, they are announced in English. 
+The Navigation SDK allows you to customize the language for both text and voice instructions. Instructions are announced in the user interface language when turn instructions are available in that language. If instructions are not available in the user interface language, they are announced in English.
 
-By default, distances are given in the predominant measurement system of the system region, which may not necessarily be the same region in which the user is traveling. 
+By default, the SDK gives distances in the predominant measurement system of the system region, which may not necessarily be the same region in which the user is traveling.
 
-The upcoming road or ramp destination is named according to the local or national language. In some regions, the name may be given in multiple languages.
+The upcoming road or ramp destination is named according to the local or national language. In some regions, the SDK may give the name multiple languages.
 
 {{<Note title="Localization and the Navigation UI SDK" imageComponent={<BookImage size="60" />}>}}
-Because language and units of measurement are specified when the route is generated, this guide does not describe any specific options in the Navigation UI SDK. **The defaults described above will be fed to the Navigation UI SDK if no language is specified.** If you would like to customize the language or units of measurement used in text and voice instructions, you must use the `NavigationRoute.Builder` class.
+Because language and units of measurement are specified when the route is generated, this guide does not describe any specific options in the Navigation UI SDK. **The Navigation UI SDK will receive the defaults described above if no language is specified.** If you would like to customize the language or units of measurement used in text and voice instructions, you must use the `NavigationRoute.Builder` class.
 {{</Note>}}
 
 ## Supported languages
@@ -52,7 +52,7 @@ The table below lists the languages that are supported for user interface elemen
 | Vietnamese | ✅              | ✅ | Depends on the device; may require third-party text-to-speech
 
 {{<Note imageComponent={<BookImage size="60" />}>}}
-For languages marked with `Depends on the device; may require third-party text-to-speech`, instructions are provided by the SDK, but we cannot guarantee the given device will have the appropriate `TextToSpeech` speech engine installed to pronounce these instructions correctly.
+For languages marked with `Depends on the device; may require third-party text-to-speech`, instructions are provided by the SDK, but it is not guaranteed that the given device will have the appropriate `TextToSpeech` speech engine installed to pronounce these instructions correctly.
 {{</Note>}}
 
 ### Contributing to localization

@@ -40,7 +40,7 @@ The Mapbox Java SDK is an open source toolset for building applications that nee
 
 ### API reference
 
-All public methods in all the project modules are well documented and even include a since tag so you can find when an API was first added. A link for all the module javadoc pages can be found in the list below:
+All public methods in all the project modules are well documented and even include a since tag so you can find when an API was first added. You can find a link for all the module javadoc pages below:
 
 Version _above_ 3.0.0:
 - [mapbox-sdk-turf](https://docs.mapbox.com/android/api/mapbox-java/libjava-turf/3.0.1/index.html)
@@ -58,7 +58,7 @@ Version _below_ 3.0.0:
 
 ### Access tokens
 
-If you plan to use any of our APIs such as directions, geocoding, navigation, etc. you'll need to have a Mapbox access token which you'll pass in as a parameter. An access token isn't needed if you plan to use the Mapbox Java SDK only for GeoJSON parsing or Turf calculations. Read [this document](https://www.mapbox.com/help/create-api-access-token/) to learn more about access tokens.
+If you plan to use any of our APIs such as directions, geocoding, navigation, etc. you'll need to have a Mapbox access token which you'll pass in as a parameter. An access token isn't needed if you plan to use the Mapbox Java SDK only for GeoJSON parsing or Turf calculations. Learn more about [how access tokens work](https://www.mapbox.com/help/create-api-access-token/).
 
 ### Point object
 
@@ -85,7 +85,7 @@ val singlePoint = Point.fromLngLat(LONGITUDE, LATITUDE);
 
 ## Installation
 
-To start developing your application using the Mapbox Java SDK, you'll need to first decide which installation method works best for you. The SDK is fully compatible with Android using Gradle and most of the project (besides the Android dependent modules) can also be included in a generic Java project using either Gradle or Maven. All dependencies given below can be found on MavenCentral.
+To start developing your application using the Mapbox Java SDK, you'll need to first decide which installation method works for you. The SDK is fully compatible with Android using Gradle and most of the project (besides the Android dependent modules) can also be included in a generic Java project using either Gradle or Maven. You can find all dependencies given below on MavenCentral.
 
 ### Gradle
 

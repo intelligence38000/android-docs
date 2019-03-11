@@ -7,12 +7,12 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"    
 ---
 
-The Mapbox Traffic Plugin adds a real-time traffic layer to any Mapbox base map. If you want to display a traffic layer inside your application, you only need to include the dependency in your project and initialize the plugin. Various shades of colors indicate the congestion level for any given part of a road segment. If not enough traffic data available for a given road, no road information will be shown.
+The Mapbox Traffic Plugin adds a real-time traffic layer to any Mapbox base map. If you want to display a traffic layer inside your application, you only need to include the dependency in your project and initialize the plugin. Various shades of colors show the congestion level for any given part of a road segment. If there's not enough traffic data available for a given road, then the plugin will not show road information.
 
-Similar to other plugins, a third optional parameter in the traffic plugin's constructor which is useful for specifying the layer in which you want the traffic to display below. If the layer ID's missing in the third parameter, the plugin will attempt to place the traffic below all symbol layers so that text and icons on the map are still visible on top of the traffic lines. It is always a good idea to pass in a string ID rather than relying on the Plugin to attempt to place the traffic below a symbol layer since it isn't guaranteed to work properly.
+Like other plugins, a third optional parameter in the traffic plugin's constructor which is useful for specifying the layer in which you want the traffic to display below. If the layer ID's missing in the third parameter, the plugin will try to place the traffic below all symbol layers so that text and icons on the map are still visible on top of the traffic lines. It is always a good idea to pass in a string ID rather than relying on the Plugin to try to place the traffic below a symbol layer since it isn't guaranteed to work properly.
 
 ## Install the Traffic Plugin
-To start developing an application using the Traffic Plugin, you'll need to add the appropriate dependencies inside your `build.gradle` file. This dependency includes the Maps SDK for Android. All dependencies given below can be found on MavenCentral.
+To start developing an application using the Traffic Plugin, you'll need to add the appropriate dependencies inside your `build.gradle` file. This dependency includes the Maps SDK for Android. You can find all dependencies given on MavenCentral.
 
 If your application is close or exceeds the 65k method count limit, you can mitigate this problem by enabling ProGuard inside your application. ProGuard directives are included in the Android dependencies to preserve the required classes.
 

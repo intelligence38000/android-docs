@@ -10,7 +10,7 @@ prependJs:
 Support for extrusions was added with `5.1.0` of the Map SDK, unlocking the possibility to display **3D buildings** on your favorite map style. The building plugin extends this functionality and makes it even easier to add buildings to a map style.
 
 ## Install the Building Plugin
-To start developing an application using the Building Plugin, you'll need to add the appropriate dependencies inside your `build.gradle` file. This dependency includes the Maps SDK for Android. All dependencies given below can be found on MavenCentral.
+To start developing an application using the Building Plugin, you'll need to add the appropriate dependencies inside your `build.gradle` file. This dependency includes the Maps SDK for Android. You can find all dependencies given below on MavenCentral.
 
 If your application is close or exceeds the 65k method count limit, you can mitigate this problem by enabling ProGuard inside your application. ProGuard directives are included in the Android dependencies to preserve the required classes.
 
@@ -34,7 +34,7 @@ dependencies {
 5. Click the Sync Project with Gradle Files near the toolbar in Studio.
 
 ## Add the Building Plugin
-The Building Plugin requires no additional permissions and initialized by passing in both the map view and `mapboxMap` objects that you'd like the building layer to show on. In addition to the required params, you also have the option to provide a layer ID which you'd like the buildings to appear below. Once initialized, setting `setVisibility()` to true will result in the building layer getting added on top of your map style.
+The Building Plugin requires no additional permissions and initialized by passing in both the map view and `mapboxMap` objects that you'd like the building layer to show on. Besides the required parameters, you also have the option to provide a layer ID which you'd like the buildings to appear below. Once initialized, setting `setVisibility()` to true will result in the building layer getting added on top of your map style.
 
 {{
 <CodeLanguageToggle id="building-plugin" />

@@ -12,7 +12,7 @@ You'll find the wrapper for the Mapbox Geocoding API in the mapbox-java-services
 
 Before using this wrapper:
 
-- We recommend reading over [Mapbox Geocoding API documentation](https://www.mapbox.com/api-documentation/search/#geocoding). The API documentation contains all available parameters including some that are not listed in this guide.
+- Read the [Mapbox Geocoding API documentation](https://www.mapbox.com/api-documentation/search/#geocoding). The API documentation contains all available parameters including some that are not listed in this guide.
 - Make sure you have included the correct permissions inside of your `AndroidManifest.xml` file if you plan to use this API inside of an Android application.
 
 ## Geocoding request
@@ -112,7 +112,7 @@ mapboxGeocoding.enqueueCall(object : Callback<GeocodingResponse> {
 
 ## Reverse geocoding
 
-The process of turning coordinates into a `String` address is called reverse geocoding. Instead of supplying the builder with a `String` address you'd pass in coordinates instead. Handling the response is like forward geocoding. While one coordinate is given, the response will often give you multiple valid ways to describe the specific location. For example, one might be the street name while another result will be the country. The ordering of the list usually goes from most relevant to least.
+The process of turning coordinates into a `String` address is called reverse geocoding. Instead of supplying the builder with a `String` address you'd pass in coordinates instead. Handling the response is like forward geocoding. While the geocoder gives one coordinate, the response will often give you multiple valid ways to describe the specific location. For example, one might be the street name while another result will be the country. The ordering of the list usually goes from most relevant to least.
 
 You can narrow the response like forward geocoding by biasing the result using the available parameters provided in the builder.
 

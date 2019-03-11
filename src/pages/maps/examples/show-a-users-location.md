@@ -1,6 +1,6 @@
 ---
 title: Show a user's location
-description: Use the LocationComponent to indicate the user's current location on the map.
+description: Use the LocationComponent to show the user's current location on the map.
 thumbnail: thumbnailLocationComponent
 topic: Getting started
 prependJs:

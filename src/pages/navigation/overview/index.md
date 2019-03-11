@@ -31,7 +31,7 @@ prependJs:
 
 The Navigation SDK for Android allows you to build a complete in-app navigation experience. With the Navigation SDK you get the power of the [Mapbox Directions API](https://docs.mapbox.com/api/navigation/#directions) along with a collection of features that are critical when building navigation applications for Android, including:
 
-- Detecting the direction a device is facing and start the route accordingly
+- Detecting the direction a device is facing and start the route
 - Providing voice instruction announcements
 - Displaying real-time user progress to their destination
 - Detecting when a user goes off-route
@@ -41,8 +41,8 @@ The Navigation SDK for Android allows you to build a complete in-app navigation 
 
 There are two SDKs that can be used to integrate navigation into your Android application, the core **Navigation SDK** and the **Navigation UI SDK**:
 
-- The core **Navigation SDK** is where the logic lives for generating routes, tracking progress, receiving instructions, and more. You can use this directly via the `MapboxNavigation` class or through the Navigation UI SDK. 
-- The **Navigation UI SDK** is built on top of the core Navigation SDK (meaning the Navigation SDK is included when you add the Navigation UI SDK as a dependency). It consumes data from the core Navigation SDK and arranges it in default UI components that have various customization options. You can use this directly via the `NavigationView` and `NavigationLauncher` classes without touching the core `MapboxNavigation` class directly in your application's code. 
+- The core **Navigation SDK** is where the logic lives for generating routes, tracking progress, receiving instructions, and more. You can use this directly via the `MapboxNavigation` class or through the Navigation UI SDK.
+- Built on top of the core Navigation SDK (meaning the Navigation SDK is included when you add the Navigation UI SDK as a dependency), the **Navigation UI SDK** consumes data from the core SDK and arranges it in default UI components that have various customization options. You can use this directly via the `NavigationView` and `NavigationLauncher` classes without touching the core `MapboxNavigation` class directly in your application's code.
 - The core **Navigation SDK** and the **Navigation UI SDK** can be used together if you want to use a mixture of the Mapbox-provided UI components and your own custom UI fed data from the core Navigation SDK.
 
 
@@ -84,10 +84,11 @@ This documentation contains information for both the core Navigation SDK and the
 
 ## Installation
 
-You'll need to add the Navigation SDK or Navigation UI SDK as a dependency before developing your app. 
+You'll need to add the Navigation SDK or Navigation UI SDK as a dependency before developing your app.
 
 {{<Note title="Using nightly builds and beta versions" imageComponent={<BookImage size="60" />}>}}
-Note that while we show how to insert the stable version of the SDK inside your project, you can also use the nightly build/SNAPSHOT or the beta version if one is available. Find more information about how to do this inside [the Navigation SDK's GitHub repository](https://github.com/mapbox/mapbox-navigation-android/#using-snapshots).
+
+You can also use the nightly build/SNAPSHOT or the beta version if one is available. Find more information about how to do this inside [the Navigation SDK's GitHub repository](https://github.com/mapbox/mapbox-navigation-android/#using-snapshots).
 {{</Note>}}
 
 ### Navigation SDK
@@ -154,9 +155,9 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 #### Set up permissions
 
-The Navigation SDK makes use of the Android manifest merge feature to reduce the need to include any Navigation SDK requirements inside your application's manifest file. You'll need to include either the fine or coarse location permission for navigation to work properly. The user location permission should also be checked during runtime using the PermissionManager if your app targets the Android API 23 or higher.
+The Navigation SDK makes use of the Android manifest merge feature to reduce the need to include any Navigation SDK requirements inside your application's manifest file. You'll need to include either the fine or coarse location permission for navigation to work properly. The user location permission should also be checked during runtime using the `PermissionsManager` if your app targets the Android API 23 or higher.
 
-For best navigation results, we strongly recommend using the fine location permission, which gives a more precise fix on the user's current location.
+For optimal navigation results, use the fine location permission, which gives a more precise fix on the user's current location.
 
 ```xml
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -224,7 +225,7 @@ NavigationRoute.builder(context)
 
 ### Navigation UI SDK
 
-The Navigation UI SDK is the fastest way to get a navigation UI into your application. 
+The Navigation UI SDK is the fastest way to get a navigation UI into your application.
 
 #### Add the dependency
 
@@ -315,7 +316,7 @@ override fun onDestroy() {
 
 There are a few methods that can be helpful when developing and testing your application.
 
-### Replay a DirectionsRoute
+### Replay a `DirectionsRoute`
 
 The Navigation SDK includes a `ReplayRouteLocationEngine`, which allows you to replay a given `DirectionsRoute` (mainly for testing, so you don't always have to code in a car). After retrieving a `DirectionsRoute`, you can create a replay engine and pass it to `MapboxNavigation`.
 

@@ -17,7 +17,7 @@ Offline routing pack downloads are restricted to Mapbox Enterprise customers. If
 
 Mapbox offline navigation provides routing functionality from the Navigation SDK in non-connected environments. In areas of no cellular connectivity, or on a device with no SIM card, end users can use turn-by-turn navigation and request new routes. If they go off-route, the system can reroute and keep them headed to their destination without requiring network connectivity. Offline routing moves the routing engine and the routing data from the server onto the end user’s device, so there’s no need to make HTTP API calls for routing information.
 
-In order to implement offline routing in your own app, you will need to:
+To implement offline routing in your own app, you will need to:
 1. Add the offline dependency to your app.
 1. Update your app to use `MapboxOfflineRouter.downloadTiles`, which allows the app to download the data needed for offline routing.
 1. Initialize `MapboxOfflineRouter`.
@@ -128,8 +128,8 @@ offlineRouter.downloadTiles(builder.build(), object : RouteTileDownloadListener 
 
 The offline dataset that is downloaded includes data for the following modes of travel: driving, cycling, and walking.
 
-## Configure MapboxOfflineRouter with offline data
-`MapboxOfflineRouter` has a `public` method `MapboxOfflineRouter#configure(String version, OnOfflineTilesConfiguredCallback callback)`. This method indexes all of the data present on a device at the time the method is called. This means it must be called on every `MapboxOfflineRouter` object before requesting a route. You must wait for the callback to return before requesting a route.
+## Configure `MapboxOfflineRouter` with offline data
+`MapboxOfflineRouter` has a `public` method `MapboxOfflineRouter#configure(String version, OnOfflineTilesConfiguredCallback callback)`. This method indexes all the data present on a device at the time the method is called. This means it must be called on every `MapboxOfflineRouter` object before requesting a route. You must wait for the callback to return before requesting a route.
 
 #### Example use
 {{
@@ -170,7 +170,7 @@ offlineRouter.configure(version, object : OnOfflineTilesConfiguredCallback {
 />
 }}
 
-## Find an offline DirectionsRoute
+## Find an offline `DirectionsRoute`
 Update your app to use the `MapboxOfflineRouter.findRoute` method to create a `DirectionsRoute`. This method takes a `OfflineRoute` class and a `RouteFoundCallback`. The callback will be called with either a route or an error.
 
 #### Example use
@@ -221,7 +221,7 @@ offlineRouter.findRoute(offlineRoute, object : OnOfflineRouteFoundCallback {
 ## Rerouting
 When the SDK detects that the user has diverged from the route, `MapboxOfflineRouter` can be used to find a new route to their original destination. Having routing data on the client device means new routes are generated without having to go back to the server to calculate and retrieve a route. As long as the user is still within the boundaries of the offline routing data they can trigger a re-route event or request a new route anywhere within the dataset.
 
-#### Example re-route scenario with MapboxNavigation
+#### Example re-route scenario with `MapboxNavigation`
 {{
 <CodeLanguageToggle id="offline-reroute-mapbox-navigation" />
 <ToggleableCodeBlock
@@ -265,7 +265,7 @@ navigation.addOffRouteListener { location ->
 />
 }}
 
-#### Example re-route scenario with NavigationView
+#### Example re-route scenario with `NavigationView`
 {{
 <CodeLanguageToggle id="offline-reroute-navigation-view" />
 <ToggleableCodeBlock
@@ -308,10 +308,10 @@ override fun allowRerouteFrom(offRoutePoint: Point): Boolean {
 
 
 ## Estimated local storage and memory benchmarks
-In addition to the storage required by the routing data, the device will also need to to store the map data needed for visual display. For more information on managing offline download size, see the [Offline maps troubleshooting guide](https://www.mapbox.com/help/mobile-offline/).
+Besides the storage required by the routing data, the device will also need to store the map data needed for visual display. For more information on managing offline download size, see the [Offline maps troubleshooting guide](https://www.mapbox.com/help/mobile-offline/).
 
 ### Local storage
-The road network density of given geographic areas varies widely, but we have provided a list of benchmark estimates below, created via a bounding box encompassing the region listed. As the data needs to be uncompressed on disk for faster routing, non-compressed estimates are shown. Download sizes will be smaller after compression.
+The road network density of given geographic areas varies widely. View the list of benchmark estimates below that were created via a bounding box encompassing the region listed. As the data needs to be uncompressed on disk for faster routing, the SDK shows non-compressed estimates. Download sizes will be smaller after compression.
 
 Example region size |	Routing data	| Map data (z1-7,12)
 --- | --- | ---
@@ -327,6 +327,6 @@ For a typical route calculation in a geographic area, the amount of memory neede
 
 Region size |	RAM needed
 --- | ---
-San Francisco (city and county) |	100MB
+San Francisco (city and county) |	100 MB
 California |	150MB
 USA (minus HI and AK) |	250MB

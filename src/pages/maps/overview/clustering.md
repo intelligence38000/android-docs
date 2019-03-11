@@ -8,14 +8,14 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
-Often times, too much data is shown on a map at a single time. Markers overlap with each other. The map looks and feels cluttered. Users can't get a quick understanding of what the data is supposed to say. 
+Often, a map can show too much data at a single time. Markers overlap with each other. The map looks and feels cluttered. Users can't get a quick understanding of what the data is supposed to say.
 
-Showing clustered data is entirely possible by using the data-driven styling capabilites of the Mapbox Maps SDK for Android.
+Showing clustered data is entirely possible by using the data-driven styling capabilities of the Mapbox Maps SDK for Android.
 
-Adjusting the amount of data shown on the map to the map's camera zoom level, is a great way to provide users with a cleaner UI experience and less overwhelming location data experience. 
-	
+Adjusting the amount of data shown on the map to the map's camera zoom level, is a way to provide users with a cleaner UI experience and less overwhelming location data experience.
 
-## CircleLayer
+
+## `CircleLayer`
 
 {{
   <Floater
@@ -50,10 +50,10 @@ The `SymbolLayer` is a bit more complicated but essentially the same as the `Cir
 <AppropriateImage imageId="SymbolLayerCluster" className="block mx-auto pt18" />
 }}
 
-To accomplish this:
-	
+To do this:
+
 1. Use a GeoJSON data source and add it to the Mapbox map as a `GeoJsonSource`.
-	
+
 	{{
 <CodeLanguageToggle id="symbol-layer" />
 <ToggleableCodeBlock
@@ -70,11 +70,11 @@ try {
 		    .withClusterRadius(DESIRED_CLUSTER_RADIUS)
 		)
 	);
-	
+
 } catch (MalformedURLException malformedUrlException) {
 
 	Log.e(TAG, "Check the URL " + malformedUrlException.getMessage());
-	
+
 }
 `}
 
@@ -90,18 +90,18 @@ try {
 		    .withClusterRadius(DESIRED_CLUSTER_RADIUS)
 		)
 	);
-	
+
 } catch (malformedUrlException: MalformedURLException) {
-	
+
 	Log.e(TAG, "Check the URL " + malformedUrlException.message)
-	
+
 }
 `}
 
 />
 }}
 
-	
+
 2. Create a `SymbolLayer` with icons that represent the individual data points for when points are not clustered. These icons will only be visible when the map's camera is close enough to the map. Remember, the higher the map zoom value, the more zoomed in the camera is. A zoom level of 12 is closer to the map than a zoom value of 4.
 3. Create as many additional `SymbolLayer`s or `CircleLayer`s as you want for the various data ranges. You might have red circles represent data clusters that have 10-30 data points and then blue circles that have 50 or more data points. Data-driven styling and `Expression` filtering will determine which cluster layers are shown at which zoom level.
 4. Create a `SymbolLayer` for the hidden data amount text. That is, the number that appears and tells a user how many more data points are "hidden" behind the cluster icon/circle and can be viewed if the map is zoomed in on. Don't forget to use runtime styling to adjust the text size, text color, and other text properties:

@@ -64,14 +64,18 @@ To run the tests locally, run:
 npm test
 ```
 
-The test suite will lint JavaScript as well as run remark-linters that lint markdown files.
+The test suite will lint JavaScript as well as:
 
-The remark-linters perform the following tasks:
-- check for [broken links](https://github.com/mapbox/remark-lint-mapbox/tree/master/link-checker)
-- [validate the frontmatter](https://github.com/mapbox/remark-lint-mapbox/tree/master/frontmatter) on each page
-- check for [non-descriptive link text](https://github.com/mapbox/remark-lint-link-text)
+* Run remark-linters that lint markdown files
+  - check for [broken links](https://github.com/mapbox/remark-lint-mapbox/tree/master/link-checker)
+  - [validate the frontmatter](https://github.com/mapbox/remark-lint-mapbox/tree/master/frontmatter) on each page
+  - check for [non-descriptive link text](https://github.com/mapbox/remark-lint-link-text)
+* Run [@mapbox/copyeditor](https://github.com/mapbox/copyeditor) to validate writing
+  - asserts the Mapbox documentation style guide
+  - checks spelling
+  - checks for plain language and suggests alternatives
 
-If the linters log an error or warning to the console, follow the guidance from the test to fix it.
+If the tests return an error or warning, follow the guidance from the test to fix it.
 
 ## Contributing new documentation
 

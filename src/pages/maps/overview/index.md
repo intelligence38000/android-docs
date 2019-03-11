@@ -40,7 +40,7 @@ The Mapbox Maps SDK for Android is an open source toolset for displaying maps in
   </a>
 }}
 
-[Mapbox's demo app on the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo&hl=en) includes many examples of how to use the Mapbox Maps SDK for Android. The demo app and [the examples section of this documentation](https://docs.mapbox.com/android/maps/examples/) are great places to start for understanding the power of the Mapbox Maps SDK for Android.
+[Mapbox's demo app on the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo&hl=en) includes many examples of how to use the Mapbox Maps SDK for Android. The demo app and [examples page](https://docs.mapbox.com/android/maps/examples/) will illustrate the power of the Mapbox Maps SDK for Android.
 
 {{
 <WarningNote title="7.0.0 Migration Guide">
@@ -81,14 +81,14 @@ dependencies {
 }
 ```
 
-_Note: You might have mismatching gradle dependencies once you add the Mapbox Maps SDK for Android. Don't forget that you can use `exclude group` like below, to remove certain dependencies:_
+_Note: You might have mismatching Gradle dependencies once you add the Mapbox Maps SDK for Android. Don't forget that you can use `exclude group` like below, to remove certain dependencies:_
 
 ```
 implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:{{constants.MAP_SDK_VERSION }}'){
     exclude group: 'group_name', module: 'module_name'
 }
 ```
-Additionally, running `gradle app_module_name_here:dependencies` in your command line will print a list of dependencies. `./gradlew app:dependencies` works if you have a Gradle wrapper. They are helpful for troubleshooting nimble Gradle configurations when various libraries are included in a single project. You can see the dependencies that specific libaries are bringing and where conflicts might be happening.
+Additionally, running `gradle app_module_name_here:dependencies` in your command line will print a list of dependencies. `./gradlew app:dependencies` works if you have a Gradle wrapper. They are helpful for troubleshooting nimble Gradle configurations when various libraries are included in a single project. You can see the dependencies that specific libraries are bringing and where conflicts might be happening.
 
 ### 2. Get an access token
 
@@ -132,7 +132,7 @@ class MapboxApplication : Application() {
 />
 }}
 
-The Maps SDK also provides a `setToken()` method in case you want to switch the Mapbox access token at runtime. Certain Mapbox APIs require special Mapbox tokens, such as maps in China. Setting a new token enables use of multiple Mapbox tools in conjunction with one another. This method allows you to set a token immediately before a specific Mapbox tool is used instead of setting the token initially and being required to use the same token for all Mapbox-related requests.
+The Maps SDK also provides a `setToken()` method in case you want to switch the Mapbox access token at runtime. Certain Mapbox APIs require special Mapbox tokens, such as maps in China. Setting a new token enables use of multiple Mapbox tools in conjunction with one another. This method allows you to set a token before a specific Mapbox tool is used instead of setting the token initially and being required to use the same token for all Mapbox-related requests.
 
 {{
 <CodeLanguageToggle id="switch-token" />
@@ -152,7 +152,7 @@ Mapbox.setAccessToken(MAPBOX_ACCESS_TOKEN)
 
 ### 3. Setup permissions
 
-Starting with the 5.0 version of the Maps SDK, we are making use of the Manifest merge feature to reduce the need to include any Maps SDK required things inside of your application's manifest file. You'll need to add _either_ the Fine **or** Coarse location permission if you plan to display a user's location on the map or get the user's location information. The user location permission should also be checked during runtime using the [PermissionManager](https://docs.mapbox.com/android/core/overview/#permissionsmanager).
+Starting with the 5.0 version of the Maps SDK, you can use the Manifest merge feature to reduce the need to include any Maps SDK required things inside of your application's manifest file. You'll need to add _either_ the Fine **or** Coarse location permission if you plan to display a user's location on the map or get the user's location information. The user location permission should also be checked during runtime using the [`PermissionsManager`](https://docs.mapbox.com/android/core/overview/#permissionsmanager).
 
 ```xml
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -238,7 +238,7 @@ Open the activity's XML layout file and add the `mapView` within your layout.
 
 ### 5. Lifecycle methods
 
-The `MapView` contains its own lifecycle methods for managing Android's OpenGL lifecycle, which must be called directly from the containing Activity. In order for your app to correctly call the MapView's lifecycle methods, you must override the following lifecycle methods in the Activity that contains the MapView and call the respective MapView method. For example, your onStart() method should look like this:
+The `MapView` contains its own lifecycle methods for managing Android's OpenGL lifecycle, which must be called directly from the containing Activity. In order for your app to correctly call the MapView's lifecycle methods, you must override the following lifecycle methods in the Activity that contains the MapView and call the respective MapView method. For example, your `onStart()` method should look like this:
 
 {{
 <CodeLanguageToggle id="on-start" />
@@ -262,7 +262,7 @@ override fun onStart() {
 }}
 
 
-Similar to the `onStart()` override above, the following lifecycle methods also need to be overridden and include the matching `MapView` method:
+Like the `onStart()` override above, the following lifecycle methods also need to be overridden and include the matching `MapView` method:
 
 {{
 <CodeLanguageToggle id="lifecycle-methods" />
@@ -332,14 +332,14 @@ fun onDestroyView() {
   />
 }} -->
 
-You must include the Mapbox wordmark and attribution notice on any map that uses the Mapbox Maps SDK for Android. We provide an attribution layout that includes all required information and can be customized either in xml or using the `UiSettings` object.
+You must include the Mapbox wordmark and attribution notice on any map that uses the Mapbox Maps SDK for Android. The SDK provides an attribution layout that includes all required information and can be customized either in xml or using the `UiSettings` object.
 
-You may adjust the position of the Mapbox wordmark and attribution notice, but they must stay visible on the map. You may also change the background and text color of the attribution notice to best match your design aesthetics, but all information must be legible.
+You may adjust the position of the Mapbox wordmark and attribution notice, but they must stay visible on the map. You may also change the background and text color of the attribution notice to match your design aesthetics, but all information must be legible.
 
 You may not otherwise alter the Mapbox wordmark or text attribution notice. If you wish to move or to remove the Mapbox wordmark, please [contact our sales team](https://www.mapbox.com/contact/sales/) to discuss options available under our Enterprise plans.
 
 ## Telemetry opt out
-Mapbox Telemetry is a [powerful location analytics platform](https://www.mapbox.com/telemetry/) included in this SDK. By default, anonymized location and usage data is sent to Mapbox whenever the host app causes it to be gathered. The [Mapbox Terms of Service](https://www.mapbox.com/tos/) require your app to provide users with a way to individually opt out of Mapbox Telemetry, which is provided automatically as part of the [attribution](#attribution) control. If you hide the attribution control, you must provide an alternative opt out for your users to use.
+Mapbox Telemetry is a [powerful location analytics platform](https://www.mapbox.com/telemetry/) included in this SDK. By default, the SDK sends anonymized location and usage data to Mapbox whenever the host app causes it to be gathered. The [Mapbox Terms of Service](https://www.mapbox.com/tos/) require your app to provide users with a way to individually opt out of Mapbox Telemetry, which is provided automatically as part of the [attribution](#attribution) control. If you hide the attribution control, you must provide an alternative opt out for your users to use.
 
 ## MapView XML attributes
 

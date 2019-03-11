@@ -14,13 +14,13 @@ prependJs:
   - "import BookImage from '@mapbox/dr-ui/book-image';"
 ---
 
-Tracking a user's progress along a route is key to providing helpful and timely navigation instructions. The `RouteProgress` class contains all the user's progress information along the route, including legs and steps. This object is provided inside `ProgressChangeListener`, allowing you to get distance measurements, the percentage of route complete, current step index, and much more.
+Tracking a user's progress along a route is key to providing helpful and prompt navigation instructions. The `RouteProgress` class contains all the user's progress information along the route, including legs and steps. This object is provided inside `ProgressChangeListener`, allowing you to get distance measurements, the percentage of route complete, current step index, and much more.
 
 ## Listening to progress change
 
 Like tracking user location changes, the `ProgressChangeListener` is invoked every time the user's location changes and provides an updated `RouteProgress` object. The Navigation UI SDK uses this listener by default, but if you are not using the Navigation UI SDK, it is strongly encouraged that you also use this listener. The `ProgressChangeListener` can typically be used to refresh most of your application's user interface when a change occurs. For example, if you are displaying the user's current progress until the user needs to do the next maneuver. Every time this listener's invoked, you can update your view with the new information from `RouteProgress`.
 
-In addition to receiving information about the route progress, the callback also provides you with the user's current location, which can provide their current speed, bearing, etc. If you have the snap-to-route enabled, the location object will be updated to give the snapped coordinates.
+Besides receiving information about the route progress, the callback also provides you with the user's current location, which can provide their current speed, bearing, etc. If you have the snap-to-route enabled, the location object will be updated to give the snapped coordinates.
 
 {{
 <CodeLanguageToggle id="on-progress-changed" />
@@ -56,11 +56,11 @@ There are three classes that contain information on route progress at different 
 <div className="col col--4-ml col--12">
 }}
 
-**Route**: The <span className="color-blue txt-bold">blue line</span> represents a route. A route stretches between the origin and destination. 
+**Route**: The <span className="color-blue txt-bold">blue line</span> is a route. A route stretches between the origin and destination.
 
-**Leg**: The _larger_ circles with a <span className="color-pink txt-bold">pink stroke</span> represent waypoints, or stops, along the route. A leg is the portion of the route between two waypoints.
+**Leg**: The _larger_ circles with a <span className="color-pink txt-bold">pink stroke</span> represent waypoints, or stops, along the route. A leg is the part of the route between two waypoints.
 
-**Step**: The _smaller_ circles with a <span className="color-green txt-bold">green stroke</span> represent maneuvers. A step is the portion of the leg between two maneuvers. 
+**Step**: The _smaller_ circles with a <span className="color-green txt-bold">green stroke</span> represent maneuvers. A step is the part of the leg between two maneuvers.
 
 {{
 </div>
@@ -85,11 +85,11 @@ This class contains all progress information at any given time during a navigati
 | currentStepPoints           | List of `Point`s representing the current step geometry.  |
 | upcomingStepPoints          | List of `Point`s representing the upcoming step geometry.    |
 | voiceInstruction            | The current `VoiceInstruction` for the given segment along the route.    |
-| currentState                | `RouteStateProgress` represents the current state of route initialization and location tracking along the route.    |
+| currentState                | `RouteStateProgress` is the current state of route initialization and location tracking along the route.    |
 
 ### RouteLegProgress
 
-This is a progress object specific to the current leg the user is on. If there is only one leg in the directions route, much of this information will be identical to the parent RouteProgress.
+This is a progress object specific to the current leg the user is on. If there is only one leg in the directions route, much of this information will be the same as the parent RouteProgress.
 
 
 | RouteLegProgress APIs       | Description           |
@@ -102,8 +102,8 @@ This is a progress object specific to the current leg the user is on. If there i
 | distanceRemaining           | The total distance the user has traveled along the current leg.   |
 | previousStep                | Get the previous step the user traversed along, if the user is still on the first step, this will return null. |
 | currentStep                 | Returns the current step the user is traversing along.  Should be used to provide voice / banner instructions. |
-| upComingStep                | Get the next/upcoming step immediately after the current step. If the user is on the last step on the last leg, this will return null since a next step doesn't exist. |
-| currentLegAnnotation        | Provides the current annotation data that the `Location` updates are traveling along.  Note: the `DirectionsRoute` must be requested with `ANNOTATION_DISTANCE` to enable this within the RouteProgress - we now do this by default in `NavigationRoute`. |
+| upComingStep                | Get the next/upcoming step after the current step. If the user is on the last step on the last leg, this will return null since a next step doesn't exist. |
+| currentLegAnnotation        | Provides the current annotation data that the `Location` updates are traveling along.  Note: the `DirectionsRoute` must be requested with `ANNOTATION_DISTANCE` to enable this within the RouteProgress - this by default in `NavigationRoute`. |
 
 ### RouteStepProgress
 
@@ -115,7 +115,7 @@ This is a progress object specific to the current step the user is on.
 | durationRemaining           | The estimated duration remaining till the user reaches the next step maneuver. |
 | fractionTraveled            | A `float` value between 0 and 1 giving the total percentage the user has traveled along the current step. |
 | distanceRemaining           | The total distance the user has traveled along the current step.   |
-| currentIntersection         | An intersection is considered a current intersection once passed through and will remain so until a different intersection is passed through.   |
+| currentIntersection         | An intersection is considered a current intersection once passed through and will stay so until a different intersection is passed through.   |
 | upcomingIntersection        | The intersection being traveled towards on the route. Will be null if the upcoming step is null (last step of the leg). |
 
 
@@ -133,12 +133,12 @@ This listeners is only available if you are adding `NavigationView` to your `Act
 |---|---|
 | `allowRerouteFrom(Point offRoutePoint)` | Will trigger in an off-route scenario: <ul><li>Given the `Point` the user has gone off-route, this listener can return true or false.</li><li>Returning true will allow the SDK to proceed with the re-route process and fetch a new route with this given off-route `Point`.</li><li>Returning false will stop the re-route process and the user will continue without a new route in the direction they are traveling.</li></ul> |
 | `onOffRoute(Point offRoutePoint)` | Will trigger only if `RouteListener#allowRerouteFrom(Point)` returns true. This serves as the official off-route event and will continue the process to fetch a new route with the given off-route `Point`. |
-| `onRerouteAlong(DirectionsRoute directionsRoute)` | Will trigger when a new `DirectionsRoute` has been retrieved post off-route. This is the new route the user will be following until another off route event is triggered. | 
-| `onFailedReroute(String errorMessage)` | Will trigger if the request for a new `DirectionsRoute` fails. Provides the error message from the directions API used to retrieve the `DirectionsRoute`. | 
+| `onRerouteAlong(DirectionsRoute directionsRoute)` | Will trigger when a new `DirectionsRoute` has been retrieved post off-route. This is the new route the user will be following until another off route event is triggered. |
+| `onFailedReroute(String errorMessage)` | Will trigger if the request for a new `DirectionsRoute` fails. Provides the error message from the directions API used to retrieve the `DirectionsRoute`. |
 
 ## More about route progress
 
-Read more about route progress in: 
+Read more about route progress in:
 
-- [Off-route detection](/android/navigation/overview/off-route/): Detect whether or not a user is on the generated route throughout their trip. If a user is off-route, provide additional instruction or generate a new route. 
+- [Off-route detection](/android/navigation/overview/off-route/): Detect whether a user is on the generated route throughout their trip. If a user is off-route, provide additional instruction or generate a new route.
 - [Faster-route detection](/android/navigation/overview/faster-route/): Specify when to check for faster routes and how to determine if a route is faster, then retrieve and initialize faster routes.

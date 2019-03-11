@@ -14,12 +14,12 @@ The standard limit for request are a maximum 60 requests per minute and maximum 
 
 Before using this wrapper:
 
-- We recommend reading over [Mapbox Matrix API documentation](https://www.mapbox.com/api-documentation/navigation/#matrix). The API documentation contains all available parameters including some that are not listed in this guide.
+- Read the [Mapbox Matrix API documentation](https://www.mapbox.com/api-documentation/navigation/#matrix). The API documentation contains all available parameters including some that are not listed in this guide.
 - Make sure you have included the correct permissions inside of your `AndroidManifest.xml` file if you plan to use this API inside of an Android application.
 
 ## API request
 
-Before requesting and receiving the Matrix response, you'll need to use the `MapboxMatrix` builder to set the request parameters. The most basic request passes in a `List` of `Point` objects, sets the directions profile, and provides an access token.
+Before requesting and receiving the Matrix response, you'll need to use the `MapboxMatrix` builder to set the request parameters. The request passes in a `List` of `Point` objects, sets the directions profile, and provides an access token.
 
 {{
 <CodeLanguageToggle id="matrix-request" />

@@ -47,7 +47,7 @@ navigationView.initialize(this, initialPosition)
 
 ### Update the camera position
 
-Driven by `DynamicCamera` engine, the `NavigationCamera` holds all of the logic needed to drive a `MapboxMap` camera that reacts and adjusts to the current progress along a `DirectionsRoute`.
+Driven by `DynamicCamera` engine, the `NavigationCamera` holds all the logic needed to drive a `MapboxMap` camera that reacts and adjusts to the current progress along a `DirectionsRoute`.
 
 To create an instance of `NavigationCamera`, you need a `MapboxMap`, `MapboxNavigation`, and `LocationComponent` object:
 

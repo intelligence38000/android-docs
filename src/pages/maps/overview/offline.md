@@ -1,6 +1,6 @@
 ---
 title: "Offline"
-description: "The Mapbox Maps SDK for Android supports offline maps, which is great for situation when your Android app has no internet connection. Get started with offline docs here."
+description: "The Mapbox Maps SDK for Android supports offline maps, which works for situation when your Android app has no internet connection. Get started with offline docs here."
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
@@ -21,7 +21,7 @@ Often, you might find your user base spends most of its time off the grid. The M
 
 ## Limitations
 
-An app can download multiple regions for offline use, but the total offline download is capped at a maximum tile count “ceiling” across all downloaded regions. The tile ceiling is set to 6,000 tiles by default but can be raised [for paid plans](https://www.mapbox.com/pricing/). Use our [Tile Count Estimator](https://www.mapbox.com/labs/offline-estimator/) to calculate the number of tiles required for your offline use case. Six thousand tiles cover a region roughly the size of Greater London within the M25 at zoom levels 0–15 or the contiguous United States at zoom levels 0–9. The size of these tiles on disk will vary according to the selected style.
+An app can download multiple regions for offline use, but the total offline download is capped at a maximum tile count “ceiling” across all downloaded regions. The SDK sets the tile ceiling to 6,000 tiles by default but can be raised [for paid plans](https://www.mapbox.com/pricing/). Use our [Tile Count Estimator](https://www.mapbox.com/labs/offline-estimator/) to calculate the number of tiles required for your offline use case. Six thousand tiles cover a region roughly the size of Greater London within the `M25` at zoom levels 0–15 or the contiguous United States at zoom levels 0–9. The size of these tiles on disk will vary according to the selected style.
 
 The Maps SDK places no limit on the number of offline regions that may be created. Your Mapbox-powered application will reuse tiles and resources that are required by multiple regions, conserving network traffic and disk space.
 
@@ -31,7 +31,7 @@ Our [terms of service](https://www.mapbox.com/tos/#[YmcMYmns]) do not allow you 
 
 ## Automatic tile updates
 
-The Maps SDK downloads tiles when any connection is available, including over regular mobile data (2G, 3G, 4G, etc.). Because only individual highly-optimized tiles download, there's no risk of the user incurring an unexpected 100MB download just by opening the map in a region that's already downloaded. That is, of course, unless the user is browsing 100MB worth of tiles.
+The Maps SDK downloads tiles when any connection is available, including over regular mobile data (2G, 3G, 4G, etc.). Because only individual highly-optimized tiles download, there's no risk of the user incurring an unexpected 100 MB download by opening the map in a region that's already downloaded. Unless the user is browsing 100 MB worth of tiles.
 
 When the SDK automatically updates offline map tiles, the offline region is not re-download from scratch. The offline tile update process is the same process as with regular map tiles: The map tile's only downloaded if there's a new version of that tile.
 
@@ -42,8 +42,10 @@ Before a region can be used offline, the resources necessary for that region mus
 First, you'll need to get the `offlineManager` instance, define the region to download, and finally create the definition object. It's important to note a few things:
 
 - The offline map style _must_ match the one being used for your `mapView`.
-- The definition needs the device's screen density. It's best to get this from the activities resources.
+- The definition needs the device's screen density and you should get this from the activities resources.
 - The bounds used for the download must not go over the 6,000 tile limit.
+
+<!--copyeditor disable retext-repeated-words-->
 
 {{
 <CodeLanguageToggle id="define-offline-region" />
@@ -89,6 +91,7 @@ val definition = OfflineTilePyramidRegionDefinition(
 />
 }}
 
+<!--copyeditor enable retext-repeated-words-->
 
 ### Metadata
 
@@ -132,7 +135,7 @@ Besides creating the metadata, you can also update the information stored, allow
 
 ## Download a region
 
-Now that the bounds and definition object are created, you can use the offlineManager to create an asynchronous download calling `createOfflineRegion`. You'll need to pass in the definition and metadata objects we created in both the [Defining a region](#defining-a-region) and [metadata](#metadata) sections. This will provide you with two methods, `onCreate` and `onError`. onError occurs if an error starting or while downloading the region occurs. The `onCreate` method provides an `offlineRegion` object which you can use to check the download and even display the progress to your users. If you need to pause a download, you can use the `offlineRegion.setDownloadState()` to handle this.
+Now that the bounds and definition object are created, you can use the offlineManager to create an asynchronous download calling `createOfflineRegion`. You'll need to pass in the definition and metadata objects you created in both the [Defining a region](#defining-a-region) and [metadata](#metadata) sections. This will provide you with two methods, `onCreate` and `onError`. onError occurs if an error starting or while downloading the region occurs. The `onCreate` method provides an `offlineRegion` object which you can use to check the download and even display the progress to your users. If you need to pause a download, you can use the `offlineRegion.setDownloadState()` to handle this.
 
 {{
 <CodeLanguageToggle id="region-download" />
@@ -341,7 +344,7 @@ This document describes how to generate these offline packages and how to make t
   imageComponent={<BookImage size="60" />}
 >
   <p>Applications built with the <a href="https://docs.mapbox.com/android/maps/overview/">Mapbox Maps SDK for Android</a> can download maps of pre-selected regions for use when the device does not have network connectivity. This process is documented in detail in the <a href="https://www.mapbox.com/help/mobile-offline">Offline maps troubleshooting page</a>.</p>
-  <p>This system works well for smaller regions where you don’t have a large number of resources to download. (You can use the <a href="https://www.mapbox.com/help/offline-estimator/">offline tile count estimator</a> to understand the number of tiles in a specific region.) However, because tiles are downloaded individually, this approach can be too slow for larger regions and might result in a poor user experience. In cases like this, offline sideloading can provide a better solution.</p>
+  <p>This system works well for smaller regions where you don’t have a large number of resources to download. (You can use the <a href="https://www.mapbox.com/help/offline-estimator/">offline tile count estimator</a> to understand the number of tiles in a specific region.) But, because tiles are downloaded individually, this approach can be too slow for larger regions and might result in a poor user experience. In cases like this, offline sideloading can provide a better solution.</p>
 </Note>
 }}
 
@@ -355,7 +358,7 @@ Using a command line tool is ideal if you want to build your offline packages se
 
 **Requirements**
 
-- In order to compile the CLI, you need to set up your development environment as described in the [Building and developing from source](https://github.com/mapbox/mapbox-gl-native/blob/master/INSTALL.md) documentation.
+- To compile the CLI, you need to set up your development environment as described in the [Building and developing from source](https://github.com/mapbox/mapbox-gl-native/blob/master/INSTALL.md) documentation.
 
 ##### CLI build instructions
 1. Clone the Maps SDK: `git clone https://github.com/mapbox/mapbox-gl-native.git`
@@ -401,7 +404,7 @@ Flag | Description
 #### Use the macOS graphical interface
 Using the macOS graphical interface is a good approach if you create offline packages relatively infrequently, if you prefer a visual tool to generate your packages, or both.
 
-This method of generating offline packages is only applicable to macOS users. For users with other operating systems, including Linux, we recommend using the CLI as described in the [Use the command line tool ](#use-the-command-line-tool)  section of this documentation.
+This method of generating offline packages is only applicable to macOS users. For users with other operating systems, including Linux, use the CLI as described in the [Use the command line tool ](#use-the-command-line-tool) section of this documentation.
 
 **Requirements:**
 

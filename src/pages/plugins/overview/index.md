@@ -33,16 +33,16 @@ Mapbox Plugins build on top of the [Maps SDK](/android/maps/overview/#install-th
 
 Mapbox Plugins for Android are a collection of libraries that extend our Maps, Navigation, and Java SDKs for Android to help you integrate powerful mapping features into your applications. Use plugins to show a user's location, display traffic or building overlays, or search for places. With these plugins, you can pick the features that your app needs without losing the ability to customize; all bundled into lightweight dependencies.
 
-By using a plugin, you also include the Maps SDK for Android which means that you'll need to setup your project to use the Maps SDK if you haven't already. Head over to the [Maps SDK Getting Started](/android/maps/overview) documentation to learn more. The example below shows how to install the Traffic Plugin, but the process is identical for other plugins.
+By using a plugin, you also include the Maps SDK for Android which means that you'll need to setup your project to use the Maps SDK if you haven't already. Head over to the [Maps SDK Getting Started](/android/maps/overview) documentation to learn more. The example below shows how to install the Traffic Plugin, but the process is the same for other plugins.
 
 ### How plugins work
 
-The plugins we offer are extensive and cover many of our SDKs for Android. They can be used together or separately depending on your needs. A brief summary of each plugin and its purpose is provided below:
+Mapbox plugins cover many of our SDKs for Android. They can be used together or separately depending on your needs. A brief summary of each plugin and its purpose is provided below:
 
 - **Building**: Add 3D buildings to your map style with as few as two lines of code. Take this further by allowing users to toggle the layer visibility.
 - **Traffic**: Place realtime traffic data within your map style as a layer.
-- **Places**: Add UI components such as a Place Picker or Autocomplete search built on top of the [Mapbox Geocoding API](https://www.mapbox.com/api-documentation/search/#geocoding). Each component includes an intentBuilder which starts an activity for results and returns a Carmen Feature.
-- **Offline**: Download map tiles and easily view already-downloaded regions for offline mapping.
+- **Places**: Add UI components such as a Place Picker or Autocomplete search built on top of the [Mapbox Geocoding API](https://www.mapbox.com/api-documentation/search/#geocoding). Each component includes an `intentBuilder` which starts an activity for results and returns a Carmen Feature.
+- **Offline**: Download map tiles and view already-downloaded regions for offline mapping.
 - **Localization**: Change the map's language based on the device's default language settings or other runtime variables.
 - **China**: Provide accurate map tiles and data for Chinese users.
 

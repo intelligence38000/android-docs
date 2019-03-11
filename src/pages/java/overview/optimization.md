@@ -12,7 +12,7 @@ You'll find the wrapper for the Mapbox Optimization API included in the `mapbox-
 
 Before using this wrapper:
 
-- We recommend reading over the [Mapbox Optimization API documentation](https://www.mapbox.com/api-documentation/navigation/#optimization).
+- Read the [Mapbox Optimization API documentation](https://www.mapbox.com/api-documentation/navigation/#optimization).
 - Make sure that you have included the correct permissions inside of your `AndroidManifest.xml` file if you plan to use this API inside of an Android application.
 
 ## Optimization request

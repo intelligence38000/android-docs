@@ -61,7 +61,7 @@ val tilequery = MapboxTilequery.builder()
 ## Query response
 
 You can access the Tilequery API's response inside of the `onResponse` callback.
-The `onResponse` callback is built with [Retrofit](https://square.github.io/retrofit/), just like the Java SDK's other services' callbacks. The response will include a `List<Feature>` if the query you built has any `Feature`s in it. However, there's no guarantee that the response will have any `Feature` objects in it.  
+The `onResponse` callback is built with [Retrofit](https://square.github.io/retrofit/), like the Java SDK's other services' callbacks. The response will include a `List<Feature>` if the query you built has any `Feature`s in it. But, there's no guarantee that the response will have any `Feature` objects in it.  
 
 {{
 <CodeLanguageToggle id="tilequery-response" />
