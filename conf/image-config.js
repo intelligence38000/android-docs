@@ -422,6 +422,14 @@ module.exports = {
     basename: 'example-highlighted-line.png',
     sizes: [{ width: 800 }, { width: 400 }]
   },
+  thumbnailMultipleTextFormats: {
+    basename: 'thumbnail-multiple-text-formats.png',
+    sizes: [{ width: 800 }, { width: 400 }]
+  },
+  exampleMultipleTextFormats: {
+    basename: 'example-multiple-text-formats.png',
+    sizes: [{ width: 1400 }]
+  },
   thumbnailMapillary: {
     basename: 'example-mapillary.png',
     sizes: [{ width: 800 }, { width: 400 }]
