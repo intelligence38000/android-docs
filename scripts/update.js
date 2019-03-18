@@ -62,22 +62,24 @@ function readAndWriteFile(filename) {
   });
 }
 
-/* Update the relevant variable (`config[PRODUCT].variableName`) in src/constants.json */
-readAndWriteFile('src/constants.json');
-
-/* Add a new VERSION to the relevant data file (`config[PRODUCT].versionList`) */
+/* Always add a new VERSION to the relevant data file (`config[PRODUCT].versionList`) */
 readAndWriteFile(config[PRODUCT].versionList);
 
-/* Rewrite relevant HTML redirect(s) (`config[PRODUCT].apiFiles`) using the new VERSION */
-config[PRODUCT].apiFiles.forEach(apiFile => {
-  fs.writeFile(
-    apiFile,
-    `<meta http-equiv="refresh" content="0; url=${VERSION}/" />`,
-    err => {
-      if (err) throw err;
-      console.log(
-        `✅ Rewrote ${apiFile} to redirect to docs for version ${VERSION}`
-      );
-    }
-  );
-});
+/* Only for stable releases (not beta or alpha) */
+if (/[0-9]+\.[0-9]+\.[0-9]+$/.test(VERSION)) {
+  /* Update the relevant variable (`config[PRODUCT].variableName`) in src/constants.json */
+  readAndWriteFile('src/constants.json');
+  /* Rewrite relevant HTML redirect(s) (`config[PRODUCT].apiFiles`) using the new VERSION */
+  config[PRODUCT].apiFiles.forEach(apiFile => {
+    fs.writeFile(
+      apiFile,
+      `<meta http-equiv="refresh" content="0; url=${VERSION}/" />`,
+      err => {
+        if (err) throw err;
+        console.log(
+          `✅ Rewrote ${apiFile} to redirect to docs for version ${VERSION}`
+        );
+      }
+    );
+  });
+}

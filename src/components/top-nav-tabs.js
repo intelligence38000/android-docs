@@ -4,7 +4,10 @@ import TabList from '@mapbox/mr-ui/tab-list';
 import ApiTabDropdown from './api-dropdown';
 import { listTabs } from '../util/list-tabs';
 import listSubfolders from '@mapbox/batfish/data/list-subfolders';
-import { androidApiReferenceLinks } from '../data/android-api-reference-links';
+import {
+  androidApiReferenceLinks,
+  latestStableVersion
+} from '../data/android-api-reference-links';
 import constants from '../constants';
 import _ from 'lodash';
 
@@ -43,11 +46,17 @@ class TopNavTabs extends React.Component {
                 <a
                   href={link.href}
                   className={
-                    index === 0 ? 'link--blue link txt-bold' : 'link link--gray'
+                    link.label === latestStableVersion[props.product]
+                      ? 'link--blue link txt-bold'
+                      : 'link link--gray'
                   }
                 >
                   {link.label}
-                  {index === 0 ? <span> &mdash; latest stable</span> : ''}
+                  {link.label === latestStableVersion[props.product] ? (
+                    <span> &mdash; latest stable</span>
+                  ) : (
+                    ''
+                  )}
                 </a>
               </li>
             );
@@ -66,14 +75,27 @@ class TopNavTabs extends React.Component {
         dropdownItems: androidApiReferenceLinks[props.product].map(
           (link, index) => {
             return (
-              <li className={index === 0 ? 'txt-bold' : 'mt12'} key={index}>
+              <li
+                className={
+                  link.label === latestStableVersion[props.product]
+                    ? 'txt-bold'
+                    : 'mt12'
+                }
+                key={index}
+              >
                 <span className="block">
                   {link.label}{' '}
-                  {index === 0 ? <span> &mdash; latest stable</span> : ''}{' '}
+                  {link.label === latestStableVersion[props.product] ? (
+                    <span> &mdash; latest stable</span>
+                  ) : (
+                    ''
+                  )}{' '}
                 </span>
                 <a
                   className={`${
-                    index === 0 ? 'link--blue' : 'link--gray'
+                    link.label === latestStableVersion[props.product]
+                      ? 'link--blue'
+                      : 'link--gray'
                   } link block`}
                   href={`/android/api/navigation-sdk/navigation/${
                     link.label
@@ -83,7 +105,9 @@ class TopNavTabs extends React.Component {
                 </a>
                 <a
                   className={`${
-                    index === 0 ? 'link--blue' : 'link--gray'
+                    link.label === latestStableVersion[props.product]
+                      ? 'link--blue'
+                      : 'link--gray'
                   } link block`}
                   href={`/android/api/navigation-sdk/navigation-ui/${
                     link.label

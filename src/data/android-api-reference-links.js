@@ -3,11 +3,13 @@ import mapVersionNumbers from './map-version-numbers';
 import navigationVersionNumbers from './navigation-version-numbers';
 import { sortVersions } from '@mapbox/dr-ui/helpers/version-sort';
 
-const mapVersionsOrdered = sortVersions(mapVersionNumbers).versionsToDisplay;
+const mapVersionsOrdered = sortVersions(
+  mapVersionNumbers
+).newestPreRelease.concat(sortVersions(mapVersionNumbers).versionsToDisplay);
 const navigationVersionsOrdered = sortVersions(navigationVersionNumbers)
   .versionsToDisplay;
 
-export const androidApiReferenceLinks = {
+const androidApiReferenceLinks = {
   maps: mapVersionsOrdered.map(number => {
     return {
       label: number,
@@ -140,3 +142,10 @@ export const androidApiReferenceLinks = {
     }
   ]
 };
+
+const latestStableVersion = {
+  maps: sortVersions(mapVersionNumbers).latestStable,
+  navigation: sortVersions(navigationVersionNumbers).latestStable
+};
+
+export { androidApiReferenceLinks, latestStableVersion };
