@@ -1,6 +1,6 @@
 ---
 title: "Events"
-description: "Documentation about map events within the Mapbox Maps SDK for Android. Read about map clicking, flinging, scrolling, and other Mapbox map events."
+description: "Documentation about map events within the Mapbox Maps SDK for Android. Read about map clicking, flinging, moving, and other Mapbox map events."
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
@@ -52,7 +52,7 @@ A common use case for converting the values between `LatLng` and pixel coordinat
 
 ## Camera change events
 
-The map's camera is the view looking down on the maps flat plane. In almost all cases, you'll be interacting with the camera to adjust the map's starting zoom and target position. The user also can manipulate the camera by performing gestures on the map such as pinch-to-zoom, two-finger scroll to tilt, and single finger moves to adjust the position.
+The map's camera is the view looking down on the maps flat plane. In almost all cases, you'll be interacting with the camera to adjust the map's starting zoom and target position. The user also can manipulate the camera by performing gestures on the map such as pinch-to-zoom, two-finger move to tilt, and single finger moves to adjust the position.
 
 The Map SDK provides a handful of camera change listeners which can tell you of any or specific camera movements. The SDK gives different camera listeners to determine if the camera movement was caused by a user gesture, built-in API animations, or a developer-controlled movement. The snippet below shows the various camera listeners available:
 
@@ -121,22 +121,31 @@ mapboxMap.addOnCameraIdleListener { Toast.makeText(this@MainActivity, "onCameraI
 
 
 
-## On fling & on scroll events
+## On fling & on move events
 
-Besides the camera change listeners, the `MapboxMap` object allows you to listen into when the user scrolls or flings the map. A scroll event occurs when the user drags a single finger across the screen causing the camera position to change. A similar action from the user will cause the `onFling` callback to be invoked, but the user performs the gesture with more momentum. Only one of these events will be fired once when the user performs the particular gesture.
+Besides the camera change listeners, the `MapboxMap` object allows you to listen into when the user moves or flings the map. A move event occurs when the user drags a single finger across the screen causing the camera position to change. A similar action from the user will cause the `onFling` callback to be invoked, but the user performs the gesture with more momentum. Only one of these events will be fired once when the user performs the particular gesture.
 
 {{
-<CodeLanguageToggle id="on-fling-and-scroll-events" />
+<CodeLanguageToggle id="on-fling-and-move-events" />
 <ToggleableCodeBlock
 
 java={`
 
-mapboxMap.addOnScrollListener(new MapboxMap.OnScrollListener() {
+mapboxMap.addOnMoveListener(new MapboxMap.OnMoveListener() {
   @Override
-  public void onScroll() {
-    Toast.makeText(MainActivity.this, "onScroll", Toast.LENGTH_LONG).show();
+  public void onMoveBegin(MoveGestureDetector detector) {
+    // user started moving the map
+  }
+  @Override
+  public void onMove(MoveGestureDetector detector) {
+    // user is moving the map
+  }
+  @Override
+  public void onMoveEnd(MoveGestureDetector detector) {
+    // user stopped moving the map
   }
 });
+
 
 mapboxMap.addOnFlingListener(new MapboxMap.OnFlingListener() {
   @Override
@@ -148,11 +157,17 @@ mapboxMap.addOnFlingListener(new MapboxMap.OnFlingListener() {
 
 kotlin={`
 
-mapboxMap.addOnScrollListener {
-
-Toast.makeText(this@MainActivity, "onScroll", Toast.LENGTH_LONG).show()
-
-}
+mapboxMap.addOnMoveListener(object : MapboxMap.OnMoveListener {
+  override fun onMoveBegin(detector: MoveGestureDetector) {
+    // user started moving the map
+  }
+  override fun onMove(detector: MoveGestureDetector) {
+    // user is moving the map
+  }
+  override fun onMoveEnd(detector: MoveGestureDetector) {
+    // user stopped moving the map
+  }
+})
 
 mapboxMap.addOnFlingListener {
 
