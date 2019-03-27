@@ -32,13 +32,15 @@ The table below lists the languages that are supported for user interface elemen
 | Czech      | ✅             | -
 | Danish     | ✅             | ✅
 | English    | ✅             | ✅
-| Esperanto  | —              | ✅
+| Esperanto  | —              | ✅ | Depends on the device; may require third-party text-to-speech
 | Finnish    | —              | ✅ | Depends on the device; may require third-party text-to-speech
 | French     | ✅             | ✅
 | German     | ✅             | ✅
 | Hebrew     | ✅             | ✅ | Depends on the device; may require third-party text-to-speech
+| Hungarian  | —              | ✅ | Depends on the device; may require third-party text-to-speech
 | Indonesian | —              | ✅ | Depends on the device; may require third-party text-to-speech
 | Italian    | ✅             | ✅
+| Japanese   | —              | ✅
 | Korean     | ✅             | ✅
 | Norwegian  | —              | ✅
 | Polish     | —              | ✅
