@@ -26,6 +26,7 @@ The table below lists the languages that are supported for user interface elemen
 
 | Language   | User interface | Spoken instructions | Remarks
 |------------|--------------|-----------------------------|--------
+| Arabic     | —              | ✅ | Depends on the device; may require third-party text-to-speech
 | Bengali    | ✅             | —
 | Burmese    | ✅             | ✅ | Depends on the device; may require third-party text-to-speech
 | Chinese    | -              | ✅ <br/>Mandarin | Depends on the device; may require third-party text-to-speech
@@ -47,6 +48,7 @@ The table below lists the languages that are supported for user interface elemen
 | Portuguese | ✅             | ✅
 | Romanian   | —              | ✅
 | Russian    | ✅             | ✅
+| Slovenian  | —              | ✅ | Depends on the device; may require third-party text-to-speech
 | Spanish    | ✅             | ✅
 | Swedish    | ✅             | ✅
 | Turkish    | —              | ✅
