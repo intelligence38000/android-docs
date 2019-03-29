@@ -23,9 +23,120 @@ Showing the user's current location as a map annotation is a popular and often c
 
 You'll need to request the Android-system location permission before using the `LocationComponent`. If you build your Android project targeting API level 23 or higher your application will need to request permissions during runtime. Handling this directly in your activity produces boilerplate code and can often be hard to manage. [Read more about using the Mapbox Core Library for Android's `PermissionsManager`](/android/core/overview/#permissionsmanager) class.
 
+## Customization
+
+The `LocationComponent` can be customized in many different ways. You can set the image drawables, opacities, colors, and more. [See a full list of XML attributes for styling the `LocationComponent` via XML](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/res-public/values/public.xml#L109-L154). [The `LocationComponentOptions` class](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/java/com/mapbox/mapboxsdk/location/LocationComponentOptions.java) can be used if you prefer to customize the `LocationComponent` programatically. Create a [LocationComponentOptions](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/java/com/mapbox/mapboxsdk/location/LocationComponentOptions.java) object and then use whichever `LocationComponentOptions.builder()`'s various methods you'd like. Then use the built `LocationComponentOptions` object as parameter in `LocationComponentActivationOptions#locationComponentOptions()` or by passing it through as a parameter of the `LocationComponent#applyStyle()` method at a later time.
+
+{{
+<CodeLanguageToggle id="location-component-customization" />
+<ToggleableCodeBlock
+ java={`
+LocationComponentOptions locationComponentOptions = LocationComponentOptions.builder(this)
+	.layerBelow(layerId)
+	.foregroundDrawable(R.drawable.drawable_name)
+	.bearingTintColor(int color)
+	.accuracyAlpha(float)
+	.build();
+
+LocationComponentActivationOptions locationComponentActivationOptions = LocationComponentActivationOptions
+	.builder(this, style)
+	.locationComponentOptions(locationComponentOptions)
+	.build();
+
+locationComponent = mapboxMap.getLocationComponent();
+locationComponent.activateLocationComponent(locationComponentActivationOptions);
+`}
+ kotlin={`
+val locationComponentOptions = LocationComponentOptions.builder(this)
+	.layerBelow(layerId)
+	.foregroundDrawable(R.drawable.drawable_name)
+	.bearingTintColor(int color)
+	.accuracyAlpha(float)
+	.build()
+
+val locationComponentActivationOptions = LocationComponentActivationOptions
+	.builder(this, style)
+	.locationComponentOptions(locationComponentOptions)
+	.build()
+
+locationComponent = mapboxMap.locationComponent
+locationComponent.activateLocationComponent(locationComponentActivationOptions)
+`}
+ />
+}}
+
+{{
+  <Floater
+    url="https://github.com/mapbox/mapbox-android-demo/blob/master/MapboxAndroidDemo/src/main/java/com/mapbox/mapboxandroiddemo/examples/location/LocationComponentOptionsActivity.java"
+    title="Customizing device location"
+    category="example"
+    text="Use LocationComponent options to style the device location icon."
+    clear={true}
+  />
+}}
+
+### Active styling options
+
+{{
+<AppropriateImage imageId="locationComponentActive" className="block mx-auto pt18 wmax300" />
+}}
+
+| XML Option | Explanation |
+| --- | --- |
+| mapbox_foregroundDrawable | Drawable image which would replace the dark blue circle |
+| mapbox_foregroundTintColor | The dark blue circle |
+| mapbox_backgroundDrawable | Drawable image which would replace the white circle  |
+| mapbox_backgroundTintColor | White circle |
+| mapbox_bearingDrawable | Drawable image which would replace the blue arrow point |
+| mapbox_bearingTintColor | Blue arrow point |
+| mapbox_navigationDrawable | Drawable image used for the navigation state icon  |
+| mapbox_accuracyAlpha | The larger light blue circle surrounding the device location icon   |
+| mapbox_accuracyColor | Color of the larger light blue circle surrounding the device location icon   |
+| mapbox_elevation | The amount of space between the map and the device location icon. The elevation will adjust the size of the shadow as seen underneath the white circle   |
+| mapbox_compassAnimationEnabled | Enable or disable smooth animation of compass values for the blue arrow point |
+| mapbox_accuracyAnimationEnabled | Enable or disable smooth animation of the larger light blue accuracy circle surrounding the device location icon |
+
+### Stale styling options
+
+{{
+<AppropriateImage imageId="locationComponentStale" className="block mx-auto pt18 wmax300" />
+}}
+
+| XML Option | Explanation |
+| --- | --- |
+| mapbox_foregroundDrawableStale | Drawable image which would replace the grey circle |
+| mapbox_foregroundStaleTintColor | Grey circle |
+| mapbox_backgroundDrawableStale | White circle underneath the grey circle |
+| mapbox_backgroundStaleTintColor | Drawable image which would replace the white circle |
+
 ## Activating
 
-`MapboxMap#getLocationComponent()` fetches the component and `LocationComponent#activateLocationComponent()` activates it. Both need to be called before any other `LocationComponent` adjustments, such as its visibility, are performed.
+`MapboxMap#getLocationComponent()` fetches the component and `LocationComponent#activateLocationComponent()` activates it. 
+
+The `activateLocationComponent()` method requires a built `LocationComponentActivationOptions` class. The `LocationComponentActivationOptions` class offers a convenient way to set activation options such as whether to use the default `LocationEngine` or [a built `LocationComponentOptions` object](/maps/overview/location-component/#customization).
+
+
+Create a `LocationComponentActivationOptions` class with the builder pattern that is provided to you via the Maps SDK.
+
+{{
+<CodeLanguageToggle id="location-component-activation-option-building" />
+<ToggleableCodeBlock
+ java={`
+LocationComponentActivationOptions locationComponentActivationOptions = LocationComponentActivationOptions
+  .builder(this, style)
+  .locationComponentOptions(locationComponentOptions)
+  .useDefaultLocationEngine(true)
+  .build();
+`}
+ kotlin={`
+ val locationComponentActivationOptions = LocationComponentActivationOptions
+  .builder(this, style)
+  .locationComponentOptions(locationComponentOptions)
+  .useDefaultLocationEngine(true)
+  .build()
+`}
+ />
+}}
 
 Retrieve and activate the `LocationComponent` once the user has granted location permission **and** the map has fully loaded.
 
@@ -55,8 +166,8 @@ private void enableLocationComponent() {
 		// Get an instance of the component
 		LocationComponent locationComponent = mapboxMap.getLocationComponent();
 
-		// Activate with options
-		locationComponent.activateLocationComponent(this, mapboxMap.getStyle());
+		// Activate with a built LocationComponentActivationOptions object
+		locationComponent.activateLocationComponent(LocationComponentActivationOptions.builder(this, style).build());
 
 		// Enable to make component visible
 		locationComponent.setLocationComponentEnabled(true);
@@ -97,9 +208,9 @@ private fun enableLocationComponent() {
 		// Get an instance of the component
 		val locationComponent = mapboxMap?.locationComponent
 
-		// Activate with options
-		locationComponent?.activateLocationComponent(this, mapboxMap?.style!!)
-
+		// Activate with a built LocationComponentActivationOptions object
+		locationComponent?.activateLocationComponent(LocationComponentActivationOptions.builder(this, style).build())
+		
 		// Enable to make component visible
 		locationComponent?.isLocationComponentEnabled = true
 
@@ -123,7 +234,7 @@ private fun enableLocationComponent() {
 
 {{
   <Floater
-    url="https://github.com/mapbox/mapbox-android-demo/blob/master/MapboxAndroidDemo/src/main/java/com/mapbox/mapboxandroiddemo/examples/location/LocationComponentActivity.java"
+    url="https://docs.mapbox.com/android/maps/examples/show-a-users-location/"
     title="Showing device location"
     category="example"
     text="Add the device's location to the map."
@@ -145,48 +256,6 @@ locationComponent.setLocationComponentEnabled(true);
 locationComponent.isLocationComponentEnabled = true
 `}
  />
-}}
-
-## Customization
-
-The `LocationComponent` can be customized in many different ways. You can set the image drawables, opacities, colors, and more. [See a full list of XML attributes for styling the `LocationComponent` via XML](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/res-public/values/public.xml#L109-L154). [The `LocationComponentOptions` class](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/java/com/mapbox/mapboxsdk/location/LocationComponentOptions.java) can be used if you prefer to customize the `LocationComponent` programmatically. Create a [LocationComponentOptions](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/MapboxGLAndroidSDK/src/main/java/com/mapbox/mapboxsdk/location/LocationComponentOptions.java) object and then use whichever `LocationComponentOptions.builder()`'s various methods you'd like. Then use the built `LocationComponentOptions` object either while activating the component or by passing it through as a parameter of the `LocationComponent#applyStyle()` method at a later time.
-
-{{
-<CodeLanguageToggle id="location-component-customization" />
-<ToggleableCodeBlock
- java={`
-LocationComponentOptions options = LocationComponentOptions.builder(this)
-	.layerBelow(layerId)
-	.foregroundDrawable(R.drawable.drawable_name)
-	.bearingTintColor(int color)
-	.accuracyAlpha(float)
-	.build();
-
-locationComponent = mapboxMap.getLocationComponent();
-locationComponent.activateLocationComponent(this, mapStyle, options);
-`}
- kotlin={`
-val options = LocationComponentOptions.builder(this)
-	.layerBelow(layerId)
-	.foregroundDrawable(R.drawable.drawable_name)
-	.bearingTintColor(int color)
-	.accuracyAlpha(float)
-	.build()
-
-locationComponent = mapboxMap.locationComponent
-locationComponent?.activateLocationComponent(this, mapStyle, options)
-`}
- />
-}}
-
-{{
-  <Floater
-    url="https://github.com/mapbox/mapbox-android-demo/blob/master/MapboxAndroidDemo/src/main/java/com/mapbox/mapboxandroiddemo/examples/location/LocationComponentOptionsActivity.java"
-    title="Customizing device location"
-    category="example"
-    text="Use LocationComponent options to style the device location icon."
-    clear={true}
-  />
 }}
 
 ### Active styling options:
