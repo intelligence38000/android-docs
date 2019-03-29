@@ -5,8 +5,9 @@ thumbnail: thumbnailStyleCirclesCategorically
 topic: Dynamic styling
 prependJs:
   - "import AppropriateImage from '../../../components/appropriate-image'"
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
-  - "import { rawJavaCode } from '../../../example-code/StyleCirclesCategoricallyActivity.js'"
+  - "import { rawJavaCode, rawKotlinCode } from '../../../example-code/StyleCirclesCategoricallyActivity.js'"
 ---
 
 {{
@@ -16,7 +17,9 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
+  <CodeLanguageToggle id="style-circles-categorically-example" />
   <ToggleableCodeBlock 
     java={rawJavaCode}
+    kotlin={rawKotlinCode}
   />
 }}

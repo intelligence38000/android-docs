@@ -2,7 +2,7 @@
 title: Show building outline
 description: Query the building layer and show a building's outline.
 thumbnail: thumbnailBuildingOutline
-topic: User interaction
+topic: Querying the map
 prependJs:
   - "import { VideoWithDeviceFrame } from '../../../components/video-with-device-frame'"
   - "import videoBuildingOutline from '../../../video/example-building-outline.mp4'"

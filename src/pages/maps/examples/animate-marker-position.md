@@ -2,7 +2,7 @@
 title: Animate marker position
 description: Animate the marker to a new position on the map.
 thumbnail: thumbnailAnimateMarkerPosition
-topic: Add markers and infoWindows to the map
+topic: Dynamic styling
 prependJs:
   - "import { VideoWithDeviceFrame } from '../../../components/video-with-device-frame'"
   - "import videoAnimateMarkerPosition from '../../../video/example-animatemarkerposition.mp4'"

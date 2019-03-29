@@ -2,7 +2,7 @@
 title: Add user's location to a map fragment
 description: Use the LocationComponent to show a user's location in a map fragment.
 thumbnail: thumbnailLocationComponentFragment
-topic: Getting started
+topic: Device location
 prependJs:
  - "import { VideoWithDeviceFrame } from '../../../components/video-with-device-frame'"
  - "import videoShowAUsersLocationInFragment from '../../../video/show-user-location-in-fragment.mp4'"

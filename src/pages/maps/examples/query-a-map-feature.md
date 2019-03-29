@@ -2,7 +2,7 @@
 title: Query a map feature
 description: Click the map to add a marker at the location and display the maps property information for this feature.
 thumbnail: thumbnailQueryAMapFeature
-topic: User interaction
+topic: Querying the map
 prependJs:
   - "import { VideoWithDeviceFrame } from '../../../components/video-with-device-frame'"
   - "import videoQueryAMapFeature from '../../../video/example-queryamapfeature.mp4'"

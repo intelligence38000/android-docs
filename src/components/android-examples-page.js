@@ -35,19 +35,35 @@ class AndroidExamplesPage extends React.PureComponent {
           return example.topic === topic.title;
         })
         .map((example, index) => {
+          let exampleImage = <div className="bg-blue-faint w-full h120" />;
+          if (/http/.test(example.image)) {
+            exampleImage = (
+              <div
+                className="w-full h120"
+                style={{
+                  backgroundImage: `url(${example.image})`,
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover'
+                }}
+              />
+            );
+          } else if (example.image !== null) {
+            exampleImage = (
+              <AppropriateImage
+                imageId={example.image}
+                style={{ borderRadius: '4px' }}
+                background={true}
+              />
+            );
+          }
           return (
             <Card
               key={index}
               title={example.title}
               description={example.description}
               path={example.path}
-              thumbnail={
-                <AppropriateImage
-                  imageId={example.image}
-                  style={{ borderRadius: '4px' }}
-                  background={true}
-                />
-              }
+              thumbnail={exampleImage}
             />
           );
         });

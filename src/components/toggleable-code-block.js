@@ -42,7 +42,6 @@ export default class OtherCodeBlock extends React.Component {
           style={{ background: '#273d56' }}
           code={code}
           highlightedCode={highlightCodeSnippet(code)}
-          maxHeight={480}
           highlightThemeCss={highlightTheme}
           onCopy={
             (/*value*/) => {

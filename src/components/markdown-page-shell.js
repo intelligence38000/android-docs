@@ -78,7 +78,8 @@ MarkdownPageshell.propTypes = {
       'Add features to a map',
       'Set a map style',
       'Image generation',
-      'Offline'
+      'Offline',
+      'Notifications'
     ]),
     headings: PropTypes.arrayOf(
       PropTypes.shape({

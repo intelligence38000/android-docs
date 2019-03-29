@@ -2,7 +2,7 @@
 title: SymbolLayer info window
 description: Use SymbolLayer and icons to show data in a BubbleLayout "info window".
 thumbnail: thumbnailSymbolLayerInfoWindow
-topic: Add markers and infoWindows to the map
+topic: Dynamic styling
 prependJs:
   - "import { VideoWithDeviceFrame } from '../../../components/video-with-device-frame'"
   - "import videoSymbolLayerInfoWindow from '../../../video/example-symbol-layer-info-window.mp4'"

@@ -153,59 +153,63 @@ The examples section contains **code examples**. Examples are updated by bumping
 1. Make and commit your changes in the proper demo repo.
 2. Move into this repo (`cd android-docs`) and `git submodule update --remote examples/maps` (or `examples/navigation`) to update the submodule. This should typically point to the latest commit in master.
 3. `git add examples/maps` (or `examples/navigation`) to stage the submodule update.
-4. `git commit -m "bumped examples submodule for <some reason>"``
+4. `git commit -m "bumped examples submodule for <some reason>"`
 
 After commiting the bumped submodule(s), any updates to code snippets for _existing examples_ will automatically update on the related example page. For any _new examples_ that were recently added to the demo app and do not already have a dedicated example page in this repo, you will need to follow the steps below to create a new example page.
 
 #### Add a new example
 
-Each example requires three pieces: (1) a code snippet, (2) visual assets, and (3) a Markdown file.
+Code for Android examples comes from public repos that contain completely functional and tested Android apps. There are currently two repos with Android test apps: `/mapbox-android-demo` for the **Maps SDK, Java SDK, Plugins, and Core** and `/mapbox-navigation-android` for the **Navigation SDK**. 
 
-#### Step one: Code snippet
+Putting an example up on a web page requires three pieces: (1) a code snippet, (2) a Markdown file, and (3) a visual asset. The `add-examples.js` script will create all but the visual asset for you. 
 
-Code for Android examples comes from public repos that contain completely functional and tested Android apps. There are currently two repos with Android test apps: `/mapbox-android-demo` for the **Maps SDK, Java SDK, Plugins, and Core** and `/mapbox-navigation-android` for the **Navigation SDK**.
+##### Run the `add-examples` script
 
-1. Create a new example.
-2. Open a pull request. A Mapbox team member will pull that code into this repo when the pull request is approved.
-3. Create a new JavaScript file in src/example-code/ following the instructions in either the `boilerplate.js` file.
+_Note: Before running this script, make sure you've updated the submodule using [the steps above](#update-examples)._
 
-#### Step two: Visual assets
+Pass one or three arguments when you run this script (`node scripts/add-examples.js {product} {folder} {activity name}`). If no `folder` and `activity name` are provided, the script will run on all activities for that product that exist in the submodule, but are not yet used in any example pages.
 
-Each example requires two visual assets: (1) a `png` thumbnail and (2) a full-size preview of the final result, which can be either a `png` or an `mp4`.
+- **required:** the `product` (`maps` or `navigation`)
+- **optional, but if one is used, both must be used**:
+    - the name of the `folder` in the demo app (a string)
+    - the `activity` name (SomethingActivity.java)
 
-1. Create visual assets using a physical Android device or an emulated device.
-2. Add any pngs to `src/img/src/`.
-3. Add any mp4s to `src/video/`.
-4. Add a new entry for pngs to the image config ([read more about the image config](#images)).
-5. Run `bin/appropriate-images.js --all`.
+Here are some examples:
 
-#### Step three: Markdown file
+- To run for all maps activities: `node scripts/add-examples.js maps`
+- To run for one maps activity: `node scripts/add-examples.js maps dds ChoroplethJsonVectorMixActivity.java`
 
-Adding a new Markdown file to the `src/pages/maps/examples/` folder will add both a new thumbnail on docs.mapbox.com/android/maps/examples/ and create a new individual example pages like docs.mapbox.com/android/maps/examples/*.
+##### Update the Markdown file
 
-1. Create a new Markdown file in `src/pages/maps/examples/` for Maps SDK examples, `src/pages/navigation/examples/` for Navigation SDK examples, etc.
-2. Add front matter.
-    - `title`: Name of example in title case.
-    - `description`: One to two sentence description of the example. Must end in a period.
-    - `topic`: Choose from:
-        `Getting started`,
-        `Dynamic styling`,
-        `Data visualization`,
-        `3D`,
-        `Add markers and infoWindows to the map`,
-        `User interaction`,
-        `Add features to a map`,
-        `Set a map style`,
-        `Image generation`,
-        `Offline`
-    - `thumbnail`: The image ID from the image config file.
-    - `prependJs`:
-      - `AppropriateImage` or `VideoWithDeviceFrame` depending on if your full-size preview is a `png` or an `mp4`.
-      - `ToggleableCodeBlock` component: Import the component to display your code.
-      - Example code: Import the raw and highlighted code pulled in the file you created in `src/example-code/`.
-3. The content in the Markdown file (outside of the front matter) will be displayed as text on the individual example page.
-4. Add your visual preview using JSX inside `{{ }}` to add an `AppropriateImage` or `VideoWithDeviceFrame`.
-5. Add any number of `ToggleableCodeBlock` components and set the `codeSnippet` prop to your imported code.
+Running the script will result in one or more new Markdown files in the `src/pages/{product}/examples/` folder. This is used to create a new individual example pages at `docs.mapbox.com/android/{product}/examples/{file-name}`.
+
+Ensure that every new Markdown has the following front matter fields (where possible, the script will fill in front matter fields):
+- `title`: Name of example in title case. This comes from an XML file in the `/src/main/res/values/` folder for the relevant demo app.
+- `description`: One to two sentence description of the example. Must end in a period. This comes from an XML file in the `/src/main/res/values/` folder for the relevant demo app.
+- `topic`: Choose from:
+    `Getting started`, 
+    `Dynamic styling`, 
+    `Data visualization`, 
+    `3D`, 
+    `Add markers and infoWindows to the map`, 
+    `User interaction`, 
+    `Add features to a map`, 
+    `Set a map style`, 
+    `Image generation`, 
+    `Offline`
+- `thumbnail`: This can either be a url to the thumbnail used in the demo app or an image ID from the image config file.
+- `prependJs`:
+  - **`VideoWithDeviceFrame` or `AppropriateImage`** depending on if your full-size preview is a `png` or an `mp4`. Videos are always preferred so the `add-examples` script imports `VideoWithDeviceFrame` by default. 
+    - **Video file**: If you are using a video, you will also need to import the video. By default, the `add-examples` script will add an import line for a video file that is (1) in the `src/videos/` folder and (2) has a name that follows this pattern: `example-{activity-name-with-dashes}.mp4`. _Note: the example pages will not load until you add the videos to the src/videos/ folder &mdash; there will be an error that it can't find the mp4 file you're trying to import._
+  - **`ToggleableCodeBlock` component**: Import the component to display your code.
+    - **Code toggle**: If the example has both a Kotlin and Java code snippet, you'll also need to import `CodeLanguageToggle`.
+  - **Example code**: Import the raw and highlighted code pulled in the file you created in `src/example-code/`. This is done automatically when using the `add-examples` script.
+
+The content in the Markdown file (outside of the front matter) will be displayed as text on the individual example page.
+
+Add your visual preview using JSX inside `{{ }}` to add an `AppropriateImage` or `VideoWithDeviceFrame`. A `VideoWithDeviceFrame` component with the default file name described above is added by the `add-examples` script.
+
+Add any number of `ToggleableCodeBlock` components and set the `java` and `kotlin` props to your imported code.
 
 **Example**:
 
@@ -235,8 +239,6 @@ prependJs:
   />
 }}
 ```
-
-_Note: There are not currently any examples written in Kotlin, but they could be added by importing `rawKotlinCode`, adding a `kotlin` prop to the `ToggleableCodeBlock`, and importing and adding a `CodeLanguageToggle`._
 
 
 ### Help

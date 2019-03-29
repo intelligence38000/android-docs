@@ -2,7 +2,7 @@
 title: Select a building
 description: Use the query feature to select a building, get its geometry and draw a polygon highlighting it.
 thumbnail: thumbnailSelectABuilding
-topic: User interaction
+topic: Querying the map
 prependJs:
   - "import { VideoWithDeviceFrame } from '../../../components/video-with-device-frame'"
   - "import videoSelectABuilding from '../../../video/example-selectabuilding.mp4'"

@@ -140,6 +140,16 @@ module.exports = {
     basename: 'thumbnail-count-features-in-a-selected-area.gif',
     sizes: [{ width: 800 }, { width: 400 }]
   },
+  // Click to add image bounds
+  thumbnailClickToAddImage: {
+    basename: 'thumbnail-click-to-add-image.png',
+    sizes: [{ width: 800 }, { width: 400 }]
+  },
+  // LocationComponentOptions
+  thumbnailLocationComponentOptions: {
+    basename: 'thumbnail-location-component-options.png',
+    sizes: [{ width: 800 }, { width: 400 }]
+  },
   // Create a line layer
   exampleCreateALineLayer: {
     basename: 'example-create-a-line-layer.png',
@@ -608,6 +618,11 @@ module.exports = {
   },
   thumbnailPlacePicker: {
     basename: 'plugins-place-picker.png',
+    sizes: [{ width: 800 }, { width: 400 }]
+  },
+  // Markerview Plugin
+  thumbnailMarkerviewPlugin: {
+    basename: 'thumbnail-plugins-markerview.png',
     sizes: [{ width: 800 }, { width: 400 }]
   },
 

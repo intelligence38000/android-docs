@@ -6,8 +6,9 @@ thumbnail: thumbnailCreateASimpleMapView
 prependJs:
   - "import { VideoWithDeviceFrame } from '../../../components/video-with-device-frame'"
   - "import videoSimpleMapViewVideo from '../../../video/example-simple-mapview.mp4'"
+  - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
-  - "import { rawJavaCode } from '../../../example-code/SimpleMapViewActivity.js'"
+  - "import { rawJavaCode, rawKotlinCode } from '../../../example-code/SimpleMapViewActivity.js'"
 ---
 
 {{
@@ -21,7 +22,9 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
+  <CodeLanguageToggle id="simple-map-view-example" />
   <ToggleableCodeBlock 
     java={rawJavaCode}
+    kotlin={rawKotlinCode}
   />
 }}

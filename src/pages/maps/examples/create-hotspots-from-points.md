@@ -2,7 +2,7 @@
 title: Create hotspots from points
 description: Use the Maps SDK to visualize point data as hotspots.
 thumbnail: thumbnailCreateHotspotsFromPoints
-topic: Add markers and infoWindows to the map
+topic: Data visualization
 prependJs:
   - "import { VideoWithDeviceFrame } from '../../../components/video-with-device-frame'"
   - "import videoCreateHotspotsFromPoints from '../../../video/example-createhotspotsfrompoints.mp4'"

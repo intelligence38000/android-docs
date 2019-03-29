@@ -2,7 +2,7 @@
 title: Marker symbol layer
 description: Display markers on the map by adding a SymbolLayer. Query the map and animate the icon size if the symbol is clicked on.
 thumbnail: thumbnailMarkerSymbolLayer
-topic: User interaction
+topic: Querying the map
 prependJs:
   - "import { VideoWithDeviceFrame } from '../../../components/video-with-device-frame'"
   - "import videoSymbolLayerMarkerIcon from '../../../video/example-marker-symbol-layer.mp4'"
