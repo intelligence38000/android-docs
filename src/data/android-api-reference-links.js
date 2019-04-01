@@ -85,7 +85,7 @@ const androidApiReferenceLinks = {
       id: 'china',
       href: `/android/api/plugins/china/${
         constants.CHINA_PLUGIN_VERSION
-      }/index.html`
+      }/china-release/index.html`
     }
   ],
   java: [
