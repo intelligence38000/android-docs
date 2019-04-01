@@ -111,9 +111,9 @@ locationComponent.activateLocationComponent(locationComponentActivationOptions)
 
 ## Activating
 
-`MapboxMap#getLocationComponent()` fetches the component and `LocationComponent#activateLocationComponent()` activates it. 
+`MapboxMap#getLocationComponent()` fetches the component and `LocationComponent#activateLocationComponent()` activates it.
 
-The `activateLocationComponent()` method requires a built `LocationComponentActivationOptions` class. The `LocationComponentActivationOptions` class offers a convenient way to set activation options such as whether to use the default `LocationEngine` or [a built `LocationComponentOptions` object](/maps/overview/location-component/#customization).
+The `activateLocationComponent()` method requires a built `LocationComponentActivationOptions` class. The `LocationComponentActivationOptions` class offers a convenient way to set activation options such as whether to use the default `LocationEngine` or [a built `LocationComponentOptions` object](/android/maps/overview/location-component/#customization).
 
 
 Create a `LocationComponentActivationOptions` class with the builder pattern that is provided to you via the Maps SDK.
@@ -210,7 +210,7 @@ private fun enableLocationComponent() {
 
 		// Activate with a built LocationComponentActivationOptions object
 		locationComponent?.activateLocationComponent(LocationComponentActivationOptions.builder(this, style).build())
-		
+
 		// Enable to make component visible
 		locationComponent?.isLocationComponentEnabled = true
 

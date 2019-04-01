@@ -4,12 +4,12 @@
     ["remark-frontmatter", ["yaml"]],
     ["@mapbox/remark-lint-mapbox/frontmatter", [2]],
     ["@mapbox/remark-lint-mapbox/link-checker",
-      {
+      [2,{
         "pages": "src/pages/",
         "siteBasePath": "android",
         "constants": "src/constants.json",
         "siteOrigin": "https://docs.mapbox.com"
-      }, [2]
+      }]
     ]
   ]
 }
