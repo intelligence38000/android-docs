@@ -510,7 +510,7 @@ module.exports = {
     sizes: [{ width: 800 }, { width: 400 }]
   },
   //
-  // JAVA SDK FOR ANDROID
+  // JAVA SDK
   //
   // ------------------------
   // OVERVIEW GUIDES

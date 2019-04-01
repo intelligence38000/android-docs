@@ -23,7 +23,7 @@ prependJs:
       ]}
       title="Android Plugins"
       ghLink="https://github.com/mapbox/mapbox-plugins-android"
-      image={<AppropriateImage imageId="overviewPlugins" alt="Mobile devices displaying applications using the Mapbox Java SDK for Android." />}
+      image={<AppropriateImage imageId="overviewPlugins" alt="Mobile devices displaying applications using the Mapbox Java SDK." />}
     />
 }}
 

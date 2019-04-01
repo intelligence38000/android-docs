@@ -21,11 +21,11 @@ prependJs:
         "Snap traces to road network",
         "Geospatial analysis"
       ]}
-      title="Java SDK for Android"
+      title="Java SDK"
       version={constants.JAVA_SDK_VERSION}
       changelogLink="https://github.com/mapbox/mapbox-java/blob/master/CHANGELOG.md"
       ghLink="https://github.com/mapbox/mapbox-java"
-      image={<AppropriateImage imageId="overviewServicesSdk" alt="Mobile devices displaying applications using the Mapbox Java SDK for Android." />}
+      image={<AppropriateImage imageId="overviewServicesSdk" alt="Mobile devices displaying applications using the Mapbox Java SDK." />}
     />
 }}
 
