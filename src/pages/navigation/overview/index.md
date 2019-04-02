@@ -108,9 +108,11 @@ If you're using the Navigation UI SDK, you **don't** have to declare the Mapbox 
 5. Click the `Sync Project with Gradle Files` near the toolbar in Studio.
 
 ```groovy
-repositories {
-  mavenCentral()
-  maven { url 'https://mapbox.bintray.com/mapbox' }
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://mapbox.bintray.com/mapbox' }
+    }
 }
 
 dependencies {
