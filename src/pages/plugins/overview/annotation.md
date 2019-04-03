@@ -28,6 +28,17 @@ If your application is close or exceeds the 65k method count limit, you can miti
 5. Click the **Sync Project with Gradle Files** near the toolbar in Studio.
 
 ```groovy
+android {
+
+	// The Annotation Plugin requires Java 8 usage
+	compileOptions {
+	    sourceCompatibility JavaVersion.VERSION_1_8
+	    targetCompatibility JavaVersion.VERSION_1_8
+	}
+  
+}
+
+
 repositories {
   mavenCentral()
 }
