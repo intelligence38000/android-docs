@@ -13,7 +13,7 @@ The snapshot functionality of the Mapbox Maps SDK for Android generates a static
 - a home screen
 - a home screen widget
 - a notification
-- a list/`RecyclerView`
+- a `ListView`/`RecyclerView`
 - wherever else a `Bitmap` can be placed
 
 A Mapbox map doesn't need to be displayed to use the snapshot functionality. `MapSnapshotter` can be invoked anywhere in the app.
@@ -60,6 +60,8 @@ Here are the various settings that are available within the `MapSnapshotter.Opti
 
 | Method | Description |
 | --- | --- |
+| `withApiBaseUrl` | Specifies the URL used for the Map API endpoint. It's very rare that you'll need to change the API base URL.
+| `withLocalIdeographFontFamily` | Set the font family for generating glyphs locally for ideographs in the the "CJK Unified Ideographs" and "Hangul Syllables" ranges.
 | `withCameraPosition` | The camera position to use for the snapshot image. This position is overriden if `withRegion` is also used.
 | `withLogo ` | A boolean flag to determine whether the Mapbox logo is included in the snapshot image.
 | `withPixelRatio ` | The pixel ratio to use. The default is 1.
