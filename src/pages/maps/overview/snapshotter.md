@@ -60,7 +60,7 @@ Here are the various settings that are available within the `MapSnapshotter.Opti
 
 | Method | Description |
 | --- | --- |
-| `withApiBaseUrl` | Specifies the URL used for the Map API endpoint. It's very rare that you'll need to change the API base URL.
+| `withApiBaseUrl` | Specifies the URL used for the Maps API endpoint. It's very rare that you'll need to change the API base URL.
 | `withLocalIdeographFontFamily` | Set the font family for generating glyphs locally for ideographs in the the "CJK Unified Ideographs" and "Hangul Syllables" ranges.
 | `withCameraPosition` | The camera position to use for the snapshot image. This position is overriden if `withRegion` is also used.
 | `withLogo ` | A boolean flag to determine whether the Mapbox logo is included in the snapshot image.
