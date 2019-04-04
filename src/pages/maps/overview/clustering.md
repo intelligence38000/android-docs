@@ -15,7 +15,7 @@ Showing clustered data is entirely possible by using the data-driven styling cap
 Adjusting the amount of data shown on the map to the map's camera zoom level, is a way to provide users with a cleaner UI experience and less overwhelming location data experience.
 
 
-## `CircleLayer`
+## CircleLayer
 
 {{
   <Floater
