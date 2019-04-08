@@ -68,7 +68,7 @@ Some of devices that will work with VisionSDK:
 - HTC U11, U11+ // U12, U12+
 - OnePlus 5 // 6
 
-You can also check more details at [Vision SDK FAQ](https://vision.mapbox.com/faq).
+You can also check more details at [Vision SDK FAQ](https://vision.mapbox.com/#faq).
 
 Besides software and hardware requirements, use of the Vision SDK requires that the device is pointed with a view of the road. Use a dashboard or windshield mount to keep your phone oriented correctly while you drive, such as [Car Phone Mount Windshield](https://www.amazon.com/gp/product/B06ZZWYQF7/) and [Car Mount Holder](https://www.amazon.com/Getron-Windshield-Dashboard-Universal-Smartphones/dp/B00XJE2YHQ/).
 

@@ -7,24 +7,33 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 ---
 
-The Maps SDK gives you the tools to query the map layers to get a list of GeoJSON features which hold valuable information used for rendering the map. An example usage of this can be to query where the user clicks/taps the map and determine if they selected a POI displaying on the map. You can then move through the provided GeoJSON Feature to get the properties which holds the POI name as a `String`. It's important to consider that querying a map won't always return the information you are looking for, so, it is possible to receive a Feature list with 0 items in it.
+The Maps SDK allows you to query map layers and return a list of GeoJSON features that include information about the feature's geometry and properties. For example, a user can query map features by tapping the map and return any POIs that exist at that point as a GeoJSON `Feature`. Then, you can access the properties in the feature, including the POI's name as a `String`. Querying the map won't always return the information that you are looking for. It is possible to receive a `List<Feature>` with 0 features in it.
+
+## How querying works
+
+You can query the map for features that exist at a `Point` or within a `BoundingBox`. Aside from layers, it is also possible to query the source for specific information matching your query regardless if the items are being displayed on the map.
+
+Because features come from vector tile (or GeoJSON data that is converted to tiles internally), the query may split feature geometries or duplicate them across tile boundaries. As a result, features may appear multiple times in query results. 
+
+For example, when querying by bounding box in an area that includes a highway spanning multiple tiles, the query will return a separate feature for every tile the highway spans. The geometry of each feature will be limited to the part of the highway that exists on that tile. Similarly, a point feature near a tile boundary may appear in multiple tiles due to tile buffering.
+
+
+## Query rendered features
+
+Use `queryRenderedFeatures` to return all map features currently rendered on the device. Features must be visible in the device's viewport **and** fully rendered before you can access them. 
+
+### Query at a point
 
 {{
   <Floater
-    url="https://github.com/mapbox/mapbox-android-demo/blob/master/MapboxAndroidDemo/src/main/java/com/mapbox/mapboxandroiddemo/examples/query/QueryFeatureActivity.java"
+    url="https://docs.mapbox.com/android/maps/examples/query-a-map-feature/"
     title="Query at point"
     category="example"
     text="Query the rendered map to get the properties at a specific location."
   />
 }}
 
-You can query the map by a specific point on the screen or by first constructing a bounding box and receiving all the features found within that region. Aside from layers, it is also possible to query the source for specific information matching your query regardless if the items are being displayed on the map.
-
-Since the features come from tiled vector data or GeoJSON data that is converted to tiles internally, the query may split feature geometries or duplicate them across tile boundaries and, as a result, features may appear multiple times in query results. For example, suppose there is a highway running through the bounding rectangle of a query. The results of the query will be those parts of the highway that lie within the map tiles covering the bounding rectangle, even if the highway extends into other tiles, and the part of the highway within each map tile will be returned as a separate feature. Similarly, a point feature near a tile boundary may appear in multiple tiles due to tile buffering.
-
-## Query rendered features
-
-A common usage for querying the map is to get information at a specific position the user is looking at. The point must be viewable inside the user devices viewport and fully rendered before you can access any information. Querying the map only accepts a screen pixel value instead of `LatLng` so in many cases you'll need to convert beforehand. In the snippet below, when the map is clicked, it provides a `LatLng` that the map uses to query and get the properties at that location.
+`queryRenderedFeatures` only accepts a screen pixel value instead of `LatLng`, so in many cases you'll need convert screen position to geographic position. In the example below, when the map is clicked it provides a `LatLng` that is used to get the features at that point on the map.
 
 {{
 <CodeLanguageToggle id="query-features" />
@@ -78,18 +87,57 @@ override fun onMapClick(point: LatLng) {
 />
 }}
 
-### Query features inside a bounding box
+
+Querying rendered features all layers:
+
+{{
+<CodeLanguageToggle id="query-method" />
+<ToggleableCodeBlock
+
+java={`
+List<Feature> features = mapboxMap.queryRenderedFeatures(pixel);
+`}
+
+kotlin={`
+val features = mapboxMap!!.queryRenderedFeatures(pixel)
+`}
+
+/>
+}}
+
+Querying rendered features in a specific layer:
+
+{{
+<CodeLanguageToggle id="query-method-with-layer-id" />
+<ToggleableCodeBlock
+
+java={`
+// You can pass in a single layer id or a list of layer ids
+List<Feature> features = mapboxMap.queryRenderedFeatures(pixel,"LAYER-ID");
+`}
+
+kotlin={`
+// You can pass in a single layer id or a list of layer ids
+val features = mapboxMap!!.queryRenderedFeatures(pixel,"LAYER-ID")
+`}
+
+/>
+}}
+
+### Query inside a bounding box
 
 {{
   <Floater
-    url="https://github.com/mapbox/mapbox-android-demo/blob/master/MapboxAndroidDemo/src/main/java/com/mapbox/mapboxandroiddemo/examples/query/FeatureCountActivity.java"
+    url="https://docs.mapbox.com/android/maps/examples/count-features-in-a-selected-area/"
     title="Query region"
     category="example"
     text="Query the rendered map to get the features found inside an Android view."
   />
 }}
 
-Besides querying a specific point on the map, it is also possible to pass in a bounding box by passing in a `RectF` object. This can either come from a Android view displayed to the user on top of the map, or 4 coordinates that are showing within the viewport. The snippet below shows how to take four coordinates, convert them into `PointF` objects, adding them into a new `RectF` and finally, passing the "bounding box" into `queryRenderedFeatures()`.
+To query the map for features in an area, pass in a bounding box using a `RectF` object. This can either come from a Android `View` displayed to the user on top of the map or four coordinates that are shown within the viewport. 
+
+The example below shows how to take four coordinates, convert them to `PointF` objects, add them into a new `RectF`, and pass the bounding box into `queryRenderedFeatures()`.
 
 {{
 <CodeLanguageToggle id="rect-f" />
@@ -119,9 +167,9 @@ mapboxMap.queryRenderedFeatures(rectF)
 
 ## Query source features
 
-In contrast to `mapboxMap.queryRenderedFeatures()`, using `querySourceFeatures` returns all features matching the query parameters, whether they are rendered by the current style (i.e. visible). The domain of the query includes all currently-loaded vector tiles and GeoJSON source tiles: this function does not check tiles outside the visible viewport.
+`querySourceFeatures()` returns all features that match the query parameters regardless of whether or not the feature is currently rendered on the map. The domain of the query includes all currently-loaded vector tiles and GeoJSON source tiles. This function does not check tiles outside of the visible viewport.
 
-Since features come from tiled vector data or GeoJSON data that is converted to tiles internally, feature geometries may be split or duplicated across tile boundaries like if you were going to `queryRenderedFeatures()`. To query a source, you must pass in the query parameters as a set of `Filters` and only the features that satisfy the statement will be added to the returning list of features. For example, in the snippet below, the map style contains a GeoJSON source called population-source which contains a property for each feature defining it's population. When you query, you will only want features which have a greater population than 100000.
+To query a source, you must pass in the query parameters as a set of `Filters` and only the features that satisfy the statement will be added to the returning list of features. In the example below, the map style contains a GeoJSON source called `population-source`, which contains a `population` property for each feature. The query below limits the features returned to those that have a population greater than 100,000.
 
 {{
 <CodeLanguageToggle id="query-source-features" />
