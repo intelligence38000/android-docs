@@ -6,6 +6,7 @@ topic: Getting started
 prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/LocalizationPluginActivity.js'"
+contentType: example
 ---
 
 <!-- BROKEN DEMO -->
@@ -13,7 +14,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

@@ -1,6 +1,7 @@
 ---
 title: "Expressions"
 description: "The Mapbox Maps SDK for Android."
+contentType: guide
 ---
 
 Like the rest of the Mapbox developer experience, expressions are all about fine-grain control. Expressions enable you to dynamically style spatial data based on the data's properties. They offer you many flexible and powerful operations. You can style data with multiple feature properties at once, apply conditional logic, and manipulate data with arithmetic or string operations for a more sophisticated relationship between your data and how it is styled.

@@ -8,10 +8,11 @@ prependJs:
   - "import videoMapillary from '../../../video/example-mapillary.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/SymbolLayerMapillaryActivity.js'"
+contentType: example
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoMapillary}
     rotation="vertical"
     device="pixel-2"
@@ -21,7 +22,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

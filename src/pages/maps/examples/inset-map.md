@@ -8,6 +8,7 @@ prependJs:
   - "import videoInsetMap from '../../../video/example-inset-map.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/InsetMapActivity.js'"
+contentType: example
 ---
 
 {{

@@ -8,6 +8,7 @@ prependJs:
   - "import videoAdjustLightLocationColor from '../../../video/example-adjustlightlocationcolor.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/AdjustExtrusionLightActivity.js'"
+contentType: example
 ---
 
 {{

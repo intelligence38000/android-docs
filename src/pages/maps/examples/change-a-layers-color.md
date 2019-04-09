@@ -8,10 +8,11 @@ prependJs:
   - "import videoChangeALayersColor from '../../../video/example-changealayerscolor.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/ColorSwitcherActivity.js'"
+contentType: example
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoChangeALayersColor}
     rotation="horizontal"
     device="pixel-2"
@@ -19,10 +20,10 @@ prependJs:
 }}
 
 
-<!-- Any notes about this example would go here. --> 
+<!-- Any notes about this example would go here. -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

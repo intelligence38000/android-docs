@@ -8,10 +8,11 @@ prependJs:
   - "import videoGlobalLocationSearch from '../../../video/example-locationsearch.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/PlacesPluginActivity.js'"
+contentType: example
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoGlobalLocationSearch}
     rotation="vertical"
     device="pixel-2"
@@ -21,7 +22,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

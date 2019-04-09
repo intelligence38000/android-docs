@@ -4,6 +4,7 @@ description: "Official documentation on the Mapbox Java SDK Matrix API."
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+contentType: guide
 ---
 
 The Mapbox Matrix API returns all travel times between many points. The Matrix API will always return the duration on the fastest route. Durations between points may not be symmetric (for example A to B may have a different duration than B to A), as the routes may differ by direction due to one-way streets or turn restrictions. The Matrix API returns durations in seconds. It does not return route geometries or distances. Make sure to have a look at the API documentation if you want [more information](https://www.mapbox.com/api-documentation/navigation/#matrix).

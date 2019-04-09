@@ -7,6 +7,7 @@ prependJs:
   - "import { WarningNote } from '../../../components/warning-note';"
   - "import ChevronousText from '@mapbox/mr-ui/chevronous-text';"
   - "import constants from '../../../constants';"
+contentType: guide
 ---
 
 {{

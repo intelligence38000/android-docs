@@ -9,6 +9,7 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import Note from '@mapbox/dr-ui/note';"
   - "import BookImage from '@mapbox/dr-ui/book-image';"
+contentType: guide
 ---
 
 The Navigation SDK provides control over the map camera throughout the navigation app experience. This guide provides instructions on how to set the map camera using `NavigationView` and `MapboxNavigation`. You can find more details on how the map camera works in the [Maps SDK for Android documentation](/android/maps/overview/camera/).
@@ -194,5 +195,3 @@ mapboxMap.easeCamera(CameraUpdateFactory.newCameraPosition(position))
 
 />
 }}
-
-

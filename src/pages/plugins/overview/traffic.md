@@ -5,6 +5,7 @@ prependJs:
   - "import constants from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"    
+contentType: guide
 ---
 
 The Mapbox Traffic Plugin adds a real-time traffic layer to any Mapbox base map. If you want to display a traffic layer inside your application, you only need to include the dependency in your project and initialize the plugin. Various shades of colors show the congestion level for any given part of a road segment. If there's not enough traffic data available for a given road, then the plugin will not show road information.

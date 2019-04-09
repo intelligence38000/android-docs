@@ -4,6 +4,7 @@ description: "Official documentation on the Mapbox Java SDK Map Matching API."
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+contentType: guide
 ---
 
 The Mapbox Map Matching API snaps fuzzy, inaccurate traces from a GPS unit or a device (such as a phone) to the OpenStreetMap road and path network using the Mapbox Directions API. The result is a clean path that can be displayed on a map or used for other analysis. The API can receive a list of 2 to 100 coordinate pairs. Make sure to [have a look at the API documentation if you want more information](https://www.mapbox.com/api-documentation/navigation/#map-matching).

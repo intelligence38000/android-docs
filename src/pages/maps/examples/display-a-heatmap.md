@@ -8,10 +8,11 @@ prependJs:
   - "import videoDisplayAHeatmap from '../../../video/example-showheatmapdata.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/HeatmapActivity.js'"
+contentType: example
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoDisplayAHeatmap}
     rotation="horizontal"
     device="pixel-2"
@@ -21,7 +22,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

@@ -9,10 +9,11 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/BuildingPluginActivity.js'"
 
+contentType: example
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoBuildingPlugin}
     rotation="horizontal"
     device="pixel-2"
@@ -23,7 +24,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

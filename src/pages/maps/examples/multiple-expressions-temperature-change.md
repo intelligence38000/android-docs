@@ -8,10 +8,11 @@ prependJs:
   - "import videoMultipleExpressions from '../../../video/example-multiple-expresions-temp-change.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/ExpressionIntegrationActivity.js'"
+contentType: example
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoMultipleExpressions}
     rotation="vertical"
     device="pixel-2"
@@ -21,7 +22,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

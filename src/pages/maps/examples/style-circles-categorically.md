@@ -8,6 +8,7 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode, rawKotlinCode } from '../../../example-code/StyleCirclesCategoricallyActivity.js'"
+contentType: example
 ---
 
 {{
@@ -18,7 +19,7 @@ prependJs:
 
 {{
   <CodeLanguageToggle id="style-circles-categorically-example" />
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
     kotlin={rawKotlinCode}
   />

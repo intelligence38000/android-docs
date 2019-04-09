@@ -8,6 +8,7 @@ prependJs:
   - "import videoClickOnSingleLayer from '../../../video/example-clickonsinglelayer.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/ClickOnLayerActivity.js'"
+contentType: example
 ---
 
 {{

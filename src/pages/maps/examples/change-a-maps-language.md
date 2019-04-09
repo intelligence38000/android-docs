@@ -8,10 +8,11 @@ prependJs:
   - "import videoChangeAMapsLanguage from '../../../video/example-changeamapslanguage.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/LanguageSwitchActivity.js'"
+contentType: example
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoChangeAMapsLanguage}
     rotation="horizontal"
     device="pixel-2"
@@ -22,7 +23,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

@@ -8,6 +8,7 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import Note from '@mapbox/dr-ui/note';"
   - "import BookImage from '@mapbox/dr-ui/book-image';"
+contentType: guide
 ---
 
 The Navigation SDK includes a faster-route detection class. This class checks each location update as well as the progress along the current route to determine if a new route should be retrieved.

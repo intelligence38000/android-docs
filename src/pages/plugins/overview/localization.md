@@ -6,6 +6,7 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"   
 
+contentType: guide
 ---
 
 The Mapbox Localization Plugin is an excellent option for adjusting your Android project's map experience according to the individual user's preferences. The plugin:

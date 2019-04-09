@@ -8,10 +8,11 @@ prependJs:
   - "import videoDashedLineDirectionsPickerActivity from '../../../video/example-dashed-line-directions-picker-activity.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/DashedLineDirectionsPickerActivity.js'"
+contentType: example
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoDashedLineDirectionsPickerActivity}
     rotation="horizontal"
     device="pixel-2"
@@ -21,7 +22,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

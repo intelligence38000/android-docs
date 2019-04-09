@@ -9,6 +9,7 @@ prependJs:
   - "import BookImage from '@mapbox/dr-ui/book-image';"
   - "import constants from '../../../constants';"
   - "import { WarningNote } from '../../../components/warning-note';"
+contentType: guide
 ---
 
 Often, you might find your user base spends most of its time off the grid. The Maps SDK enables you to download and store pre-selected regions for usage when the device goes offline. The result of downloading the map is a fully functional map using your styles, tiles, and other resources inside the downloaded region.

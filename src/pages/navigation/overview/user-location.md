@@ -11,6 +11,7 @@ prependJs:
   - "import AppropriateImage from '../../../components/appropriate-image'"
   - "import Note from '@mapbox/dr-ui/note';"
   - "import BookImage from '@mapbox/dr-ui/book-image';"
+contentType: guide
 ---
 
 <!--copyeditor ignore best-->

@@ -9,10 +9,11 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode, rawKotlinCode } from '../../../example-code/SimpleMapViewActivity.js'"
+contentType: example
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoSimpleMapViewVideo}
     rotation="horizontal"
     device="pixel-2"
@@ -23,7 +24,7 @@ prependJs:
 
 {{
   <CodeLanguageToggle id="simple-map-view-example" />
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
     kotlin={rawKotlinCode}
   />

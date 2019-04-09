@@ -4,6 +4,7 @@ description: "Official documentation on the Mapbox Java SDK Optimization API."
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+contentType: guide
 ---
 
 The Mapbox Optimization API returns a duration-optimized route between the input coordinates. This is also known as solving the [Traveling Salesperson Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem). A typical use case for this API is planning the route for deliveries in a city. An optimized route can be retrieved for car driving, bicycling, walking, or hiking.

@@ -8,10 +8,11 @@ prependJs:
  - "import videoShowAUsersLocationInFragment from '../../../video/show-user-location-in-fragment.mp4'"
  - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
  - "import { rawJavaCode } from '../../../example-code/LocationComponentFragmentActivity.js'"
+contentType: example
 ---
 
 {{
-  <VideoWithDeviceFrame 
+  <VideoWithDeviceFrame
     videoFile={videoShowAUsersLocationInFragment}
     rotation="horizontal"
     device="pixel-2"
@@ -22,7 +23,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

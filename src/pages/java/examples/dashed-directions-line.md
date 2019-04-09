@@ -8,6 +8,7 @@ prependJs:
   - "import videoDashedDirectionsLine from '../../../video/example-dashed-directions-line.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/DashedDirectionsLineActivity'"
+contentType: example
 ---
 
 {{

@@ -5,6 +5,7 @@ prependJs:
   - "import constants from '../../../constants';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+contentType: guide
 ---
 
 The [Mapbox Gestures for Android library](https://github.com/mapbox/mapbox-gestures-android) is used inside of the Mapbox Maps SDK for Android for gesture detection based on user's input. This library wraps [`GestureDetectorCompat`](https://developer.android.com/reference/android/support/v4/view/GestureDetectorCompat.html) and [`ScaleGestureDetector`](https://developer.android.com/reference/android/view/ScaleGestureDetector.html) as well as introduces implementation of rotate, move, shove, and tap gesture detectors.

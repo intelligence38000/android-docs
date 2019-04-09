@@ -4,6 +4,7 @@ description: "Documentation about map events within the Mapbox Maps SDK for Andr
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+contentType: guide
 ---
 
 The Maps SDK provides various ways to listen to map events. The majority of listeners that the SDK offers are listed below. But, you'll occasionally find other listeners specific to their corresponding API inside other overview documents.

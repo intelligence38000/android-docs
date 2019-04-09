@@ -7,10 +7,11 @@ prependJs:
   - "import AppropriateImage from '../../../components/appropriate-image'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/HillShadeActivity.js'"
+contentType: example
 ---
 
 {{
-  <AppropriateImage 
+  <AppropriateImage
     imageId="exampleAddAHillshadeLayer"
   />
 }}
@@ -18,7 +19,7 @@ prependJs:
 <!-- Any notes about this example would go here.  -->
 
 {{
-  <ToggleableCodeBlock 
+  <ToggleableCodeBlock
     java={rawJavaCode}
   />
 }}

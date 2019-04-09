@@ -5,6 +5,7 @@ prependJs:
   - "import { Floater } from '../../../components/floater';"
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+contentType: guide
 ---
 
 The Maps SDK allows you to query map layers and return a list of GeoJSON features that include information about the feature's geometry and properties. For example, a user can query map features by tapping the map and return any POIs that exist at that point as a GeoJSON `Feature`. Then, you can access the properties in the feature, including the POI's name as a `String`. Querying the map won't always return the information that you are looking for. It is possible to receive a `List<Feature>` with 0 features in it.
@@ -13,14 +14,14 @@ The Maps SDK allows you to query map layers and return a list of GeoJSON feature
 
 You can query the map for features that exist at a `Point` or within a `BoundingBox`. Aside from layers, it is also possible to query the source for specific information matching your query regardless if the items are being displayed on the map.
 
-Because features come from vector tile (or GeoJSON data that is converted to tiles internally), the query may split feature geometries or duplicate them across tile boundaries. As a result, features may appear multiple times in query results. 
+Because features come from vector tile (or GeoJSON data that is converted to tiles internally), the query may split feature geometries or duplicate them across tile boundaries. As a result, features may appear multiple times in query results.
 
 For example, when querying by bounding box in an area that includes a highway spanning multiple tiles, the query will return a separate feature for every tile the highway spans. The geometry of each feature will be limited to the part of the highway that exists on that tile. Similarly, a point feature near a tile boundary may appear in multiple tiles due to tile buffering.
 
 
 ## Query rendered features
 
-Use `queryRenderedFeatures` to return all map features currently rendered on the device. Features must be visible in the device's viewport **and** fully rendered before you can access them. 
+Use `queryRenderedFeatures` to return all map features currently rendered on the device. Features must be visible in the device's viewport **and** fully rendered before you can access them.
 
 ### Query at a point
 
@@ -135,7 +136,7 @@ val features = mapboxMap!!.queryRenderedFeatures(pixel,"LAYER-ID")
   />
 }}
 
-To query the map for features in an area, pass in a bounding box using a `RectF` object. This can either come from a Android `View` displayed to the user on top of the map or four coordinates that are shown within the viewport. 
+To query the map for features in an area, pass in a bounding box using a `RectF` object. This can either come from a Android `View` displayed to the user on top of the map or four coordinates that are shown within the viewport.
 
 The example below shows how to take four coordinates, convert them to `PointF` objects, add them into a new `RectF`, and pass the bounding box into `queryRenderedFeatures()`.
 

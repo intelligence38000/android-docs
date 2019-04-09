@@ -7,6 +7,7 @@ products:
 prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
+contentType: guide
 ---
 
 In some cases, you may want to have the user stick to a specific route that doesn't fit into the scope covered by the Mapbox Directions API. For example, a parking finder app where you want to guide a user past specific blocks with parking, but also allow people to navigate on it with the Mapbox Navigation SDK for Android. The Mapbox Map Matching API is an appropriate fit for this situation.

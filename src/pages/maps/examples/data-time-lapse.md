@@ -8,6 +8,7 @@ prependJs:
   - "import videoDataTimeLapse from '../../../video/example-data-time-lapse.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/AddRainFallStyleActivity.js'"
+contentType: example
 ---
 
 {{

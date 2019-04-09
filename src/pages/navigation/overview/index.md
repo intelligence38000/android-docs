@@ -10,6 +10,7 @@ prependJs:
   - "import Note from '@mapbox/dr-ui/note';"
   - "import BookImage from '@mapbox/dr-ui/book-image';"
   - "import { FundamentalsTag } from '../../../components/fundamentals-tag';"
+contentType: guide
 ---
 
 {{

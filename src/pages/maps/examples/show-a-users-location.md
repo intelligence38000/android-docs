@@ -9,6 +9,7 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode, rawKotlinCode } from '../../../example-code/LocationComponentActivity.js'"
+contentType: example
 ---
 
 {{

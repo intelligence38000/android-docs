@@ -5,6 +5,7 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 
+contentType: guide
 ---
 
 The Maps SDK for Android allows full customization of the look of the map. You can choose one of Mapbox's core styles designed by our cartographers or create a custom map style by adjusting the map's colors, icons, and fonts to match your application's UI or company's brand.

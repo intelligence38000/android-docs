@@ -6,6 +6,7 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import { WarningNote } from '../../../components/warning-note';"
+contentType: guide
 ---
 
 {{

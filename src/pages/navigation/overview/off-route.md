@@ -8,6 +8,7 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import Note from '@mapbox/dr-ui/note';"
   - "import BookImage from '@mapbox/dr-ui/book-image';"
+contentType: guide
 ---
 
 The Navigation SDK provides information about whether a user's device is on the route that was generated. If a user is off-route, you can provide additional instruction to the user and generate a new route.

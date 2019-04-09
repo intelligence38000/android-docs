@@ -7,6 +7,7 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import constants from '../../../constants';"
 
+contentType: guide
 ---
 
 The Mapbox Directions API delivers routes for navigating the world. Driving, walking, and cycling directions are all possible for you to request, retrieve, and use in your Android project. The Mapbox Java SDK's `MapboxDirections` class eases interaction with the [Mapbox Directions API](https://www.mapbox.com/api-documentation/navigation/#directions).

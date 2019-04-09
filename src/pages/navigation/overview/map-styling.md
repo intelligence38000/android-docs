@@ -9,6 +9,7 @@ prependJs:
   - "import AppropriateImage from '../../../components/appropriate-image';"
   - "import Note from '@mapbox/dr-ui/note';"
   - "import BookImage from '@mapbox/dr-ui/book-image';"
+contentType: guide
 ---
 
 Use the Navigation UI SDK to design an application that provides a unique experience for your users or fits your brand. The Navigation UI SDK offers a wide range of options for customizing the look of your application including navigation instructions, route lines, and the map style.

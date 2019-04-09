@@ -7,6 +7,7 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import { Floater } from '../../../components/floater';"
 
+contentType: guide
 ---
 
 The Mapbox Annotation Plugin simplifies the way to set and adjust the visual properties of annotations on a Mapbox map. The Mapbox Maps SDK for Android provides developers with fine-grain control over the appearance and location of map annotations. In this context, "annotations" means circles, polygons, lines, text, and icons. Using runtime and data-driven styling to create annotations can require a deep understanding of the Maps SDK. This plugin obfuscates much of the required boilerplate code.
@@ -35,7 +36,7 @@ android {
 	    sourceCompatibility JavaVersion.VERSION_1_8
 	    targetCompatibility JavaVersion.VERSION_1_8
 	}
-  
+
 }
 
 

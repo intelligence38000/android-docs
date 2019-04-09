@@ -8,6 +8,7 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import Note from '@mapbox/dr-ui/note';"
   - "import BookImage from '@mapbox/dr-ui/book-image';"
+contentType: guide
 ---
 
 The Navigation SDK allows you to customize the language for both text and voice instructions. Instructions are announced in the user interface language when turn instructions are available in that language. If instructions are not available in the user interface language, they are announced in English.
