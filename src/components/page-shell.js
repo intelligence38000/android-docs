@@ -227,6 +227,7 @@ class PageShell extends React.Component {
     return (
       <ReactPageShell
         site="Android"
+        subsite={productNames[product]}
         {...this.props}
         meta={meta}
         darkHeaderText={true}
