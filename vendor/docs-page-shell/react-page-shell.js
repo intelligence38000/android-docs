@@ -900,7 +900,8 @@ function PageFooter() {
 }
 
 function MetaTagger(props) {
-  var suffixedTitle = /^Mapbox/.test(props.title) ? props.title : "".concat(props.title === props.site ? props.title : "".concat(props.title, " | ").concat(props.site), " | Mapbox");
+  var site = props.subsite ? props.subsite : props.site;
+  var suffixedTitle = /^Mapbox/.test(props.title) ? props.title : "".concat(props.title === site ? props.title : "".concat(props.title, " | ").concat(site), " | Mapbox");
   var preppedDescription = props.description.replace(/\s+/g, ' ');
   var prodUrl = 'https://www.mapbox.com';
   if (props.pathname[0] !== '/') prodUrl += '/';
@@ -954,6 +955,15 @@ function MetaTagger(props) {
     'data-type': 'string',
     content: props.site
   });
+
+  if (props.subsite) {
+    metaItems.push({
+      class: 'swiftype',
+      name: 'subsite',
+      'data-type': 'string',
+      content: props.subsite
+    });
+  }
 
   if (props.contentType) {
     metaItems.push({
@@ -1013,6 +1023,7 @@ MetaTagger.propTypes = {
   description: PropTypes.string.isRequired,
   pathname: PropTypes.string.isRequired,
   site: PropTypes.string.isRequired,
+  subsite: PropTypes.string,
   contentType: PropTypes.string,
   imageUrl: PropTypes.string,
   imageUrlThumbnail: PropTypes.string,
@@ -1094,7 +1105,8 @@ function (_React$Component) {
           overflowX: 'hidden'
         }
       }, React.createElement(PageHelmet, null), React.createElement(MetaTagger, _extends({}, this.props.meta, {
-        site: this.props.site
+        site: this.props.site,
+        subsite: this.props.subsite
       })), React.createElement("div", {
         className: nonFooterClasses
       }, React.createElement("div", {
@@ -1127,6 +1139,7 @@ ReactPageShell.propTypes = {
   }).isRequired,
   children: PropTypes.node.isRequired,
   site: PropTypes.string.isRequired,
+  subsite: PropTypes.string,
   darkHeaderText: PropTypes.bool,
   nonFooterBgClass: PropTypes.string,
   onUser: PropTypes.func
