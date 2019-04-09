@@ -66,6 +66,9 @@ class PageShell extends React.Component {
     if (!meta.pathname) {
       meta.pathname = location.pathname;
     }
+    if (frontMatter.contentType) meta.contentType = frontMatter.contentType;
+    if (frontMatter.language) meta.language = frontMatter.language;
+    if (frontMatter.level) meta.level = frontMatter.level;
 
     const normalizedPathname = /\/$/.test(location.pathname)
       ? this.props.location.pathname
@@ -222,7 +225,12 @@ class PageShell extends React.Component {
     }
 
     return (
-      <ReactPageShell {...this.props} meta={meta} darkHeaderText={true}>
+      <ReactPageShell
+        site="Android"
+        {...this.props}
+        meta={meta}
+        darkHeaderText={true}
+      >
         <Helmet>
           <link
             rel="canonical"
