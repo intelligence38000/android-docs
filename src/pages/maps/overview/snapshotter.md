@@ -6,6 +6,9 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 The snapshot functionality of the Mapbox Maps SDK for Android generates a static map image to use in your Android project. Take a snapshot of any Mapbox map and add the image into:

@@ -7,6 +7,9 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"   
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 The **Places plugin for Android** lets users search for a destination, explore what's nearby, or find their favorite restaurants, coffee shops, or stores. Built on top of the [Mapbox Geocoding API](https://www.mapbox.com/api-documentation/search/#geocoding), the plugin offers UI components that you can integrated inside your app with a few lines of code.

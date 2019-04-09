@@ -8,7 +8,9 @@ prependJs:
   - "import videoGlobalLocationSearch from '../../../video/example-locationsearch.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/PlacesPluginActivity.js'"
-contentType: example
+contentType: guide
+language:
+- Java
 ---
 
 {{

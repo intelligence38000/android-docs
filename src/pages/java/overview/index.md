@@ -8,6 +8,9 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 {{

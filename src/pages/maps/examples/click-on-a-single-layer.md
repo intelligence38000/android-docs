@@ -9,6 +9,8 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/ClickOnLayerActivity.js'"
 contentType: example
+language:
+- Java
 ---
 
 {{

@@ -8,7 +8,9 @@ prependJs:
   - "import videoMarkerViewPluginActivity from '../../../video/example-marker-view-plugin-activity.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/MarkerViewPluginActivity.js'"
-contentType: example
+contentType: guide
+language:
+- Java
 ---
 
 {{

@@ -6,6 +6,9 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 Traditional map services are either blocked in China or suffer from slow internet connections. Our mapbox.cn infrastructure allows for unparalleled speed advantages for anyone using our maps in China or through Chinese mobile carriers internationally. Built on top of the Mapbox Maps SDK for Android, the plugin automatically configures the Maps SDK to make sure that the correct Mapbox API endpoints are being called. Accurate endpoints make sure that a mobile device retrieves the correct map tiles, map styles, and other location information. Additionally, the plugin handles shifting of various GeoJSON geometries (polygons, lines, points, etc.), which ensures that data is accurately placed on the map.

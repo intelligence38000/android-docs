@@ -6,7 +6,9 @@ topic: Getting started
 prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/LocalizationPluginActivity.js'"
-contentType: example
+contentType: guide
+language:
+- Java
 ---
 
 <!-- BROKEN DEMO -->

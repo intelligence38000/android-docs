@@ -7,6 +7,9 @@ prependJs:
   - "import { Floater } from '../../../components/floater';"
 
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 The Mapbox Tilequery API allows you to retrieve data about specific features from a vector tileset, based on a given latitude and longitude. The API makes it possible to query for features within a radius, do point in polygon queries, query for features in multiple composite layers, and augment data from the Mapbox Geocoding API with custom data.

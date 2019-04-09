@@ -7,6 +7,8 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/SimpleOfflineMapActivity.js'"
 contentType: example
+language:
+- Java
 ---
 
 <!-- Any notes about this example would go here.  -->

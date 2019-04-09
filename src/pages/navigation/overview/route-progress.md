@@ -13,6 +13,9 @@ prependJs:
   - "import Note from '@mapbox/dr-ui/note';"
   - "import BookImage from '@mapbox/dr-ui/book-image';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 Tracking a user's progress along a route is key to providing helpful and prompt navigation instructions. The `RouteProgress` class contains all the user's progress information along the route, including legs and steps. This object is provided inside `ProgressChangeListener`, allowing you to get distance measurements, the percentage of route complete, current step index, and much more.

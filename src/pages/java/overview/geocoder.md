@@ -5,6 +5,9 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 The Mapbox Geocoding API does two things: forward geocoding and reverse geocoding. **Forward geocoding** lets you convert location text into geographic coordinates, and **reverse geocoding** turns geographic coordinates into place names.

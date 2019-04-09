@@ -12,6 +12,9 @@ prependJs:
   - "import BookImage from '@mapbox/dr-ui/book-image';"
   - "import { BearingToleranceMap } from '../../../components/bearing-tolerance-map';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 {{<Note title="Route generation and the Navigation UI SDK" imageComponent={<BookImage size="60" />}>}}

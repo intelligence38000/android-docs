@@ -10,6 +10,9 @@ prependJs:
   - "import Note from '@mapbox/dr-ui/note';"
   - "import BookImage from '@mapbox/dr-ui/book-image';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 {{<Note title="Downloading offline routing packs" imageComponent={<BookImage size="60" />}>}}

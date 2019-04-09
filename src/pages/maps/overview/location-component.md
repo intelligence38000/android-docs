@@ -8,8 +8,10 @@ prependJs:
   - "import AppropriateImage from '../../../components/appropriate-image';"
   - "import { DocNote } from '../../../components/note';"
   - "import { Floater } from '../../../components/floater';"
-
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 Showing the user's current location as a map annotation is a popular and often critical feature of location-based apps. The Maps SDK's `LocationComponent` makes use of the Maps SDK's [runtime styling capabilities](/android/maps/overview/data-driven-styling/) to display the device location icon within the map itself rather than on top as an Android view. Mapbox map layers and layer styling give you precise control over how you show a device's location on the map.

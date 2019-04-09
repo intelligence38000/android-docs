@@ -9,6 +9,9 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode, rawKotlinCode } from '../../../example-code/StyleCirclesCategoricallyActivity.js'"
 contentType: example
+language:
+- Java
+- Kotlin
 ---
 
 {{

@@ -10,6 +10,9 @@ prependJs:
   - "import Note from '@mapbox/dr-ui/note';"
   - "import BookImage from '@mapbox/dr-ui/book-image';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 Navigation milestones inside the SDK provide a powerful way to give your user instructions or get cues to hide or show custom UI elements at defined locations along their route. Use default milestones to trigger voice and text instructions or create custom milestones that fit your particular app needs.

@@ -7,6 +7,9 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 By default, device notifications display the upcoming maneuver icon and instruction text, as well as the distance remaining to said maneuver. This default notification will always be displayed unless otherwise overridden by a custom notification as outlined below.

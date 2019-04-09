@@ -7,6 +7,9 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 Often, a map can show too much data at a single time. Markers overlap with each other. The map looks and feels cluttered. Users can't get a quick understanding of what the data is supposed to say.

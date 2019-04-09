@@ -10,6 +10,8 @@ prependJs:
   - "import { rawJavaCode } from '../../../example-code/MarathonExtrusionActivity.js'"
 
 contentType: example
+language:
+- Java
 ---
 
 {{

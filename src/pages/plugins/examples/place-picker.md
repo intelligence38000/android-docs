@@ -8,7 +8,9 @@ prependJs:
   - "import videoPlacePicker from '../../../video/example-place-picker.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/PlaceSelectionPluginActivity.js'"
-contentType: example
+contentType: guide
+language:
+- Java
 ---
 
 {{

@@ -6,6 +6,9 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 Support for extrusions was added with `5.1.0` of the Map SDK, unlocking the possibility to display **3D buildings** on your favorite map style. The building plugin extends this functionality and makes it even easier to add buildings to a map style.

@@ -7,6 +7,9 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import { WarningNote } from '../../../components/warning-note';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 {{

@@ -8,6 +8,8 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/AddWmsSourceActivity.js'"
 contentType: example
+language:
+- Java
 ---
 
 {{

@@ -7,6 +7,9 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 Turf is a modular geospatial engine written in JavaScript. The Turf for Java library allows Android-based projects to use Turf algorithms as well. You can do Turf algorithms completely on device and don't require any type of call/response to any API or internet database.

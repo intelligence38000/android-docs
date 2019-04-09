@@ -8,7 +8,9 @@ prependJs:
   - "import videoTrafficPlugin from '../../../video/example-traffic-plugin.mp4'"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/TrafficPluginActivity.js'"
-contentType: example
+contentType: guide
+language:
+- Java
 ---
 
 {{

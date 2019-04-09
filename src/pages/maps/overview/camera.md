@@ -6,6 +6,9 @@ prependJs:
   - "import CodeLanguageToggle from '../../../components/code-language-toggle';"
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 The Maps SDK's maps are represented as a flat plane using a [Mercator projection](https://en.wikipedia.org/wiki/Mercator_projection). On the east-west-axis, the map seamlessly wraps around on itself an infinite amount of times. Because the bottom and the top of the map could infinitely grow larger and further distort the map towards the poles, the north-south-axis gets cut off around the 90 degrees north and 90 degrees south. With this in mind, the camera object's introduced to represent the user's viewpoint above the map.

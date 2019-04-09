@@ -7,6 +7,9 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block';"
   - "import { WarningNote } from '../../../components/warning-note';"
 contentType: guide
+language:
+- Java
+- Kotlin
 ---
 
 The Mapbox Maps SDK for Android provides several different ways to mark a single point, create a circle, add a line between many points, or draw a polygon. Usually, you can draw these objects either on top of the map or in some cases, within the map itself.

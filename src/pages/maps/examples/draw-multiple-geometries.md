@@ -8,6 +8,8 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/MultipleGeometriesActivity.js'"
 contentType: example
+language:
+- Java
 ---
 
 {{

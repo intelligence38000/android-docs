@@ -7,6 +7,8 @@ prependJs:
   - "import ToggleableCodeBlock from '../../../components/toggleable-code-block'"
   - "import { rawJavaCode } from '../../../example-code/ChoroplethJsonVectorMixActivity.js'"
 contentType: example
+language:
+- Java
 ---
 
 <!-- Broken demo -->
