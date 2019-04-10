@@ -1,7 +1,7 @@
 ---
-title: 
-description: 
-thumbnail: 
+title: Symbol listener
+description: Listen for Symbol interaction using the Annotation plugin its and built-in listeners
+thumbnail: https://i.imgur.com/r9fuJBJ.png
 topic: Getting started
 prependJs:
   - "import { VideoWithDeviceFrame } from '../../../components/video-with-device-frame'"

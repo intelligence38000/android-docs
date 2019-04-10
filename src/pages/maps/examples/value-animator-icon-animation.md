@@ -1,8 +1,8 @@
 ---
 title: Animated icon movement
 description: Use Android system interpolators to animate SymbolLayer icons movement.
-thumbnail: 
-topic: 
+thumbnail: https://i.imgur.com/JfLf69C.png
+topic: Dynamic styling
 prependJs:
   - "import { VideoWithDeviceFrame } from '../../../components/video-with-device-frame'"
   - "import videoValueAnimatorIconAnimationActivity from '../../../video/example-value-animator-icon-animation-activity.mp4'"

@@ -2,7 +2,7 @@
 title: Zoom-based icon switch
 description: Change SymbolLayer icons based on the camera\'s zoom level.
 thumbnail: https://i.imgur.com/sbWU4Ui.png
-topic: Data visualization
+topic: Dynamic styling
 prependJs:
   - "import { VideoWithDeviceFrame } from '../../../components/video-with-device-frame'"
   - "import videoSymbolSwitchOnZoomActivity from '../../../video/example-symbol-switch-on-zoom-activity.mp4'"
