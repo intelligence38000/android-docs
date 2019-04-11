@@ -75,35 +75,7 @@ The test suite will lint JavaScript as well as:
   - checks spelling
   - checks for plain language and suggests alternatives
 
-If the tests return an error or warning, follow the guidance from the test to fix. 
-
-
-### Java/Kotlin toggles
-
-Add the following snippet in a README file if you'd like to have a Java/Kotlin toggle somewhere in the documentation:
-
-```
-{{
-<CodeLanguageToggle id="UNIQUE-ID-HERE" />
-<ToggleableCodeBlock
-
-java={`
-
-JAVA CODE HERE
-
-`}
-
-kotlin={`
-
-KOTLIN CODE HERE
-
-`}
-
-/>
-}}
-```
-
-Make sure the snippet has all of the sections. If not, the locally test side will break when you click on either the Java or Kotlin toggle. Please view [this ticket](https://github.com/mapbox/android-docs/issues/752) if you see a `Uncaught TypeError: Cannot read property 'length' of undefined` error.
+If the tests return an error or warning, follow the guidance from the test to fix it. 
 
 
 ## Updating for SDK releases

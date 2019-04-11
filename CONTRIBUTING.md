@@ -130,6 +130,8 @@ i am kotlin code
 
 Language preference (Java vs. Kotlin) will persist throughout /android-docs when navigating between pages.
 
+Make sure the snippet has all of the sections. If not, the locally test side will break when you click on either the Java or Kotlin toggle. Please view [this ticket](https://github.com/mapbox/android-docs/issues/752) if you see a `Uncaught TypeError: Cannot read property 'length' of undefined` error.
+
 #### Mapbox Java SDK
 
 All overview guides for APIs in the Mapbox Java SDK should follow this format:
