@@ -899,6 +899,50 @@ function PageFooter() {
   }))));
 }
 
+var removeMarkdown = function (md, options) {
+  options = options || {};
+  options.listUnicodeChar = options.hasOwnProperty('listUnicodeChar') ? options.listUnicodeChar : false;
+  options.stripListLeaders = options.hasOwnProperty('stripListLeaders') ? options.stripListLeaders : true;
+  options.gfm = options.hasOwnProperty('gfm') ? options.gfm : true;
+  options.useImgAltText = options.hasOwnProperty('useImgAltText') ? options.useImgAltText : true;
+  var output = md || ''; // Remove horizontal rules (stripListHeaders conflict with this rule, which is why it has been moved to the top)
+
+  output = output.replace(/^(-\s*?|\*\s*?|_\s*?){3,}\s*$/gm, '');
+
+  try {
+    if (options.stripListLeaders) {
+      if (options.listUnicodeChar) output = output.replace(/^([\s\t]*)([\*\-\+]|\d+\.)\s+/gm, options.listUnicodeChar + ' $1');else output = output.replace(/^([\s\t]*)([\*\-\+]|\d+\.)\s+/gm, '$1');
+    }
+
+    if (options.gfm) {
+      output = output // Header
+      .replace(/\n={2,}/g, '\n') // Fenced codeblocks
+      .replace(/~{3}.*\n/g, '') // Strikethrough
+      .replace(/~~/g, '') // Fenced codeblocks
+      .replace(/`{3}.*\n/g, '');
+    }
+
+    output = output // Remove HTML tags
+    .replace(/<[^>]*>/g, '') // Remove setext-style headers
+    .replace(/^[=\-]{2,}\s*$/g, '') // Remove footnotes?
+    .replace(/\[\^.+?\](\: .*?$)?/g, '').replace(/\s{0,2}\[.*?\]: .*?$/g, '') // Remove images
+    .replace(/\!\[(.*?)\][\[\(].*?[\]\)]/g, options.useImgAltText ? '$1' : '') // Remove inline links
+    .replace(/\[(.*?)\][\[\(].*?[\]\)]/g, '$1') // Remove blockquotes
+    .replace(/^\s{0,3}>\s?/g, '') // Remove reference-style links?
+    .replace(/^\s{1,2}\[(.*?)\]: (\S+)( ".*?")?\s*$/g, '') // Remove atx-style headers
+    .replace(/^(\n)?\s{0,}#{1,6}\s+| {0,}(\n)?\s{0,}#{0,} {0,}(\n)?\s{0,}$/gm, '$1$2$3') // Remove emphasis (repeat the line to remove double emphasis)
+    .replace(/([\*_]{1,3})(\S.*?\S{0,1})\1/g, '$2').replace(/([\*_]{1,3})(\S.*?\S{0,1})\1/g, '$2') // Remove code blocks
+    .replace(/(`{3,})(.*?)\1/gm, '$2') // Remove inline code
+    .replace(/`(.+?)`/g, '$1') // Replace two or more newlines with exactly two? Not entirely sure this belongs here...
+    .replace(/\n{2,}/g, '\n\n');
+  } catch (e) {
+    console.error(e);
+    return md;
+  }
+
+  return output;
+};
+
 function MetaTagger(props) {
   var site = props.subsite ? props.subsite : props.site;
   var suffixedTitle = /^Mapbox/.test(props.title) ? props.title : "".concat(props.title === site ? props.title : "".concat(props.title, " | ").concat(site), " | Mapbox");
@@ -908,7 +952,7 @@ function MetaTagger(props) {
   prodUrl += props.pathname;
   var metaItems = [{
     name: 'description',
-    content: preppedDescription
+    content: removeMarkdown(preppedDescription)
   }];
   metaItems.push({
     name: 'twitter:title',
@@ -918,10 +962,10 @@ function MetaTagger(props) {
     content: props.title
   }, {
     name: 'twitter:description',
-    content: preppedDescription
+    content: removeMarkdown(preppedDescription)
   }, {
     property: 'og:description',
-    content: preppedDescription
+    content: removeMarkdown(preppedDescription)
   }, {
     property: 'og:url',
     content: prodUrl
@@ -937,7 +981,7 @@ function MetaTagger(props) {
     class: 'swiftype',
     name: 'excerpt',
     'data-type': 'string',
-    content: props.description
+    content: removeMarkdown(props.description)
   }, {
     name: 'twitter:image:alt',
     content: props.imageAlt
@@ -1012,6 +1056,13 @@ function MetaTagger(props) {
     });
   }
 
+  if (props.hideFromSearchEngines) {
+    metaItems.push({
+      name: 'robots',
+      content: 'noindex, nofollow'
+    });
+  }
+
   return React.createElement(Helmet__default, {
     title: suffixedTitle,
     meta: metaItems
@@ -1030,7 +1081,8 @@ MetaTagger.propTypes = {
   imageAlt: PropTypes.string,
   largeImage: PropTypes.bool,
   language: PropTypes.array,
-  level: PropTypes.number
+  level: PropTypes.number,
+  hideFromSearchEngines: PropTypes.bool
 };
 MetaTagger.defaultProps = {
   imageUrl: DEFAULT_SOCIAL_IMAGE_URL,
@@ -1135,7 +1187,8 @@ ReactPageShell.propTypes = {
     contentType: PropTypes.string,
     pathname: PropTypes.string,
     level: PropTypes.number,
-    codeLanguage: PropTypes.array
+    codeLanguage: PropTypes.array,
+    hideFromSearchEngines: PropTypes.bool
   }).isRequired,
   children: PropTypes.node.isRequired,
   site: PropTypes.string.isRequired,
