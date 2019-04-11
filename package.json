@@ -57,7 +57,7 @@
     "@mapbox/copyeditor": "^0.6.0",
     "@mapbox/rehype-prism": "^0.3.1",
     "@mapbox/remark-lint-link-text": "^0.4.2",
-    "@mapbox/remark-lint-mapbox": "^0.5.0",
+    "@mapbox/remark-lint-mapbox": "^0.6.1",
     "@mapbox/svg-react-transformer-loader": "^1.0.1",
     "babel-eslint": "^8.2.2",
     "babel-plugin-lodash": "^3.2.11",
